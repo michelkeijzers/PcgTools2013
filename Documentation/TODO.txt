@@ -1,0 +1,17 @@
+﻿TODO
+====
+
+
+
+Extra copy/paste options
+========================
+Auto paste existing programs from combis/set list slots
+-------------------------------------------------------
+
+Auto paste existing combis   from set list slots
+------------------------------------------------
+When unchecked, and set list slots are pasted, references to combis are not automatically assigned to duplicates.
+
+o Do not delete copied patches after pasting (Copy/Paste)
+o Delete copied patches after pasting within same PCG file (Cut/Paste within same PCG file, Copy/Paste outside PCG file)
+o Delete copied patches after pasting always (Copy/Paste) 

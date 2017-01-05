@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<swid:software_identification_tag xsi:schemaLocation="http://standards.iso.org/iso/19770/-2/2009/schema.xsd http://standards.iso.org/iso/19770/-2/2009/schema.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:swid="http://standards.iso.org/iso/19770/-2/2009/schema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fs="http://www.flexerasoftware.com/swid/2011/arp">
+	<!-- Mandatory elements -->
+	<swid:entitlement_required_indicator id="entitlement_required_indicator">false</swid:entitlement_required_indicator>
+	<swid:product_title id="product_title">PCG Tools</swid:product_title>
+	<swid:product_version>
+		<swid:name id="version_name">2.7.3</swid:name>
+		<swid:numeric>
+			<swid:major id="version_major">2</swid:major>
+			<swid:minor id="version_minor">7</swid:minor>
+			<swid:build id="version_build">3</swid:build>
+			<swid:review id="version_review">0</swid:review>
+		</swid:numeric>
+	</swid:product_version>
+	<swid:software_creator>
+		<swid:name id="creator_name">Michel Keijzers</swid:name>
+		<swid:regid id="creator_regid">regid.2011-01.nl.mkspace</swid:regid>
+	</swid:software_creator>
+	<swid:software_licensor>
+		<swid:name id="licensor_name">MiKeSoft</swid:name>
+		<swid:regid id="licensor_regid">regid.2011-01.nl.mkspace</swid:regid>
+	</swid:software_licensor>
+	<swid:software_id>
+		<swid:unique_id id="unique_id">F2876D3A-C8D3-4331-BFDA-5287CE6C6096</swid:unique_id>
+		<swid:tag_creator_regid id="tag_creator_regid">regid.2011-01.nl.mkspace</swid:tag_creator_regid>
+	</swid:software_id>
+	<swid:tag_creator>
+		<swid:name id="tag_name">MiKeSoft</swid:name>
+		<swid:regid id="tag_regid">regid.2011-01.nl.mkspace</swid:regid>
+	</swid:tag_creator>
+	<!--Extended Information -->
+	<swid:extended_information xsi:schemaLocation="http://www.flexerasoftware.com/swid/2011/arp http://www.flexerasoftware.com/swid/2011/arp">
+		<fs:original_arp_guid id="original_arp_guid">{05234DCB-4C1A-4D97-9832-D6FEDF52CB2B}</fs:original_arp_guid>
+		<fs:original_arp_publisher id="original_arp_publisher">MiKeSoft</fs:original_arp_publisher>
+		<fs:original_arp_display_name id="original_arp_display_name">PCG Tools</fs:original_arp_display_name>
+		<fs:original_arp_display_version id="original_arp_display_version">2.7.3</fs:original_arp_display_version>
+		<fs:current_arp_guid/>
+		<fs:current_arp_publisher/>
+		<fs:current_arp_display_name/>
+		<fs:current_arp_display_version/>
+	</swid:extended_information>
+</swid:software_identification_tag>

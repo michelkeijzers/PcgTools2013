@@ -1,0 +1,17 @@
+PcgViewModel/PcgWindow relationships
+-------------------------------------
+
+Higher level
+ PcgViewModel.SelectedMemory = ...
+  SetBanksSelected()
+   ProgramBanksSelected = true
+    Banks.Clear/Add
+	OnPropertyChanged("ProgramBanksSelected");
+
+	 PcgWindow:OnViewPropertyChanged(..)
+      OnViewPropertyChangedProgramBanksSelected();
+	   SetProgramBanksGridViews()
+
+
+PcgWindow:ListViewBanksSelectionChanged
+ PcgVIewModel.BanksChanged
