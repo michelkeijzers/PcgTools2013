@@ -105,9 +105,6 @@
                 </Button.ToolTip>
             </Button>
 
-            <Button Content="_Hex Export" 
-            VerticalAlignment="Bottom" Width="71" Command="{Binding Path=ExportToHexCommand}" Margin="4"
-            />
         </WrapPanel>
 
 

@@ -1,7 +1,6 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
-using PcgTools.Model.Common.Synth;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 
@@ -47,16 +46,13 @@ namespace PcgTools.Model.M3Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Eds; }
-        }
-        
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Eds;
+
 
         /// <summary>
         /// E.g. GM banks have index 1.
         /// </summary>
-        public override int IndexOffset { get { return 1; } }
+        public override int IndexOffset => 1;
     }
     
 }

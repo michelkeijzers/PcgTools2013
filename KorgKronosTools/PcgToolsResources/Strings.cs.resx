@@ -537,8 +537,8 @@ Odkaz:</value>
   <data name="IncompatibleOsVersion" xml:space="preserve">
     <value>Patche ve schrance jsou z nekompatibilni verze OS a nemuzou byt zkopirovany.</value>
   </data>
-  <data name="Index" xml:space="preserve">
-    <value>Index</value>
+  <data name="ColumnVolume" xml:space="preserve">
+    <value>Volume</value>
   </data>
   <data name="InnerExceptionMessage" xml:space="preserve">
     <value>Vnitrni zprava o chybe</value>
@@ -1558,7 +1558,7 @@ Jine vysvetleni:
     <value>Styl</value>
   </data>
   <data name="IncludingPatchName" xml:space="preserve">
-    <value>Inclusief Patchnaam</value>
+    <value>Obsahujici jmeno patche</value>
   </data>
   <data name="Manual_grt" xml:space="preserve">
     <value>Navod</value>
@@ -1611,5 +1611,272 @@ Jine vysvetleni:
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Neznamy</value>
+  </data>
+  <data name="AllPatchesRadioButton" xml:space="preserve">
+    <value>_Vsechny patche</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>_Priradit</value>
+  </data>
+  <data name="AssignToSetListSlot" xml:space="preserve">
+    <value>_Priradit k Set List slotu</value>
+  </data>
+  <data name="AutoBackupFiles" xml:space="preserve">
+    <value>Automaticka zaloha souboru</value>
+  </data>
+  <data name="AutoBackupIntervalTime" xml:space="preserve">
+    <value>Interval zalohy (min)</value>
+  </data>
+  <data name="AutoBackupMaxStorage" xml:space="preserve">
+    <value>_Maximalni velikost</value>
+  </data>
+  <data name="AutoFillInSetListSlotNames" xml:space="preserve">
+    <value>_Automaticky vyplnit v Set List Slotu jmena</value>
+  </data>
+  <data name="Capitalization" xml:space="preserve">
+    <value>_Kapitalizace</value>
+  </data>
+  <data name="CapitalizeName" xml:space="preserve">
+    <value>_Zvetsit nazev</value>
+  </data>
+  <data name="ClearDuplicates" xml:space="preserve">
+    <value>_Smazat duplikaty</value>
+  </data>
+  <data name="ClearPatches" xml:space="preserve">
+    <value>Smazat patche</value>
+  </data>
+  <data name="ClearPatchesAsk" xml:space="preserve">
+    <value>_Zeptat</value>
+  </data>
+  <data name="ClearPatchesNone" xml:space="preserve">
+    <value>_Zadne</value>
+  </data>
+  <data name="ClearPatchesUnusedAndUsed" xml:space="preserve">
+    <value>_Nepouzity a pouzity</value>
+  </data>
+  <data name="ClearPatchesUnusedOnly" xml:space="preserve">
+    <value>_Pouze nepouzity</value>
+  </data>
+  <data name="ClearWarning" xml:space="preserve">
+    <value>Alespon jeden patch je pouzit jako odkaz k jinemu patchi. Chcete smazat pouzite patche?</value>
+  </data>
+  <data name="ColumnCrcValueExcludingName" xml:space="preserve">
+    <value>C_RC-Wert ohne Name</value>
+  </data>
+  <data name="ColumnCrcValueIncludingName" xml:space="preserve">
+    <value>_CRC-Wert mit Name</value>
+  </data>
+  <data name="CombiReferenceChanger" xml:space="preserve">
+    <value>Prevodnik odkazu combi</value>
+  </data>
+  <data name="DecapitalizeName" xml:space="preserve">
+    <value>_Zmensit nazev</value>
+  </data>
+  <data name="DoNotUsePatchNamesForPatchDuplicationChecking" xml:space="preserve">
+    <value>_Nepouzivejte jmena programu pro kontrolu duplikaci</value>
+  </data>
+  <data name="DrumKit" xml:space="preserve">
+    <value>Bici soustava</value>
+  </data>
+  <data name="ExcludingPatchName" xml:space="preserve">
+    <value>Vyjma jmena patche</value>
+  </data>
+  <data name="ExternalLinksContributors" xml:space="preserve">
+    <value>Externi odkazy ke prispevatelum</value>
+  </data>
+  <data name="ExternalLinksContributorsMenuItem" xml:space="preserve">
+    <value>_Externi odkazy ke prispevatelum</value>
+  </data>
+  <data name="FixReferencesToClearedUsedPatches" xml:space="preserve">
+    <value>_Upravit odkazy k prazdnym pouzitym programum</value>
+  </data>
+  <data name="IgnoreCharachtersParts" xml:space="preserve">
+    <value>_Ignorovat znaky/casti</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Index</value>
+  </data>
+  <data name="MasterFileClose" xml:space="preserve">
+    <value>_Zavrit</value>
+  </data>
+  <data name="MasterFileOpen" xml:space="preserve">
+    <value>_Otevrit</value>
+  </data>
+  <data name="MasterFileUnassign" xml:space="preserve">
+    <value>_Odznacit</value>
+  </data>
+  <data name="NumberOfReferences" xml:space="preserve">
+    <value>#Ref</value>
+  </data>
+  <data name="OasysVoucherCodeSponsors" xml:space="preserve">
+    <value>Oasys vouchery...</value>
+  </data>
+  <data name="OptionalColumns" xml:space="preserve">
+    <value>_Volitelne sloupce</value>
+  </data>
+  <data name="PatchType" xml:space="preserve">
+    <value>Typ patche</value>
+  </data>
+  <data name="PcgWindow" xml:space="preserve">
+    <value>PCG okno</value>
+  </data>
+  <data name="ProcessingRules" xml:space="preserve">
+    <value>Zpracovavam pravidla...</value>
+  </data>
+  <data name="ProgramReferenceChanger" xml:space="preserve">
+    <value>_Prevodnik odkazu programu...</value>
+  </data>
+  <data name="ProgramReferenceChanger_wt" xml:space="preserve">
+    <value>Prevodnik odkazu programu</value>
+  </data>
+  <data name="ReferenceRules" xml:space="preserve">
+    <value>_Pravidla referenci</value>
+  </data>
+  <data name="ReferenceType" xml:space="preserve">
+    <value>Zvolte typ patche</value>
+  </data>
+  <data name="Rules" xml:space="preserve">
+    <value>_Pravidla</value>
+  </data>
+  <data name="ShowNumberOfReferencesColumn" xml:space="preserve">
+    <value>_Zobrazit #Refs (Pocet odkazu) sloupcu</value>
+  </data>
+  <data name="ShowWarningWhenClearingUsedPatches" xml:space="preserve">
+    <value>_Zobrazit varovani, kdyz se mazou pouzite patche</value>
+  </data>
+  <data name="TitleCaseName" xml:space="preserve">
+    <value>_Zacatecni pismeno</value>
+  </data>
+  <data name="TreatEquallyNamedPatchesAsDuplicates" xml:space="preserve">
+    <value>_Zpracovavat stejne nazvane patche jako duplikaty</value>
+  </data>
+  <data name="TreatLikeNamedPatchesAsDuplicates" xml:space="preserve">
+    <value>_Zpracovavat podobne nazvane patche jako duplikaty</value>
+  </data>
+  <data name="WaveSequence" xml:space="preserve">
+    <value>Wave sekvence</value>
+  </data>
+  <data name="XOfYCharacters_editw" xml:space="preserve">
+    <value>{0} z {1} znaku</value>
+  </data>
+  <data name="ChangePcgFileName" xml:space="preserve">
+    <value>_Zmenit...</value>
+  </data>
+  <data name="DrumKits" xml:space="preserve">
+    <value>Bici soustavy</value>
+  </data>
+  <data name="DrumPattern" xml:space="preserve">
+    <value>Vzor bicich</value>
+  </data>
+  <data name="DrumPatterns" xml:space="preserve">
+    <value>Vzory bicich</value>
+  </data>
+  <data name="DrumPatternsInRadioButton" xml:space="preserve">
+    <value>_Vzory bicich</value>
+  </data>
+  <data name="EditParameterChangeEmpty" xml:space="preserve">
+    <value>Vyplnte validni zmenu parametru dle pravidla vyse.</value>
+  </data>
+  <data name="EmptyOrInitPatchName" xml:space="preserve">
+    <value>Prazdny nebo inicializovany program</value>
+  </data>
+  <data name="ExportToFile" xml:space="preserve">
+    <value>_Exportovat do souboru</value>
+  </data>
+  <data name="ExternalLinksPersonal" xml:space="preserve">
+    <value>Externi odkazy Osobni odkazy</value>
+  </data>
+  <data name="ExternalLinksPersonalMenuItem" xml:space="preserve">
+    <value>Externi odkazy _Osobni odkazy</value>
+  </data>
+  <data name="FilterDrumPatternNames" xml:space="preserve">
+    <value>_Filtrovat vzory bicich</value>
+  </data>
+  <data name="FilterDrumPatterns" xml:space="preserve">
+    <value>Filtrovat vzory bicich</value>
+  </data>
+  <data name="HexExport" xml:space="preserve">
+    <value>_Export do hexadecimalni soustavy</value>
+  </data>
+  <data name="HexExportDlgTitle" xml:space="preserve">
+    <value>Export do hexadecimalni soustavy</value>
+  </data>
+  <data name="IgnoreEmptyInitDrumPatterns" xml:space="preserve">
+    <value>_Ignorovat Prazdne/Inicializovane vzory bicich</value>
+  </data>
+  <data name="InitAsMpeCombi" xml:space="preserve">
+    <value>_Inicializovat jako MPE Combi</value>
+  </data>
+  <data name="MidiChannelMainKeyboard" xml:space="preserve">
+    <value>MIDI kanal hlavni klavesy</value>
+  </data>
+  <data name="MidiChannelSecondaryKeyboard" xml:space="preserve">
+    <value>MIDI kanal sekundarni klavesy</value>
+  </data>
+  <data name="MidiTracks" xml:space="preserve">
+    <value>_MIDI Stopy</value>
+  </data>
+  <data name="OverwriteFilledDrumKits" xml:space="preserve">
+    <value>_Prepsat naplnene bici soustavy</value>
+  </data>
+  <data name="OverwriteFilledDrumKitsToolTip" xml:space="preserve">
+    <value>Prepsat naplnene (neprazdne) bici soustavy</value>
+  </data>
+  <data name="OverwriteFilledDrumPatterns" xml:space="preserve">
+    <value>_Prepsat naplnene vzory bicich</value>
+  </data>
+  <data name="OverwriteFilledDrumPatternsToolTip" xml:space="preserve">
+    <value>Prepsat naplnene (neprazdne) vzory bicich</value>
+  </data>
+  <data name="OverwriteFilledWaveSequences" xml:space="preserve">
+    <value>_Prepsat naplnene wave sekvence</value>
+  </data>
+  <data name="OverwriteFilledWaveSequencesToolTip" xml:space="preserve">
+    <value>Prepsat naplnene (neprazdne) wave sekvence</value>
+  </data>
+  <data name="PasteDuplicateDrumKits" xml:space="preserve">
+    <value>_Vlozit duplikatni bici soustavy</value>
+  </data>
+  <data name="PasteDuplicateDrumKitsToolTip" xml:space="preserve">
+    <value>Vlozi bici soustavy do PCG</value>
+  </data>
+  <data name="PasteDuplicateDrumPatterns" xml:space="preserve">
+    <value>_Vlozit duplikatni vzory bicich</value>
+  </data>
+  <data name="PasteDuplicateDrumPatternsToolTip" xml:space="preserve">
+    <value>Vlozi vzory bicich do PCG</value>
+  </data>
+  <data name="PasteDuplicateWaveSequences" xml:space="preserve">
+    <value>_Vlozit duplikatni wave sekvence</value>
+  </data>
+  <data name="PasteDuplicateWaveSequencesToolTip" xml:space="preserve">
+    <value>Vlozi wave sekvence do PCG</value>
+  </data>
+  <data name="SelectAllExceptDrums" xml:space="preserve">
+    <value>_Vybrat Vsechny / Bici</value>
+  </data>
+  <data name="SourceSetList" xml:space="preserve">
+    <value>Zdrojovy Set List</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInMultipleBanks" xml:space="preserve">
+    <value>{0} vzorku bicich v {0} Bankach</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInOneBank" xml:space="preserve">
+    <value>{0} vzorku bicich v 1 Bance</value>
+  </data>
+  <data name="Stb_OneDrumPatternInMultipleBanks" xml:space="preserve">
+    <value>1 vzorek bicich v {0} Bankach</value>
+  </data>
+  <data name="Stb_OneDrumPatternInOneBank" xml:space="preserve">
+    <value>1 vzorek bicich v 1 Bance</value>
+  </data>
+  <data name="TargetCombiBank" xml:space="preserve">
+    <value>Cilova Combi Banka</value>
+  </data>
+  <data name="TargetSetList" xml:space="preserve">
+    <value>Cilovy Set List</value>
+  </data>
+  <data name="WaveSequences" xml:space="preserve">
+    <value>Wave sekvence</value>
   </data>
 </root>

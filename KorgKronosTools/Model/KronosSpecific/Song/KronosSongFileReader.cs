@@ -3,7 +3,6 @@
 using PcgTools.Model.Common.File;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.SongsRelated;
-using PcgTools.Model.KromeSpecific.Synth;
 using PcgTools.Model.KronosSpecific.Synth;
 
 namespace PcgTools.Model.KronosSpecific.Song
@@ -27,16 +26,13 @@ namespace PcgTools.Model.KronosSpecific.Song
         /// <summary>
         /// Byte offset where timbres start.
         /// </summary>
-        protected override int TimbresByteOffset
-        {
-            get { return 4802; }
-        }
+        protected override int TimbresByteOffset => 4802;
 
 
         /// <summary>
         /// Number of bytes in a song track (equal to length of a combi timbre).
         /// </summary>
-        public override int SongTrackByteLength { get { return 188; } }
+        public override int SongTrackByteLength => 188;
 
 
         /// <summary>

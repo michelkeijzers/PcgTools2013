@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>PCG Tools: Download</title>
+    <meta charset="utf-8" name="keywords" content="PCG Tools, korg, synthesizer, synthesizers, workstation, workstations, librarian, editor, music, PCG files, PCG, files, patch, patches, program, programs, combi, combis, global, cubase, sng, set lists, set list, set list slots, kronos x, kronos, oasys, krome, kross, m3, m50, triton extreme, triton studio, triton classic, triton le, triton, triton rack, triton tr, karma, trinity v1, trinity v2, trinity v3, trinity tr rack">
+    <meta name="description" content="A free software application for Korg synthesizers/workstations, download">
+
+    <link rel="shortcut icon" href="http://pcgtools.mkspace.nl/favicon.ico">
+
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-46096075-1', 'mkspace.nl');
+     ga('send', 'pageview');
+    </script>
+
+    <style>
+     @import url('style.css');
+    </style>
+  </head>
+
+  <body>
+      <img src="http://pcgtools.mkspace.nl/pcgtoolsnormal.jpg" alt=""/>
+
+    <div id="menu">
+      <ul>
+        <li><a href="http://pcgtools.mkspace.nl/index.html" title="Home">Home</a></li>
+        <li><a href="http://pcgtools.mkspace.nl/whoami.html" title="Who Am I?">Who Am I?</a></li>
+        <li><a href="http://pcgtools.mkspace.nl/support.html" title="Support">Support</a></li>
+        <li><a href="http://pcgtools.mkspace.nl/download.php" title="Download">Download</a></li>
+        <li><a href="http://pcgtools.mkspace.nl/history.html">History</a></li>
+        <li><a href="http://pcgtools.mkspace.nl/wishlist.html">Wish List</a></li>
+        <li><a href="http://pcgtools.mkspace.nl/known_issues.html">Issues</a></li>
+        <li><a href="http://pcgtools.mkspace.nl/contact.html" title="Contact">Contact</a></li>
+        <li><a href="http://pcgtools.mkspace.nl/faq.html" title="Links">FAQ</a></li>
+        <li><a href="http://pcgtools.mkspace.nl/links.html" title="Links">Links</a></li>
+    </ul>
+  </div>
+
+
+<head>
+<style>
+table, th, td
+{
+border-collapse:collapse;
+border:1px solid black;
+}
+th, td
+{
+padding:5px;
+}
+</style>
+</head>
+  <h1>Known Issues</h1>
+
+  <h2>Summary</h2>
+     <table border="1">
+       <tr><td><b>Category</b></td><td><b>Item</b></td></tr>
+       <tr><td>Startup</td><td>Opening multiple files in the file explorer, starts up multiple instances.</td></tr>
+       <tr><td>Startup</td><td>Splash screen is not using internationalized texts but always English.</td></tr>
+       <tr><td>Support</td><td>Concatenated MIDI system exclusive files are read partly.</td></tr>
+       <tr><td>GUI</td><td>Moving a window behind the menu/toolbar makes it immovable.</td></tr>
+       <tr><td>GUI</td><td>Resizing does not change cursor.</td></tr>
+       <tr><td>GUI</td><td>Menu invisible when hovering over it</td></tr>
+       <tr><td>PCG Window</td><td>Selected patches are sometimes retained after switching banks and/or scrolling (Tim Godfrey).</td></tr>
+       <tr><td>Master File</td><td>Opening/closing a master file does not always sync other windows correctly.</td></tr>
+       <tr><td>Master File</td><td>Changing a master file does not always sync other windows correctly.</td></tr>
+       <tr><td>List Generator</td><td>Different GM banks are not recognized.</td></tr>
+       <tr><td>List Generator</td><td>Not all columns are translated.</td></tr>
+       <tr><td>List Generator</td><td>CRC values in Patch list sometimes are not in sync with Differences List results (Tim Godfrey).</td></tr>
+       <tr><td>Copy & Paste</td><td>Wave sequences and drum kits can not be copy/pasted.</td></tr>
+       <tr><td>Copy & Paste</td><td>When copying set lists, combis referenced multiple times are copied multiple times.</td></tr>
+       <tr><td>Global Section/Categories</td><td>Use both Korg Trinity Category A and B</td></tr>
+     </table>
+
+
+  <h2>Startup</h2>
+
+    <h3>Opening multiple files in the file explorer, starts up multiple instances</h3>
+      <table>
+        <tr><td>Description</td><td>When selecting multiple PCG files in the file explorer and double clicking or open them, for each selected PCG file an own instance of PCG Tools is started.</td>
+        <tr><td>Workaround</td><td>Select only one PCG file and open it, then load the other PCG files manually.</td>
+        <tr><td>Fix expectation</td><td>Not possible.</td>
+      </table>
+
+    <h3>Splash screen is not using internationalized texts but always English</h3>
+      <table>
+        <tr><td>Description</td><td>The splash screen is not using internationalized texts but always using English texts.</td>
+        <tr><td>Workaround</td><td>None.</td>
+        <tr><td>Fix expectation</td><td>Low priority.</td>
+      </table>
+
+
+
+  <h2>Support</h2>
+    <h3>Concatenated MIDI system exclusive files are read partly</h3>
+      <table>
+        <tr><td>Description</td><td>In some cases, MIDI system exclusive files consist of multiple 'logical' files concatenated. From these file, only the first part is read; the rest is ignored. An example of such file are the Valhala sysex files for the Korg M1.</td>
+        <tr><td>Workaround</td><td>Use a hex editor to split such files in more files.</td>
+        <tr><td>Fix expectation</td><td>Unknown.</td>
+      </table>
+
+
+  <h2>GUI</h2>
+
+    <h3>Moving a window behind the menu/toolbar makes it immovable</h3>
+      <table>
+        <tr><td>Description</td><td>When moving/dragging a window behind the menu or behind the toolbar of the main window, the moved/dragged window cannot be moved again and the upper part of the window is invisible.</td>
+        <tr><td>Workaround</td><td>Save the PCG file (if changes need to be saved), close it and reopen it again.</td>
+        <tr><td>Fix expectation</td><td>Due to a problem in the used GUI library, there is no solution for the short term.</td>
+      </table>
+
+    <h3>Resizing does not change cursor</h3>
+      <table>
+        <tr><td>Description</td><td>When resizing the window after opening PCG, the cursor does not change to a double ended (resize) arrow to help visualize the resizing operation.</td>
+        <tr><td>Workaround</td><td>None, however resizing still works but without change of cursor type.</td>
+        <tr><td>Fix expectation</td><td>Due to a problem in the used GUI library, there is no solution for the short term.</td>
+      </table>
+
+
+    <h3>Menu invisible when hovering over it</h3>
+      <table>
+        <tr><td>Description</td><td>When hovering with the mouse over the menu, the items become invible. Only seen by one person on Windows XP system.</td>
+        <tr><td>Workaround</td><td>Minimize and maximize the application.</td>
+        <tr><td>Fix expectation</td><td>Low priority due to no testing possibilities.</td>
+      </table>
+
+
+  <h2>PCG Window</h2>
+
+    <h3>Selected patches are sometimes retained after switching banks and/or scrolling</h3>
+      <table>
+        <tr><td>Description</td><td>When selecting one or more patches, going to another bank, scroll up or down at least one screen size and return to the original bank, when selecting a new patch, the previously selected patches sometimes are still selected. This problem can also occurs after scrolling inside one bank.</td>
+        <tr><td>Workaround</td><td>Scroll through the list where the previous selected patches are, and reselect the desired patches. Note t hat the number of selected patches are shown at the top of the screen to immediately see if this unwanted effect occurs.</td>
+        <tr><td>Fix expectation</td><td>When changing to a different MDI mechanism, there is no solution for the short term.</td>
+      </table>
+
+
+  <h2>Master File</h2>
+
+    <h3></h3>
+    <h3>Opening/closing a master file does not always sync related windows correctly</h3>
+      <table>
+        <tr><td>Description</td><td>Opening or closing a master file does not always synchronize the related PCG windows of Timbre windows using that master file.</td>
+        <tr><td>Workaround</td><td>Sometimes changing banks might help in the PCG Window, or opening/closing the Timbre window. What always helps is opening the PCG window itself.</td>
+        <tr><td>Fix expectation</td><td>Only after a major architectural change.</td>
+      </table>
+
+    <h3>Changing a master file does not always sync related windows correctly</h3>
+      <table>
+        <tr><td>Description</td><td>Changing a master file does not always synchronize the related PCG windows of Timbre windows using that master file.
+A change might be to change the name of a patch, move a patch up or down, or copy/paste in the master file.</td>
+        <tr><td>Workaround</td><td>Sometimes changing banks might help in the PCG Window, or opening/closing the Timbre window. What always helps is opening the PCG window itself.</td>
+        <tr><td>Fix expectation</td><td>Only after a major architectural change.</td>
+      </table>
+
+
+  <h2>List Generator</h2>
+
+    <h3>Different GM banks are not recognized</h3>
+      <table>
+        <tr><td>Description</td><td>The lists created by the list generator do not make a difference between GM, G(1)-G(9) and G(d) banks. All these banks are shown as GM.</td>
+        <tr><td>Workaround</td><td>None.</td>
+        <tr><td>Fix expectation</td><td>Not likely, and the consequence is not big. Since GM banks (G(1)-G(9) and G(d)) are not present in a PCG file anyway, it will not matter for most lists.</td>
+      </table>
+
+    <h3>Not all columns are translated</h3>
+      <table>
+        <tr><td>Description</td><td>In the set list generator generated tables for XML, not all column headers are translated in foreign languages.</td>
+        <tr><td>Workaround</td><td>None.</td>
+        <tr><td>Fix expectation</td><td>Likely within one of the next releases.</td>
+      </table>
+
+    <h3>CRC values in Patch List sometimes are not in sync with Differences List results.</h3>
+      <table>
+        <tr><td>Description</td><td>For some models the CRC values (optional columns) in the Patch List, show different numbers while the Differences List marks them as duplicates.</td>
+        <tr><td>Workaround</td>None; however the difference list is better.<td>None.</td>
+        <tr><td>Fix expectation</td><td>Likely within one of the next releases.</td>
+      </table>
+
+  <h2>Copy & Paste</h2>
+
+    <h3>Wave sequences and drum kits are not copy/pasted</h3>
+      <table>
+        <tr><td>Description</td><td>When copying programs, combis or set list slots, used wave sequences and drum kits are not copied along.</td>
+        <tr><td>Workaround</td><td>No complete solution, but make sure the destination PCG file has the used wave sequences and drum kits on the same location as the source PCG file. If not, copy them on your workstation itself before or after using PCG Tools.</td>
+        <tr><td>Fix expectation</td><td>After a redesign of the copy/paste functionality.</td>
+      </table>
+
+    <h3>When copying set lists, combis referenced multiple times are copied multiple times.</h3>
+      <table>
+        <tr><td>Description</td><td>When copying set lists (or set list slots), when different set list slots reference to the same combi, those combis are copied multiple times (one per reference) to the clipboard, showing a huge amount of combis in some cases. However, when pasting duplicates are automatically removed. So the only disadvantage in the current implementation is that you cannot see exactly how many combis/programs are really used.</td>
+        <tr><td>Workaround</td><td>-</td>
+        <tr><td>Fix expectation</td><td>After a redesign of the copy/paste functionality.</td>
+      </table>
+
+  <h2>Global Section/Categories</h2>
+
+    <h3>Use Both Korg Trinity Category A and B both</h3>
+      <table>
+        <tr><td>Description</td><td>Use both Korg Trinity Category A and B when sorting, displaying and generating lists. Currently either Category A or B is used which is selectable. However, both categories should be used.</td>
+        <tr><td>Workaround</td><td>None.</td>
+        <tr><td>Fix expectation</td><td>Low priority.</td>
+      </table>
+<!--
+    <h3></h3>
+      <table>
+        <tr><td>Description</td><td></td>
+        <tr><td>Workaround</td><td></td>
+        <tr><td>Fix expectation</td><td></td>
+      </table>
+-->
+    </body>
+</html>

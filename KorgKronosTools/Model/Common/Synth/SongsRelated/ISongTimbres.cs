@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Common.Mvvm;
-using PcgTools.Model.Common.Synth.PatchCombis;
-using PcgTools.Model.Common.Synth.PatchInterfaces;
+﻿using PcgTools.Model.Common.Synth.PatchCombis;
 
 namespace PcgTools.Model.Common.Synth.SongsRelated
 {

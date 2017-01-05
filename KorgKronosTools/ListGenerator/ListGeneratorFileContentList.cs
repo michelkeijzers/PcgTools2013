@@ -189,8 +189,8 @@ namespace PcgTools.ListGenerator
                 case OutputFormat.Xml:
                     writer.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 // ReSharper disable RedundantStringFormatCall
-                    writer.WriteLine(String.Format("<?xml-stylesheet type=\"text/xsl\" href=\"{0}\"?>",
-                        Path.ChangeExtension(OutputFileName, "xsl")));
+                    writer.WriteLine(
+                        $"<?xml-stylesheet type=\"text/xsl\" href=\"{Path.ChangeExtension(OutputFileName, "xsl")}\"?>");
 // ReSharper restore RedundantStringFormatCall
                     writer.WriteLine("<file_content_list xml:lang=\"en\">");
                     break;
@@ -236,9 +236,9 @@ namespace PcgTools.ListGenerator
         {
             foreach (var bank in _list)
             {
-                var bankType = String.Empty;
-                var contentType = String.Empty;
-                var bankId = String.Empty;
+                var bankType = string.Empty;
+                var contentType = string.Empty;
+                var bankId = string.Empty;
                 var writablePatches = 0;
                 var filledPatches = 0;
                 var emptyPatches = 0;
@@ -251,8 +251,8 @@ namespace PcgTools.ListGenerator
 
                     bankType = "ProgramBank";
                     bankId = programBank.Id;
-                    contentType = String.Format("{0} {1}", ProgramBank.SynthesisTypeAsString(programBank.BankSynthesisType),
-                        Strings.Programs);
+                    contentType =
+                        $"{ProgramBank.SynthesisTypeAsString(programBank.BankSynthesisType)} {Strings.Programs}";
                     writablePatches = programBank.Patches.Count(program => programBank.IsWritable);
                     filledPatches = programBank.CountFilledAndNonEmptyPatches;
                     emptyPatches = writablePatches - filledPatches;
@@ -380,9 +380,8 @@ namespace PcgTools.ListGenerator
             switch (ListOutputFormat)
             {
                 case OutputFormat.AsciiTable:
-                    lines.Add(String.Format("|{0,-11}|{1,-23}| {2,-6}|{3,5}     |{4,5}   |{5,5}  |{6}",
-                        bankType, contentType, bankId, writablePatches, filledPatches, emptyPatches,
-                        Util.GetPatchIdsString(filledPatchList)));
+                    lines.Add(
+                        $"|{bankType,-11}|{contentType,-23}| {bankId,-6}|{writablePatches,5}     |{filledPatches,5}   |{emptyPatches,5}  |{Util.GetPatchIdsString(filledPatchList)}");
                     break;
 
                 case OutputFormat.Text:
@@ -394,7 +393,7 @@ namespace PcgTools.ListGenerator
                 case OutputFormat.Csv:
                     writer.WriteLine("{0},{1},{2},{3},{4},{5},{6}",
                         bankType, contentType, bankId, writablePatches, filledPatches, emptyPatches,
-                        Util.GetPatchIdsString(filledPatchList).Replace(",", String.Empty));
+                        Util.GetPatchIdsString(filledPatchList).Replace(",", string.Empty));
                     break;
 
                 case OutputFormat.Xml:
@@ -445,7 +444,7 @@ namespace PcgTools.ListGenerator
             builder.AppendLine("<?xml version=\"1.0\"?>");
             builder.AppendLine(" <xsl:stylesheet version=\"1.0\"");
             builder.AppendLine(" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
-            builder.AppendLine(String.Empty);
+            builder.AppendLine(string.Empty);
             builder.AppendLine(" <xsl:template match=\"/\">");
             builder.AppendLine("   <html>");
             builder.AppendLine("   <body>");
@@ -475,7 +474,7 @@ namespace PcgTools.ListGenerator
             builder.AppendLine("   </body>");
             builder.AppendLine("   </html>");
             builder.AppendLine(" </xsl:template>");
-            builder.AppendLine(String.Empty);
+            builder.AppendLine(string.Empty);
             builder.AppendLine(" </xsl:stylesheet>");
             File.WriteAllText(Path.ChangeExtension(OutputFileName, "xsl"), builder.ToString());
         }

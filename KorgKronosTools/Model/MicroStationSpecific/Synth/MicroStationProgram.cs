@@ -1,11 +1,9 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Collections.Generic;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.OldParameters;
 using PcgTools.Model.Common.Synth.PatchPrograms;
-using PcgTools.Model.MSpecific.Synth;
 
 namespace PcgTools.Model.MicroStationSpecific.Synth
 {
@@ -86,21 +84,12 @@ namespace PcgTools.Model.MicroStationSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 24; }
-        }
+        public override int MaxNameLength => 24;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get
-            {
-                return ((Name == String.Empty) || (Name.Contains("Init") && Name.Contains("Prog")));
-            }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("Init") && Name.Contains("Prog")));
     }
 }

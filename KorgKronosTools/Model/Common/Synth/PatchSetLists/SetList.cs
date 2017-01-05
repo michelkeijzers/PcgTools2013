@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Utils;
@@ -17,7 +16,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength { get { return 24; } }
+        public override int MaxNameLength => 24;
 
 
         /// <summary>
@@ -37,8 +36,8 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// Used in XAML PCG Window in list view column.
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        [UsedImplicitly] public string Column2 { get { return Name; } } 
-        
+        [UsedImplicitly] public string Column2 => Name;
+
 
         /// <summary>
         /// 
@@ -59,17 +58,14 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("{0} {1}", Strings.SetList_2str, Id);
+            return $"{Strings.SetList_2str} {Id}";
         }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public int Index
-        {
-            get { return PcgId; }
-        }
+        public int Index => PcgId;
 
 
         /// <summary>
@@ -77,7 +73,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
+            Name = string.Empty;
         }
     }
 }

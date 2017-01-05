@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Diagnostics;
 using PcgTools.ClipBoard;
 using PcgTools.Model.Common;
@@ -41,7 +40,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
                 GetParam(ParameterNames.CombiParameterName.Favorite).Value = false;
             }
 
-            RaisePropertyChanged(String.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
         }
 
 
@@ -159,6 +158,6 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public static int SizeBetweenCmb2AndCbk2 { get { return 8; } }
+        public static int SizeBetweenCmb2AndCbk2 => 8;
     }
 }

@@ -127,7 +127,7 @@ namespace PcgTools.ListGenerator
                         where !bank.IsLoaded || (bank.IsLoaded && !IgnoreMutedOffTimbres ||
                                                       (((timbre.GetParam(ParameterNames.TimbreParameterName.Mute) == null) ||
                                                       !timbre.GetParam(ParameterNames.TimbreParameterName.Mute).Value) &&
-                                                       (new List<String> {"Int", "On", "Both"}.Contains(
+                                                       (new List<string> {"Int", "On", "Both"}.Contains(
                                                            timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value))))
                         select new Tuple<IProgramBank, IProgram>(timbre.UsedProgramBank, timbre.UsedProgram)
                         into key
@@ -313,9 +313,8 @@ namespace PcgTools.ListGenerator
                 writer.Write("{0,-8} ", item.Id);
             }
 // ReSharper disable RedundantStringFormatCall
-            writer.WriteLine(String.Format("{0}|", new string(' ',
-// ReSharper restore RedundantStringFormatCall
-                Math.Max((maxTimbresPerCombi - _dict[key].Count)*9, columnText.Length - _dict[key].Count*9))));
+            writer.WriteLine(
+                $"{new string(' ', /* ReSharper restore RedundantStringFormatCall */ Math.Max((maxTimbresPerCombi - _dict[key].Count)*9, columnText.Length - _dict[key].Count*9))}|");
         }
 
 
@@ -413,7 +412,7 @@ namespace PcgTools.ListGenerator
             builder.AppendLine("<?xml version=\"1.0\"?>");
             builder.AppendLine(" <xsl:stylesheet version=\"1.0\"");
             builder.AppendLine(" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
-            builder.AppendLine(String.Empty);
+            builder.AppendLine(string.Empty);
             builder.AppendLine(" <xsl:template match=\"/\">");
             builder.AppendLine("   <html>");
             builder.AppendLine("   <body>");
@@ -441,7 +440,7 @@ namespace PcgTools.ListGenerator
             builder.AppendLine("   </body>");
             builder.AppendLine("   </html>");
             builder.AppendLine(" </xsl:template>");
-            builder.AppendLine(String.Empty);
+            builder.AppendLine(string.Empty);
             builder.AppendLine(" </xsl:stylesheet>");
             File.WriteAllText(Path.ChangeExtension(OutputFileName, "xsl"), builder.ToString());
         }

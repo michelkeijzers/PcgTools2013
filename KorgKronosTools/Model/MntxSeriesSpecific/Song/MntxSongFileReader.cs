@@ -34,6 +34,6 @@ namespace PcgTools.Model.MntxSeriesSpecific.Song
         /// <summary>
         /// Number of song tracks (equal to combi timbres)
         /// </summary>
-        public override int NumberOfSongTracks { get { return 8; } }
+        public override int NumberOfSongTracks => 8;
     }
 }

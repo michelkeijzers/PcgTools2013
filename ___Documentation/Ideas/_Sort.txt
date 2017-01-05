@@ -1,0 +1,938 @@
+﻿                        
+WISHES/TODO
+============
+
+WISH: Check if MOSS programs from Trinity can be copied to Korg Triton Extreme program banks
+MANUAL: Trinity songs not supported.
+
+
+- Add Korg TR to Korg Triton Classic/Studio/Rack.
+
+					   
+Clear Unused Timbres
+---------------------
+Clears all timbres which have Status OFF or Muted
+Can be used over one or more combis or one or more combi banks.
+
+SmartSort Timbres
+-----------------
+Should be added as button in Timbre window.
+But also can be used over one or more combis or one or more combi banks.
+
+Sort by:
+- Status
+- Mute
+- MIDI Channel
+- Key Zone (Bottom/Top)
+- Vel Zone (Bottom/Top)
+
+MG: x Create Gap between different MIDI channel(s)
+KG: x Create Gap between different Key zone(s)
+
+o Create no gaps
+o Create gap between different MIDI Channels
+o Create double gap between different MIDI Channel(s) and gap between different key zone(s)
+x Only sort within 8 timbres
+
+E.g.
+Timbre MIDI KeyZone    Result for: MG = Off, KG = Off       MG = Off, KG = On      MG = On, KG = On      MG = On, KG = On
+  1     2   C1-C3                    3 2 1                       3 - 2 1              3 1 - 2               3 - 1 - - 2
+  2     1   C3-C4            
+  3     1   C1-C3
+
+
+see telephone notes about PCG Tools
+
+check MPE work for other types, check negative values for BitsUtil.SetBits.
+
+
+Translations
+double-to-single combis using different midi channels: warning message if incomplete
+Tidy kronos?
+Feature : Parameter Edit for editing a parameter over multiple patches simultaneously.
+windows phone TODO list (save as german)
+
+
+
+
+SMART SORT
+============
+Group Box Name		Control Type		Control Name			Effect Type			Effect Control Name(s)
+-------------------	-------------------	-----------------------	------------------- -------------------------------------------------------------
+-										Initialization								Combi supported: Enable (else Disable) all in Combi Selection
+-										Initialization			Show/Hide+Disable	Combis 9..16 supported: Enable (else Disable) Timbre 9..16
+-					Label				#Selected Patches		
+Combi Selection		Radio Button		Combi					Disable				Timbre 1..16, Select All, Select All/Drums, Deselect All
+Combi Selection		Radio Button		Timbres					Enable				Timbre 1..16, Select All, Select All/Drums, Deselect All
+Combi Selection		Check Box			Timbre 1..16			
+Combi Selection		Button				Select All				Enable				Timbre 1..16
+Combi Selection		Button				Deselect All			Disable				Timbres 1..16
+
+Parameter			Int Spin Control	Byte Offset				Update				#Bytes
+																Function			UpdateResultAfterChange		
+Parameter			Label Readonly Int	Max Byte Offset			-
+Parameter			Int Spin Control	#Bytes					Update				Byte Offset
+																Update				Value/Decimal Value Range, Value/Hex Value Range
+																Function			UpdateResultAfterChange
+Parameter			Label Readonly Int	Max # Bytes				-
+Parameter			Int Spin Control	MSB Bit					Function			UpdateResultAfterChange
+																Update				Value/Decimal Value Range, Value/Hex Value Range
+Parameter			Int Spin Control	LSB Bit					Function			UpdateResultAfterChange
+																Update				Value/Decimal Value Range, Value/Hex Value Range
+Parameter			Check Box			Signed					Function			UpdateResultAfterChange
+																Update				Value/Decimal Value Range, Value/Hex Value Range
+Value				Radio Button		Absolute Value			Function			UpdateResultAfterChange
+Value				Radio Button		Relative Value			Function			UpdateResultAfterChange
+Value				Radio Button		Percentage				Function			UpdateResultAfterChange
+Value				Int Spin Control	Decimal Value			Function			UpdateResultAfterChange
+Value				Int Spin Control	Hex Value				Function			UpdateResultAfterChange
+Value				Label String		Decimal Value Range		-
+Value				Label String		Hex Value Range			-
+Result After Change	Radio Button		Calculate Automatically	Disable				Button Calculate
+Result After Change	Radio Button		Calculate Manually		Disable				Button Calculate
+																Disable				RAC:Decimal Value Range, RAC:Hex Value Range, # Clipped Patches
+Result After Change	Button				Calculate				Enable				RAC:Decimal Value Range, RAC:Hex Value Range, # Clipped Patches
+																Function			UpdateResultAfterChange
+Result After Change	Label String		Decimal Value Range		-
+Result After Change	Label String		Hex Value Range			-
+Result After Change	Label String		# Clipped Patches		-
+
+UpdateResultAfterChange:
+- If Calculate Automatically:	Update  Decimal Value Range, Hex Value Range, # Clipped Patches
+- If Calculate Manually:		Disable Decimal Value Range, Hex Value Range, # Clipped Patches
+
+
+
+=========================
+
+
+PCG Tools
+=========
+
+
+======================================================================
+
+
+
+
+EXTRA NAVIGATION
+================
+From Program:
+- Goto usage -> Shows dialog with list of combis/set list slots and possibility to navigate to it or Save
+
+   Example:
+
+   +-PROGRAM USAGE LIST-------------------------------+
+   |Program I-A000 | Kronos Grand                     |
+   +--------------++--------+-------------------------+
+   |Type          |   ID    | Name                    |
+   +--------------+---------+-------------------------+
+   |Combi         | I-D000  | Era of Korg             |
+   |Combi         | I-D010  | Korg Combi Mix          |
+   |Set List Slot | 028/000 | Piano of Korg           |
+   +----------+---+--+------+-------------------------+
+   | Navigate | Save |                                |
+   +----------+---+--+------+-------------------------+
+
+   Navigate: Go to selected (single) item in PCG window (change bank and patch selection).
+   Save: Ask for Text, ASCII Table, CSV, XML skip if setting is set
+   Save Type: o Ask   o Text   o ASCII Table   o CSV   o XML
+   Change set list generator default type according above.
+
+
+From Combi:
+- Goto usage -> Shows list of set list slots and selection
+
+   Equal as programs
+
+From Combi Window:
+
+   Navigate button -> Show parent program in PCG Window (if timbre is set to a program).
+
+From Set list slot:
+- Goto reference
+  
+From Program Window:
+- Save (see Save Navigation type in program above)
+
+From Timbre window:
+- Save (see Save navigation type in program above)
+
+
+SELECTIONS FOR COPYING
+======================
+Enabled only when one bank is selected or a patch in a bank:
+- Mark all (patches in bank)		
+- Unmark all (patches in bank) 		
+- Mark favorites			When supported and not in set lists (slots).
+- Unmark favorites 			When supported and not in set lists (slots).
+- Mark with properties 			Show box with name selection, favorites, category (?)
+- Unmark with properties		Show box with name selection, favorites, category (?)
+
+
+COLUMN SELECTION IN PCG WINDOWS
+===============================
+
+Program Bank | Program
+ID  Type     | ID     Name          Category   Sub Category
+I-A Mod      | I-A000 Kronos Grand  Keyboards  A Piano
+I-B Samp     | I-A001 EPiano        Keyboards  E Piano
+I-C ...                           ...
+...
+
+
+To be added in settings. Tough better would be directly from PCG Window.
+Showing of columns should be done otherwise (context menu?)
+
+Type                Columns
+------------------- -----------------------------------
+All Banks           ID
+Program Bank        Type (Modeled/sampled: Kronos only), Name (only used in PCG Tools)?
+Combi Bank          Name
+Set List            Name
+Drum Kit Bank       Name?
+Wave Sequence Bank  Name?
+
+Patch               ID, Name
+Program             Category, Sub category, Favorite
+Combi               Category, Sub category, Favorite
+Set List Slot       Reference ID, Reference Name, Reference Category, Reference Sub category, Description
+Drum Kit            -
+Wave Sequence       -
+
+All columns:
+- Orderable
+- Optional viewable
+- Sortable
+- Resizable
+- Width and shown per column Persistable
+
+Add to settings:
+
+List Box:           List View (depending on list box left):
+Type                Column  Name            Width   Show    
+Program Bank        1       ID              50      Yes
+Combi Bank          2       Reference ID    60      Yes
+...                 3       Reference Name  180     Yes
+Program             4       Description     300     Variable?
+Combi
+...                 MoveUp MoveDown Edit
+
+ Edit shows new dialog with Width edit box / slider + Show check box
+ 
+ Add Bank edit to set name of program/combi bank/set list.
+ 
+
+Sort when clicking on column.
+Add function to change IDs according to current view.
+
+
+
+Sort feature
+------------
+Sort programs, combis, set list slots (later drum kits, wave sequences).
+
+1. Add menu sort
+----------------
+
+Sort keys:
+   - Name (Program bank/combi bank only)
+   - Name (Set list only; no AT*)
+   - Title name (Set list only; AT* only)
+   - Artist name (Set list only; AT* only)
+   - Favorite
+   - Category
+   - Sub category (if supported)
+   - Reference ID (set list slots only)
+   - According set list slot usage in set list [All or set list nr: 0..32/128?] (program/combi only)
+   
+
+Sorting by artist sorts on name, but from split character to end of line.
+
+
+Gui
+---
+Select column, sort as view
+Add option to sort as view (i.e. changed IDs).
+
+2. Add preferences
+------------------
+
+Artist/Group name split character                 	: String (default: -)
+Use set List Slot Description Tags			: Yes 
+Postfix split character				  	: String (default: /)
+Postfix alignment					: Left / Right
+
+3. Add set list slot tags menu
+------------------------------
+- Edit
+- Remove
+- Create tags from name
+- Create name from tags
+
+4. Edit set list slot
+---------------------
+Show/Edit tags
+
+Tag structure
+-------------
+used in set list slots.
+
+Format $<Tag code>Tag content($,EOL)
+Where Tag code can be:
+   aArtist name
+   tTitle or sub title
+   pPostFix, e.g. In(tro), So(lo), ...
+   cComments
+   
+And $ is the beginning of a next tag.
+
+tags always are located at the end of a description (i.e. human readable part first).
+
+Returns before tags are added automatically depending on the number of lines used in the human description (setting?)
+
+
+Examples of creating name from tags
+
+Tag
+
+Title				Artist/Group			Post Fix			Sort by Title			Sort by Artist/Group
+0123456789012345678901234	0123456789012345678901234	0123456789012345678901234	012345678901234567890123	012345678901234567890123	
+Seven Nation Army 		White Strips			In				SevenNationArmy-Whi..\In	WhiteStripes-SevenN..\In
+
+
+Algorithm:							
+  Description								Strings					
+- Add space + postfix split + postfix (trimmed)				[' \In']
+- Insert title or artist (trimmed), depending on order			['Seven Nation Army', ' \In']		
+- Insert ' ' + split + '-'						['Seven Nation Army', ' - ', ' \In']
+- Insert artis or title (trimmed), depending on order			['Seven Nation Army', ' - ', 'White Stripes', ' \In'], Total 37
+- Count total; while count >= 24:								
+   if postfix startswith ' ' -> remove; cont				['Seven Nation Army', ' - ', 'White Stripes', '\In'], Total 36
+   if space in ' - ': remove first space; cont				['Seven Nation Army', '- ', 'White Stripes', '\In'], Total 35
+									['Seven Nation Army', '-', 'White Stripes', '\In'], Total 34
+   if space in third string: remove first space: cont			['Seven Nation Army', '-', 'WhiteStripes', '\In'], Total 33
+   if space in first string: remove first space: cont			['SevenNation Army', '-', 'WhiteStripes', '\In'], Total 32
+									['SevenNationArmy', '-', 'WhiteStripes', '\In'], Total 31
+   if third string length > 5 and last two chars of third string != '..'
+	 -> replace to '..'; cont					['SevenNationArmy', '-', 'WhiteStrip..', '\In'], Total 31
+   if third string length > 5 -> remove char before '.''; cont		['SevenNationArmy', '-', 'WhiteStri..', '\In'], Total 30
+									['SevenNationArmy', '-', 'WhiteStr..', '\In'], Total 29
+									['SevenNationArmy', '-', 'WhiteSt..', '\In'], Total 28
+									['SevenNationArmy', '-', 'WhiteS..', '\In'], Total 27
+									['SevenNationArmy', '-', 'White..', '\In'], Total 26
+									['SevenNationArmy', '-', 'Whit..', '\In'], Total 25
+ 									['SevenNationArmy', '-', 'Whi..', '\In'], Total 24
+   if third string length > 2 -> remove last char 
+
+
+   if first string length > 5 and last two chars of firststring != '..'
+	 -> replace to '..'; cont					['TheVeryBestBandOfTheWor..', 'Be', '\In'], Total 31
+   if first string length > 4 -> remove char before '.''; cont		['TheVeryBestBandOfT..', '-', 'Be', '\In'], Total 26
+   if first string length > 2 -> remove last char			['TheVeryBestBandO..', '-', 'Be', '\In'], Total 24
+
+- Concatenate all strings:						'SevenNationArmy-Whi..\In'
+									'TheVeryBestBandO..-Be\In'
+
+
+
+BAND SET LIST
+=============
+New settings:
+  - Band set list break words: Set <x>, Break, End, Encore (resourceable)
+  - Set splitter: Set
+  - Multiple bands: Name, Venue, Date, Link to graphic
+  - Print encore on band set list?
+  - When artist/title option selected: Form: artist - title or title - artist, split character (-)
+
+Example (no artist/set list option):
+
+
+   Co-Incidental   25 February 2013    De Pas, Heesch
+
+   Set 1
+   <Set list slot name 1>
+   <Set list slot name 2>
+   ...   
+   <Set list slot name 8>
+
+   Set 2
+   <Set list slot name 10>
+   <Set list slot name 11>
+   ...   
+   <Set list slot name 18>
+
+   Toegift
+   <Set list slot name 20>
+
+   
+Example (artist/set list option):
+   Set 1
+   <Title set list slot 1> - <Artist set list slot 1>
+   <Title set list slot 2> - <Artist set list slot 2>
+   ...
+   <Title set list slot 8> - <Artist set list slot 8>
+   
+   .. etc
+
+   Option to use tabs.
+
+Band set list available when set list is selected, maybe also for multiple set list slot selections?
+
+
+
+
+
+Menu 
+====
+
++---------------+---------------+---------------+---------------+---------------+---------------+---+
+|               |   Programs    |    Combis     |Set List Slots |   Drum Kits   | WaveSequences |Glo|
+|               +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+bal|
+|               |Progrms| Banks |Combis | Banks |SLSlots|SetLsts|Dr.Kits| Banks |Wv.Seqs| Banks |   |
++---------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|               | 1 |>1 | 1 |>1 | 1 |>1 | 1 |>1 | 1 |>1 | 1 |>1 | 1 |>1 | 1 |>1 | 1 |>1 | 1 |>1 | 1 |
++---------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|Move Up        |MTB| - | - | - |MTB| - | - | - |MTB| - | - | - | - | - | - | - | - | - | - | - |NA |
+|Move Down	|MTB| - | - | - |MTB| - | - | - |MTB| - | - | - | - | - | - | - | - | - | - | - |NA | 
+|Edit		|MTB| - | - | - |MTB| - | - | - |MTB| - | - | - | - | - | - | - | - | - | - | - | - |
+|Clear		|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB| - | - | - | - | - | - | - | - |NA |
+|Insert		|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB| - | - | - | - | - | - | - | - |MTB|
+|Delete		|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|
+|Mark All	|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|
+|UnMark All	|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|
+|Set Favorite	|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|NA |NA |NA |NA |NA |NA |NA |NA |NA |NA |NA |NA |NA |
+|Unset Favorite	|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|NA |NA |NA |NA |NA |NA |NA |NA |NA |NA |NA |NA |NA |
+|Navigate	|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|NA |NA |NA |NA |NA |NA |NA |NA |NA |
+|Show Usage	|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|
+|Cut		|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB| - | - | - | - | - | - | - | - | - |
+|Copy		|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB| - | - | - | - | - | - | - | - | - |
+|Paste		|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB|MTB| - | - | - | - | - | - | - | - | - |
++---------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+M = Menu and Context Menu, T = Toolbar, B = Button
+- = Not implemented	NA = Not applicable
+
+
+    
+
+BETTER COPYING
+==============
+
+            global
+            
+   set list slots -> combis -> programs
+           \-----------+-------^  / |
+                       |         /  |
+                       V V------/   V 
+                   drum kits   wave sequences
+
+            combis -> programs
+              |          / |
+              |         /  |
+              V V------/   V 
+          drum kits    wave sequences
+            
+                      programs
+                         / |
+                        /  |
+                V------/   V 
+          drum kits    wave sequences
+
+          drum kits
+          
+          wave sequences
+          
+          timbres
+
+
+
+
+
+		   
+
+PCG Tools Documentation: High Level Content
+FI  File Info 
+FE  Features
+LG  List Generator
+GU  GUI
+GL  Globalization
+AR  Architectural Changes
+DE  Design 
+WE  Website
+MA  Manual
+UT  Utilities
+PL  Planning
+ 
+ 
+PCG Tools Documentation
+  File Info
+     MIDI
+       Generic
+       MIDI Sysex
+         Sysex Functions General
+         Sysex Formats General
+         Korg Specific
+    Common
+      PCG
+    Models
+      Triton
+      N Series
+        N364/N264
+          File <x>
+      MS2000
+        File <x>
+      microKorg
+        File <x>
+    Samples
+    Songs
+      Models
+
+    Samples
+      Generic
+      Models
+   
+  Features
+    PCG Database
+    Reference Searching
+    Alternative Copy & Paste
+    Editing
+      Single Edit
+      Multi Edit
+    Files
+      PCG Compare
+    Master Files
+    Virtual Files
+    References
+  List Generator
+    List Types
+  GUI
+    Commands
+    Menu
+    Context Menu
+    New GUI  
+  Globalization
+  Architectural Changes (External)
+    Copy & Paste
+      Alternative copy &  Paste
+      Settings
+    New GUI (Total Commander)
+    
+  Design
+    Software Design
+      Interfaces
+    Design Improvements
+      Copy & Paste
+      Parameters
+      File Reader
+      MVVM
+      List Generator
+  Web Site
+  
+  Manual
+    Models
+      Kronos
+        Kronos OS2/3 workflow
+      Features
+        Program Reference File Changer
+  Utilities
+  Planning
+    Long Term
+    Short Term
+    TODO
+ 
+
+Status Patch Type   Reference  Remarks
+------- ------------------------------- ----------------------- ----------------------------------------------------
+Ongoing Program    Drum Kits  1-2 drum kits, only for Drum programs
+Release Program    Wave Sequences  Kronos only
+Release Program    Program   1 Program used as drums (optionally*)
+Done Combi    Programs  0-16 Programs used as timbre
+Release Combi    Program   1 Program used as drums (optionally*)
+Done Set List   Program/combi  Used programs/combis (including programs)
+ 
+Extra copy/paste option:
+[X] Copy Drum Track Programs
+Copies the drum track program used by cut/copied programs/combis (or set lists using programs/combis).
+
+Copy set list slots
+-------------------
+1. Copy set list slots.
+2. Copy referenced patches:
+ 2a For each combi assigned to a set list slot in step 1, copy the combi.
+ 2b For each program assigned to a used timbre of copied combis in step 2a, copy the program.
+ 2c For each program assigned to a set list slot in step 1, copy the program.
+3. Copy drum track programs:
+ 3a If option enabled, copy the drum track program for all patches, copied in step 2a.
+ 3b If option enabled, copy the drum track program for all patches, copied in step 2c.
+4. Copy wave sequences:
+ 4a Copy wave sequences used by programs, copied in step 2b.
+ 4b Copy wave sequences used by programs, copied ins tep 2c.
+ 4c Copy wave sequences used by programs, copied in step 3a.
+ 4c Copy wave sequences used by programs, copied in step 3b.
+Graphic:
+                                                  Drum Kit
+                                                      ^
+                                                      |
+                                                    1..2
+                                                      |
+  Set List Slot--*--> Program --0..1------> Drum Track Program (Drum Track Programs 
+           \              \                        ^      |    from timbres of combis                          
+            \              --0..32------------    /       |    are not copied)                                                
+             *                                \  /        |
+              \        Program --0..32-------- \/        0..32
+               \          ^                   \/\         | 
+                \         | (used programs)   /\ -----    |
+                 \        |                  /  \     \   |                                                    
+                  \     0..16               /    \     v  v
+                   \      |                /      --> Wave Sequence
+                    --> Combi --0..1-------
+      
+                        Drum Kit
+                            ^
+                            |
+                          1..2
+                            |
+  Combis-------------> Drum Track Program* --0..32---
+      \                                              \
+       \                                              v
+        --0..16---> Program ---0..32----------> Wave Sequence
+   (used programs)
+ 
+                   Drum Kit
+                      ^
+                      |
+                    1..2
+                      |
+  Program--> Drum Track Program --0..32---
+     \                                    \ 
+      \                                    v
+       ---0..32----------------------> Wave Sequence
+
+  Timbre--0..01---> Program --0..32---> Wave Sequence
+ 
+   
+Drum track program and wave sequences used by drum track program only copied if setting enabled
+
+Status bar:
+Clip board: 122 set list slots, 23 combis, 26 HD1 programs, 63 EXI programs, 6 drum kits, 63 wave sequences
+     Short: 122 SLS, 23 CMB, 26 HD1 PRG, 63 EXI PRG, 6 DRK, 63 WSEQ
+ 
+
+ 
+
+
+ ==================
+
+ 			Phase 1					
+File	New		x					
+	Open		x					
+	Batch Processing / for list generation							
+	Revert to Saved		x					
+	Save		x					
+	Save As		x					
+	Close		x					
+	Properties			Shows file name/path, contents				
+	Print							
+	Print Setup							
+	Exit		x					
+	<Most recent files>							
+								
+								
+								
+Edit	Select All							
+	Deselect All							
+	Find & Mark							
+	Find							
+	Find Next							
+	Invert							
+	Edit		x					
+	Clear							
+	Delete			0,3				
+	Insert		x	0,3				
+	Copy		x	0,09				
+	Paste		x					
+	Move Up		x	11,1111111111111				
+	Move Down		x					
+	Sort	Alphabetical						
+	 	Categorical		9,45				
+	 							
+	Settings							
+								
+Lists	Patch List							
+	Program Usage List							
+	 Combi Reference List							
+	Differences List							
+	Instrument Definition File	Cubase						
+		Cakewalk						
+		Logic/Sonar ?						
+	Full List Generator							
+	Hex Output							
+								
+								
+Global	Edit Category Names							
+								
+								
+								
+Windows	Theme / Generic		x					
+	Theme / Luna		x					
+	Theme / Aero		x					
+	Cascade							
+	Tile							
+	Close							
+	Close All							
+	Close All but This							
+	Properties							
+	<window 1>							
+	<window 2>							
+								
+About	Help							
+	About		x					
+	Website							
+	Shortcut Keys							
+	External Links							
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+Menu Structure								
+#ERROR!								
+								
+File / New / PCG File								
+       Open...								
+       Most Recent / File 1								
+                     File 2								
+		     ...						
+       Revert								
+       ----								
+       Save								
+       Save As...								
+       ----								
+       Merge...								
+       Differ...								
+       ----								
+       Export / Sequencers / Cubase								
+                             Ableton								
+			     Cakewalk					
+			     Sonar					
+			     Reaper					
+                Text File / ...								
+		Text Table File / ...						
+		XML File / ...						
+		CSV File / ...						
+       ----								
+       Close								
+       Quit								
+     								
+Mark / Select Group...								
+       Unselect Group...								
+       Select All								
+       Unselect All								
+       Invert Selection								
+       								
+             								
+Edit /     Undo								
+           Redo								
+           ----								
+           Cut								
+           Copy								
+           Paste								
+           Copy/Paste Exit								
+           Recall								
+           ----								
+           Export Selection As / Text File / ...								
+                                 Text Table File / ...								
+                                 XML File / ...								
+                                 CSV File / ...								
+           ----			     					
+           Edit								
+           Clear								
+           ----								
+           Capitalize     / Patch Names								
+	                    Set List Slot Descriptions							
+           (Decapitalize  / Patch Names								
+	                    Set List Slot Descriptions)							
+	   ----							
+	   Favorite							
+	   Unfavorite							
+	   ----							
+	   Tidy Up (combis)							
+           Auto Rename								
+	   ----       							
+           Options    / All								
+                        Cut/Copy/Paste Settings								
+			MIDI Settings					
+			Auto Rename					
+			Auto Save					
+			Tip of the Day					
+			Clear Warning					
+			List Settings					
+			Theme					
+			Language					
+Commands / Change Bank Type...								
+           ----								
+           Sort / by Name								
+                / by Category								
+           ----								
+           Move Up								
+           Move Down								
+	   Swap							
+	   Delete							
+	   Insert							
+	   ----							
+	   Convert to / Set List Slots							
+	                Songs							
+	                Combis							
+           ----								
+           Set as Assigned Clear patch								
+           ----								
+           MIDI Receive								
+           MIDI Send								
+	   ----							
+           Combi Window								
+	   Master Files / Show							
+	                  Set as Master File							
+           Set as Assigned Clear Patch								
+       								
+Lists  Patch List / Short / As Text File								
+                            As Text Table File								
+			    As XML File					
+			    As CSV File					
+		    Long  / As Text File						
+                            As Text Table File								
+			    As XML File					
+			    As CSV File					
+       Differences List / ...								
+       List Generator...			    					
+								
+Window Maximize All								
+       Minimize All								
+       ----								
+       Rectangular								
+       Layout Horizontally								
+       Layout Vertically								
+       ----								
+       Close Window								
+       Close All but This								
+       ----								
+       Show List								
+								
+       								
+Help   About								
+       Help								
+       Tip of the Day								
+       ----								
+       Show Oasys Voucher Donors								
+       Show Donors								
+       Show External Links								
+       ----								
+       Show Special Event								
+								
+								
+File				Mark					Edit			Order			Commands			MIDI					Lists				Language	Window					Help
+New					Select Group ...		Undo			Cut				Change Bank Type	MIDI Setup				Patch List /		Dutch		Theme /					Help
+Open				Unselect Group ...		Redo			Copy			Tidy Up (Combis)	---						Differences List /	English		---						Shortcut Keys
+Open Master File	---						---				Paste			Auto Rename			MIDI Receive All		Usage List /		French		Minimize All			Tip of the Day
+Most Recent Files	Select Favorites		Edit Global		Copy/Paste Exit	Synchronize			MIDI Send All			Combi List /		Italian		Maximize All			---
+Revert to Saved		Select All				Edit Patch		Recall			---					---						File Contents List	Spanish		---						Show Oasys Vouch
+---					Unselect All			Clear Patch		---				Convert To /		MIDI Receive Selected	Samples List /		German		Cascade					Show Korg Related Links
+Save				---						---				Move Up			---					MIDI Send Selected		---					Portuguese	Tile					Show Donors
+Save As ...			Invert Selection		Capitalize /	Move Down		Create Hex File		---						Settings			Polish		Layout Horizontally		Show Ext Links
+---					---						Favorite		Swap			---					Create MIDI File		---								Layout Vertically		---
+Merge ...			Set Patch Mark Filter	Unfavorite		Delete			Combi Window		---						List Generator ...				---						Show Special Event
+Differ ...									---				Insert			Master Files /		Audition Current Patch									Close Window			---
+---											Find ...						---																			Close All But This		About
+Export /									Find Next						Set as Assigned Clear Patch													Close All	
+---											Find Previous					---																			---	
+Close										---								Export Selection															Window /	
+Quit										Settings																									 Show List	
+								
+								
+								
+==========================
+ADDED
+
+PCG Tools text format
+
+Add menu options:
+
+* Show Content As
+
+o Hex
+
+o Base64 Text
+
+Both opens a window, with:
+
+File Name: -
+
+PCG File: C:\Kronos New.pcg
+
+PCG Patch: Program I-A64 Kronos Grand Piano
+
+O Hexadecimal Bytes O Base 64 Text
+
+Content (hex example)
+
+0000 0000 12 15 16 17 20 25 49 34 12 ABCD EFGH
+
+0000 0008 12 15 16 17 20 25 49 34 12 IJKL MNOP
+
+0000 0010 12 15 16 17 20 25 49 34 12 IJKL MNOP
+
+0000 0018 12 15 16 17 20 25 49 34 12 IJKL MNOP
+
+Content (Base 64 example)
+
+# File: C:\Kronos New.pcg
+
+# Patch: Program I-A64 Kronos Grand Piano
+
+: 849giorjgAERjaiojfiaweojtj$Afwiaoeefj
+
+: jiofajwefAEFJIEFjio408i9gf0aj4piitj4
+
+: afjioe4aj4o$jiogjaiogjioagm34jiotjra
+
+# Checksum: 347849
+
+Save As … Recall Store Close
+
+Recall button retrieves Patch data to Content.
+
+Store button saves Content to patch data.
+
+Save As … Saves to a file
+
+Notes
+
+* In Hexadecimal Bytes display, only numbers are taken into account, text is ignore, same as offsets.
+
+Format:
+
+<_*XXXX_*XXXX_*>? (_*XX_*)8x <IGNORE> where _ is a space, X is [0..9, A..F or a..f]
+
+* In Base 64 text:
+
+# Comments (_*File: _* <filepatch>_*)
+
+# Comments (_*Patch: _*<patch number>_* <patch name>_*)
+
+# More comments
+
+:<base 64 data>
+
+: <base 64 data>
+
+# _*Checksum:_*<value>_*
+
+* Program references in combis/set list slots and combi references in set list slots are not taken into account. 
+
+

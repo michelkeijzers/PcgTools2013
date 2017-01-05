@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PcgTools.Model.Common.File
+﻿namespace PcgTools.Model.Common.File
 {
     /// <summary>
     /// 
@@ -13,9 +8,6 @@ namespace PcgTools.Model.Common.File
         /// <summary>
         /// Byte offset where timbres start.
         /// </summary>
-        protected virtual int TimbresByteOffset
-        {
-            get { return -1; }
-        }
+        protected virtual int TimbresByteOffset => -1;
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using Common.Mvvm;
+﻿using System.Diagnostics;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.OldParameters;
 using PcgTools.Model.Common.Synth.PatchCombis;
@@ -23,7 +21,7 @@ namespace PcgTools.Model.Common.Synth.SongsRelated
         /// <summary>
         /// 
         /// </summary>
-        private ITimbres Timbres { get { return _timbres; } }
+        private ITimbres Timbres => _timbres;
 
 
         /// <summary>
@@ -49,16 +47,10 @@ namespace PcgTools.Model.Common.Synth.SongsRelated
         }
 
 
-        public override IMemory Root
-        {
-            get { return (IMemory)(Timbres.Parent.Parent); }
-        }
+        public override IMemory Root => (IMemory)(Timbres.Parent.Parent);
 
 
-        public override INavigable Parent
-        {
-            get { return Timbres; }
-        }
+        public override INavigable Parent => Timbres;
 
 
         public override bool IsLoaded
@@ -87,10 +79,7 @@ namespace PcgTools.Model.Common.Synth.SongsRelated
         /// <summary>
         /// 
         /// </summary>
-        public override IProgramBank UsedProgramBank
-        {
-            get { return null; }
-        }
+        public override IProgramBank UsedProgramBank => null;
 
 
         /// <summary>
@@ -105,18 +94,14 @@ namespace PcgTools.Model.Common.Synth.SongsRelated
         /// <summary>
         /// 
         /// </summary>
-        public override string ColumnProgramId
-        {
-            get { return "ID"; }
-        }
+        public override string ColumnProgramId => "ID";
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override string ColumnProgramName
-        {
-            get { return "TODO"; }
-        } //TODO
+        public override string ColumnProgramName => "TODO";
+
+        //TODO
     }
 }

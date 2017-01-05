@@ -36,7 +36,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("{0} {1}", Strings.Bank_2str, Id);
+            return $"{Strings.Bank_2str} {Id}";
         }
     }
 }

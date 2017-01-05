@@ -5,7 +5,6 @@ using PcgTools.Model.Common;
 using PcgTools.Model.Common.File;
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 
@@ -310,9 +309,6 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// <summary>
         /// Byte offset where timbres start.
         /// </summary>
-        protected override int TimbresByteOffset
-        {
-            get { return 16; }
-        }
+        protected override int TimbresByteOffset => 16;
     }
 }

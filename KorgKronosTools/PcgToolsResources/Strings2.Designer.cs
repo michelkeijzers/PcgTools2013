@@ -61,6 +61,312 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Connected PCG File:.
+        /// </summary>
+        public static string ___ConnectedPcgFile {
+            get {
+                return ResourceManager.GetString("___ConnectedPcgFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Absolute Value.
+        /// </summary>
+        public static string ___EditParameterAbsoluteValue {
+            get {
+                return ResourceManager.GetString("___EditParameterAbsoluteValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Byte Offset.
+        /// </summary>
+        public static string ___EditParameterByteOffset {
+            get {
+                return ResourceManager.GetString("___EditParameterByteOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Calculate.
+        /// </summary>
+        public static string ___EditParameterCalculate {
+            get {
+                return ResourceManager.GetString("___EditParameterCalculate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculate _Automatically.
+        /// </summary>
+        public static string ___EditParameterCalculateAutomatically {
+            get {
+                return ResourceManager.GetString("___EditParameterCalculateAutomatically", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculate _Manually.
+        /// </summary>
+        public static string ___EditParameterCalculateManually {
+            get {
+                return ResourceManager.GetString("___EditParameterCalculateManually", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Combi.
+        /// </summary>
+        public static string ___EditParameterCombi {
+            get {
+                return ResourceManager.GetString("___EditParameterCombi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Combi Selection.
+        /// </summary>
+        public static string ___EditParameterCombiSelection {
+            get {
+                return ResourceManager.GetString("___EditParameterCombiSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Decimal.
+        /// </summary>
+        public static string ___EditParameterDecimal {
+            get {
+                return ResourceManager.GetString("___EditParameterDecimal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Decimal Value.
+        /// </summary>
+        public static string ___EditParameterDecimalValue {
+            get {
+                return ResourceManager.GetString("___EditParameterDecimalValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Hex Value.
+        /// </summary>
+        public static string ___EditParameterHexadecimalValue {
+            get {
+                return ResourceManager.GetString("___EditParameterHexadecimalValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hex Value Range.
+        /// </summary>
+        public static string ___EditParameterHexadecimalValueRange {
+            get {
+                return ResourceManager.GetString("___EditParameterHexadecimalValueRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _LSB Bit.
+        /// </summary>
+        public static string ___EditParameterLsbBit {
+            get {
+                return ResourceManager.GetString("___EditParameterLsbBit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Mask.
+        /// </summary>
+        public static string ___EditParameterMask {
+            get {
+                return ResourceManager.GetString("___EditParameterMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Byte Offset.
+        /// </summary>
+        public static string ___EditParameterMaxByteOffset {
+            get {
+                return ResourceManager.GetString("___EditParameterMaxByteOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max # Bytes.
+        /// </summary>
+        public static string ___EditParameterMaxNumberOfBytes {
+            get {
+                return ResourceManager.GetString("___EditParameterMaxNumberOfBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min Range.
+        /// </summary>
+        public static string ___EditParameterMinRange {
+            get {
+                return ResourceManager.GetString("___EditParameterMinRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #_Bytes.
+        /// </summary>
+        public static string ___EditParameterNumberOfBytes {
+            get {
+                return ResourceManager.GetString("___EditParameterNumberOfBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #Clipped Patches.
+        /// </summary>
+        public static string ___EditParameterNumberOfClippedPatches {
+            get {
+                return ResourceManager.GetString("___EditParameterNumberOfClippedPatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter Change Rule.
+        /// </summary>
+        public static string ___EditParameterParameterChangeRule {
+            get {
+                return ResourceManager.GetString("___EditParameterParameterChangeRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Percentage.
+        /// </summary>
+        public static string ___EditParameterPercentage {
+            get {
+                return ResourceManager.GetString("___EditParameterPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        public static string ___EditParameterPreview {
+            get {
+                return ResourceManager.GetString("___EditParameterPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Relative Value.
+        /// </summary>
+        public static string ___EditParameterRelativeValue {
+            get {
+                return ResourceManager.GetString("___EditParameterRelativeValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Signed.
+        /// </summary>
+        public static string ___EditParameterSigned {
+            get {
+                return ResourceManager.GetString("___EditParameterSigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timbre.
+        /// </summary>
+        public static string ___EditParameterTimbre {
+            get {
+                return ResourceManager.GetString("___EditParameterTimbre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Timbres.
+        /// </summary>
+        public static string ___EditParameterTimbres {
+            get {
+                return ResourceManager.GetString("___EditParameterTimbres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Update.
+        /// </summary>
+        public static string ___EditParameterUpdate {
+            get {
+                return ResourceManager.GetString("___EditParameterUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value Change.
+        /// </summary>
+        public static string ___EditParameterValueChange {
+            get {
+                return ResourceManager.GetString("___EditParameterValueChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value Range After Change.
+        /// </summary>
+        public static string ___EditParameterValueRangeAfterChange {
+            get {
+                return ResourceManager.GetString("___EditParameterValueRangeAfterChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value Range Before Change.
+        /// </summary>
+        public static string ___EditParameterValueRangeBeforeChange {
+            get {
+                return ResourceManager.GetString("___EditParameterValueRangeBeforeChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning: Number of Patches with Clipped Values:.
+        /// </summary>
+        public static string ___EditParameterWarningNumberOfPatchesWithClippedValues {
+            get {
+                return ResourceManager.GetString("___EditParameterWarningNumberOfPatchesWithClippedValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Parameter.
+        /// </summary>
+        public static string ___EditParameterWindow {
+            get {
+                return ResourceManager.GetString("___EditParameterWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Parameter.
+        /// </summary>
+        public static string ___Parameter {
+            get {
+                return ResourceManager.GetString("___Parameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result After Change.
+        /// </summary>
+        public static string ___ResultAfterChange {
+            get {
+                return ResourceManager.GetString("___ResultAfterChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         public static string About {
@@ -763,6 +1069,24 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ref ID.
+        /// </summary>
+        public static string ColumnSetListSlotReferenceId {
+            get {
+                return ResourceManager.GetString("ColumnSetListSlotReferenceId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reference Name.
+        /// </summary>
+        public static string ColumnSetListSlotReferenceName {
+            get {
+                return ResourceManager.GetString("ColumnSetListSlotReferenceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Volume.
         /// </summary>
         public static string ColumnVolume {
@@ -840,15 +1164,6 @@ namespace PcgTools.PcgToolsResources {
         public static string CompactSelected {
             get {
                 return ResourceManager.GetString("CompactSelected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Connected PCG File:.
-        /// </summary>
-        public static string ConnectedPcgFile {
-            get {
-                return ResourceManager.GetString("ConnectedPcgFile", resourceCulture);
             }
         }
         
@@ -1257,7 +1572,7 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Double to Single Keyboard.
+        ///   Looks up a localized string similar to _Double to Single Keyboard Setup.
         /// </summary>
         public static string DoubleToSingleKeyboard {
             get {
@@ -1266,7 +1581,7 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Double to Single Keyboard.
+        ///   Looks up a localized string similar to Double to Single Keyboard Setup.
         /// </summary>
         public static string DoubleToSingleKeyboardWindowTitle {
             get {
@@ -1374,290 +1689,11 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Absolute Value.
-        /// </summary>
-        public static string EditParameterAbsoluteValue {
-            get {
-                return ResourceManager.GetString("EditParameterAbsoluteValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Byte Offset.
-        /// </summary>
-        public static string EditParameterByteOffset {
-            get {
-                return ResourceManager.GetString("EditParameterByteOffset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Calculate.
-        /// </summary>
-        public static string EditParameterCalculate {
-            get {
-                return ResourceManager.GetString("EditParameterCalculate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Calculate _Automatically.
-        /// </summary>
-        public static string EditParameterCalculateAutomatically {
-            get {
-                return ResourceManager.GetString("EditParameterCalculateAutomatically", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Calculate _Manually.
-        /// </summary>
-        public static string EditParameterCalculateManually {
-            get {
-                return ResourceManager.GetString("EditParameterCalculateManually", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Fill in a valid parameter change rule above..
         /// </summary>
         public static string EditParameterChangeEmpty {
             get {
                 return ResourceManager.GetString("EditParameterChangeEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Combi.
-        /// </summary>
-        public static string EditParameterCombi {
-            get {
-                return ResourceManager.GetString("EditParameterCombi", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Combi Selection.
-        /// </summary>
-        public static string EditParameterCombiSelection {
-            get {
-                return ResourceManager.GetString("EditParameterCombiSelection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Decimal.
-        /// </summary>
-        public static string EditParameterDecimal {
-            get {
-                return ResourceManager.GetString("EditParameterDecimal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Decimal Value.
-        /// </summary>
-        public static string EditParameterDecimalValue {
-            get {
-                return ResourceManager.GetString("EditParameterDecimalValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Hex Value.
-        /// </summary>
-        public static string EditParameterHexadecimalValue {
-            get {
-                return ResourceManager.GetString("EditParameterHexadecimalValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hex Value Range.
-        /// </summary>
-        public static string EditParameterHexadecimalValueRange {
-            get {
-                return ResourceManager.GetString("EditParameterHexadecimalValueRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _LSB Bit.
-        /// </summary>
-        public static string EditParameterLsbBit {
-            get {
-                return ResourceManager.GetString("EditParameterLsbBit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Mask.
-        /// </summary>
-        public static string EditParameterMask {
-            get {
-                return ResourceManager.GetString("EditParameterMask", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Max Byte Offset.
-        /// </summary>
-        public static string EditParameterMaxByteOffset {
-            get {
-                return ResourceManager.GetString("EditParameterMaxByteOffset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Max # Bytes.
-        /// </summary>
-        public static string EditParameterMaxNumberOfBytes {
-            get {
-                return ResourceManager.GetString("EditParameterMaxNumberOfBytes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Min Range.
-        /// </summary>
-        public static string EditParameterMinRange {
-            get {
-                return ResourceManager.GetString("EditParameterMinRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to #_Bytes.
-        /// </summary>
-        public static string EditParameterNumberOfBytes {
-            get {
-                return ResourceManager.GetString("EditParameterNumberOfBytes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to #Clipped Patches.
-        /// </summary>
-        public static string EditParameterNumberOfClippedPatches {
-            get {
-                return ResourceManager.GetString("EditParameterNumberOfClippedPatches", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Parameter Change Rule.
-        /// </summary>
-        public static string EditParameterParameterChangeRule {
-            get {
-                return ResourceManager.GetString("EditParameterParameterChangeRule", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Percentage.
-        /// </summary>
-        public static string EditParameterPercentage {
-            get {
-                return ResourceManager.GetString("EditParameterPercentage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preview.
-        /// </summary>
-        public static string EditParameterPreview {
-            get {
-                return ResourceManager.GetString("EditParameterPreview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Relative Value.
-        /// </summary>
-        public static string EditParameterRelativeValue {
-            get {
-                return ResourceManager.GetString("EditParameterRelativeValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Signed.
-        /// </summary>
-        public static string EditParameterSigned {
-            get {
-                return ResourceManager.GetString("EditParameterSigned", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Timbre.
-        /// </summary>
-        public static string EditParameterTimbre {
-            get {
-                return ResourceManager.GetString("EditParameterTimbre", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Timbres.
-        /// </summary>
-        public static string EditParameterTimbres {
-            get {
-                return ResourceManager.GetString("EditParameterTimbres", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Update.
-        /// </summary>
-        public static string EditParameterUpdate {
-            get {
-                return ResourceManager.GetString("EditParameterUpdate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value Change.
-        /// </summary>
-        public static string EditParameterValueChange {
-            get {
-                return ResourceManager.GetString("EditParameterValueChange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value Range After Change.
-        /// </summary>
-        public static string EditParameterValueRangeAfterChange {
-            get {
-                return ResourceManager.GetString("EditParameterValueRangeAfterChange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value Range Before Change.
-        /// </summary>
-        public static string EditParameterValueRangeBeforeChange {
-            get {
-                return ResourceManager.GetString("EditParameterValueRangeBeforeChange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Warning: Number of Patches with Clipped Values:.
-        /// </summary>
-        public static string EditParameterWarningNumberOfPatchesWithClippedValues {
-            get {
-                return ResourceManager.GetString("EditParameterWarningNumberOfPatchesWithClippedValues", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit Parameter.
-        /// </summary>
-        public static string EditParameterWindow {
-            get {
-                return ResourceManager.GetString("EditParameterWindow", resourceCulture);
             }
         }
         
@@ -2828,6 +2864,15 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Hex Export.
+        /// </summary>
+        public static string HexExport {
+            get {
+                return ResourceManager.GetString("HexExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hex Export.
         /// </summary>
         public static string HexExportDlgTitle {
@@ -3623,15 +3668,6 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Parameter.
-        /// </summary>
-        public static string Parameter {
-            get {
-                return ResourceManager.GetString("Parameter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Paste.
         /// </summary>
         public static string Paste {
@@ -4109,15 +4145,6 @@ namespace PcgTools.PcgToolsResources {
         public static string Restore {
             get {
                 return ResourceManager.GetString("Restore", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Result After Change.
-        /// </summary>
-        public static string ResultAfterChange {
-            get {
-                return ResourceManager.GetString("ResultAfterChange", resourceCulture);
             }
         }
         

@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Collections.Generic;
 using PcgTools.Model.Common.Synth;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -28,22 +27,22 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         protected override void CreateBanks()
         {
             // Add internal banks.
-            foreach (var bankName in new List<String> {"A", "B", "C", "D", "E", "F", "G", "H"})
+            foreach (var bankName in new List<string> {"A", "B", "C", "D", "E", "F", "G", "H"})
             {
                 Add(
                     new Ms2000ProgramBank(
-                        this, BankType.EType.Int, string.Format("{0}", bankName), 0, 
+                        this, BankType.EType.Int, $"{bankName}", 0, 
                         ProgramBank.SynthesisType.AnalogModeling, "-"));
             }
 
             // Add virtual banks.
             for (var set = 0; set < 16; set++) // 15 virtual banks
             {
-                foreach (var bankName in new List<String> {"A", "B", "C", "D", "E", "F", "G", "H"})
+                foreach (var bankName in new List<string> {"A", "B", "C", "D", "E", "F", "G", "H"})
                 {
                     Add(
                         new Ms2000ProgramBank(
-                            this, BankType.EType.Virtual, string.Format("V{0}{1}", set, bankName), 0, 
+                            this, BankType.EType.Virtual, $"V{set}{bankName}", 0, 
                             ProgramBank.SynthesisType.AnalogModeling, "-"));
                 }
             }

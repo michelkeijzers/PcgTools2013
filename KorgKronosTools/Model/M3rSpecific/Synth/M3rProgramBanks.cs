@@ -31,13 +31,13 @@ namespace PcgTools.Model.M3rSpecific.Synth
             // Add internal banks.
             Add(
                 new M3RProgramBank(
-                    this, BankType.EType.Int, string.Format("{0}", "I"), 0, 
+                    this, BankType.EType.Int, $"{"I"}", 0, 
                     ProgramBank.SynthesisType.Ai, "-"));
 
             // Add Card banks.
             Add(
                 new M3RProgramBank(
-                    this, BankType.EType.Int, string.Format("{0}", "C"), 1,
+                    this, BankType.EType.Int, $"{"C"}", 1,
                     ProgramBank.SynthesisType.Ai, "-"));
         }
     }

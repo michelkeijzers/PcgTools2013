@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.OldParameters;
-using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.TritonSpecific.Synth;
 
 namespace PcgTools.Model.TritonTrClassicStudioRackSpecific.Synth

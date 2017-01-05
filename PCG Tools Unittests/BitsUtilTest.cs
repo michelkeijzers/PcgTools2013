@@ -1,6 +1,5 @@
 ﻿using Common.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Common.Extensions;
 
 // (c) 2011 Michel Keijzers
 

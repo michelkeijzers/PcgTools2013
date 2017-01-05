@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Text;
 using Common.Extensions;
 using Common.Utils;
-using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.NewParameters;
 using PcgTools.Model.Common.Synth.OldParameters;
@@ -15,7 +14,6 @@ using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.PcgToolsResources;
 using PcgTools.Properties;
-using PcgTools.ViewModels;
 
 namespace PcgTools.Model.Common.Synth.PatchSetLists
 {
@@ -61,7 +59,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         {
             Bank = setList;
             Index = index;
-            Id = string.Format("{0}/{1}", setList.Id, index);
+            Id = $"{setList.Id}/{index}";
             VolumePcgOffset = volumePcgOffset;
             DescriptionPcgOffset = descriptionPcgOffset;
         }
@@ -156,10 +154,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// 
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public string PatchTypeAsString
-        {
-            get { return Strings.SetListSlot; }
-        }
+        public string PatchTypeAsString => Strings.SetListSlot;
 
 
         /// <summary>
@@ -167,25 +162,16 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// </summary>
         // ReSharper disable once UnusedMember.Global
         [UsedImplicitly]
-        public string Reference
-        {
-            get { return FullPatchId; }
-        }
+        public string Reference => FullPatchId;
 
 
         /// <summary>
         /// 
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        [UsedImplicitly] public string ProgramCombiName
-        {
-            get
-            {
-                return ((SelectedPatchType == PatchType.Song) || (PcgRoot.Content == null) || (UsedPatch == null))
-                           ? "(Unknown)"
-                           : (((IBank)(UsedPatch.Parent)).IsLoaded ? UsedPatch.Name : "(Unknown)");
-            }
-        }
+        [UsedImplicitly] public string ProgramCombiName => ((SelectedPatchType == PatchType.Song) || (PcgRoot.Content == null) || (UsedPatch == null))
+            ? "(Unknown)"
+            : (((IBank)(UsedPatch.Parent)).IsLoaded ? UsedPatch.Name : "(Unknown)");
 
 
         /// <summary>
@@ -194,9 +180,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         // ReSharper disable once UnusedMember.Global
         [UsedImplicitly] public string VolumeAsString
         // ReSharper restore UnusedMember.Global
-        {
-            get { return Volume.ToString(CultureInfo.InvariantCulture); }
-        }
+            => Volume.ToString(CultureInfo.InvariantCulture);
 
 
         /// <summary>
@@ -209,10 +193,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// 
         /// </summary>
         [UsedImplicitly]
-        public string DescriptionInList
-        {
-            get { return Settings.Default.SingleLinedSetListSlotDescriptions ? Description.Replace("\r\n", " / ") : Description; }
-        }
+        public string DescriptionInList => Settings.Default.SingleLinedSetListSlotDescriptions ? Description.Replace("\r\n", " / ") : Description;
 
 
         /// <summary>
@@ -282,7 +263,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         {
             get
             {
-                var isEmpty = ((Name == String.Empty) && (SelectedPatchType == PatchType.Program));
+                var isEmpty = ((Name == string.Empty) && (SelectedPatchType == PatchType.Program));
                 if (isEmpty)
                 {
                     // Check further (Program is from bank 0, index 0.
@@ -303,11 +284,11 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
-            Description = String.Empty;
+            Name = string.Empty;
+            Description = string.Empty;
             SelectedPatchType = PatchType.Program;
 
-            RaisePropertyChanged(String.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
         }
 
 
@@ -400,7 +381,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// <param name="name"></param>
         public override void Update(string name)
         {
-            RaisePropertyChanged(String.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
             switch (name)
             {
                 case "ContentChanged":

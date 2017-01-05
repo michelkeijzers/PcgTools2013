@@ -21,7 +21,7 @@ namespace PcgTools.Model.M1Specific.Synth
         public M1Combi(CombiBank combiBank, int index)
             : base(combiBank, index)
         {
-            Id = string.Format("{0}{1}", combiBank.Id, (index).ToString("00"));
+            Id = $"{combiBank.Id}{(index).ToString("00")}";
             Timbres = new M1Timbres(this);
         }
 

@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Collections.Generic;
 using PcgTools.Model.Common.Synth.Global;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -19,25 +18,25 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int CategoryNameLength { get { return 16; } }
+        protected override int CategoryNameLength => 16;
 
 
         /// <summary>
         /// Hardcoded.
         /// </summary>
-        protected override int PcgOffsetCategories { get { return -1; } }
+        protected override int PcgOffsetCategories => -1;
 
 
         /// <summary>
         /// Called genres.
         /// </summary>
-        protected override int NrOfCategories { get { return 8; } }
+        protected override int NrOfCategories => 8;
 
 
         /// <summary>
         /// Called Categories.
         /// </summary>
-        protected override int NrOfSubCategories { get { return 8; } }
+        protected override int NrOfSubCategories => 8;
 
 
         /// <summary>
@@ -67,7 +66,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
                 category = ((ICombi)patch).GetParam(ParameterNames.CombiParameterName.Category).Value;
             }
 
-            var genres = new List<String>
+            var genres = new List<string>
             {
                 "Vintage",
                 "Rock/Pop",
@@ -101,7 +100,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
                 subCategory = ((ICombi)patch).GetParam(ParameterNames.CombiParameterName.Category).Value;
             }
 
-            var categories = new List<String>
+            var categories = new List<string>
             {
                 "Poly Synth",
                 "Bass",

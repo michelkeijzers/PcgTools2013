@@ -1,12 +1,10 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
 using PcgTools.Model.Common.Synth.PatchSetLists;
 using PcgTools.PcgToolsResources;
-using Xceed.Wpf.Toolkit;
 
 namespace PcgTools.Edit
 {
@@ -85,20 +83,20 @@ namespace PcgTools.Edit
             labelError.Content = EditUtils.CheckText(textBoxName.Text, _patch.MaxNameLength, EditUtils.ECheckType.Name);
         
             // Check set list slot description.
-            if (labelError.Content.Equals(String.Empty))
+            if (labelError.Content.Equals(string.Empty))
             {
                 // Set length.
                 var usedDescriptionSize = textBoxDescription.Text.Length;
                 var maxDescriptionLength = _patch.MaxDescriptionLength;
-                labelDescriptionLength.Text = 
-                    string.Format("{0} of {1} characters", usedDescriptionSize, maxDescriptionLength);
+                labelDescriptionLength.Text =
+                    $"{usedDescriptionSize} of {maxDescriptionLength} characters";
 
                 // Check description.
                 labelError.Content = EditUtils.CheckText(
                     textBoxDescription.Text, _patch.MaxDescriptionLength, EditUtils.ECheckType.Description);
             }
 
-            _ok = labelError.Content.Equals(String.Empty);
+            _ok = labelError.Content.Equals(string.Empty);
             buttonOk.IsEnabled = _ok;
         }
 

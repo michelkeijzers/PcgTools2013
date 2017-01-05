@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WPF.MDI">
+</Property><Property Name="Solution File" Value="D:\PCG Tools\WPF.MDI\WPF.MDI.sln">
+</Property><Property Name="Date" Value="zondag 18 september 2011">
+</Property><Property Name="Time" Value="3:05">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="WPF.MDI.sln" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI.sln">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\WPF.MDI.csproj" Description="Project file successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\WPF.MDI.csproj">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\Event\ClosingEventArgs.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\Event\ClosingEventArgs.cs">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\MdiChild.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\MdiChild.cs">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\MdiContainer.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\MdiContainer.cs">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\Properties\Resources.Designer.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\Properties\Settings.Designer.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\Properties\Settings.settings" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\Properties\Resources.resx" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\Themes\Generic.xaml" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\WPF.MDI\Themes\Generic.xaml">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\WPF.MDI.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="WPF.MDI" Source="WPF.MDI\WPF.MDI.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Example.csproj" Description="Project file successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Example.csproj">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\App.xaml.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\App.xaml.cs">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Main.xaml.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Main.xaml.cs">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Controls\ExampleControl.xaml.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Controls\ExampleControl.xaml.cs">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Properties\Resources.Designer.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Properties\Settings.Designer.cs" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Properties\Settings.settings" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Properties\Resources.resx" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\App.xaml" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\App.xaml">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Controls\ExampleControl.xaml" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Controls\ExampleControl.xaml">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Main.xaml" Description="File successfully backed up as D:\PCG Tools\WPF.MDI\Backup\Example\Main.xaml">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Example.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Example" Source="Example\Example.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="WPF.MDI.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="WPF.MDI.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WPF.MDI" Source="WPF.MDI\WPF.MDI.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Example" Source="Example\Example.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

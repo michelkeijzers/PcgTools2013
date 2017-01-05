@@ -41,19 +41,12 @@ namespace PcgTools.Model.TritonExtremeSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultModeledSynthesisType
-        {
-            get { return SynthesisType.MossZ1; }
-        }
+        public override SynthesisType DefaultModeledSynthesisType => SynthesisType.MossZ1;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Hi; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Hi;
     }
 }

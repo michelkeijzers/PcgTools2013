@@ -93,19 +93,12 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultModeledSynthesisType
-        {
-            get { return SynthesisType.Exi; }
-        }
+        public override SynthesisType DefaultModeledSynthesisType => SynthesisType.Exi;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Hd1; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Hd1;
     }
 }

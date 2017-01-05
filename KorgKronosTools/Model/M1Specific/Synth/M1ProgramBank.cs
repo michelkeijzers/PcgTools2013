@@ -16,10 +16,7 @@ namespace PcgTools.Model.M1Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int NrOfPatches
-        {
-            get { return 100; }
-        }
+        public override int NrOfPatches => 100;
 
 
         /// <summary>
@@ -60,10 +57,6 @@ namespace PcgTools.Model.M1Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.AnalogModeling; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.AnalogModeling;
     }
 }

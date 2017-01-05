@@ -24,7 +24,7 @@ namespace PcgTools.MasterFiles
         /// <summary>
         /// 
         /// </summary>
-        public static MasterFiles Instances { get { return AllInstances; } }
+        public static MasterFiles Instances => AllInstances;
 
 
         /// <summary>

@@ -89,14 +89,14 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        public IMemory Root { get { return _combi.Root; } }
+        public IMemory Root => _combi.Root;
 
         // INavigable
 
         /// <summary>
         /// 
         /// </summary>
-        public INavigable Parent { get { return _combi;  } }
+        public INavigable Parent => _combi;
 
 
         /// <summary>

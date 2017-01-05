@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Common.Extensions
@@ -18,7 +19,9 @@ namespace Common.Extensions
         /// <returns></returns>
         public static string ConvertToXml(this string str)
         {
-            return str.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").
+            var newString = str.Aggregate("", (current, ch) => current + (ch < 32 ? ' ' : ch));
+
+            return newString.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").
                 Replace("'", "&apos;").Replace("\"", "&quot;").Replace((char) 0x00, ' ');
         }
 
@@ -50,8 +53,8 @@ namespace Common.Extensions
         /// <returns></returns>
         public static bool IsEqualFileAs(this string fileName1, string fileName2)
         {
-            return ((fileName2 != String.Empty) && 
-                (String.Equals(Path.GetFullPath(fileName1), Path.GetFullPath(fileName2), 
+            return ((fileName2 != string.Empty) && 
+                (string.Equals(Path.GetFullPath(fileName1), Path.GetFullPath(fileName2), 
                 StringComparison.CurrentCultureIgnoreCase)));
         }
 

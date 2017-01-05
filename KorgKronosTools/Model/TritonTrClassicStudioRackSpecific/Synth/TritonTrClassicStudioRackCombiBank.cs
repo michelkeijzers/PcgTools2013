@@ -2,7 +2,6 @@
 
 
 using PcgTools.Model.Common.Synth.Meta;
-using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.TritonSpecific.Synth;
 
 namespace PcgTools.Model.TritonTrClassicStudioRackSpecific.Synth

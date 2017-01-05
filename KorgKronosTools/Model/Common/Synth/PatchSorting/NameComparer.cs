@@ -22,7 +22,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         /// <summary>
         /// 
         /// </summary>
-        public static NameComparer Instance { get { return _instance; } }
+        public static NameComparer Instance => _instance;
 
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
             Debug.Assert(p1 != null);
             Debug.Assert(p2 != null);
 
-            return String.Compare(p1.Name, p2.Name, StringComparison.Ordinal);
+            return string.Compare(p1.Name, p2.Name, StringComparison.Ordinal);
         }
     }
 }

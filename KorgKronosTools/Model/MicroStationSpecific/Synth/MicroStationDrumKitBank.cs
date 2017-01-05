@@ -17,7 +17,7 @@ namespace PcgTools.Model.MicroStationSpecific.Synth
         // commented out model 0x8D), I did some basic testing on the drumkit part.
         // Needs more testing once microStation is fully supported in PcgTools though, since I did not
         // get past other exceptions thrown for this model. I commented out the 0x8D again in KorgFileReader.
-        public override int NrOfPatches { get { return 32; } }
+        public override int NrOfPatches => 32;
 
 
         /// <summary>

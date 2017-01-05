@@ -52,10 +52,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         /// <summary>
         /// 
         /// </summary>
-        public static IntParameter Instance
-        {
-            get { return _instance ?? (_instance = new IntParameter()); }
-        }
+        public static IntParameter Instance => _instance ?? (_instance = new IntParameter());
 
 
         /// <summary>
@@ -157,7 +154,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
 
                 if (Patch != null)
                 {
-                    Patch.RaisePropertyChanged(String.Empty, false);
+                    Patch.RaisePropertyChanged(string.Empty, false);
                 }
             }
         }

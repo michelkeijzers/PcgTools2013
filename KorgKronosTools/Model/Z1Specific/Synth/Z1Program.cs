@@ -21,26 +21,20 @@ namespace PcgTools.Model.Z1Specific.Synth
         public Z1Program(IBank programBank, int index)
             : base(programBank, index)
         {
-            Id = string.Format("{0}{1}", programBank.Id, (index).ToString("00"));
+            Id = $"{programBank.Id}{(index).ToString("00")}";
         }
      
 
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 16; }
-        }
+        public override int MaxNameLength => 16;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get { return ((Name == String.Empty) || (Name.Contains("INIT") && Name.Contains("Prog"))); }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("INIT") && Name.Contains("Prog")));
 
 
         /// <summary>
@@ -48,8 +42,8 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
-            RaisePropertyChanged(String.Empty, false);
+            Name = string.Empty;
+            RaisePropertyChanged(string.Empty, false);
         }
 
 

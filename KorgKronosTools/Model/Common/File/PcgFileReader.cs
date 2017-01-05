@@ -167,7 +167,7 @@ namespace PcgTools.Model.Common.File
             Index += 4;
             var sizeOfACombi = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
 // ReSharper disable RedundantStringFormatCall
-            Console.WriteLine(String.Format(" Size of a combi: {0}", sizeOfACombi));
+            Console.WriteLine($" Size of a combi: {sizeOfACombi}");
 // ReSharper restore RedundantStringFormatCall
             Index += 4;
             var bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
@@ -366,7 +366,7 @@ namespace PcgTools.Model.Common.File
             var numberOfProgramsInBank = Util.GetInt(CurrentPcgMemory.Content, Index + 8, 4);
             var sizeOfAProgram = Util.GetInt(CurrentPcgMemory.Content, Index + 12, 4);
 // ReSharper disable RedundantStringFormatCall
-            Console.WriteLine(String.Format(" Size of a program: {0}", sizeOfAProgram));
+            Console.WriteLine($" Size of a program: {sizeOfAProgram}");
 // ReSharper restore RedundantStringFormatCall
             var bankId = Util.GetInt(CurrentPcgMemory.Content, Index + 16, 4);
             var bankIndex = ProgramBankId2ProgramIndex(bankId);
@@ -408,7 +408,7 @@ namespace PcgTools.Model.Common.File
             Index += 4;
             var sizeOfAProgram = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
 // ReSharper disable RedundantStringFormatCall
-            Console.WriteLine(String.Format(" Size of a program: {0}", sizeOfAProgram));
+            Console.WriteLine($" Size of a program: {sizeOfAProgram}");
 // ReSharper restore RedundantStringFormatCall
             Index += 4;
             var bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
@@ -571,7 +571,7 @@ namespace PcgTools.Model.Common.File
             Index += 4;
             var sizeOfAWaveSeq = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
             // ReSharper disable RedundantStringFormatCall
-            Console.WriteLine(String.Format(" Size of a waveseq: {0}", sizeOfAWaveSeq));
+            Console.WriteLine($" Size of a waveseq: {sizeOfAWaveSeq}");
             // ReSharper restore RedundantStringFormatCall
             Index += 4;
             var bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
@@ -643,7 +643,7 @@ namespace PcgTools.Model.Common.File
             Index += 4;
             var sizeOfADrumKit = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
 // ReSharper disable RedundantStringFormatCall
-            Console.WriteLine(String.Format(" Size of a drumkit: {0}", sizeOfADrumKit));
+            Console.WriteLine($" Size of a drumkit: {sizeOfADrumKit}");
 // ReSharper restore RedundantStringFormatCall
             Index += 4;
             var bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
@@ -736,7 +736,7 @@ namespace PcgTools.Model.Common.File
             var numberOfDrumPatternsInBank = dpd1ChunkSize / sizeOfADrumPattern;
             Debug.Assert(Util.GetInt(CurrentPcgMemory.Content, Index, 4) == numberOfDrumPatternsInBank);
             // ReSharper disable RedundantStringFormatCall
-            Console.WriteLine(String.Format(" Size of a drumpattern: {0}", sizeOfADrumPattern));
+            Console.WriteLine($" Size of a drumpattern: {sizeOfADrumPattern}");
             // ReSharper restore RedundantStringFormatCall
             var bankId = 1; // User bank
             var bankIndex = DrumPatternBankId2DrumPatternIndex(bankId);

@@ -36,7 +36,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         public Chunk(string name, int offset, int size)
         {
 // ReSharper disable RedundantStringFormatCall
-            Console.WriteLine(String.Format("Chunk {0}, offset {1:x10}, size {2:x10}", name, offset, size));
+            Console.WriteLine($"Chunk {name}, offset {offset:x10}, size {size:x10}");
 // ReSharper restore RedundantStringFormatCall
             Name = name;
             Offset = offset;

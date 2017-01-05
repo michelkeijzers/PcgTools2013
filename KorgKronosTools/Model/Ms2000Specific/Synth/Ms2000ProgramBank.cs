@@ -14,10 +14,7 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int NrOfPatches
-        {
-            get { { return PcgRoot.CanContainOnlyOnePatch ? 1 : 16; } }
-        }
+        public override int NrOfPatches => PcgRoot.CanContainOnlyOnePatch ? 1 : 16;
 
 
         /// <summary>
@@ -58,10 +55,6 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.AnalogModeling; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.AnalogModeling;
     }
 }

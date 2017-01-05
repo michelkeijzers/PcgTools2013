@@ -37,10 +37,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         /// <summary>
         /// 
         /// </summary>
-        public static FixedParameter Instance
-        {
-            get { return _instance ?? (_instance = new FixedParameter()); }
-        }
+        public static FixedParameter Instance => _instance ?? (_instance = new FixedParameter());
 
 
         /// <summary>

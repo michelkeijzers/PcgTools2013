@@ -50,10 +50,6 @@ namespace PcgTools.Model.KromeSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Edsx; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Edsx;
     }
 }

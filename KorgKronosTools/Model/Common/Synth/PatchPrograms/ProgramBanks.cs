@@ -103,7 +103,7 @@ namespace PcgTools.Model.Common.Synth
         /// 
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public string Name { get { return "n.a."; } }
+        public string Name => "n.a.";
 
 
         // Virtual banks.
@@ -135,6 +135,6 @@ namespace PcgTools.Model.Common.Synth
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public new IBank this[int index] { get { return base[index]; } }
+        public new IBank this[int index] => base[index];
     }
 }

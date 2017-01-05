@@ -207,7 +207,7 @@ namespace PcgTools.Edit
             labelErrorDescription.Content = EditUtils.CheckText(
                 textBoxDescription.Text, _patch.MaxDescriptionLength, EditUtils.ECheckType.Description);
 
-            _ok = labelErrorName.Content.Equals(String.Empty) && labelErrorDescription.Content.Equals(String.Empty);
+            _ok = labelErrorName.Content.Equals(string.Empty) && labelErrorDescription.Content.Equals(string.Empty);
             buttonOk.IsEnabled = _ok;
         }
 

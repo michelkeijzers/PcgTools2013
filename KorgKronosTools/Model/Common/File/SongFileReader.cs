@@ -392,13 +392,13 @@ namespace PcgTools.Model.Common.File
         /// <summary>
         /// Number of song tracks (equal to combi timbres)
         /// </summary>
-        public virtual int NumberOfSongTracks { get { return 16; } }
+        public virtual int NumberOfSongTracks => 16;
 
 
-         /// <summary>
+        /// <summary>
         /// Number of bytes in a song track (equal to length of a combi timbre).
         /// </summary>
-        public virtual int SongTrackByteLength { get { return -1; } }
+        public virtual int SongTrackByteLength => -1;
 
 
         /// <summary>

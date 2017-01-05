@@ -597,10 +597,11 @@ Links   : Added link with Studio de Bovenkamer (donator).
 Install : New installer.
 
 TODO: Drum patterns (?) can be moved/sorted/cleared/etc
-TODO: Rename (names), like removing fragments (like ending parts of names)
-TODO: Small bug: vertical scroll veiwer for sng files
+TODO: Small bug: vertical scroll viewer for sng files
 TODO: Feature : Drum Kits and Wave Sequences can be copy/cut/pasted.
+
 TODO: Feature : Used Drum Kits and Wave Sequences are copy/pasted automatically.
+TODO: Rename (names), like removing fragments (like ending parts of names)
 
 Drumkits/wavesequence check list:
 
@@ -732,7 +733,7 @@ UpdateResultAfterChange:
 
 
 
-"c:\users\michel\source\repos\PCG Tools TestFiles\Workstations\Kronos\krs-01.sng"
+"c:\PCG Tools Test Files\TestFiles\Kronos\krs-01.sng"
 
 
 
@@ -778,7 +779,7 @@ Portuguese spoken
 https://www.youtube.com/watch?v=K8zd7X7tN9w
 
 
-debug "c:\users\michel\source\repos\PCG Tools TestFiles\Workstations\Kronos2\preload_v3.pcg" 
+debug "c:\PCG Tools Test Files\TestFiles\Workstations\Kronos2\PRELOAD_V3_2016-10-01-20-23-33.PCG" 
 
 
 

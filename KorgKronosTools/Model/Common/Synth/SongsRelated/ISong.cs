@@ -2,8 +2,6 @@
 
 using System.ComponentModel;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
-using PcgTools.OpenedFiles;
-using PcgTools.Songs;
 
 namespace PcgTools.Model.Common.Synth.SongsRelated
 {

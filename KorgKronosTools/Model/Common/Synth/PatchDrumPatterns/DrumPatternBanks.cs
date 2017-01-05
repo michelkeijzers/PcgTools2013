@@ -1,9 +1,7 @@
 ﻿// (c) 2011 Michel Keijzers
 
-using System.Linq;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
-using Xceed.Wpf.Toolkit.Media.Animation;
 
 namespace PcgTools.Model.Common.Synth.PatchDrumPatterns
 {
@@ -43,7 +41,7 @@ namespace PcgTools.Model.Common.Synth.PatchDrumPatterns
         /// <summary>
         /// 
         /// </summary>
-        public string Name { get { return "n.a."; } }
+        public string Name => "n.a.";
 
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PcgTools.ListGenerator;
 using PcgTools.Model.Common.File;
@@ -17,7 +16,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class M50Test
     {
-        const string PcgDirectory = @"C:\users\michel\source\repos\PCG Tools TestFiles\Workstations\M50";
+        const string PcgDirectory = @"C:\PCG Tools Test Files\TestFiles\Workstations\M50";
         
 
         PcgMemory _pcgMemory;
@@ -33,7 +32,7 @@ namespace PCG_Tools_Unittests
         {
             _generator.PcgMemory = _pcgMemory;
             _generator.FilterOnText = false;
-            _generator.FilterText = String.Empty;
+            _generator.FilterText = string.Empty;
             _generator.FilterCaseSensitive = false;
             _generator.FilterSetListSlotDescription = true;
             _generator.SelectedProgramBanks = new ObservableBankCollection<IProgramBank>();
@@ -64,7 +63,7 @@ namespace PCG_Tools_Unittests
             _generator.IgnoreInitWaveSequences = true;
             _generator.SortMethod = ListGenerator.Sort.Alphabetical;
             _generator.ListOutputFormat = ListGenerator.OutputFormat.Text;
-            _generator.OutputFileName = "output.txt";
+            _generator.OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt";
             _lines = null;
         }
 
@@ -72,7 +71,7 @@ namespace PCG_Tools_Unittests
         private void Run()
         {
             _generator.Run();
-            _lines = File.ReadAllLines("output.txt");
+            _lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
         }
 
 

@@ -166,7 +166,11 @@
                 <MenuItem Header="{Binding ShowMenu, Source={StaticResource LocStrings}}" VerticalAlignment="Center">
                     <MenuItem Header="{Binding Timbres, Source={StaticResource LocStrings}}" 
                               Style="{StaticResource menuItemWithCommand}" 
-                                Command="{Binding Path=CurrentChildViewModel.ShowTimbresCommand}" />
+                              Command="{Binding Path=CurrentChildViewModel.ShowTimbresCommand}" />
+                    <MenuItem Header="{Binding HexExport, Source={StaticResource LocStrings}}" 
+                              Style="{StaticResource menuItemWithCommand}" 
+                              Command="{Binding Path=CurrentChildViewModel.ExportToHexCommand}"/>
+
                     <Separator/>
                     <MenuItem IsCheckable="True" IsChecked="{Binding IsShowSingleLinedSetListSlotDescriptions}" 
                               Header="{Binding ShowSingleLinedSetListSlotDescriptions, Source={StaticResource LocStrings}}"

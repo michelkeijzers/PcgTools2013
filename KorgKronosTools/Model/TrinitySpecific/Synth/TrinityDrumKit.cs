@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 
 // (c) 2011 Michel Keijzers
@@ -46,24 +45,14 @@ namespace PcgTools.Model.TrinitySpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 16; }
-        }
+        public override int MaxNameLength => 16;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get
-            {
-                // I don't know if this was done by an editor on the PC or on the synth itself...
-                return ((Name == String.Empty) || (Name.Contains("Init") && Name.Contains("Drum") && Name.Contains("Kit")) || 
-                    (new Regex("Drumkit[0-9]*").IsMatch(Name)));
-            }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("Init") && Name.Contains("Drum") && Name.Contains("Kit")) || 
+                                               (new Regex("Drumkit[0-9]*").IsMatch(Name)));
 
 
         /// <summary>

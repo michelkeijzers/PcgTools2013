@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using PcgTools.Model.Common.Synth.MemoryAndFactory;
+﻿using PcgTools.Model.Common.Synth.MemoryAndFactory;
 
 namespace PcgTools.ViewModels.Commands.PcgCommands
 {

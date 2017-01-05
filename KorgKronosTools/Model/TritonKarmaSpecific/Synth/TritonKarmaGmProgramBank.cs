@@ -50,16 +50,13 @@ namespace PcgTools.Model.TritonKarmaSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Hi; }
-        }
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Hi;
 
 
         /// <summary>
         /// E.g. GM banks have index 1.
         /// </summary>
-        public override int IndexOffset { get { return 1; } }
+        public override int IndexOffset => 1;
     }
     
 }

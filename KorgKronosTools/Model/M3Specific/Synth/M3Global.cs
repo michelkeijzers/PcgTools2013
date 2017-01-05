@@ -14,7 +14,7 @@ namespace PcgTools.Model.M3Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int PcgOffsetCategories { get { return 15730; } } 
+        protected override int PcgOffsetCategories => 15730;
 
 
         /// <summary>

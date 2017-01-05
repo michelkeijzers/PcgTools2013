@@ -3,7 +3,6 @@
 using PcgTools.Model.Common.File;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.SongsRelated;
-using PcgTools.Model.KromeSpecific.Synth;
 using PcgTools.Model.MicroStationSpecific.Synth;
 
 namespace PcgTools.Model.MicroStationSpecific.Song

@@ -15,19 +15,19 @@ namespace PcgTools.Model.TritonSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int PcgOffsetCategories { get { return 324; } }
+        protected override int PcgOffsetCategories => 324;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int CategoryNameLength { get { return 16; } }
+        protected override int CategoryNameLength => 16;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int NrOfCategories { get { return 16; } }
+        protected override int NrOfCategories => 16;
 
 
         /// <summary>

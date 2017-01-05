@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Common.Mvvm;
+﻿using Common.Mvvm;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 
 namespace PcgTools.OpenedFiles

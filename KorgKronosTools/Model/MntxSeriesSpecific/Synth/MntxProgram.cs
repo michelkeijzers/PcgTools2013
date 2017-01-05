@@ -42,21 +42,12 @@ namespace PcgTools.Model.MntxSeriesSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 10; }
-        }
+        public override int MaxNameLength => 10;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get
-            {
-                return ((Name == string.Empty) || (Name.Contains("Init") && Name.Contains("Prog")));
-            }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("Init") && Name.Contains("Prog")));
     }
 }

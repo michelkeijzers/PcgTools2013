@@ -17,7 +17,7 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        private static int TimbresSizeConstant { get { return 16; } }
+        private static int TimbresSizeConstant => 16;
 
 
         /// <summary>
@@ -100,17 +100,11 @@ namespace PcgTools.Model.Z1Specific.Synth
 
         /// <summary>
         /// </summary>
-        protected override int UsedProgramBankId
-        {
-            get { return Util.GetBits(Combi.PcgRoot.Content, TimbresOffset, 7, 7); }
-        }
+        protected override int UsedProgramBankId => Util.GetBits(Combi.PcgRoot.Content, TimbresOffset, 7, 7);
 
 
         /// <summary>
         /// </summary>
-        protected override int UsedProgramId
-        {
-            get { return Util.GetBits(Combi.PcgRoot.Content, TimbresOffset, 6, 0); }
-        }
+        protected override int UsedProgramId => Util.GetBits(Combi.PcgRoot.Content, TimbresOffset, 6, 0);
     }
 }

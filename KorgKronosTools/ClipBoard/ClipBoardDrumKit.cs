@@ -3,10 +3,7 @@
 using PcgTools.Model.Common;
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
-using PcgTools.Model.Common.Synth.PatchSetLists;
-using PcgTools.Model.KronosSpecific.Pcg;
 using PcgTools.Model.KronosSpecific.Synth;
 
 namespace PcgTools.ClipBoard

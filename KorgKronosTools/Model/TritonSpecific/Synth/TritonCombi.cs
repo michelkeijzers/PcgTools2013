@@ -1,7 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
-
 using PcgTools.Model.Common.Synth.OldParameters;
 using PcgTools.Model.Common.Synth.PatchCombis;
 
@@ -32,19 +30,16 @@ namespace PcgTools.Model.TritonSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 16; }
-        }
+        public override int MaxNameLength => 16;
 
-        
+
         /// <summary>
         /// Use Comb instead of Combi, because of some Triton EXB-H banks are initialized as InitCombEH....
         /// </summary>
-        public override bool IsEmptyOrInit { get { return ((Name == String.Empty) || (Name.Contains("Init") &&
-            Name.Contains("Comb"))); } }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("Init") &&
+                                                                          Name.Contains("Comb")));
 
-        
+
         /// <summary>
         /// 
         /// </summary>

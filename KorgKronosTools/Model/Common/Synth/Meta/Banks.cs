@@ -3,7 +3,6 @@ using System.Linq;
 using Common.Mvvm;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
-using PcgTools.Model.Common.Synth.PatchPrograms;
 
 namespace PcgTools.Model.Common.Synth.Meta
 {
@@ -73,19 +72,13 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <summary>
         /// 
         /// </summary>
-        public INavigable Parent
-        {
-            get { return _pcgMemory.Root; }
-        }
+        public INavigable Parent => _pcgMemory.Root;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public IMemory Root
-        {
-            get { return _pcgMemory.Root; }
-        }
+        public IMemory Root => _pcgMemory.Root;
 
 
         /// <summary>
@@ -109,7 +102,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public IBank this[int index] { get { return BankCollection[index]; } }
+        public IBank this[int index] => BankCollection[index];
 
 
         /// <summary>

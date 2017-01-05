@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>ea7c98ff-3bca-4014-b9cb-0c28e8821823</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>___Documentation</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Analysis\Drum Kits and Wave Sequences.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Analysis\PCG Structures\PCG Structure Kronos.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Analysis\PCG Structures\PCG Structure M3.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Analysis\PCG Structures\PCG Structure N264.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Analysis\PCG Structures\PCG Structure Oasys.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Analysis\PCG Structures\PCG Structure Wavestation.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Analysis\PCG Structures\PcgChunks.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Analysis\PCG Structures\SNG Structure Kronos.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)contact.html" />
+    <Content Include="$(MSBuildThisFileDirectory)Google Analytics.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)History.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Ideas\_Sort.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)readme.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Technical\Notes.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Technical\ResourceStringProblems.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Technical\GUI PCG Windows.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)wpfmdi_license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Design.eap" />
+    <None Include="$(MSBuildThisFileDirectory)Design.ldb" />
+    <None Include="$(MSBuildThisFileDirectory)EULA.rtf" />
+    <None Include="$(MSBuildThisFileDirectory)Ideas\P.doc" />
+    <None Include="$(MSBuildThisFileDirectory)KorgNda.pdf" />
+    <None Include="$(MSBuildThisFileDirectory)Manual.docx" />
+    <None Include="$(MSBuildThisFileDirectory)PCG Tools 2.pptx" />
+    <None Include="$(MSBuildThisFileDirectory)Technical\GoogleDocsStringIds.xlsx" />
+    <None Include="$(MSBuildThisFileDirectory)Technical\Production Code.doc" />
+    <None Include="$(MSBuildThisFileDirectory)Manual addition.docx" />
+  </ItemGroup>
+</Project>

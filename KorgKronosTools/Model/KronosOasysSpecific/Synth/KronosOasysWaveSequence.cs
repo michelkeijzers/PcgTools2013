@@ -1,7 +1,4 @@
-﻿using System;
-
-
-// (c) 2011 Michel Keijzers
+﻿// (c) 2011 Michel Keijzers
 using PcgTools.Model.Common.Synth.PatchWaveSequences;
 
 namespace PcgTools.Model.KronosOasysSpecific.Synth
@@ -45,23 +42,14 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 24; }
-        }
+        public override int MaxNameLength => 24;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get
-            {
-                return ((Name == String.Empty) ||
-                    (Name == "WaveSequence")) ||
-                    ((Name.Contains("Init") && Name.Contains("Wave") && Name.Contains("Sequence")));
-            }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) ||
+                                               (Name == "WaveSequence")) ||
+                                              ((Name.Contains("Init") && Name.Contains("Wave") && Name.Contains("Sequence")));
     }
 }

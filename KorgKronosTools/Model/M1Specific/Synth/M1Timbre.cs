@@ -14,7 +14,7 @@ namespace PcgTools.Model.M1Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        private static int TimbresSizeConstant { get { return 11; } }
+        private static int TimbresSizeConstant => 11;
 
 
         /// <summary>
@@ -81,9 +81,6 @@ namespace PcgTools.Model.M1Specific.Synth
         /// If Combination type is     MULTI: 00=Timbre off, 01H-64H=I00..I99, 65H..C8H=C00..C99
         /// If combination type is not MULTI:                00..63H=I00..I99, 64H..C8H=C00..C99
         /// </summary>
-        protected override int UsedProgramId
-        {
-            get { return Combi.PcgRoot.Content[TimbresOffset] % 100; }
-        }
+        protected override int UsedProgramId => Combi.PcgRoot.Content[TimbresOffset] % 100;
     }
 }

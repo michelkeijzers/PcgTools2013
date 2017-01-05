@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using PcgTools.Annotations;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -19,7 +17,6 @@ using PcgTools.Properties;
 using PcgTools.Songs;
 using PcgTools.ViewModels;
 using PcgTools.ViewModels.Commands.PcgCommands;
-using PcgTools.Windows;
 using WPF.MDI;
 
 // (c) 2011 Michel Keijzers
@@ -34,7 +31,7 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        public IViewModel ViewModel { get; private set; }
+        public IViewModel ViewModel { get; }
 
 
         /// <summary>
@@ -51,10 +48,7 @@ namespace PcgTools
         /// 
         /// </summary>
         // ReSharper disable once MemberCanBePrivate.Global
-        public ISongViewModel SongViewModel
-        {
-            get { return (ISongViewModel) ViewModel; }
-        }
+        public ISongViewModel SongViewModel => (ISongViewModel) ViewModel;
 
 
         /// <summary>
@@ -73,25 +67,13 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        private ISongMemory _songMemory;
+        public ISongMemory SongMemory { get; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public ISongMemory SongMemory
-        {
-            get { return _songMemory; }
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public IMemory Memory
-        {
-            get { return SongMemory; }
-        }
+        public IMemory Memory => SongMemory;
 
 
         /// <summary>
@@ -105,7 +87,7 @@ namespace PcgTools
         {
             InitializeComponent();
 
-            _songMemory = songMemory;
+            SongMemory = songMemory;
             _mainWindow = mainWindow;
             ViewModel = new SongViewModel(openedPcgWindows);
             SongViewModel.Song = listViewSongs.SelectedIndex >= 0
@@ -157,8 +139,8 @@ namespace PcgTools
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            listViewSongs.ItemsSource = SongMemory != null ? SongMemory.Songs.SongCollection : null;
-            listViewSamples.ItemsSource = SongMemory != null ?  SongMemory.Regions.RegionsCollection : null;
+            listViewSongs.ItemsSource = SongMemory?.Songs.SongCollection;
+            listViewSamples.ItemsSource = SongMemory?.Regions.RegionsCollection;
             FillListView();
 
             ButtonMidiTracks.IsEnabled = false;
@@ -299,33 +281,30 @@ namespace PcgTools
             builder.AppendLine("--- ------------------------------------------------------------");
 
             var index = 0;
-            foreach (var song in _songMemory.Songs.SongCollection)
+            foreach (var song in SongMemory.Songs.SongCollection)
             {
                 index++;
                 builder.AppendLine($"{index,3} {song.Name}");
             }
             
-            const string fileName = "output.txt";
+            string fileName = $"{SongMemory.FileName}_output.txt";
 
             try
             {
                 System.IO.File.WriteAllText(fileName, builder.ToString());
                 Mouse.OverrideCursor = Cursors.Wait;
                     Process.Start(fileName);
-                
             }
             catch (UnauthorizedAccessException ex)
             {
                 var stringCaption = $"{Strings.ErrorOccurred}: \n\n" + 
                     $"{Strings.Message}: {ex.Message}\n\n" +
-                    $"{Strings.InnerExceptionMessage}: {ex.InnerException?.Message ?? String.Empty}\n\n" + 
+                    $"{Strings.InnerExceptionMessage}: {ex.InnerException?.Message ?? string.Empty}\n\n" + 
                     $"{Strings.StackTrace}: {ex.StackTrace}";
 
                 Mouse.OverrideCursor = Cursors.Arrow;
                 MessageBox.Show(Strings.PcgTools, stringCaption, MessageBoxButton.OK, MessageBoxImage.Error,
                     MessageBoxResult.OK, MessageBoxOptions.None);
-                ;
-
             }
             finally
             {
@@ -342,13 +321,13 @@ namespace PcgTools
             builder.AppendLine(" #  Sample Name                                                  Sample File Name");
             builder.AppendLine("--- ------------------------------------------------------------ ------------------------------------------------------------");
 
-            foreach (var region in _songMemory.Regions.RegionsCollection)
+            foreach (var region in SongMemory.Regions.RegionsCollection)
             {
                 var sample = (Region) region;
                 builder.AppendLine($"{sample.Index, 3} {sample.Name,-60} {sample.SampleFileName,-60}");
             }
 
-            const string fileName = "output.txt";
+            string fileName = $"{SongMemory.FileName}_output.txt";
 
             try
             {
@@ -361,14 +340,12 @@ namespace PcgTools
             {
                 var stringCaption = $"{Strings.ErrorOccurred}: \n\n" +
                     $"{Strings.Message}: {ex.Message}\n\n" +
-                    $"{Strings.InnerExceptionMessage}: {ex.InnerException?.Message ?? String.Empty}\n\n" +
+                    $"{Strings.InnerExceptionMessage}: {ex.InnerException?.Message ?? string.Empty}\n\n" +
                     $"{Strings.StackTrace}: {ex.StackTrace}";
 
                 Mouse.OverrideCursor = Cursors.Arrow;
                 MessageBox.Show(Strings.PcgTools, stringCaption, MessageBoxButton.OK, MessageBoxImage.Error,
                     MessageBoxResult.OK, MessageBoxOptions.None);
-                ;
-
             }
             finally
             {
@@ -393,8 +370,8 @@ namespace PcgTools
         /// <param name="e"></param>
         private void ListViewSongs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SongViewModel.Song = _songMemory.Songs.SongCollection[listViewSongs.SelectedIndex];
-            ButtonMidiTracks.IsEnabled = ((SongViewModel.Song != null) && (_songMemory is KronosSongMemory));
+            SongViewModel.Song = SongMemory.Songs.SongCollection[listViewSongs.SelectedIndex];
+            ButtonMidiTracks.IsEnabled = ((SongViewModel.Song != null) && (SongMemory is KronosSongMemory));
         }
 
 

@@ -2,7 +2,6 @@
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchDrumPatterns;
-using PcgTools.Model.MSpecific.Synth;
 
 // (c) 2011 Michel Keijzers
 

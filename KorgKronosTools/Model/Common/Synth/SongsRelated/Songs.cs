@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System.Collections.ObjectModel;
 using Common.Mvvm;
 
 namespace PcgTools.Model.Common.Synth.SongsRelated

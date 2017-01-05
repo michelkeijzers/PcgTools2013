@@ -1,7 +1,6 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -13,7 +12,6 @@ using PcgTools.Model.Common.Synth.Global;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.OldParameters;
 using PcgTools.Model.Common.Synth.PatchCombis;
-using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.Common.Synth.PatchSorting;
@@ -99,28 +97,19 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <summary>
         /// 
         /// </summary>
-        public INavigable Parent
-        {
-            get { return Bank; }
-        }
+        public INavigable Parent => Bank;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public IMemory Root
-        {
-            get { return Parent.Root; }
-        }
+        public IMemory Root => Parent.Root;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public IPcgMemory PcgRoot
-        {
-            get { return (IPcgMemory) Root; }
-        }
+        public IPcgMemory PcgRoot => (IPcgMemory) Root;
 
 
         /// <summary>
@@ -189,10 +178,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// The user index is the same as index, except for GM programs which are named as GM001 instead of GM000 etc.
         /// </summary>
         // ReSharper disable once UnusedMemberInSuper.Global
-        public virtual int UserIndex
-        {
-            get { return _index; }
-        }
+        public virtual int UserIndex => _index;
 
 
         /// <summary>
@@ -226,7 +212,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <returns></returns>
         protected string GetChars(int offset, int length)
         {
-            return (PcgRoot.Content == null) ? String.Empty : Util.GetChars(PcgRoot.Content, ByteOffset + offset, length);
+            return (PcgRoot.Content == null) ? string.Empty : Util.GetChars(PcgRoot.Content, ByteOffset + offset, length);
         }
 
 
@@ -306,7 +292,7 @@ namespace PcgTools.Model.Common.Synth.Meta
             // Check text filtering.
             usePatch &= FilterOnText(filterOnText, filterText, caseSensitive, filterDescription);
 
-            usePatch = CheckFavorite(useFavorites, usePatch);
+            usePatch &= CheckFavorite(useFavorites, usePatch);
 
             return usePatch;
         }
@@ -577,7 +563,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("{0}:{1}", Id, Name);
+            return $"{Id}:{Name}";
         }
 
 

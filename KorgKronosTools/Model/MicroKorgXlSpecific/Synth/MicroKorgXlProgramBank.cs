@@ -15,10 +15,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int NrOfPatches
-        {
-            get { { return 64; } }
-        }
+        public override int NrOfPatches => 64;
 
 
         /// <summary>
@@ -59,10 +56,6 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Mmt; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Mmt;
     }
 }

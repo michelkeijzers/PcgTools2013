@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using Common.Mvvm;
+﻿using Common.Mvvm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PcgTools.ClipBoard;
-using PcgTools.ListGenerator;
 using PcgTools.Model.Common.File;
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -22,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class CopyBetweenFilesTests
     {
-        const string PcgDirectory = @"C:\users\michel\source\repos\PCG Tools TestFiles\Workstations\";
+        const string PcgDirectory = @"C:\PCG Tools Test Files\TestFiles\Workstations\";
 
 
         private PcgMemory _pcgOs2;
@@ -33,7 +28,7 @@ namespace PCG_Tools_Unittests
         {
             var korgFileReader = new KorgFileReader();
             _pcgOs2 = (PcgMemory) korgFileReader.Read(PcgDirectory + @"\Kronos\all.PCG");
-            _pcgOs3 = (PcgMemory) korgFileReader.Read(PcgDirectory + @"\Kronos2\PRELOAD_V3.PCG");
+            _pcgOs3 = (PcgMemory) korgFileReader.Read(PcgDirectory + @"\Kronos2\PRELOAD_V3_2016-10-01-20-23-33.PCG");
 
             // Set settings.
             Settings.Default.CopyPaste_AutoExtendedSinglePatchSelectionPaste = false;

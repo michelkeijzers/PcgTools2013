@@ -1,7 +1,6 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.ZeroSeries.Pcg;
 

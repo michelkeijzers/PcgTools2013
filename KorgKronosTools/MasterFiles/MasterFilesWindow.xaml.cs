@@ -39,7 +39,7 @@ namespace PcgTools.MasterFiles
         /// <summary>
         /// 
         /// </summary>
-        public IMemory Memory { get { return null; } }
+        public IMemory Memory => null;
 
 
         /// <summary>

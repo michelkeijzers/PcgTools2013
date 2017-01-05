@@ -1,10 +1,7 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
-
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchPrograms;
-using PcgTools.Model.MSpecific.Synth;
 using PcgTools.Model.ZeroSeries.Synth;
 
 namespace PcgTools.Model.Zero3Rw.Synth

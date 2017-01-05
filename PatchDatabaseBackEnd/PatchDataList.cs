@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PatchDatabaseBackEnd
 {
@@ -32,7 +29,7 @@ namespace PatchDatabaseBackEnd
 
             foreach (var patch in PatchList)
             {
-                builder.AppendLine(String.Format("{0}: {1}, {2}", patch.PatchName, patch.Author, patch.Description));
+                builder.AppendLine($"{patch.PatchName}: {patch.Author}, {patch.Description}");
             }
 
             return builder.ToString();

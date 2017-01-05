@@ -1,11 +1,7 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System.Windows;
-using System.Windows.Data;
-using PcgTools.Edit;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.Common.Synth.PatchCombis;
-using PcgTools.Model.Common.Synth.SongsRelated;
 using PcgTools.Properties;
 using PcgTools.ViewModels;
 using WPF.MDI;
@@ -26,7 +22,7 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        public ISngTimbresViewModel SngTimbresViewModel { get { return (ISngTimbresViewModel) ViewModel; } }
+        public ISngTimbresViewModel SngTimbresViewModel => (ISngTimbresViewModel) ViewModel;
 
 
         /// <summary>
@@ -111,9 +107,9 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        public IMemory Memory { get { return ViewModel.SelectedMemory; } }
+        public IMemory Memory => ViewModel.SelectedMemory;
 
-        
+
         /// <summary>
         /// 
         /// </summary>

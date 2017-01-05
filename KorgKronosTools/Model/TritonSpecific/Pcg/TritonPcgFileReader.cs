@@ -36,64 +36,43 @@ namespace PcgTools.Model.TritonSpecific.Pcg
         /// LV: I noticed that these are overridden again in TritonExtreme and 
         /// TritonKarma subclasses with exactly the same values. Remove them there?
         /// </summary>
-        protected override int Div1Offset
-        {
-            get { return 0x18; }
-        }
+        protected override int Div1Offset => 0x18;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int BetweenChunkGapSize
-        {
-            get { return 8; }
-        }
+        protected override int BetweenChunkGapSize => 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int GapSizeAfterMbk1ChunkName
-        {
-            get { return 0; }
-        }
+        protected override int GapSizeAfterMbk1ChunkName => 0;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int Pbk1NumberOfProgramsOffset
-        {
-            get { return 8; }
-        }
+        protected override int Pbk1NumberOfProgramsOffset => 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int SizeBetweenCmb1AndCbk1
-        {
-            get { return 4; }
-        }
+        protected override int SizeBetweenCmb1AndCbk1 => 4;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int Cbk1NumberOfCombisOffset
-        {
-            get { return 8; }
-        }
+        protected override int Cbk1NumberOfCombisOffset => 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int Dbk1NumberOfDrumKitsOffset
-        {
-            get { return 8; }
-        }
+        protected override int Dbk1NumberOfDrumKitsOffset => 8;
 
 
         /// <summary>

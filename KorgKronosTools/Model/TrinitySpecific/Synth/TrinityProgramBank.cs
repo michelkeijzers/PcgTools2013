@@ -35,19 +35,12 @@ namespace PcgTools.Model.TrinitySpecific.Synth
         /// <summary>
         /// Not used because depending on bank it can also be Prophecy.
         /// </summary>
-        public override SynthesisType DefaultModeledSynthesisType
-        {
-            get { return SynthesisType.MossZ1; }
-        }
+        public override SynthesisType DefaultModeledSynthesisType => SynthesisType.MossZ1;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Access; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Access;
     }
 }

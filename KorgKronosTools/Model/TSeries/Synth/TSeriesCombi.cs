@@ -3,7 +3,6 @@
 using System.Text;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.OldParameters;
-using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.MntxSeriesSpecific.Synth;
 
 namespace PcgTools.Model.TSeries.Synth
@@ -22,7 +21,7 @@ namespace PcgTools.Model.TSeries.Synth
         public TSeriesCombi(IBank combiBank, int index)
             : base(combiBank, index)
         {
-            Id = string.Format("{0}{1}", combiBank.Id, (index).ToString("00"));
+            Id = $"{combiBank.Id}{(index).ToString("00")}";
             Timbres = new TSeriesTimbres(this);
         }
 

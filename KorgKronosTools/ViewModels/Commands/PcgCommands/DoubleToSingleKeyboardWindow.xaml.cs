@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchSetLists;
 
@@ -62,11 +51,11 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 {
                     var item = new ComboBoxItem();
                     item.Tag = setList;
-                    item.Content = String.Format("{0} {1}", setList.Id, setList.Name);
+                    item.Content = $"{setList.Id} {setList.Name}";
 
                     var item2 = new ComboBoxItem();
                     item2.Tag = setList;
-                    item2.Content = String.Format("{0} {1}", setList.Id, setList.Name);
+                    item2.Content = $"{setList.Id} {setList.Name}";
                 
 
                     SourceSetListListBox.Items.Add(item);
@@ -84,7 +73,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                     var item = new ComboBoxItem
                     {
                         Tag = bank,
-                        Content = String.Format("{0}", bank.Id)
+                        Content = $"{bank.Id}"
                     };
 
                     TargetCombiBankListBox.Items.Add(item);

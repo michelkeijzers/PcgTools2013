@@ -1,6 +1,4 @@
-﻿using PcgTools.Model.Common.Synth.MemoryAndFactory;
-
-namespace PcgTools.Model.Common.Synth.MemoryAndFactory
+﻿namespace PcgTools.Model.Common.Synth.MemoryAndFactory
 {
     /// <summary>
     /// 

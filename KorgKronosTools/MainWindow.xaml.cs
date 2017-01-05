@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
-using System.Windows.Threading;
 #if !DEBUG
 using System.Threading;
 #endif
@@ -24,7 +23,6 @@ using PcgTools.OpenedFiles;
 using PcgTools.ViewModels;
 using PcgTools.PcgToolsResources;
 using PcgTools.Properties;
-using PcgTools.Songs;
 using WPF.MDI;
 
 // Do not remove; used for Release build
@@ -138,7 +136,7 @@ namespace PcgTools
                     Title = title,
                     Filter = filter,
                     FileName = fileName,
-                    FilterIndex = GetFilterIndexOfFile(System.IO.Path.GetExtension(fileName), filter)
+                    FilterIndex = ViewModel.GetFilterIndexOfFile(System.IO.Path.GetExtension(fileName), filter)
                 };
 
                 dynamic result = new ExpandoObject();
@@ -377,40 +375,7 @@ namespace PcgTools
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="extension"></param>
-        /// <param name="filter"></param>
-        /// <returns></returns>
-        int GetFilterIndexOfFile(string extension, string filter)
-        {
-            var model = ViewModel.SelectedMemory.Model.ModelAsString;
-            var filterParts = filter.Split('|');
-            var filters = new List<String>();
 
-            for (var index = 0; index < filterParts.Count(); index += 2)
-            {
-                // Combine every two filter parts because a filter is made up by two |'s, e.g.: 
-                // "MicroKorg XL {0} (*.mkxl_all,*.syx)|*.mkxl_all;*.syx|" +
-                filters.Add(filterParts[index] + filterParts[index + 1]);
-            }
-
-            var foundFilter = filters.FirstOrDefault(filterToCheck => filterToCheck.Contains(model + " ")) ??
-                              (filters.FirstOrDefault(
-                filterToCheck => ((filterToCheck.ToUpper().Contains(extension.ToUpper() + ",")) ||
-                                  (filterToCheck.ToUpper().Contains(extension.ToUpper() + ")")))));
-
-            for (var n = 0; n < filters.Count; n++)
-            {
-                if (filters[n] == foundFilter)
-                {
-                    return n + 1; // First filter is index 1
-                }
-            }
-
-            return 0;
-        }
 
 
         /// <summary>
@@ -493,11 +458,11 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        IChildWindow FocusedWindow
+        private IChildWindow FocusedWindow
         {
             get
             {
-                if ((Container == null) || (Container.Children == null))
+                if (Container?.Children == null)
                 {
                     return null;
                 }
@@ -585,35 +550,35 @@ namespace PcgTools
             var child = Container.Children[index];
             if (child.Content is PcgWindow)
             {
-                if ((((PcgWindow) (child.Content)).ViewModel.Close(true)))
+                if (((PcgWindow) (child.Content)).ViewModel.Close(true))
                 {
                     return true;
                 }
             }
             else if (child.Content is CombiWindow)
             {
-                if ((((CombiWindow) (child.Content)).ViewModel.Close(true)))
+                if (((CombiWindow) (child.Content)).ViewModel.Close(true))
                 {
                     return true;
                 }
             }
             else if (child.Content is SongWindow)
             {
-                if ((((SongWindow) (child.Content)).ViewModel.Close(true)))
+                if (((SongWindow) (child.Content)).ViewModel.Close(true))
                 {
                     return true;
                 }
             }
             else if (child.Content is SongTimbresWindow)
             {
-                if ((((SongTimbresWindow)(child.Content)).ViewModel.Close(true)))
+                if (((SongTimbresWindow)(child.Content)).ViewModel.Close(true))
                 {
                     return true;
                 }
             }
             else if (child.Content is MasterFilesWindow)
             {
-                if ((((MasterFilesWindow) (child.Content)).ViewModel.Close(true)))
+                if (((MasterFilesWindow) (child.Content)).ViewModel.Close(true))
                 {
                     return true;
                 }

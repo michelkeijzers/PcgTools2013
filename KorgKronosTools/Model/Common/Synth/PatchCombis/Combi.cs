@@ -12,7 +12,6 @@ using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.OldParameters;
 using PcgTools.Model.Common.Synth.PatchDrumPatterns;
-using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.Common.Synth.PatchSetLists;
 using PcgTools.PcgToolsResources;
 using PcgTools.Properties;
@@ -33,7 +32,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             Bank = combiBank;
             Index = index;
-            Id = string.Format("{0}{1}", combiBank.Id, index.ToString("000"));
+            Id = $"{combiBank.Id}{index.ToString("000")}";
         }
 
 
@@ -71,7 +70,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         public void SwitchMidiChannels(int mainMidiChannel, int secondaryMidiChannel)
         {
             foreach (var timbre in Timbres.TimbresCollection.Where(
-                timbre => new List<String> {"Int", "On", "Both"}.Contains(timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value)))
+                timbre => new List<string> {"Int", "On", "Both"}.Contains(timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value)))
             {
                 if (timbre.GetParam(ParameterNames.TimbreParameterName.MidiChannel).Value == mainMidiChannel - 1)
                 {
@@ -174,27 +173,18 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable UnusedMember.Global
-        public string Favorite
-        {
-            get
-            {
-                return (((IBank) (Parent)).IsLoaded &&
-                        Root.AreFavoritesSupported &&
-                        GetParam(ParameterNames.CombiParameterName.Favorite).Value)
-                    ? "X"
-                    : String.Empty;
-            }
-        }
+        public string Favorite => (((IBank) (Parent)).IsLoaded &&
+                                   Root.AreFavoritesSupported &&
+                                   GetParam(ParameterNames.CombiParameterName.Favorite).Value)
+            ? "X"
+            : string.Empty;
 
 
         /// <summary>
         /// 
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public string PatchTypeAsString
-        {
-            get { return Strings.Combi; }
-        }
+        public string PatchTypeAsString => Strings.Combi;
 
 
         /// <summary>
@@ -204,14 +194,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         // ReSharper disable UnusedMember.Global
         public string NumberOfReferencesAsString
             // ReSharper restore UnusedMember.Global
-        {
-            get
-            {
-                return Settings.Default.UI_ShowNumberOfReferencesColumn
-                    ? NumberOfReferences.ToString(CultureInfo.InvariantCulture)
-                    : String.Empty;
-            }
-        }
+            => Settings.Default.UI_ShowNumberOfReferencesColumn
+                ? NumberOfReferences.ToString(CultureInfo.InvariantCulture)
+                : string.Empty;
 
 
         /// <summary>
@@ -294,7 +279,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
+            Name = string.Empty;
             GetParam(ParameterNames.CombiParameterName.Category).Value = 0;
             if (PcgRoot.HasSubCategories)
             {
@@ -306,7 +291,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                 timbre.Clear();
             }
 
-            RaisePropertyChanged(String.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
         }
 
 

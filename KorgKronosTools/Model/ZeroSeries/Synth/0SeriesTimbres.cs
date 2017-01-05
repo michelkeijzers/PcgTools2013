@@ -14,7 +14,7 @@ namespace PcgTools.Model.ZeroSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        private static int TimbresOffsetConstant { get { return 40; } }
+        private static int TimbresOffsetConstant => 40;
 
 
         /// <summary>

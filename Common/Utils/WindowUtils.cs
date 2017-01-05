@@ -74,8 +74,8 @@ namespace Common.Utils
             EMessageBoxButton messageBoxButton,
             EMessageBoxImage messageBoxImage, EMessageBoxResult messageBoxResult)
         {
-            Debug.Assert(!String.IsNullOrEmpty(text));
-            Debug.Assert(!String.IsNullOrEmpty(title));
+            Debug.Assert(!string.IsNullOrEmpty(text));
+            Debug.Assert(!string.IsNullOrEmpty(title));
             
             MessageBoxButton button;
             switch (messageBoxButton)

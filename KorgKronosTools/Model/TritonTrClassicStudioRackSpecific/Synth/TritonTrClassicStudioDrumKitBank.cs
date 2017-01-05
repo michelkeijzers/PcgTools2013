@@ -1,6 +1,5 @@
 ﻿
 using PcgTools.Model.Common.Synth.Meta;
-using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.TritonSpecific.Synth;
 
 // (c) 2011 Michel Keijzers

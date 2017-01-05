@@ -1,0 +1,236 @@
+
+Hierarchy
+=========
+
+
+===============================================
+IFactory (?)
+-----------------------------------------------
+
+
+===============================================
+IModelFactory : IFactory
+-----------------------------------------------
+IFactory CreateFactory(EModelType ModelType) { instance }
+
+
+
+===============================================
+IService
+-----------------------------------------------
+Dictionary<EModel, IModelService> ModelServices { get; }
+
+===============================================
+IModelService
+-----------------------------------------------
+Dictionary<EGroup, IParameterService> ParameterServices { get; }
+
+
+===============================================
+IParameterService
+-----------------------------------------------
+
+===============================================
+IProgramParameterService : IParameterserviceS
+-----------------------------------------------
+IParameter Name
+IParameter Id
+
+===============================================
+ICombiParameterService : IParameterService
+-----------------------------------------------
+ITextParameter  Name
+ITextIParameter Id
+IValueParameter Volume
+IBoolParameter	Favorite
+===============================================
+IKronosCombiParameterService: ICombiParameterService
+
+===============================================
+IParameter 
+-----------------------------------------------
+string  Name { get; }
+===============================================
+IIntParameter : IParameter
+-----------------------------------------------
+int    Value 		{ get; set; }
+int    Min		{ get; }
+int    Max	 	{ get; }
+
+===============================================
+ITextParameter : IParameter
+-----------------------------------------------
+string Text 	  	{ get; set; }
+string Length 		{ get; }
+
+===============================================
+IBoolParameter : IParameter
+-----------------------------------------------
+bool   IsEnabled        { get; set; }
+
+===============================================
+IGroupService
+-----------------------------------------------
+bool IsGroupSupported(EGroup) { get; }		e.g. Program, combi ...
+
+===============================================
+IPcgFile : IItem
+-----------------------------------------------
+IGroups     Groups     { get; }
+string      FileName   { get; set; }
+
+===============================================
+IGroups : IItem					 e.g. program, combi, ...
+-----------------------------------------------
+Dictionary<GroupId, IGroup> Group { get; }
+
+===============================================
+IGroup : IItem
+-----------------------------------------------
+List<IBanks> Banks { get; }
+IParameterService 	Parameters { get; }	(e.g. points to KronosProgramParameterService)
+					 	 all patches in this group use the same parameter service
+						 (check: GM programs?)
+===============================================
+IBanks : IItem
+-----------------------------------------------
+List<IBank> Bank { get; }
+
+===============================================
+IBank : IItem
+-----------------------------------------------
+List<IPatcs> Patches { get; }
+IPatch       GetPatch(string);                   i.e. GetPatch("I-A000");
+
+===============================================
+IPatch : IItem
+-----------------------------------------------
+IItem                   Parent { get; }
+string			Name { get; set; }
+int			Id { get; set; }
+IParameterService       Parameters { get; }     Returns Parmeters from IGroup
+-----------------------------------------------
+
+
+Example, getting volume from combi bank 5, index 10.
+
+IFactory factory = new ModelFactory.CreateInstance(Kronos);
+var pcgFile = factory.CreatePcgFile();
+pcgFile.ReadFile(C:\\Kronos.pcg"); 
+??? if (pcgFile.IsSupported(EGroupCombi))
+var banks = pcgFile.Groups[EGroupCombi].banks;
+IPatch patch = banks[5].Patches[10]; // Also possible: banks["I-A"], or GetPatch("I-A000");
+var volume = patch.Parameters.Volume.Value;
+
+
+Shortened:
+
+var pcgFile = factory.ReadPcgFile("C:\\Kronos.pcg"); // Create factory
+if (pcgFile.IsLoaded(EGroupCombi))
+  var banks = pcgFile.Groups[EGroupCombi].banks;
+  IPatch patch = banks[5].Patches[10]; // optional: GetPatch("I-A010"), or GetPatch(0, 10)
+  var volume = patch.Parameters.Volume.Value; // Also MinValue, MaxValue;
+
+======================================================================================
+
+TIMBRES
+
+ICombiBanks : IBanks (not for banks, not bank)
+--------------------------------------------------------
+
+TimbreServices TimbreServices { get; }
+
+CombiBanks
+--------------------------------------------------------
+CombiBanks(ITimbreServices services)
+ TimbreServices = services
+
+TimbreServices 
+========================================================
+
+ICombiBank : IBank
+--------------------------------------------------------
+List<ITimbre> Timbres { get; }
+
+
+========================================================
+
+ICombiBanksTimbreService
+--------------------------------------------------------
+IProgram	GetUsedProgram	(ITimbre timbre);
+IBank		GetUsedBank	(ITimbre timbre);
+int 		GetVolume	(ITimbre timbre);
+int 		GetTranspose	(ITimbre timbre);
+int 		GetDetune	(ITimbre timbre);
+EOsc		GetOsc		(ITimbre timbre);
+...
+
+========================================================
+
+CombiBanksTimbreService : ICombiBanksTimbreService
+--------------------------------------------------------
+CombiBanksTimbreService(TimbreServices timbreServices)
+ // Store in local variables, used by below
+
+
+
+========================================================
+TimbreServices 
+
+list of all services (one per parameter).
+
+ICombiBanksUsedPatchimbreService 	UsedatchTimbreService { get; }
+ICombiBanksVolumeTimbreService		VolumeTimbreService { get; }
+
+--------------------------------------------------------
+ICombiBanksUsedPatchTimbreService
+ IPatch GetUsedProgram(ITimbre timbre)
+ void   Set...
+ IPatch GetUsedBank...
+ void   Set...
+
+ 
+ CombiBanksUsedPatchTimbreService ... UsedPatch or UsedProgram?
+
+  CombiBanksDefaultTimbreUsedPatchService : UsedProgramTimbreService
+   DefaultTimbreUsedProgramService(int byteOffset);
+   IProgram GetUsedProgram(ITimbre timbre) return content[byteOffset), convert ID to program
+
+  Other strategies
+
+ICombiBanksUsedBankTimbreService
+
+... as above
+
+ICombiBanksVolumeTimbreService
+
+.. as above
+
+========================================================
+
+CombiBanksTimbreService : ICombiBanksTimbreService
+--------------------------------------------------------
+(abstract)
+
+========================================================
+
+ICombiBanksTimbreService : ICombiBanksTimbreService
+--------------------------------------------------------
+(abstract)
+
+
+========================================================
+
+ITimbre 
+--------------------------------------------------------
+IUsedPatchimbreService
+
+========================================================
+
+IUsedProgramTimbreService
+--------------------------------------------------------
+UsedProgram { get } { return Parent.Parent.Parent.UsedProgramTimbreService.GetUsedProgram(this)
+UsedBank    { get } ...
+
+
+

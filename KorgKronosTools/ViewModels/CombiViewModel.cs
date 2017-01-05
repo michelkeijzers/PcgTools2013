@@ -290,7 +290,7 @@ namespace PcgTools.ViewModels
         {
             var root = Combi.PcgRoot;
             var assignedClearProgram = root.AssignedClearProgram ?? root.ProgramBanks[0][0];
-            AssignedClearProgram = string.Format("{0} {1}", assignedClearProgram.Id, assignedClearProgram.Name);
+            AssignedClearProgram = $"{assignedClearProgram.Id} {assignedClearProgram.Name}";
         }
 
 

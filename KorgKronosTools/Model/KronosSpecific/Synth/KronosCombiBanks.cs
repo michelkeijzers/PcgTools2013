@@ -77,8 +77,8 @@ namespace PcgTools.Model.KronosSpecific.Synth
                 {
                     Add(
                         new KronosCombiBank(
-                            this, BankType.EType.Virtual, 
-                            string.Format("V{0}-{1}", bankGroupIndex, bankName), -1));
+                            this, BankType.EType.Virtual,
+                            $"V{bankGroupIndex}-{bankName}", -1));
                 }
             }
         }

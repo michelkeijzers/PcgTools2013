@@ -2,7 +2,6 @@
 
 using System;
 using PcgTools.Model.Common.Synth.Meta;
-using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.MntxSeriesSpecific.Synth;
 
 namespace PcgTools.Model.ZeroSeries.Synth
@@ -15,10 +14,7 @@ namespace PcgTools.Model.ZeroSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int NrOfPatches
-        {
-            get { return 100; }
-        }
+        public override int NrOfPatches => 100;
 
 
         /// <summary>
@@ -59,10 +55,6 @@ namespace PcgTools.Model.ZeroSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Ai2; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Ai2;
     }
 }

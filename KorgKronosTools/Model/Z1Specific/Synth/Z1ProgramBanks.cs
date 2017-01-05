@@ -34,7 +34,7 @@ namespace PcgTools.Model.Z1Specific.Synth
             {
                 Add(
                     new Z1ProgramBank(
-                        this, BankType.EType.Int, string.Format("{0}", id), bankId, 
+                        this, BankType.EType.Int, $"{id}", bankId, 
                         ProgramBank.SynthesisType.MossZ1, "-"));
                 bankId++;
             }
@@ -44,7 +44,7 @@ namespace PcgTools.Model.Z1Specific.Synth
             {
                 Add(
                     new Z1ProgramBank(
-                        this, BankType.EType.Int, string.Format("{0}", id), bankId, 
+                        this, BankType.EType.Int, $"{id}", bankId, 
                         ProgramBank.SynthesisType.MossZ1, "-"));
                 bankId++;
             }

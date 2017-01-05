@@ -16,7 +16,7 @@ namespace PcgTools.Model.TSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        private static int TimbresSizeConstant { get { return 11; } }
+        private static int TimbresSizeConstant => 11;
 
 
         /// <summary>
@@ -57,13 +57,7 @@ namespace PcgTools.Model.TSeries.Synth
         /// There is a specific bit if a timbre is on or off.
         /// However, when the timbre is off, sometimes the program is A00, sometimes B00.
         /// </summary>
-        protected override int UsedProgramBankId
-        {
-            get
-            {
-                return (Combi.PcgRoot.Content[TimbresOffset] <= 0x63) ? 0 : 1;
-            }
-        }
+        protected override int UsedProgramBankId => (Combi.PcgRoot.Content[TimbresOffset] <= 0x63) ? 0 : 1;
 
 
         /// <summary>
@@ -73,33 +67,18 @@ namespace PcgTools.Model.TSeries.Synth
         /// - 64..127: B00..B99
         /// There is a specific bit if a timbre is on or off.
         /// </summary>
-        protected override int UsedProgramId
-        {
-            get { return Combi.PcgRoot.Content[TimbresOffset] % 100; }
-        }
-
-        
-        /// <summary>
-        /// If program not used, show Timbre OFF.
-        /// </summary>
-        public override string ColumnProgramId
-        {
-            get
-            {
-                return GetParam(ParameterNames.TimbreParameterName.Status).Value == "Off" ? Strings.TimbreOff : UsedProgram.Id;
-            }
-        }
+        protected override int UsedProgramId => Combi.PcgRoot.Content[TimbresOffset] % 100;
 
 
         /// <summary>
         /// If program not used, show Timbre OFF.
         /// </summary>
-        public override string ColumnProgramName
-        {
-            get
-            {
-                return GetParam(ParameterNames.TimbreParameterName.Status).Value == "Off" ? Strings.TimbreOff : UsedProgram.Name;
-            }
-        }
+        public override string ColumnProgramId => GetParam(ParameterNames.TimbreParameterName.Status).Value == "Off" ? Strings.TimbreOff : UsedProgram.Id;
+
+
+        /// <summary>
+        /// If program not used, show Timbre OFF.
+        /// </summary>
+        public override string ColumnProgramName => GetParam(ParameterNames.TimbreParameterName.Status).Value == "Off" ? Strings.TimbreOff : UsedProgram.Name;
     }
 }

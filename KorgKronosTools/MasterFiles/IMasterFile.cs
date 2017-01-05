@@ -1,5 +1,4 @@
-﻿using Common.Mvvm;
-using PcgTools.Model.Common.Synth.MemoryAndFactory;
+﻿using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
 
 namespace PcgTools.MasterFiles

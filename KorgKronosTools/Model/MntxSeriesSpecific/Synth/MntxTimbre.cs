@@ -100,36 +100,24 @@ namespace PcgTools.Model.MntxSeriesSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override string ColumnOscMode
-        {
-            get { return string.Empty; }
-        }
-        
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string ColumnOscSelect
-        {
-            get { return string.Empty; }
-        }
+        public override string ColumnOscMode => string.Empty;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override string ColumnPortamento
-        {
-            get { return string.Empty; }
-        }
+        public override string ColumnOscSelect => string.Empty;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override string ColumnBendRange
-        {
-            get { return string.Empty; }
-        }
+        public override string ColumnPortamento => string.Empty;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override string ColumnBendRange => string.Empty;
     }
 }

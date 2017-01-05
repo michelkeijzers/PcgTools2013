@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Text;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.OldParameters;
-using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.MntxSeriesSpecific.Synth;
 
 namespace PcgTools.Model.TSeries.Synth
@@ -24,7 +23,7 @@ namespace PcgTools.Model.TSeries.Synth
         public TSeriesProgram(IBank programBank, int index)
             : base(programBank, index)
         {
-            Id = string.Format("{0}{1}", programBank.Id, (index).ToString("00"));
+            Id = $"{programBank.Id}{(index).ToString("00")}";
         }
 
 
@@ -67,19 +66,13 @@ namespace PcgTools.Model.TSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 10; }
-        }
+        public override int MaxNameLength => 10;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get { return ((Name == String.Empty) || (Name.Contains("INIT") && Name.Contains("Prog"))); }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("INIT") && Name.Contains("Prog")));
 
 
         /// <summary>
@@ -87,8 +80,8 @@ namespace PcgTools.Model.TSeries.Synth
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
-            RaisePropertyChanged(String.Empty, false);
+            Name = string.Empty;
+            RaisePropertyChanged(string.Empty, false);
         }
 
 

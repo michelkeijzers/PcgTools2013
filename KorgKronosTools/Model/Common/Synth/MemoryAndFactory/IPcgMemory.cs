@@ -1,11 +1,9 @@
-﻿using System;
-using PcgTools.ClipBoard;
+﻿using PcgTools.ClipBoard;
 using PcgTools.Model.Common.Synth.Global;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.Common.Synth.PatchDrumPatterns;
-using PcgTools.Model.Common.Synth.PatchInterfaces;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.Common.Synth.PatchSetLists;
 using PcgTools.Model.Common.Synth.PatchWaveSequences;

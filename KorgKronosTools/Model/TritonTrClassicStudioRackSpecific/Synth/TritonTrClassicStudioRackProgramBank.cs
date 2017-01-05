@@ -1,7 +1,6 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 
-using PcgTools.Model.Common.Synth;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.TritonSpecific.Synth;
 
@@ -41,19 +40,12 @@ namespace PcgTools.Model.TritonTrClassicStudioRackSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultModeledSynthesisType
-        {
-            get { return SynthesisType.MossZ1; }
-        }
+        public override SynthesisType DefaultModeledSynthesisType => SynthesisType.MossZ1;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Hi; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Hi;
     }
 }

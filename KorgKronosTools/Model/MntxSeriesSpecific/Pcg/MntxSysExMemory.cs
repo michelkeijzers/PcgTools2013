@@ -29,28 +29,19 @@ namespace PcgTools.Model.MntxSeriesSpecific.Pcg
         /// <summary>
         /// 
         /// </summary>
-        public override bool HasProgramCategories
-        {
-            get { return false; }
-        }
+        public override bool HasProgramCategories => false;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool HasCombiCategories
-        {
-            get { return false; }
-        }
+        public override bool HasCombiCategories => false;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool HasSubCategories
-        {
-            get { return false; }
-        }
+        public override bool HasSubCategories => false;
 
 
         /// <summary>

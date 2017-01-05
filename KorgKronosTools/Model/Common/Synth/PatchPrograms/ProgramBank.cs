@@ -107,10 +107,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <summary>
         /// 
         /// </summary>
-        public bool IsModeled
-        {
-            get { return Program.IsModeled(BankSynthesisType); }
-        }
+        public bool IsModeled => Program.IsModeled(BankSynthesisType);
 
 
         /// <summary>
@@ -118,13 +115,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Global
-        public string Column2
-        {
-            get
-            {
-                return SynthesisTypeAsString(BankSynthesisType);
-            }
-        }
+        public string Column2 => SynthesisTypeAsString(BankSynthesisType);
 
 
         /// <summary>
@@ -175,7 +166,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("{0} {1}", Strings.Bank_2str, Id);
+            return $"{Strings.Bank_2str} {Id}";
         }
     }
 }

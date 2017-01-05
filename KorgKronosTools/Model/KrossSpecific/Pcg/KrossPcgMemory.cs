@@ -37,13 +37,13 @@ namespace PcgTools.Model.KrossSpecific.Pcg
         /// <summary>
         /// 
         /// </summary>
-        public override int NumberOfCategories { get { return 12; } }
+        public override int NumberOfCategories => 12;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override int NumberOfSubCategories { get { return 8; } }
+        public override int NumberOfSubCategories => 8;
 
 
         /// <summary>

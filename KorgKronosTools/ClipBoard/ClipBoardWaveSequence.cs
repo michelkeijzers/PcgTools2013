@@ -3,7 +3,6 @@
 using PcgTools.Model.Common;
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.Common.Synth.PatchSetLists;
 using PcgTools.Model.Common.Synth.PatchWaveSequences;
 using PcgTools.Model.KronosSpecific.Pcg;
 using PcgTools.Model.KronosSpecific.Synth;

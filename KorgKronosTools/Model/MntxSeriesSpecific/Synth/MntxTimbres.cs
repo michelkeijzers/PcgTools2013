@@ -13,7 +13,7 @@ namespace PcgTools.Model.MntxSeriesSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresPerCombiConstant { get { return 8;  } }
+        static int TimbresPerCombiConstant => 8;
 
 
         /// <summary>

@@ -3,7 +3,6 @@ using Common.Mvvm;
 using Common.Utils;
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.Common.Synth.PatchInterfaces;
 using PcgTools.PcgToolsResources;
 using PcgTools.Properties;
 
@@ -173,7 +172,7 @@ namespace PcgTools.MasterFiles
         /// </summary>
         public void UpdateState()
         {
-            if (FileName == String.Empty)
+            if (FileName == string.Empty)
             {
                 FileState = EFileState.Unassigned;
             }

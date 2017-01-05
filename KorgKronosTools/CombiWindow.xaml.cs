@@ -25,7 +25,7 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        public ICombiViewModel CombiViewModel { get { return (ICombiViewModel) ViewModel; } }
+        public ICombiViewModel CombiViewModel => (ICombiViewModel) ViewModel;
 
 
         /// <summary>
@@ -118,9 +118,9 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        public IMemory Memory { get { return ViewModel.SelectedMemory; } }
+        public IMemory Memory => ViewModel.SelectedMemory;
 
-        
+
         /// <summary>
         /// 
         /// </summary>

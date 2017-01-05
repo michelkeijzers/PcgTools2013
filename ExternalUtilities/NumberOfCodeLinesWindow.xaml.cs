@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ExternalUtilities
 {
@@ -20,7 +10,7 @@ namespace ExternalUtilities
     /// </summary>
     public partial class NumberOfCodeLinesWindow : Window
     {
-        private const string ProjectFolder = @"C:/Users/Michel/Source/Repos/PcgTools2013";
+        private const string ProjectFolder = @"C:/Users/Michel/OneDrive/PcgTools2013";
 
         private StringBuilder output = new StringBuilder();
 

@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchPrograms;
@@ -34,7 +33,7 @@ namespace PcgTools.Model.Zero3Rw.Synth
             {
                 Add(
                     new Zero3RwProgramBank(
-                        this, BankType.EType.Int, id, pcgId, ProgramBank.SynthesisType.Ai2, String.Empty));
+                        this, BankType.EType.Int, id, pcgId, ProgramBank.SynthesisType.Ai2, string.Empty));
                 pcgId++;
             }
 

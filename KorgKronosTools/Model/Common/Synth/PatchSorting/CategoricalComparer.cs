@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using PcgTools.Model.Common.Synth.Meta;
@@ -31,10 +30,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         /// <summary>
         /// 
         /// </summary>
-        public static CategoricalComparer Instance
-        {
-            get { return _instance; }
-        }
+        public static CategoricalComparer Instance => _instance;
 
 
         /// <summary>
@@ -241,7 +237,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
                 if (!_hasSubCategories)
                 {
                     {
-                        return _p1.Name == _p2.Name ? String.CompareOrdinal(_p1.Id, _p2.Id) : _p1.CompareTo(_p2);
+                        return _p1.Name == _p2.Name ? string.CompareOrdinal(_p1.Id, _p2.Id) : _p1.CompareTo(_p2);
                     }
                 }
 
@@ -253,7 +249,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
                 }
 
                 {
-                    return _p1.Name == _p2.Name ? String.CompareOrdinal(_p1.Id, _p2.Id) : _p1.CompareTo(_p2);
+                    return _p1.Name == _p2.Name ? string.CompareOrdinal(_p1.Id, _p2.Id) : _p1.CompareTo(_p2);
                 }
             }
 

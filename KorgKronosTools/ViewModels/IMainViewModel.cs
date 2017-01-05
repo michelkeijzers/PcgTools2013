@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using Common.Utils;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using WPF.MDI;

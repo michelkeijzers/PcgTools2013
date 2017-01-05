@@ -32,10 +32,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         /// <summary>
         /// 
         /// </summary>
-        public static WordParameter Instance
-        {
-            get { return _instance ?? (_instance = new WordParameter()); }
-        }
+        public static WordParameter Instance => _instance ?? (_instance = new WordParameter());
 
 
         /// <summary>

@@ -4,16 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace ExternalUtilities
@@ -24,7 +15,7 @@ namespace ExternalUtilities
     public partial class LanguageCrossReferenceWindow : Window
     {
         private const string ResourcePath = 
-            @"c:\users\michel\source\repos\pcgtools2013\korgkronostools\pcgtoolsresources\";
+            @"c:\users\michel\OneDrive\pcgtools2013\korgkronostools\pcgtoolsresources\";
 
         // Key: text fragment to translate (keyword)
         // Value: English translation.
@@ -42,8 +33,9 @@ namespace ExternalUtilities
             _referenceTranslations = new SortedDictionary<string, string>();
             _warnings = new StringBuilder();
 
-            CreateReferenceLanguageList();
-            CheckOtherLanguages();
+            CheckLanguages();
+            //CreateReferenceLanguageList();
+            //CheckOtherLanguages();
 
             var text = ShowAllTexts();
             TranslationsTextBox.Text = text.ToString();
@@ -73,10 +65,79 @@ namespace ExternalUtilities
             return text;
         }
 
+        private void CheckLanguages()
+        {
+            var cultures = new[] { "", "cs", "de", "el", "es", "fr", "nl", "pl",
+                "pt-BR", "pt-BR", "ru", "tr" }; // Removed: "sr-Latn-RS",
+
+            _warnings.Append($"{"Phrase/Word/Item",-50} ");
+            foreach (string culture in cultures)
+            {
+                _warnings.Append($"{(culture == "" ? "English" : culture),-6} ");
+            }
+            _warnings.AppendLine("\n");
+            
+            var dict = new Dictionary<string, List<bool>>(); // Word -> present[culture]
+
+             // Create word list
+            for (var cultureIndex = 0; cultureIndex < cultures.Length; cultureIndex++)
+            {
+                var culture = cultures[cultureIndex];
+                var fileName = ResourcePath + "Strings" + (culture == "" ? "" : ".") + culture + ".resx";
+                var xElement = XDocument.Load(fileName).Root;
+                if (xElement != null)
+                    foreach (var key in from elem in xElement.Elements("data")
+                        let xAttribute = elem.Attribute("name")
+                        where xAttribute != null
+                        let key = xAttribute.Value
+                        let element = elem.Element("value")
+                        where element != null
+                        let value = element.Value.Replace("\n", "<NL>")
+                        where !key.StartsWith("___") && !key.StartsWith("String") select key)
+                    {
+                        if (dict.ContainsKey(key))
+                        {
+                            dict[key][cultureIndex] = true;
+                        }
+                        else
+                        {
+                            dict[key] = new List<bool>();
+                            for (var listIndex = 0; listIndex < cultures.Length; listIndex++)
+                            {
+                                dict[key].Add(false);
+                            }
+                            dict[key][cultureIndex] = true;
+                        }
+                    }
+            }
+
+            // show non complete cultures
+            var dictKeys = dict.Keys.ToList();
+            dictKeys.Sort();
+
+            foreach (var key in dictKeys)
+            {
+                if (dict[key].Contains(false))
+                {
+                    var item = dict[key];
+                    _warnings.Append($"{key,-50}: ");
+                    for (var listIndex = 0; listIndex < cultures.Length; listIndex++)
+                    {
+                        _warnings.Append(dict[key][listIndex] ? $"{"",-6} " : $"{cultures[listIndex],-6} ");
+                    }
+
+                    _warnings.AppendLine();
+                }
+            }
+        }
+
+
         void CreateReferenceLanguageList()
         {
             const string fileName = ResourcePath + "Strings.resx";
-            foreach (var elem in XDocument.Load(fileName).Root.Elements("data"))
+            var elements = XDocument.Load(fileName).Root.Elements("data").ToList();
+            elements.Sort();
+            foreach (var elem in elements)
             {
                 var key = elem.Attribute("name").Value;
                 var value = elem.Element("value").Value.Replace("\n", "<NL>");
@@ -88,7 +149,7 @@ namespace ExternalUtilities
                 else
                 {
                     _warnings.AppendLine(
-                        String.Format("In reference language, fragment {0} is defined again with value {1}.", key, value));
+                        $"In reference language, fragment {key} is defined again with value {value}.");
                 }
             }
         }
@@ -114,17 +175,14 @@ namespace ExternalUtilities
                     else
                     {
                         _warnings.AppendLine(
-                            String.Format("In culture {0}, fragment {1} is defined again with value {2}.", culture, key,
-                                value));
+                            $"In culture {culture}, fragment {key} is defined again with value {value}.");
                     }
 
                     // Check if the word exists in reference language.
                     if (!_referenceTranslations.ContainsKey(key))
                     {
                         _warnings.AppendLine(
-                            String.Format(
-                                "Reference language does not contain from culture {0}, fragment {1} with value {2}",
-                                culture, key, value));
+                            $"Reference language does not contain from culture {culture}, fragment {key} with value {value}");
                     }
                 }    
 
@@ -134,9 +192,7 @@ namespace ExternalUtilities
                     if (!dict.Keys.Contains(key))
                     {
                         _warnings.AppendLine(
-                            String.Format(
-                                "Culture {0} does not contain from reference language, fragment {1} with value {2}",
-                                culture, key, _referenceTranslations[key]));
+                            $"Culture {culture} does not contain from reference language, fragment {key} with value {_referenceTranslations[key]}");
                     }
                 }
             }

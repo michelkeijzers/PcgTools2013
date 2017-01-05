@@ -21,10 +21,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         /// <summary>
         /// 
         /// </summary>
-        public static ArtistComparer Instance
-        {
-            get { return _instance; }
-        }
+        public static ArtistComparer Instance => _instance;
 
 
         /// <summary>
@@ -51,7 +48,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
                 return 0;
             }
 
-            return String.Compare(patch1.Artist, patch2.Artist, StringComparison.Ordinal);
+            return string.Compare(patch1.Artist, patch2.Artist, StringComparison.Ordinal);
         }
     }
 }

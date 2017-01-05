@@ -14,10 +14,7 @@ namespace PcgTools.Model.XSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int NrOfPatches
-        {
-            get { { return 100; } }
-        }
+        public override int NrOfPatches => 100;
 
 
         /// <summary>

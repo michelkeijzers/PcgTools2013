@@ -1,7 +1,6 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 
-using PcgTools.Model.Common.Synth;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.MSpecific.Synth;
@@ -42,19 +41,12 @@ namespace PcgTools.Model.M3Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultModeledSynthesisType
-        {
-            get { return SynthesisType.Radias; }
-        }
+        public override SynthesisType DefaultModeledSynthesisType => SynthesisType.Radias;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Eds; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Eds;
     }
 }

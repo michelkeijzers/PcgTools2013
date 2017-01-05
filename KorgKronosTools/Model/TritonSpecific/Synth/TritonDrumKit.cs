@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 
@@ -31,7 +30,7 @@ namespace PcgTools.Model.TritonSpecific.Synth
                 // INT and USER Drumkit banks have same size for Tritons, so no use in checking bank types here.
                 indexInId += drumKitBankIndex*drumKitBank.NrOfPatches;
             }
-            Id = string.Format("{0}{1}", drumKitBank.Id, indexInId.ToString("000"));
+            Id = $"{drumKitBank.Id}{indexInId.ToString("000")}";
         }
         
         
@@ -58,24 +57,13 @@ namespace PcgTools.Model.TritonSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 24; }
-        }
+        public override int MaxNameLength => 24;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get
-            {
-                // LV: I found a Triton PCG which contained user Drumkits with names of the format "Drumkit<n>". 
-                // I don't know if this was done by an editor on the PC or on the synth itself...
-                return ((Name == String.Empty) || (Name.Contains("Init") && Name.Contains("Drum") && Name.Contains("Kit")) || 
-                    (new Regex("Drumkit[0-9]*").IsMatch(Name)));
-            }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("Init") && Name.Contains("Drum") && Name.Contains("Kit")) || 
+                                               (new Regex("Drumkit[0-9]*").IsMatch(Name)));
     }
 }

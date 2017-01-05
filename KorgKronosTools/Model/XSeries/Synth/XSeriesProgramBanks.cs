@@ -31,12 +31,12 @@ namespace PcgTools.Model.XSeries.Synth
             // Add internal banks.
             Add(
                 new XSeriesProgramBank(
-                    this, BankType.EType.Int, string.Format("{0}", "A"), 0, 
+                    this, BankType.EType.Int, $"{"A"}", 0, 
                     ProgramBank.SynthesisType.Ai, "-"));
 
             Add(
                 new XSeriesProgramBank(
-                    this, BankType.EType.Int, string.Format("{0}", "B"), 1, 
+                    this, BankType.EType.Int, $"{"B"}", 1, 
                     ProgramBank.SynthesisType.Ai, "-"));
         }
     }

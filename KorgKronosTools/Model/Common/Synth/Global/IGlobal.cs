@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Collections.Generic;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
@@ -42,7 +41,7 @@ namespace PcgTools.Model.Common.Synth.Global
         /// <param name="type"></param>
         /// <param name="category"></param>
         /// <returns></returns>
-        LinkedList<String> GetSubCategoryNames(Synth.Global.Global.ECategoryType type, int category);
+        LinkedList<string> GetSubCategoryNames(Synth.Global.Global.ECategoryType type, int category);
 
     }
 }

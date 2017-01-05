@@ -1764,4 +1764,130 @@ Interne uitzondering:
   <data name="Unknown" xml:space="preserve">
     <value>Onbekend</value>
   </data>
+  <data name="DrumPattern" xml:space="preserve">
+    <value>Drum Pattern</value>
+  </data>
+  <data name="DrumPatterns" xml:space="preserve">
+    <value>Drum Patterns</value>
+  </data>
+  <data name="DrumPatternsInRadioButton" xml:space="preserve">
+    <value>_Drum Patterns</value>
+  </data>
+  <data name="EmptyOrInitPatchName" xml:space="preserve">
+    <value>Lege of geinitialiseerde patch</value>
+  </data>
+  <data name="ExportToFile" xml:space="preserve">
+    <value>_Exporteer naar bestand</value>
+  </data>
+  <data name="ExternalLinksPersonal" xml:space="preserve">
+    <value>Externe Links Persoonlijke Links</value>
+  </data>
+  <data name="ExternalLinksPersonalMenuItem" xml:space="preserve">
+    <value>Externe Links _Persoonlijke Links</value>
+  </data>
+  <data name="FilterDrumPatternNames" xml:space="preserve">
+    <value>_Filter Drum Pattern Namen</value>
+  </data>
+  <data name="FilterDrumPatterns" xml:space="preserve">
+    <value>Filter Drum Patterns</value>
+  </data>
+  <data name="HexExport" xml:space="preserve">
+    <value>_Hex Export</value>
+  </data>
+  <data name="HexExportDlgTitle" xml:space="preserve">
+    <value>Hex Export</value>
+  </data>
+  <data name="IgnoreEmptyInitDrumPatterns" xml:space="preserve">
+    <value>_Negeer Lege/Geinitialiseerde Drum Patterns</value>
+  </data>
+  <data name="InitAsMpeCombi" xml:space="preserve">
+    <value>_Initialiseer als MPE Combi</value>
+  </data>
+  <data name="MidiChannelMainKeyboard" xml:space="preserve">
+    <value>MIDI Kanaal Hoofd Keyboard</value>
+  </data>
+  <data name="MidiChannelSecondaryKeyboard" xml:space="preserve">
+    <value>MIDI Kanaal Secundaire Keyboard</value>
+  </data>
+  <data name="MidiTracks" xml:space="preserve">
+    <value>_MIDI Sporen</value>
+  </data>
+  <data name="OverwriteFilledDrumKits" xml:space="preserve">
+    <value>_Overschrijf Gevulde Drumkits</value>
+  </data>
+  <data name="OverwriteFilledDrumKitsToolTip" xml:space="preserve">
+    <value>Overschrijf Gevulde (niet lege/geinitialiseerde) drum kits</value>
+  </data>
+  <data name="OverwriteFilledDrumPatterns" xml:space="preserve">
+    <value>_Overschrijf Gevulde Drum Patterns</value>
+  </data>
+  <data name="OverwriteFilledDrumPatternsToolTip" xml:space="preserve">
+    <value>Overschrijf gevulde (niet lege/geinitialiseerde) drum patterns</value>
+  </data>
+  <data name="OverwriteFilledWaveSequences" xml:space="preserve">
+    <value>_Overschrijf Gevulde Wave Sequences</value>
+  </data>
+  <data name="OverwriteFilledWaveSequencesToolTip" xml:space="preserve">
+    <value>Overschrijf gevulde (niet lege/geinitialiseerde) wave sequences</value>
+  </data>
+  <data name="PasteDuplicateDrumKits" xml:space="preserve">
+    <value>_Plak Gedupliceerde Drum Kits</value>
+  </data>
+  <data name="PasteDuplicateDrumKitsToolTip" xml:space="preserve">
+    <value>Plak drum kits in de PCG</value>
+  </data>
+  <data name="PasteDuplicateDrumPatterns" xml:space="preserve">
+    <value>_Plak Gedupliceerde Drum Patterns</value>
+  </data>
+  <data name="PasteDuplicateDrumPatternsToolTip" xml:space="preserve">
+    <value>Plakt drum patterns in de PCG</value>
+  </data>
+  <data name="PasteDuplicateWaveSequences" xml:space="preserve">
+    <value>_Plak Gedupliceerde Wave Sequences</value>
+  </data>
+  <data name="PasteDuplicateWaveSequencesToolTip" xml:space="preserve">
+    <value>Plakt wave sequences in de PCG</value>
+  </data>
+  <data name="SelectAllExceptDrums" xml:space="preserve">
+    <value>_Selecteer Alles / Drums</value>
+  </data>
+  <data name="SourceSetList" xml:space="preserve">
+    <value>Bron Set List</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInMultipleBanks" xml:space="preserve">
+    <value>{0} Drum Patterns in {1} Banks</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInOneBank" xml:space="preserve">
+    <value>{0} Drum Patterns in 1 Bank</value>
+  </data>
+  <data name="Stb_OneDrumPatternInMultipleBanks" xml:space="preserve">
+    <value>1 Drum Pattern in {0} Banks</value>
+  </data>
+  <data name="Stb_OneDrumPatternInOneBank" xml:space="preserve">
+    <value>1 Drum Pattern in 1 Bank</value>
+  </data>
+  <data name="TargetCombiBank" xml:space="preserve">
+    <value>Doel Combi Bank</value>
+  </data>
+  <data name="TargetSetList" xml:space="preserve">
+    <value>Doel Set List</value>
+  </data>
+  <data name="WaveSequences" xml:space="preserve">
+    <value>Wave Sequences</value>
+  </data>
+  <data name="ChangePcgFileName" xml:space="preserve">
+    <value>_Pas Aan...</value>
+  </data>
+  <data name="DoubleToSingleKeyboard" xml:space="preserve">
+    <value>_Dubbel naar Enkel Keyboard Setup</value>
+  </data>
+  <data name="DoubleToSingleKeyboardWindowTitle" xml:space="preserve">
+    <value>Dubbel naar Enkel Keyboard Setup</value>
+  </data>
+  <data name="DrumKits" xml:space="preserve">
+    <value>Drum Kits</value>
+  </data>
+  <data name="EditParameterChangeEmpty" xml:space="preserve">
+    <value>Vul een geldige parameter-aanpassingsregel in hierboven.</value>
+  </data>
 </root>

@@ -24,27 +24,18 @@ namespace PcgTools.Model.TritonSpecific.Pcg
         /// <summary>
         /// 
         /// </summary>
-        public override bool HasSubCategories
-        {
-            get { return false; }
-        }
+        public override bool HasSubCategories => false;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override int NumberOfCategories
-        {
-            get { return 16; }
-        }
+        public override int NumberOfCategories => 16;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override int NumberOfSubCategories
-        {
-            get { return 0; }
-        }
+        public override int NumberOfSubCategories => 0;
     }
 }

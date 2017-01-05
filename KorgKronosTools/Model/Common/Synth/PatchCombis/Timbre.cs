@@ -115,10 +115,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        protected ICombi Combi
-        {
-            get { return (ICombi) (Parent.Parent); }
-        }
+        protected ICombi Combi => (ICombi) (Parent.Parent);
 
 
         /// <summary>
@@ -193,20 +190,14 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         }
 
 
-        public virtual IMemory Root
-        {
-            get { return (IMemory) 
-                (_timbres is SongTimbres ? _timbres.Parent.Parent : _timbres.Parent.Parent.Parent.Parent); }
-        }
+        public virtual IMemory Root => (IMemory) 
+            (_timbres is SongTimbres ? _timbres.Parent.Parent : _timbres.Parent.Parent.Parent.Parent);
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected PcgMemory PcgRoot
-        {
-            get { return (PcgMemory) Root; }
-        }
+        protected PcgMemory PcgRoot => (PcgMemory) Root;
 
 
         // INavigable
@@ -214,10 +205,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        public virtual INavigable Parent
-        {
-            get { return _timbres; }
-        }
+        public virtual INavigable Parent => _timbres;
 
 
         /// <summary>
@@ -229,10 +217,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        protected virtual int UsedProgramBankId
-        {
-            get { return Combi.PcgRoot.Content[TimbresOffset + 1]; }
-        }
+        protected virtual int UsedProgramBankId => Combi.PcgRoot.Content[TimbresOffset + 1];
 
 
         /// <summary>
@@ -258,10 +243,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        protected virtual int UsedProgramId
-        {
-            get { return Combi.PcgRoot.Content[TimbresOffset]; }
-        }
+        protected virtual int UsedProgramId => Combi.PcgRoot.Content[TimbresOffset];
 
 
         /// <summary>
@@ -341,11 +323,11 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
             {
                 Util.SwapBytes(PcgRoot, Root.Content, TimbresOffset, Root.Content, otherTimbre.TimbresOffset,
                                TimbresSize);
-                RaisePropertyChanged(String.Empty, false);
-                otherTimbre.RaisePropertyChanged(String.Empty, false);
+                RaisePropertyChanged(string.Empty, false);
+                otherTimbre.RaisePropertyChanged(string.Empty, false);
 
-                UsedProgram.RaisePropertyChanged(String.Empty, false);
-                otherTimbre.UsedProgram.RaisePropertyChanged(String.Empty, false);
+                UsedProgram.RaisePropertyChanged(string.Empty, false);
+                otherTimbre.UsedProgram.RaisePropertyChanged(string.Empty, false);
                 RefillColumns();
             }
         }
@@ -360,9 +342,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
             if (fromTimbre.TimbresOffset != TimbresOffset)
             {
                 Util.CopyBytes(PcgRoot, fromTimbre.TimbresOffset, TimbresOffset, TimbresSize);
-                RaisePropertyChanged(String.Empty, false);
+                RaisePropertyChanged(string.Empty, false);
 
-                UsedProgram.RaisePropertyChanged(String.Empty, false);
+                UsedProgram.RaisePropertyChanged(string.Empty, false);
                 RefillColumns();
             }
         }
@@ -412,10 +394,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        private bool IsGmTimbre
-        {
-            get { return ((ProgramBank) (UsedProgram.Parent)).Type == BankType.EType.Gm; }
-        }
+        private bool IsGmTimbre => ((ProgramBank) (UsedProgram.Parent)).Type == BankType.EType.Gm;
 
 
         /// <summary>
@@ -423,10 +402,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public virtual string ColumnIndex
-        {
-            get { return (Index + 1).ToString(CultureInfo.InvariantCulture); }
-        }
+        public virtual string ColumnIndex => (Index + 1).ToString(CultureInfo.InvariantCulture);
 
 
         /// <summary>
@@ -497,7 +473,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public String ColumnCategory
+        public string ColumnCategory
         {
             get
             {
@@ -527,10 +503,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public string ColumnVolume
-        {
-            get { return (string) GetParam(ParameterNames.TimbreParameterName.Volume).Value.ToString(); }
-        }
+        public string ColumnVolume => (string) GetParam(ParameterNames.TimbreParameterName.Volume).Value.ToString();
 
 
         /// <summary>
@@ -538,10 +511,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public string ColumnStatus
-        {
-            get { return GetParam(ParameterNames.TimbreParameterName.Status).Value; }
-        }
+        public string ColumnStatus => GetParam(ParameterNames.TimbreParameterName.Status).Value;
 
 
         /// <summary>
@@ -549,12 +519,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public string ColumnMute
-        {
-            get { return GetParam(ParameterNames.TimbreParameterName.Mute) == null 
-                ? "-" 
-                : ((bool) (GetParam(ParameterNames.TimbreParameterName.Mute).Value)).ToYesNo(); }
-        }
+        public string ColumnMute => GetParam(ParameterNames.TimbreParameterName.Mute) == null 
+            ? "-" 
+            : ((bool) (GetParam(ParameterNames.TimbreParameterName.Mute).Value)).ToYesNo();
 
 
         /// <summary>
@@ -562,12 +529,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public string ColumnPriority
-        {
-            get { return ((GetParam(ParameterNames.TimbreParameterName.Priority) == null) 
-                ? "-" : 
-                ((bool) GetParam(ParameterNames.TimbreParameterName.Priority).Value).ToYesNo()); }
-        }
+        public string ColumnPriority => ((GetParam(ParameterNames.TimbreParameterName.Priority) == null) 
+            ? "-" : 
+            ((bool) GetParam(ParameterNames.TimbreParameterName.Priority).Value).ToYesNo());
 
 
         /// <summary>
@@ -575,16 +539,10 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public string ColumnMidiChannel
-        {
-            get
-            {
-                return (GetParam(ParameterNames.TimbreParameterName.MidiChannel) == null)
-                           ? "-"
-                           : ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.MidiChannel, 
-                           (int)GetParam(ParameterNames.TimbreParameterName.MidiChannel).Value);
-            }
-        }
+        public string ColumnMidiChannel => (GetParam(ParameterNames.TimbreParameterName.MidiChannel) == null)
+            ? "-"
+            : ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.MidiChannel, 
+                (int)GetParam(ParameterNames.TimbreParameterName.MidiChannel).Value);
 
 
         /// <summary>
@@ -592,18 +550,12 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public string ColumnKeyZone
-        {
-            get
-            {
-                return (String.Format(
-                    "{0}~{1}",
-                    ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.BottomKey,
-                    GetParam(ParameterNames.TimbreParameterName.BottomKey).Value),
-                    ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.TopKey, 
-                    GetParam(ParameterNames.TimbreParameterName.TopKey).Value)));
-            }
-        }
+        public string ColumnKeyZone => (string.Format(
+            "{0}~{1}",
+            ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.BottomKey,
+                GetParam(ParameterNames.TimbreParameterName.BottomKey).Value),
+            ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.TopKey, 
+                GetParam(ParameterNames.TimbreParameterName.TopKey).Value)));
 
 
         /// <summary>
@@ -611,15 +563,8 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public string ColumnVelocityZone
-        {
-            get
-            {
-                return
-                    (String.Format("{0}~{1}", (string) GetParam(ParameterNames.TimbreParameterName.BottomVelocity).Value.ToString(),
-                                   GetParam(ParameterNames.TimbreParameterName.TopVelocity).Value.ToString()));
-            }
-        }
+        public string ColumnVelocityZone => (string.Format("{0}~{1}", (string) GetParam(ParameterNames.TimbreParameterName.BottomVelocity).Value.ToString(),
+            GetParam(ParameterNames.TimbreParameterName.TopVelocity).Value.ToString()));
 
 
         /// <summary>
@@ -627,20 +572,14 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public virtual string ColumnOscMode
-        {
-            get { return (string) GetParam(ParameterNames.TimbreParameterName.OscMode).Value; }
-        }
+        public virtual string ColumnOscMode => (string) GetParam(ParameterNames.TimbreParameterName.OscMode).Value;
 
         /// <summary>
         /// 
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public virtual string ColumnOscSelect
-        {
-            get { return (string) GetParam(ParameterNames.TimbreParameterName.OscSelect).Value; }
-        }
+        public virtual string ColumnOscSelect => (string) GetParam(ParameterNames.TimbreParameterName.OscSelect).Value;
 
 
         /// <summary>
@@ -648,14 +587,8 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public string ColumnTranspose
-        {
-            get
-            {
-                return (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Transpose,
-                    GetParam(ParameterNames.TimbreParameterName.Transpose).Value);
-            }
-        }
+        public string ColumnTranspose => (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Transpose,
+            GetParam(ParameterNames.TimbreParameterName.Transpose).Value);
 
 
         /// <summary>
@@ -663,15 +596,8 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public string ColumnDetune
-        {
-            get
-            {
-                return
-                    (string)
-                    ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Detune, GetParam(ParameterNames.TimbreParameterName.Detune).Value);
-            }
-        }
+        public string ColumnDetune => (string)
+            ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Detune, GetParam(ParameterNames.TimbreParameterName.Detune).Value);
 
 
         /// <summary>
@@ -695,16 +621,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Local
-        public virtual string ColumnBendRange
-        {
-            get
-            {
-                return
-                    (string)
-                    ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.BendRange, 
-                    GetParam(ParameterNames.TimbreParameterName.BendRange).Value);
-            }
-        }
+        public virtual string ColumnBendRange => (string)
+            ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.BendRange, 
+                GetParam(ParameterNames.TimbreParameterName.BendRange).Value);
 
 
         /// <summary>
@@ -896,11 +815,11 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
             //ColumnCategory = UsedProgram.CategoryAsName;
             //ColumnSubCategory = UsedProgram.SubCategoryAsName;
 
-            RaisePropertyChanged(String.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
             //RaisePropertyChanged("ColumnProgramName");
             if (UsedProgram != null) // Null while initializing
             {
-                UsedProgram.RaisePropertyChanged(String.Empty, false);
+                UsedProgram.RaisePropertyChanged(string.Empty, false);
             }
         }
 

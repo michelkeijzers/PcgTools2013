@@ -294,7 +294,7 @@ namespace PcgTools.Model.Common
                              + bytesPerLine // - characters to show the ascii value
                              + Environment.NewLine.Length; // Carriage return and line feed (should normally be 2)
 
-            char[] line = (new String(' ', lineLength - 2) + Environment.NewLine).ToCharArray();
+            char[] line = (new string(' ', lineLength - 2) + Environment.NewLine).ToCharArray();
             int expectedLines = (bytesLength + bytesPerLine - 1)/bytesPerLine;
             var result = new StringBuilder(expectedLines*lineLength);
 

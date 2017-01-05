@@ -1,14 +1,9 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Windows.Documents;
-using Common.Utils;
 using PcgTools.ClipBoard;
 using PcgTools.Model.Common;
-using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.OldParameters;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
@@ -45,7 +40,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
                 GetParam(ParameterNames.ProgramParameterName.Favorite).Value = false;
             }
 
-            RaisePropertyChanged(String.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
         }
 
         
@@ -185,7 +180,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public static int SizeBetweenPrg2AndPbk2 { get { return 8; } }
+        public static int SizeBetweenPrg2AndPbk2 => 8;
 
 
         /// <summary>

@@ -32,10 +32,6 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Pcg
 
         /// <summary>
         /// </summary>
-        public override bool AreCategoriesEditable
-        {
-            get { return false; }
-        }
-
+        public override bool AreCategoriesEditable => false;
     }
 }

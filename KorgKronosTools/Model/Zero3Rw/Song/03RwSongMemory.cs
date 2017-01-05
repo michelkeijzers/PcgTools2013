@@ -2,7 +2,6 @@
 
 
 using PcgTools.Model.ZeroSeries.Song;
-using PcgTools.Model.ZeroSeriesSpecific.Song;
 
 
 namespace PcgTools.Model.Zero3Rw.Song

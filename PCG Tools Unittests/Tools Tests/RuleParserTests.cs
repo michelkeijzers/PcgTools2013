@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.KronosSpecific.Pcg;

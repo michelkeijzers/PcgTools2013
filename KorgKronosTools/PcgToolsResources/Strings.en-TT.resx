@@ -1624,4 +1624,124 @@
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>
   </data>
+  <data name="ChangePcgFileName" xml:space="preserve">
+    <value>ChangePcgFileName</value>
+  </data>
+  <data name="DrumKits" xml:space="preserve">
+    <value>DrumKits</value>
+  </data>
+  <data name="DrumPattern" xml:space="preserve">
+    <value>DrumPattern</value>
+  </data>
+  <data name="DrumPatterns" xml:space="preserve">
+    <value>DrumPatterns</value>
+  </data>
+  <data name="DrumPatternsInRadioButton" xml:space="preserve">
+    <value>DrumPatternsInRadioButton</value>
+  </data>
+  <data name="EditParameterChangeEmpty" xml:space="preserve">
+    <value>EditParameterChangeEmpty</value>
+  </data>
+  <data name="EmptyOrInitPatchName" xml:space="preserve">
+    <value>EmptyOrInitPatchName</value>
+  </data>
+  <data name="ExportToFile" xml:space="preserve">
+    <value>ExportToFile</value>
+  </data>
+  <data name="ExternalLinksPersonal" xml:space="preserve">
+    <value>ExternalLinksPersonal</value>
+  </data>
+  <data name="ExternalLinksPersonalMenuItem" xml:space="preserve">
+    <value>ExternalLinksPersonalMenuItem</value>
+  </data>
+  <data name="FilterDrumPatternNames" xml:space="preserve">
+    <value>FilterDrumPatternNames</value>
+  </data>
+  <data name="FilterDrumPatterns" xml:space="preserve">
+    <value>FilterDrumPatterns</value>
+  </data>
+  <data name="HexExport" xml:space="preserve">
+    <value>HexExport</value>
+  </data>
+  <data name="HexExportDlgTitle" xml:space="preserve">
+    <value>HexExportDlgTitle</value>
+  </data>
+  <data name="IgnoreEmptyInitDrumPatterns" xml:space="preserve">
+    <value>IgnoreEmptyInitDrumPatterns</value>
+  </data>
+  <data name="InitAsMpeCombi" xml:space="preserve">
+    <value>InitAsMpeCombi</value>
+  </data>
+  <data name="MidiChannelMainKeyboard" xml:space="preserve">
+    <value>MidiChannelMainKeyboard</value>
+  </data>
+  <data name="MidiChannelSecondaryKeyboard" xml:space="preserve">
+    <value>MidiChannelSecondaryKeyboard</value>
+  </data>
+  <data name="MidiTracks" xml:space="preserve">
+    <value>MidiTracks</value>
+  </data>
+  <data name="OverwriteFilledDrumKits" xml:space="preserve">
+    <value>OverwriteFilledDrumKits</value>
+  </data>
+  <data name="OverwriteFilledDrumKitsToolTip" xml:space="preserve">
+    <value>OverwriteFilledDrumKitsToolTip</value>
+  </data>
+  <data name="OverwriteFilledDrumPatterns" xml:space="preserve">
+    <value>OverwriteFilledDrumPatterns</value>
+  </data>
+  <data name="OverwriteFilledDrumPatternsToolTip" xml:space="preserve">
+    <value>OverwriteFilledDrumPatternsToolTip</value>
+  </data>
+  <data name="OverwriteFilledWaveSequences" xml:space="preserve">
+    <value>OverwriteFilledWaveSequences</value>
+  </data>
+  <data name="OverwriteFilledWaveSequencesToolTip" xml:space="preserve">
+    <value>OverwriteFilledWaveSequencesToolTip</value>
+  </data>
+  <data name="PasteDuplicateDrumKits" xml:space="preserve">
+    <value>PasteDuplicateDrumKits</value>
+  </data>
+  <data name="PasteDuplicateDrumKitsToolTip" xml:space="preserve">
+    <value>PasteDuplicateDrumKitsToolTip</value>
+  </data>
+  <data name="PasteDuplicateDrumPatterns" xml:space="preserve">
+    <value>PasteDuplicateDrumPatterns</value>
+  </data>
+  <data name="PasteDuplicateDrumPatternsToolTip" xml:space="preserve">
+    <value>PasteDuplicateDrumPatternsToolTip</value>
+  </data>
+  <data name="PasteDuplicateWaveSequences" xml:space="preserve">
+    <value>PasteDuplicateWaveSequences</value>
+  </data>
+  <data name="PasteDuplicateWaveSequencesToolTip" xml:space="preserve">
+    <value>PasteDuplicateWaveSequencesToolTip</value>
+  </data>
+  <data name="SelectAllExceptDrums" xml:space="preserve">
+    <value>SelectAllExceptDrums</value>
+  </data>
+  <data name="SourceSetList" xml:space="preserve">
+    <value>SourceSetList</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInMultipleBanks" xml:space="preserve">
+    <value>Stb_MultipleDrumPatternsInMultipleBanks</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInOneBank" xml:space="preserve">
+    <value>Stb_MultipleDrumPatternsInOneBank</value>
+  </data>
+  <data name="Stb_OneDrumPatternInMultipleBanks" xml:space="preserve">
+    <value>Stb_OneDrumPatternInMultipleBanks</value>
+  </data>
+  <data name="Stb_OneDrumPatternInOneBank" xml:space="preserve">
+    <value>Stb_OneDrumPatternInOneBank</value>
+  </data>
+  <data name="TargetCombiBank" xml:space="preserve">
+    <value>TargetCombiBank</value>
+  </data>
+  <data name="TargetSetList" xml:space="preserve">
+    <value>TargetSetList</value>
+  </data>
+  <data name="WaveSequences" xml:space="preserve">
+    <value>WaveSequences</value>
+  </data>
 </root>

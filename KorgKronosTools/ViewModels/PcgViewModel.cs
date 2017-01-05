@@ -225,11 +225,8 @@ namespace PcgTools.ViewModels
         /// </summary>
         public void UpdateWindowTitle()
         {
-            WindowTitle = string.Format("{0}{1} ({2}{3}{4})", SelectedPcgMemory.FileName, 
-                SelectedPcgMemory.IsDirty ? " *" : String.Empty,
-                SelectedPcgMemory.Model.ModelAsString,
-                SelectedPcgMemory.Model.OsVersionString == String.Empty ? String.Empty : " ", 
-                SelectedPcgMemory.Model.OsVersionString);
+            WindowTitle =
+                $"{SelectedPcgMemory.FileName}{(SelectedPcgMemory.IsDirty ? " *" : string.Empty)} ({SelectedPcgMemory.Model.ModelAsString}{(SelectedPcgMemory.Model.OsVersionString == string.Empty ? string.Empty : " ")}{SelectedPcgMemory.Model.OsVersionString})";
         }
 
 
@@ -461,8 +458,8 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public IPcgMemory SelectedPcgMemory { get { return (PcgMemory) SelectedMemory; } }
-  
+        public IPcgMemory SelectedPcgMemory => (PcgMemory) SelectedMemory;
+
 
         /// <summary>
         /// 
@@ -621,7 +618,7 @@ namespace PcgTools.ViewModels
             else
             {
                 ShowMessageBox(
-                    String.Format("{0}: {1}", Strings.NoContentWarning, SelectedMemory.FileName),
+                    $"{Strings.NoContentWarning}: {SelectedMemory.FileName}",
                     Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok,
                     WindowUtils.EMessageBoxImage.Warning, WindowUtils.EMessageBoxResult.Ok);
             }
@@ -874,13 +871,7 @@ namespace PcgTools.ViewModels
         /// 
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public bool IsPcgEmpty
-        {
-            get
-            {
-                return (!_programsEnabled && !_combisEnabled && !_setListSlotsEnabled);
-            }
-        }
+        public bool IsPcgEmpty => (!_programsEnabled && !_combisEnabled && !_setListSlotsEnabled);
 
 
         /// <summary>
@@ -1195,7 +1186,7 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                var errorText = String.Empty;
+                var errorText = string.Empty;
                 // If the PCG is of the same model.
                 if (!ModelCompatibility.AreModelsCompatible(SelectedPcgMemory.Model, PcgClipBoard.Model))
                 {
@@ -1247,11 +1238,11 @@ namespace PcgTools.ViewModels
             builder.AppendLine("[end]");
 
             var folder = Settings.Default.Slg_DefaultOutputFolderForSequencerFiles;
-            if (folder == String.Empty)
+            if (folder == string.Empty)
             {
                 folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
-            var fileName = String.Format(@"{0}\Cubase.txt", folder);
+            var fileName = $@"{folder}\{Path.GetFileNameWithoutExtension(SelectedPcgMemory.FileName)}_Cubase.txt";
 
             try
             {
@@ -1260,12 +1251,12 @@ namespace PcgTools.ViewModels
             }
             catch (UnauthorizedAccessException exception)
             {
-                ShowMessageBox(String.Format("{0}: {1}", Strings.CubaseIoError, exception.Message), Strings.PcgTools,
+                ShowMessageBox($"{Strings.CubaseIoError}: {exception.Message}", Strings.PcgTools,
                     WindowUtils.EMessageBoxButton.Ok, WindowUtils.EMessageBoxImage.Error, WindowUtils.EMessageBoxResult.Ok);
             }
             catch (IOException exception)
             {
-                ShowMessageBox(String.Format("{0}: {1}", Strings.CubaseIoError, exception.Message), Strings.PcgTools,
+                ShowMessageBox($"{Strings.CubaseIoError}: {exception.Message}", Strings.PcgTools,
                     WindowUtils.EMessageBoxButton.Ok, WindowUtils.EMessageBoxImage.Error, WindowUtils.EMessageBoxResult.Ok);
             }
         }
@@ -1306,7 +1297,7 @@ namespace PcgTools.ViewModels
             string patchId;
             if (programIsGm)
             {
-                patchId = string.Format("[p{0},{1},{2},{3}]", 2, program.Index, 121, ((IProgramBank)program.Parent).PcgId - 6);
+                patchId = $"[p{2},{program.Index},{121},{((IProgramBank) program.Parent).PcgId - 6}]";
                 //FUTURE: 6 is number of internal program banks for Kronos; might be different for other models.
                 builder.AppendLine(patchId + " " + program.Id); // Name cannot be added since these are not in the PCG
             }
@@ -1316,14 +1307,14 @@ namespace PcgTools.ViewModels
                 {
                     case BankType.EType.UserExtended: // Fall through
                     case BankType.EType.User:
-                        patchId = string.Format("[p{0},{1},{2},{3}]", hasSubCategories ? 3 : 2, program.Index, 0,
-                            ((IProgramBank)program.Parent).PcgId - 9);
+                        patchId =
+                            $"[p{(hasSubCategories ? 3 : 2)},{program.Index},{0},{((IProgramBank) program.Parent).PcgId - 9}]";
                         builder.AppendLine(patchId + " " + program.Id + " " + program.Name);
                         break;
 
                     case BankType.EType.Int:
-                        patchId = string.Format("[p{0},{1},{2},{3}]", hasSubCategories ? 3 : 2, program.Index, 0,
-                             ((IProgramBank) program.Parent).PcgId);
+                        patchId =
+                            $"[p{(hasSubCategories ? 3 : 2)},{program.Index},{0},{((IProgramBank) program.Parent).PcgId}]";
                         builder.AppendLine(patchId + " " + program.Id + " " + program.Name);
                         break;
                 }
@@ -1423,9 +1414,10 @@ namespace PcgTools.ViewModels
 
             if (SelectedMemory.IsDirty)
             {
-                revert = (ShowMessageBox(String.Format(Strings.RevertWarning, fileName,
+                revert = (ShowMessageBox(string.Format(Strings.RevertWarning, fileName,
                     (PcgClipBoard.PastePcgMemory == SelectedPcgMemory) ?
-                    String.Format("{0}. ", Strings.CutCopyPasteOperationUnfinishedWarning) : String.Empty),
+                        $"{Strings.CutCopyPasteOperationUnfinishedWarning}. "
+                        : string.Empty),
                     Strings.PcgTools,
                     WindowUtils.EMessageBoxButton.YesNo, WindowUtils.EMessageBoxImage.Warning, WindowUtils.EMessageBoxResult.No) ==
                     WindowUtils.EMessageBoxResult.Yes);
@@ -1457,7 +1449,7 @@ namespace PcgTools.ViewModels
             
             if (SelectedMemory.IsDirty)
             {
-                var result = ShowMessageBox(String.Format(Strings.SaveFile, fileName), Strings.PcgTools,
+                var result = ShowMessageBox(string.Format(Strings.SaveFile, fileName), Strings.PcgTools,
                     exitMode ? WindowUtils.EMessageBoxButton.YesNoCancel : WindowUtils.EMessageBoxButton.YesNo, 
                     WindowUtils.EMessageBoxImage.Warning, WindowUtils.EMessageBoxResult.No);
                     
@@ -1577,17 +1569,11 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// Executable when the file has either filled/nonempty combis or set list slots.
         /// </summary>
-        bool CanExecuteProgramReferenceChangerCommand
-        {
-            get
-            {
-                return ((SelectedMemory is IPcgMemory) &&
-                        (((SelectedPcgMemory.CombiBanks != null) && 
-                        (SelectedPcgMemory.CombiBanks.CountFilledAndNonEmptyPatches > 0)) ||
-                        (((SelectedPcgMemory.SetLists != null) && 
-                        (SelectedPcgMemory.SetLists.CountFilledAndNonEmptyPatches > 0)))));
-            }
-        }
+        bool CanExecuteProgramReferenceChangerCommand => ((SelectedMemory is IPcgMemory) &&
+                                                          (((SelectedPcgMemory.CombiBanks != null) && 
+                                                            (SelectedPcgMemory.CombiBanks.CountFilledAndNonEmptyPatches > 0)) ||
+                                                           (((SelectedPcgMemory.SetLists != null) && 
+                                                             (SelectedPcgMemory.SetLists.CountFilledAndNonEmptyPatches > 0)))));
 
 
         /// <summary>
@@ -1609,15 +1595,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteSelectAllCommand
-        {
-            get
-            {
-                // Can execute if 1 set list selected or 1 patch.
-                return (SelectedMemory is IPcgMemory);
-
-            }
-        }
+        bool CanExecuteSelectAllCommand => (SelectedMemory is IPcgMemory);
 
 
         /// <summary>
@@ -1881,19 +1859,10 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// Impr: Same as CanExecuteCopyCommand.
         /// </summary>
-        bool CanExecuteCutCommand
-        {
-            get
-            {
-                return ((SelectedPcgMemory != null) &&
-                        !WaveSequenceBanksSelected && //TODO WAVE SEQUENCES
-                        !DrumKitBanksSelected && //TODO DRUM KIT BANKS
-                        !DrumPatternBanksSelected && // TODO DRUM PATTERN BANKS SELECTED
-                        (PcgClipBoard.IsEmpty || !PcgClipBoard.CutPasteSelected) &&
-                        (PcgClipBoard.IsEmpty || !PcgClipBoard.PasteDuplicatesExecuted) &&
-                        AreItemsSelected);
-            }
-        }
+        bool CanExecuteCutCommand => ((SelectedPcgMemory != null) &&
+                                      (PcgClipBoard.IsEmpty || !PcgClipBoard.CutPasteSelected) &&
+                                      (PcgClipBoard.IsEmpty || !PcgClipBoard.PasteDuplicatesExecuted) &&
+                                      AreItemsSelected);
 
 
         /// <summary>
@@ -1937,19 +1906,10 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteCopyCommand
-        {
-            get
-            {
-                return (SelectedPcgMemory != null) &&
-                       !WaveSequenceBanksSelected && //TODO WAVE SEQUENCES
-                       !DrumKitBanksSelected && //TODO DRUM KIT BANKS
-                       !DrumPatternBanksSelected && // TODO DRUM PATTERN BANKS SELECTED
-                       (PcgClipBoard.IsEmpty || !PcgClipBoard.CutPasteSelected) &&
-                       (PcgClipBoard.IsEmpty || !PcgClipBoard.PasteDuplicatesExecuted) &&
-                       AreItemsSelected;
-            }
-        }
+        bool CanExecuteCopyCommand => (SelectedPcgMemory != null) &&
+                                      (PcgClipBoard.IsEmpty || !PcgClipBoard.CutPasteSelected) &&
+                                      (PcgClipBoard.IsEmpty || !PcgClipBoard.PasteDuplicatesExecuted) &&
+                                      AreItemsSelected;
 
 
         /// <summary>
@@ -2101,7 +2061,7 @@ namespace PcgTools.ViewModels
                 OnPropertyChanged("PcgClipBoard");
                 UpdateTimbresWindows();
 
-                if (infoText != String.Empty)
+                if (infoText != string.Empty)
                 {
                     ShowMessageBox(infoText, Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok, 
                         WindowUtils.EMessageBoxImage.Information, WindowUtils.EMessageBoxResult.Ok);
@@ -2174,12 +2134,11 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                var text = String.Empty;
+                var text = string.Empty;
                 if (LastSelectedProgramOrCombi != null)
                 {
-                    text = String.Format("{0} {1}: {2}",
-                        LastSelectedProgramOrCombi is IProgram ? Strings.Program : Strings.Combi,
-                        LastSelectedProgramOrCombi.Id, LastSelectedProgramOrCombi.Name);
+                    text =
+                        $"{(LastSelectedProgramOrCombi is IProgram ? Strings.Program : Strings.Combi)} {LastSelectedProgramOrCombi.Id}: {LastSelectedProgramOrCombi.Name}";
                 }
                 return text;
             }
@@ -2261,7 +2220,7 @@ namespace PcgTools.ViewModels
         bool CheckPastePreconditionsAndWarnings()
         {
             var errorText = PastePreconditionsAndWarnings;
-            if (errorText != String.Empty)
+            if (errorText != string.Empty)
             {
                 ShowMessageBox(errorText, Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok, WindowUtils.EMessageBoxImage.Error, 
                     WindowUtils.EMessageBoxResult.Ok);
@@ -2271,7 +2230,7 @@ namespace PcgTools.ViewModels
             // If the pasting has been started elsewhere you have to clear the clipboard or continue in the other window.
             if ((PcgClipBoard.PasteDuplicatesExecuted) && (PcgClipBoard.PastePcgMemory != SelectedPcgMemory))
             {
-                errorText = String.Format(Strings.PastingAlreadyExecutedWarning, PcgClipBoard.PastePcgMemory.FileName);
+                errorText = string.Format(Strings.PastingAlreadyExecutedWarning, PcgClipBoard.PastePcgMemory.FileName);
                 ShowMessageBox(errorText, Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok, WindowUtils.EMessageBoxImage.Error,
                     WindowUtils.EMessageBoxResult.Ok);
                 return false;
@@ -2323,7 +2282,7 @@ namespace PcgTools.ViewModels
         {
             if (!PcgClipBoard.IsPastingFinished)
             {
-                if (ShowMessageBox(String.Format("{0}\n{1}", Strings.PastingUnfinishedWarning, Strings.ContinueWarning),
+                if (ShowMessageBox($"{Strings.PastingUnfinishedWarning}\n{Strings.ContinueWarning}",
                     Strings.PcgTools,
                     WindowUtils.EMessageBoxButton.YesNo, WindowUtils.EMessageBoxImage.Exclamation, 
                     WindowUtils.EMessageBoxResult.No) == WindowUtils.EMessageBoxResult.No)
@@ -2363,14 +2322,8 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteRecallCommand
-        {
-            get
-            {
-                return (SelectedPcgMemory != null) &&
-                    PcgClipBoard.IsEmpty && !PcgClipBoard.IsMemoryEmpty;
-            }
-        }
+        bool CanExecuteRecallCommand => (SelectedPcgMemory != null) &&
+                                        PcgClipBoard.IsEmpty && !PcgClipBoard.IsMemoryEmpty;
 
 
         /// <summary>
@@ -2691,15 +2644,9 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteSortCommand
-        {
-            get
-            {
-                return (SelectedPcgMemory != null) &&
-                       (AreMultipleItemsSelected &&
-                        (!PcgClipBoard.PasteDuplicatesExecuted || PcgClipBoard.IsEmpty));
-            }
-        }
+        bool CanExecuteSortCommand => (SelectedPcgMemory != null) &&
+                                      (AreMultipleItemsSelected &&
+                                       (!PcgClipBoard.PasteDuplicatesExecuted || PcgClipBoard.IsEmpty));
 
 
         /// <summary>
@@ -2941,7 +2888,7 @@ namespace PcgTools.ViewModels
                         ((ICombi)patch).GetParam(ParameterNames.CombiParameterName.Favorite).Value = favorite;
                     }
 
-                    patch.RaisePropertyChanged(String.Empty, false);
+                    patch.RaisePropertyChanged(string.Empty, false);
                 }
             }
             else
@@ -2957,7 +2904,7 @@ namespace PcgTools.ViewModels
                         ((ICombi)patch).GetParam(ParameterNames.CombiParameterName.Favorite).Value = favorite;
                     }
 
-                    patch.RaisePropertyChanged(String.Empty, false);
+                    patch.RaisePropertyChanged(string.Empty, false);
                 }
             }
         }
@@ -3052,7 +2999,7 @@ namespace PcgTools.ViewModels
             if (program != null)
             {
                 ShowMessageBox(
-                    String.Format(Strings.ClearProgramIsAssigned, program.Id, program.Name), Strings.PcgTools,
+                    string.Format(Strings.ClearProgramIsAssigned, program.Id, program.Name), Strings.PcgTools,
                     WindowUtils.EMessageBoxButton.Ok,
                     WindowUtils.EMessageBoxImage.Information, WindowUtils.EMessageBoxResult.None);
             }
@@ -3214,16 +3161,10 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteCompactCommand
-        {
-            get
-            {
-                return (SelectedPcgMemory != null) &&
-                       AreMultipleItemsSelected &&
-                       (!PcgClipBoard.PasteDuplicatesExecuted || PcgClipBoard.IsEmpty) &&
-                       !AllPatchesSelected;
-            }
-        }
+        bool CanExecuteCompactCommand => (SelectedPcgMemory != null) &&
+                                         AreMultipleItemsSelected &&
+                                         (!PcgClipBoard.PasteDuplicatesExecuted || PcgClipBoard.IsEmpty) &&
+                                         !AllPatchesSelected;
 
 
         /// <summary>
@@ -3420,13 +3361,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteCapitalizeNameCommand
-        {
-            get
-            {
-                return CanExecuteCaseCommand;
-            }
-        }
+        bool CanExecuteCapitalizeNameCommand => CanExecuteCaseCommand;
 
 
         /// <summary>
@@ -3479,13 +3414,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteTitleCaseNameCommand
-        {
-            get
-            {
-                return CanExecuteCaseCommand;
-            }
-        }
+        bool CanExecuteTitleCaseNameCommand => CanExecuteCaseCommand;
 
 
         /// <summary>
@@ -3538,12 +3467,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteDecapitalizeNameCommand
-        {
-            get {
-                return CanExecuteCaseCommand;
-            }
-        }
+        bool CanExecuteDecapitalizeNameCommand => CanExecuteCaseCommand;
 
 
         /// <summary>
@@ -3617,15 +3541,9 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteSetPcgFileAsMasterFileCommand
-        {
-            get
-            {
-                return (SelectedPcgMemory != null) && 
-                    SelectedPcgMemory.AreCategoriesEditable && 
-                    SelectedPcgMemory.AreAllNeededProgramsCombisAndGlobalPresent;
-            }
-        }
+        bool CanExecuteSetPcgFileAsMasterFileCommand => (SelectedPcgMemory != null) && 
+                                                        SelectedPcgMemory.AreCategoriesEditable && 
+                                                        SelectedPcgMemory.AreAllNeededProgramsCombisAndGlobalPresent;
 
 
         /// <summary>
@@ -3636,9 +3554,9 @@ namespace PcgTools.ViewModels
             SetPcgFileAsMasterFile(SelectedPcgMemory.Model, SelectedPcgMemory.FileName);
 
             ShowMessageBox(
-                            String.IsNullOrEmpty(SelectedMemory.Model.OsVersionString) 
-                            ? String.Format(Strings.SetPcgFileAsMasterFileShort, SelectedPcgMemory.FileName, SelectedMemory.Model.ModelAsString) 
-                            : String.Format(Strings.SetPcgFileAsMasterFileLong, SelectedPcgMemory.FileName, SelectedMemory.Model.ModelAsString,
+                            string.IsNullOrEmpty(SelectedMemory.Model.OsVersionString) 
+                            ? string.Format(Strings.SetPcgFileAsMasterFileShort, SelectedPcgMemory.FileName, SelectedMemory.Model.ModelAsString) 
+                            : string.Format(Strings.SetPcgFileAsMasterFileLong, SelectedPcgMemory.FileName, SelectedMemory.Model.ModelAsString,
                              SelectedMemory.Model.OsVersionString),
                             Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok,
                             WindowUtils.EMessageBoxImage.Warning, WindowUtils.EMessageBoxResult.Ok);
@@ -3861,16 +3779,10 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// PCG with set lists, combis and programs.
         /// </summary>
-        public bool CanExecuteDoubleToSingleKeyboardCommand
-        {
-            get
-            {
-                return (SelectedPcgMemory != null) &&
-                    (SelectedPcgMemory.SetLists != null) &&
-                    (SelectedPcgMemory.SetLists.CountFilledAndNonEmptyPatches > 0) &&
-                    (SelectedPcgMemory.CombiBanks.CountFilledAndNonEmptyPatches > 0);
-            }
-        }
+        public bool CanExecuteDoubleToSingleKeyboardCommand => (SelectedPcgMemory != null) &&
+                                                               (SelectedPcgMemory.SetLists != null) &&
+                                                               (SelectedPcgMemory.SetLists.CountFilledAndNonEmptyPatches > 0) &&
+                                                               (SelectedPcgMemory.CombiBanks.CountFilledAndNonEmptyPatches > 0);
 
 
         /// <summary>

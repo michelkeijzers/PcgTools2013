@@ -70,7 +70,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         {
             Debug.Assert((value >= 0) && (value <= 16));
 
-            return value < MidiChannelGch ? string.Format("{0, 2}", value + 1) : "Gch";
+            return value < MidiChannelGch ? $"{value + 1,2}" : "Gch";
         }
 
 
@@ -82,7 +82,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         private static string GetKeyString(int value)
         {
             var notes = new[] {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
-            return string.Format("{0,-2}{1,2}", notes[value%12], value/12 - 1);
+            return $"{notes[value%12],-2}{value/12 - 1,2}";
         }
 
 
