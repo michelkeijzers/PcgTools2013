@@ -87,21 +87,12 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        public string ModelAsString 
-        {
-            get
-            {
-                return ModelTypeAsString(ModelType);
-            }
-        }
+        public string ModelAsString => ModelTypeAsString(ModelType);
 
 
         /// <summary>
         /// 
         /// </summary>
-        public string ModelAndVersionAsString
-        {
-            get { return ModelAsString + (String.IsNullOrEmpty(OsVersionString) ? String.Empty : (" " + OsVersionString)); }
-        }
+        public string ModelAndVersionAsString => ModelAsString + (string.IsNullOrEmpty(OsVersionString) ? string.Empty : (" " + OsVersionString));
     }
 }

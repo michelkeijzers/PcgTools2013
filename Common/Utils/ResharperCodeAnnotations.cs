@@ -78,10 +78,7 @@ namespace Common.Utils
         /// <summary>
         /// Gets format parameter name
         /// </summary>
-        public string FormatParameterName
-        {
-            get { return _myFormatParameterName; }
-        }
+        public string FormatParameterName => _myFormatParameterName;
     }
 
 
@@ -136,10 +133,7 @@ namespace Common.Utils
         /// <summary>
         /// Gets condition type
         /// </summary>
-        public AssertionConditionType ConditionType
-        {
-            get { return _myConditionType; }
-        }
+        public AssertionConditionType ConditionType => _myConditionType;
     }
 
     /// <summary>
@@ -246,10 +240,7 @@ namespace Common.Utils
         /// <summary>
         /// Gets enumerations of specified base types
         /// </summary>
-        public IEnumerable<Type> BaseTypes
-        {
-            get { return myBaseTypes; }
-        }
+        public IEnumerable<Type> BaseTypes => myBaseTypes;
     }
 
 

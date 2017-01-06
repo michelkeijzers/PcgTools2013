@@ -1,5 +1,5 @@
 ﻿// (c) 2011 Michel Keijzers
-using System;
+
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
 
@@ -44,23 +44,14 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 24; }
-        }
+        public override int MaxNameLength => 24;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get
-            {
-                return ((Name == String.Empty) ||
-                    Name.StartsWith("Drumkit      0") ||
-                    (Name.Contains("Init") && Name.Contains("Drum") && Name.Contains("Kit")));
-            }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) ||
+                                               Name.StartsWith("Drumkit      0") ||
+                                               (Name.Contains("Init") && Name.Contains("Drum") && Name.Contains("Kit")));
     }
 }

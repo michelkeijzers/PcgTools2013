@@ -111,7 +111,7 @@ namespace Common.Mvvm.ViewModel
         /// </summary>
         ~ViewModelBase()
         {
-            string msg = string.Format("{0} ({1}) ({2}) Finalized", GetType().Name, DisplayName, GetHashCode());
+            string msg = $"{GetType().Name} ({DisplayName}) ({GetHashCode()}) Finalized";
             Debug.WriteLine(msg);
         }
 #endif

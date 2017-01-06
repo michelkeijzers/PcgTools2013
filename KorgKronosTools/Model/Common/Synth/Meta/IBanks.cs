@@ -2,7 +2,6 @@
 
 using System.ComponentModel;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
-using PcgTools.Model.Common.Synth.PatchPrograms;
 
 namespace PcgTools.Model.Common.Synth.Meta
 {

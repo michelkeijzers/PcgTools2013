@@ -1,6 +1,5 @@
 ﻿
 using PcgTools.Model.Common.File;
-using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.SongsRelated;
 
 namespace PcgTools.Model.Common.Synth.MemoryAndFactory

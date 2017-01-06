@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Globalization;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Forms;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.PcgToolsResources;
@@ -56,8 +54,7 @@ namespace PcgTools.Tools
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(this, String.Format("{0}.\n{1}: {2}",
-                     Strings.LinkWarning, Strings.Message, exception.Message),
+                    MessageBox.Show(this, $"{Strings.LinkWarning}.\n{Strings.Message}: {exception.Message}",
                      Strings.PcgTools,
                      MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -141,8 +138,7 @@ namespace PcgTools.Tools
             }
             else
             {
-                MessageBox.Show(this, String.Format("Error in rules, line {0}",
-                    _ruleParser.ParseErrorInLine + 1),
+                MessageBox.Show(this, $"Error in rules, line {_ruleParser.ParseErrorInLine + 1}",
                     Strings.PcgTools,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }

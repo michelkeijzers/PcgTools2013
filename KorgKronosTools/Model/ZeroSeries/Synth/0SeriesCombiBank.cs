@@ -2,7 +2,6 @@
 
 
 using PcgTools.Model.Common.Synth.Meta;
-using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.MntxSeriesSpecific.Synth;
 
 namespace PcgTools.Model.ZeroSeries.Synth
@@ -15,10 +14,7 @@ namespace PcgTools.Model.ZeroSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int NrOfPatches
-        {
-            get { { return 100; } }
-        }
+        public override int NrOfPatches => 100;
 
 
         /// <summary>

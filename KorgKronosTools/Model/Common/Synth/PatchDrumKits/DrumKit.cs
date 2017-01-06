@@ -3,9 +3,7 @@
 using System;
 using System.Text;
 using Common.Extensions;
-using Common.Utils;
 using PcgTools.Model.Common.Synth.Meta;
-using PcgTools.Model.Common.Synth.PatchSetLists;
 using PcgTools.PcgToolsResources;
 
 namespace PcgTools.Model.Common.Synth.PatchDrumKits
@@ -24,7 +22,7 @@ namespace PcgTools.Model.Common.Synth.PatchDrumKits
         {
             Bank = drumKitBank;
             Index = index;
-            Id = string.Format("{0}{1}", drumKitBank.Id, index.ToString("000"));
+            Id = $"{drumKitBank.Id}{index.ToString("000")}";
         }
 
 
@@ -33,8 +31,8 @@ namespace PcgTools.Model.Common.Synth.PatchDrumKits
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
-            RaisePropertyChanged(String.Empty, false);
+            Name = string.Empty;
+            RaisePropertyChanged(string.Empty, false);
         }
 
 
@@ -61,10 +59,7 @@ namespace PcgTools.Model.Common.Synth.PatchDrumKits
         /// 
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public string PatchTypeAsString
-        {
-            get { return Strings.DrumKit; }
-        }
+        public string PatchTypeAsString => Strings.DrumKit;
 
 
         /// <summary>

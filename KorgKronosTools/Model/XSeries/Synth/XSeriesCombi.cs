@@ -20,7 +20,7 @@ namespace PcgTools.Model.XSeries.Synth
         public XSeriesCombi(IBank combiBank, int index)
             : base(combiBank, index)
         {
-            Id = string.Format("{0}{1}", combiBank.Id, (index).ToString("00"));
+            Id = $"{combiBank.Id}{(index).ToString("00")}";
             Timbres = new XSeriesTimbres(this);
         }
 

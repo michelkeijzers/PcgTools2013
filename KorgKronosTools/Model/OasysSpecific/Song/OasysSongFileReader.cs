@@ -39,15 +39,12 @@ namespace PcgTools.Model.OasysSpecific.Song
         /// <summary>
         /// Byte offset where timbres start.
         /// </summary>
-        protected override int TimbresByteOffset
-        {
-            get { return 4790 + 12; }
-        }
+        protected override int TimbresByteOffset => 4790 + 12;
 
 
         /// <summary>
         /// Number of bytes in a song track (equal to length of a combi timbre).
         /// </summary>
-        public override int SongTrackByteLength { get { return 186; } }
+        public override int SongTrackByteLength => 186;
     }
 }

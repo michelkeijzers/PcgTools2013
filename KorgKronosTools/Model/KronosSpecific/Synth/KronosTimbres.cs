@@ -13,13 +13,13 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public static int TimbresPerCombiConstant { get { return 16; } }
+        public static int TimbresPerCombiConstant => 16;
 
 
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant { get { return 4802; } }
+        static int TimbresOffsetConstant => 4802;
 
 
         /// <summary>

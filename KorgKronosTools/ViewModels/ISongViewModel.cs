@@ -1,10 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
-using System.ComponentModel;
-using System.Windows.Input;
-using Common.Mvvm;
-using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.SongsRelated;
 using PcgTools.Songs;
 

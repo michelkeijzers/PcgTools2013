@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -191,7 +190,7 @@ namespace PcgTools.Edit
             var usedSize = textBoxName.Text.Length;
             labelNameLength.Content = string.Format(Strings.XOfYCharacters_editw, usedSize, _patch.MaxNameLength);
             labelError.Content = EditUtils.CheckText(textBoxName.Text, _patch.MaxNameLength, EditUtils.ECheckType.Name);
-            _ok = labelError.Content.Equals(String.Empty);
+            _ok = labelError.Content.Equals(string.Empty);
             buttonOk.IsEnabled = _ok;
         }
 

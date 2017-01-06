@@ -1,11 +1,8 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
-using System.Collections.Generic;
-
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.KronosOasysSpecific.Pcg;
-using PcgTools.Properties;
 
 namespace PcgTools.Model.KronosSpecific.Pcg
 {

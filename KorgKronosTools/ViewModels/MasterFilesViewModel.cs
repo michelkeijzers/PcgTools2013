@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Linq;
 using System.Windows.Input;
 using Common.Mvvm;
@@ -90,10 +89,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        private bool CanExecuteOpenMasterFileCommand
-        {
-            get { return SelectedMasterFile.FileState == MasterFile.EFileState.Unloaded; }
-        }
+        private bool CanExecuteOpenMasterFileCommand => SelectedMasterFile.FileState == MasterFile.EFileState.Unloaded;
 
 
         /// <summary>
@@ -130,10 +126,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        private bool CanExecuteCloseMasterFileCommand
-        {
-            get { return SelectedMasterFile.FileState == MasterFile.EFileState.Loaded; }
-        }
+        private bool CanExecuteCloseMasterFileCommand => SelectedMasterFile.FileState == MasterFile.EFileState.Loaded;
 
 
         /// <summary>
@@ -170,10 +163,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        private bool CanExecuteUnassignMasterFileCommand
-        {
-            get { return SelectedMasterFile.FileState != MasterFile.EFileState.Unassigned; }
-        }
+        private bool CanExecuteUnassignMasterFileCommand => SelectedMasterFile.FileState != MasterFile.EFileState.Unassigned;
 
 
         /// <summary>
@@ -181,7 +171,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         private void UnassignMasterFile()
         {
-            SelectedMasterFile.SetModel(SelectedMasterFile.Model, String.Empty);
+            SelectedMasterFile.SetModel(SelectedMasterFile.Model, string.Empty);
         }
     }
 }

@@ -4,7 +4,6 @@ using System;
 using PcgTools.Model.Common.File;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.SongsRelated;
-using PcgTools.Model.KromeSpecific.Synth;
 
 namespace PcgTools.Model.Ms2000Specific.Song
 {

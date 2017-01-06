@@ -1750,7 +1750,7 @@ Excepción:
     <value>_Todos los Patches</value>
   </data>
   <data name="AutoBackupFiles" xml:space="preserve">
-    <value>Archivos de respaldo automático</value>
+    <value>Respaldo automático de Archivos</value>
   </data>
   <data name="AutoBackupIntervalTime" xml:space="preserve">
     <value>Tiempo intermedio de Respaldo(min)</value>
@@ -1769,5 +1769,137 @@ Excepción:
   </data>
   <data name="WaveSequence" xml:space="preserve">
     <value>Secuencia Wawe</value>
+  </data>
+  <data name="DrumPattern" xml:space="preserve">
+    <value>Patrón de Batería</value>
+  </data>
+  <data name="DrumPatterns" xml:space="preserve">
+    <value>Patrón de Batería</value>
+  </data>
+  <data name="DrumPatternsInRadioButton" xml:space="preserve">
+    <value>_Patrón de Batería</value>
+  </data>
+  <data name="EmptyOrInitPatchName" xml:space="preserve">
+    <value>Patch libre o inicializado</value>
+  </data>
+  <data name="ExportToFile" xml:space="preserve">
+    <value>_Exportar a Archivo</value>
+  </data>
+  <data name="ExternalLinksPersonal" xml:space="preserve">
+    <value>Enlace Externo Enlace Personal</value>
+  </data>
+  <data name="ExternalLinksPersonalMenuItem" xml:space="preserve">
+    <value>Enlace Externo _Enlace Personal</value>
+  </data>
+  <data name="FilterDrumPatternNames" xml:space="preserve">
+    <value>_Filtrar Nombres de Patrón de Batería</value>
+  </data>
+  <data name="FilterDrumPatterns" xml:space="preserve">
+    <value>Filtrar Patrón de Batería</value>
+  </data>
+  <data name="HexExport" xml:space="preserve">
+    <value>_Exportar Hex</value>
+  </data>
+  <data name="HexExportDlgTitle" xml:space="preserve">
+    <value>Exportar Hex</value>
+  </data>
+  <data name="IgnoreEmptyInitDrumPatterns" xml:space="preserve">
+    <value>_Ignorar vacíos/Inicializar Patrones de Batería</value>
+  </data>
+  <data name="InitAsMpeCombi" xml:space="preserve">
+    <value>_Inicializar como Combi MPE</value>
+  </data>
+  <data name="MidiChannelMainKeyboard" xml:space="preserve">
+    <value>Canal de MIDI Teclado Principal</value>
+  </data>
+  <data name="MidiChannelSecondaryKeyboard" xml:space="preserve">
+    <value>Canal de MIDI Teclado Secundario</value>
+  </data>
+  <data name="MidiTracks" xml:space="preserve">
+    <value>_Pista MIDI</value>
+  </data>
+  <data name="OverwriteFilledDrumKits" xml:space="preserve">
+    <value>_Sobreescribir Kits de Batería utilizados</value>
+  </data>
+  <data name="OverwriteFilledDrumKitsToolTip" xml:space="preserve">
+    <value>Sobreescribir Kits de Batería utilizados (no vacios/inicializados)</value>
+  </data>
+  <data name="OverwriteFilledDrumPatterns" xml:space="preserve">
+    <value>_Sobreescribir Patrónes de Batería utilizados</value>
+  </data>
+  <data name="OverwriteFilledDrumPatternsToolTip" xml:space="preserve">
+    <value>_Sobreescribir Patrónes de Batería utilizados (no vacios/inicializados)</value>
+  </data>
+  <data name="OverwriteFilledWaveSequences" xml:space="preserve">
+    <value>_Sobreescribir Secuencias de Wave ocupadas</value>
+  </data>
+  <data name="OverwriteFilledWaveSequencesToolTip" xml:space="preserve">
+    <value>Sobreescribir Secuencias de Wave ocupadas (no vacias/inicializadas)</value>
+  </data>
+  <data name="PasteDuplicateDrumKits" xml:space="preserve">
+    <value>_Pegar Kits de Batería repetidos</value>
+  </data>
+  <data name="PasteDuplicateDrumKitsToolTip" xml:space="preserve">
+    <value>Pegar Kits de Batería en el PCG</value>
+  </data>
+  <data name="PasteDuplicateDrumPatterns" xml:space="preserve">
+    <value>_Pegar Patrones de Batería repetidos</value>
+  </data>
+  <data name="PasteDuplicateDrumPatternsToolTip" xml:space="preserve">
+    <value>Pegar Patrones de Batería en el PCG</value>
+  </data>
+  <data name="PasteDuplicateWaveSequences" xml:space="preserve">
+    <value>_Pegar Secuencias Wave repetidas</value>
+  </data>
+  <data name="PasteDuplicateWaveSequencesToolTip" xml:space="preserve">
+    <value>Pegar Secuencoas Wave en el PCG</value>
+  </data>
+  <data name="SelectAllExceptDrums" xml:space="preserve">
+    <value>_Seleccionar todo / Batería</value>
+  </data>
+  <data name="ShowSingleLinedSetListSlotDescriptions" xml:space="preserve">
+    <value>_Descripción del Slot Do List Set en una sola Linea</value>
+  </data>
+  <data name="SourceSetList" xml:space="preserve">
+    <value>Set List Fuente</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInMultipleBanks" xml:space="preserve">
+    <value>{0} Patrones de Batería en {1} Bancos</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInOneBank" xml:space="preserve">
+    <value>{0} Patrones de Batería en 1 Banco</value>
+  </data>
+  <data name="Stb_OneDrumPatternInMultipleBanks" xml:space="preserve">
+    <value>1 Patrón de Batería en {0} Bancos</value>
+  </data>
+  <data name="Stb_OneDrumPatternInOneBank" xml:space="preserve">
+    <value>1 Patrón de Batería en 1 Banco</value>
+  </data>
+  <data name="TargetCombiBank" xml:space="preserve">
+    <value>Banco Combi Destino</value>
+  </data>
+  <data name="TargetSetList" xml:space="preserve">
+    <value>Set List Destino</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Desconocido</value>
+  </data>
+  <data name="WaveSequences" xml:space="preserve">
+    <value>Secuencia Wave</value>
+  </data>
+  <data name="ChangePcgFileName" xml:space="preserve">
+    <value>_Alterar</value>
+  </data>
+  <data name="DoubleToSingleKeyboard" xml:space="preserve">
+    <value>_De doble Teclado a Teclado simple</value>
+  </data>
+  <data name="DoubleToSingleKeyboardWindowTitle" xml:space="preserve">
+    <value>De doble Teclado a Teclado simple</value>
+  </data>
+  <data name="DrumKits" xml:space="preserve">
+    <value>Kits de Batería</value>
+  </data>
+  <data name="EditParameterChangeEmpty" xml:space="preserve">
+    <value>Selecciona un Cambio de Parámetro válido de arriba.</value>
   </data>
 </root>

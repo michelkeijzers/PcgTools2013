@@ -27,7 +27,7 @@ namespace PcgTools.Model.KromeSpecific.Pcg
             SetLists = null;
             WaveSequenceBanks = null;
             DrumKitBanks = new KromeDrumKitBanks(this);
-            DrumPatternBanks = null;
+            DrumPatternBanks = new KromeDrumPatternBanks(this);
             Global = new KromeGlobal(this);
             Model = Models.Find(Models.EOsVersion.EOsVersionKrome);
         }

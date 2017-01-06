@@ -1,8 +1,4 @@
-﻿
-using System;
-using PcgTools.Model.Common.Synth.Meta;
-using PcgTools.Model.Common.Synth.PatchDrumPatterns;
-using PcgTools.Model.Common.Synth.PatchSetLists;
+﻿using PcgTools.Model.Common.Synth.PatchDrumPatterns;
 
 // (c) 2011 Michel Keijzers
 

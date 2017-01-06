@@ -1,13 +1,7 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Windows;
-using System.Globalization;
-using System.IO;
-using System.Threading;
-using Common.Utils;
 using PcgTools.PcgToolsResources;
-using PcgTools.Properties;
 
 namespace PcgTools
 {

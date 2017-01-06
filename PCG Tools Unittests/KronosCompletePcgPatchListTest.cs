@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosCompletePcgPatchListTest
     {
-        const string PcgFileName = @"C:\users\michel\source\repos\PCG Tools TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
 
         PcgMemory _pcgMemory;
 
@@ -36,7 +35,7 @@ namespace PCG_Tools_Unittests
                          {
                              PcgMemory = _pcgMemory,
                              FilterOnText = false,
-                             FilterText = String.Empty,
+                             FilterText = string.Empty,
                              FilterCaseSensitive = false,
                              FilterProgramNames = true,
                              FilterCombiNames = true,
@@ -61,7 +60,7 @@ namespace PCG_Tools_Unittests
                              ListOutputFormat = ListGenerator.OutputFormat.Text, 
                              SelectedProgramBanks = new ObservableBankCollection<IProgramBank>(),
                              SelectedCombiBanks = new ObservableBankCollection<ICombiBank>(),
-                             OutputFileName = "output.txt"
+                             OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt"
                          };
 
             if (_pcgMemory != null)
@@ -86,7 +85,7 @@ namespace PCG_Tools_Unittests
         {
 
             _generator.Run();
-            _lines = File.ReadAllLines("output.txt");
+            _lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
         }
 
 
@@ -160,7 +159,7 @@ namespace PCG_Tools_Unittests
             _generator.FilterText = "Synth";
             Run();
 
-            var lines = File.ReadAllLines("output.txt");
+            var lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
             Assert.AreEqual(58, lines.Length);
         }
 
@@ -174,7 +173,7 @@ namespace PCG_Tools_Unittests
             _generator.FilterCaseSensitive = true;
             Run();
 
-            var lines = File.ReadAllLines("output.txt");
+            var lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
             Assert.AreEqual(56, lines.Length);
         }
 
@@ -188,7 +187,7 @@ namespace PCG_Tools_Unittests
             _generator.FilterSetListSlotDescription = false;
             Run();
 
-            var lines = File.ReadAllLines("output.txt");
+            var lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
             Assert.AreEqual(54, lines.Length);
         }
 

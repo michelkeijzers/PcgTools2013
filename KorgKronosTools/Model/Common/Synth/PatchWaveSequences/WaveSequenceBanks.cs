@@ -53,7 +53,7 @@ namespace PcgTools.Model.Common.Synth.PatchWaveSequences
         /// <summary>
         /// 
         /// </summary>
-        public string Name { get { return "n.a."; } }
+        public string Name => "n.a.";
 
 
         /// <summary>

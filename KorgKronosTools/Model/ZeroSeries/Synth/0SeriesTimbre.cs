@@ -14,7 +14,7 @@ namespace PcgTools.Model.ZeroSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        private static int TimbresSizeConstant { get { return 11; } }
+        private static int TimbresSizeConstant => 11;
 
 
         /// <summary>
@@ -67,9 +67,6 @@ namespace PcgTools.Model.ZeroSeries.Synth
         /// <summary>
         /// The program No is 00..99: 
         /// </summary>
-        protected override int UsedProgramId
-        {
-            get { return Combi.PcgRoot.Content[TimbresOffset] % 100; }
-        }
+        protected override int UsedProgramId => Combi.PcgRoot.Content[TimbresOffset] % 100;
     }
 }

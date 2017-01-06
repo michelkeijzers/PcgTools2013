@@ -3,7 +3,6 @@
 using System;
 using System.Text;
 using Common.Extensions;
-using Common.Utils;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.PcgToolsResources;
 
@@ -23,7 +22,7 @@ namespace PcgTools.Model.Common.Synth.PatchWaveSequences
         {
             Bank = waveSeqBank;
             Index = index;
-            Id = string.Format("{0}{1}", waveSeqBank.Id, index.ToString("000"));
+            Id = $"{waveSeqBank.Id}{index.ToString("000")}";
         }
 
 
@@ -32,8 +31,8 @@ namespace PcgTools.Model.Common.Synth.PatchWaveSequences
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
-            RaisePropertyChanged(String.Empty, false);
+            Name = string.Empty;
+            RaisePropertyChanged(string.Empty, false);
         }
 
 
@@ -60,10 +59,7 @@ namespace PcgTools.Model.Common.Synth.PatchWaveSequences
         /// 
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public string PatchTypeAsString
-        {
-            get { return Strings.WaveSequence; }
-        }
+        public string PatchTypeAsString => Strings.WaveSequence;
 
         /// <summary>
         /// Change all references to the current patch, towards the specified patch.
@@ -83,10 +79,7 @@ namespace PcgTools.Model.Common.Synth.PatchWaveSequences
         /// <summary>
         /// 
         /// </summary>
-        public override bool ToolTipEnabled
-        {
-            get { return !IsEmptyOrInit; }
-        }
+        public override bool ToolTipEnabled => !IsEmptyOrInit;
 
 
         /// <summary>

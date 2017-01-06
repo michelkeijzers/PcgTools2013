@@ -187,8 +187,14 @@ namespace PcgTools.Help
 
                 new ExternalItem()
                 {
-                    Name="MK Editor", Description = "microKORG Editor by JohnS",
+                    Name = "MK Editor", Description = "microKORG Editor by JohnS",
                     Url = "http://www.artlum.com/microkorg", BitmapPath = "Artlum.png"
+                },
+
+                new ExternalItem()
+                {
+                    Name = "Radias Librarian", Description = "Radias Librarian by LiPI",
+                    Url = "http://lipi.atw.hu/", BitmapPath = "RadiasLibrarian.png"
                 },
 
                 // Affiliates
@@ -344,8 +350,7 @@ namespace PcgTools.Help
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, String.Format("{0}.\n{1}:{2}",
-                    Strings.LinkWarning, Strings.Message, exception.Message),
+                MessageBox.Show(this, $"{Strings.LinkWarning}.\n{Strings.Message}:{exception.Message}",
                     Strings.PcgTools,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }

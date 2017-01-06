@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Common.Utils;
@@ -41,11 +40,8 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         /// <summary>
         /// 
         /// </summary>
-        public static EnumParameter Instance
-        {
-            get { return _instance ?? (_instance = new EnumParameter()); }
-        }
-        
+        public static EnumParameter Instance => _instance ?? (_instance = new EnumParameter());
+
 
         /// <summary>
         /// 
@@ -87,7 +83,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
                 PcgMemory.IsDirty |= BitsUtil.SetBits(PcgData, PcgOffset, _highBit, _lowBit, _enumValues.IndexOf(value));
                 if (Patch != null)
                 {
-                    Patch.RaisePropertyChanged(String.Empty, false);
+                    Patch.RaisePropertyChanged(string.Empty, false);
                 }
             }
         }

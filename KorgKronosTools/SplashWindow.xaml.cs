@@ -34,7 +34,7 @@ namespace PcgTools
         void DrawLogoAndName()
         {
             var logo = new Logos().GetRandomLogo();
-            if (logo.ImageName != String.Empty)
+            if (logo.ImageName != string.Empty)
             {
                 image.Source = new BitmapImage(
                     new Uri("/PcgTools;component/Help/External Links/" + logo.ImageName, UriKind.Relative));

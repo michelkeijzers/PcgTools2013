@@ -1,9 +1,7 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using PcgTools.Model.Common.File;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.SongsRelated;
-using PcgTools.Model.KromeSpecific.Synth;
 using PcgTools.Model.M3rSpecific.Synth;
 using PcgTools.Model.MntxSeriesSpecific.Song;
 

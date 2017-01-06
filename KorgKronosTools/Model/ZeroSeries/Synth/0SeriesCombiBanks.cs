@@ -37,7 +37,7 @@ namespace PcgTools.Model.ZeroSeries.Synth
             // Add virtual banks for raw disk image file.
             for (var id = 0; id <= 4; id++)
             {
-                Add(new ZeroSeriesCombiBank(this, BankType.EType.Virtual, string.Format("V{0}", id + 1), -1));
+                Add(new ZeroSeriesCombiBank(this, BankType.EType.Virtual, $"V{id + 1}", -1));
             }
         }
     }

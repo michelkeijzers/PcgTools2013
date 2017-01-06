@@ -23,18 +23,18 @@ namespace PcgTools.Model.KronosOasysSpecific.Pcg
         /// <summary>
         /// 
         /// </summary>
-        public override bool HasSubCategories { get { return true; } }
+        public override bool HasSubCategories => true;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override int NumberOfCategories { get { return 18; } }
+        public override int NumberOfCategories => 18;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override int NumberOfSubCategories { get { return 8; } }
+        public override int NumberOfSubCategories => 8;
     }
 }

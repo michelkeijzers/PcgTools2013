@@ -101,7 +101,7 @@ namespace PcgTools.ListGenerator
             {
                 case OutputFormat.AsciiTable:
 // ReSharper disable RedundantStringFormatCall
-                    writer.WriteLine(String.Format("+------+{0}+", new string('-', maxTimbresPerCombi*8 - 1)));
+                    writer.WriteLine($"+------+{new string('-', maxTimbresPerCombi*8 - 1)}+");
 // ReSharper restore RedundantStringFormatCall
 
                     var columnText = "Used Program IDs";
@@ -111,8 +111,8 @@ namespace PcgTools.ListGenerator
                     }
 
 // ReSharper disable RedundantStringFormatCall
-                    writer.WriteLine(String.Format("|Combi |{0}{1}|", columnText,
-                        new string(' ', maxTimbresPerCombi*8 - columnText.Count() - 1)));
+                    writer.WriteLine(
+                        $"|Combi |{columnText}{new string(' ', maxTimbresPerCombi*8 - columnText.Count() - 1)}|");
 // ReSharper restore RedundantStringFormatCall
                     writer.WriteLine(
                         ListSubType == SubType.Compact
@@ -125,8 +125,8 @@ namespace PcgTools.ListGenerator
                 case OutputFormat.Xml:
                     writer.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 // ReSharper disable RedundantStringFormatCall
-                    writer.WriteLine(String.Format("<?xml-stylesheet type=\"text/xsl\" href=\"{0}\"?>",
-                        Path.ChangeExtension(OutputFileName, "xsl")));
+                    writer.WriteLine(
+                        $"<?xml-stylesheet type=\"text/xsl\" href=\"{Path.ChangeExtension(OutputFileName, "xsl")}\"?>");
 // ReSharper restore RedundantStringFormatCall
                     writer.WriteLine("<combi_content_list> xml:lang=\"en\">");
                     break;
@@ -249,7 +249,7 @@ namespace PcgTools.ListGenerator
             return (!IgnoreMutedOffTimbres ||
                 ((timbre.GetParam(ParameterNames.TimbreParameterName.Mute) == null) || 
                 (!timbre.GetParam(ParameterNames.TimbreParameterName.Mute).Value) &&
-                    new List<String>{"Int", "On", "Both"}.Contains(timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value))) &&
+                    new List<string> {"Int", "On", "Both"}.Contains(timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value))) &&
                         (!IgnoreFirstProgram ||
                             ((PcgMemory.ProgramBanks.BankCollection.IndexOf(timbre.UsedProgramBank) != 0) &&
                                 (timbre.UsedProgramBank.Patches.IndexOf(timbre.UsedProgram) != 0))) &&
@@ -381,7 +381,7 @@ namespace PcgTools.ListGenerator
             builder.AppendLine("<?xml version=\"1.0\"?>");
             builder.AppendLine(" <xsl:stylesheet version=\"1.0\"");
             builder.AppendLine(" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
-            builder.AppendLine(String.Empty);
+            builder.AppendLine(string.Empty);
             builder.AppendLine(" <xsl:template match=\"/\">");
             builder.AppendLine("   <html>");
             builder.AppendLine("   <body>");
@@ -407,7 +407,7 @@ namespace PcgTools.ListGenerator
             builder.AppendLine("   </body>");
             builder.AppendLine("   </html>");
             builder.AppendLine(" </xsl:template>");
-            builder.AppendLine(String.Empty);
+            builder.AppendLine(string.Empty);
             builder.AppendLine(" </xsl:stylesheet>");
             File.WriteAllText(Path.ChangeExtension(OutputFileName, "xsl"), builder.ToString());
         }
@@ -435,12 +435,12 @@ namespace PcgTools.ListGenerator
                 var favorite = combi.PcgRoot.AreFavoritesSupported ? combi.GetParam(ParameterNames.CombiParameterName.Favorite) : null;
                 var favoriteString = (favorite == null) ? "-" : (favorite.Value) ? "Yes" : "No";
                 var paramTempo = combi.GetParam(ParameterNames.CombiParameterName.Tempo);
-                var tempo = paramTempo == null ? "-" : String.Format("{0,6:0.00}", paramTempo.Value);
+                var tempo = paramTempo == null ? "-" : string.Format("{0,6:0.00}", paramTempo.Value);
 
                 // Print header.
                 writer.WriteLine("+------------+-----------------------------+----------------------------+--------------------------------+------------+-------+---------------------------------+");
 // ReSharper disable RedundantStringFormatCall
-                writer.WriteLine(String.Format(new CultureInfo("en-US"), 
+                writer.WriteLine(string.Format(new CultureInfo("en-US"), 
 // ReSharper restore RedundantStringFormatCall
                     "|Combi {0,-6}|Name:{1,-24}|Cat:{2,-24}|Sub Cat:{3,-24}|Tempo:{4,-6}|Fav:{5,-3}|                                 |", 
                     combi.Id, combi.Name, categoryString, subCategoryString, tempo, favoriteString));
@@ -528,15 +528,12 @@ namespace PcgTools.ListGenerator
             var bendRange = (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.BendRange,
                 timbre.GetParam(ParameterNames.TimbreParameterName.BendRange).Value);
 
-            writer.Write(string.Format(
-                "|{0,2 } |{1,-10   }|{2,-24}|{3,-24}|{4,-24     }|{5,  3}|{6,-3 }|{7,-4     }|{8,-4         }|{9, -4            }|",
-                index + 1, timbreId, name, category, subCategory, volume, status, muteString, priorityString, midiChannelString));
+            writer.Write(
+                $"|{index + 1,2} |{timbreId,-10}|{name,-24}|{category,-24}|{subCategory,-24}|{volume,3}|{status,-3}|{muteString,-4}|{priorityString,-4}|{midiChannelString,-4}|");
 
 // ReSharper disable RedundantStringFormatCall
-            writer.WriteLine(string.Format(
-// ReSharper restore RedundantStringFormatCall
-                "{0,-4}~{1,-4   }|{2,3          }~{3,3       }|{4,-4  }|{5,-4    }|{6,3     }|{7,5    }|{8,3      }|{9,-3} |",
-                bottomKey, topKey, bottomVelocity, topVelocity, oscMode, oscSelect, transpose, detune, portamento, bendRange));
+            writer.WriteLine(
+                $"{bottomKey,-4}~{topKey,-4}|{bottomVelocity,3}~{topVelocity,3}|{oscMode,-4}|{oscSelect,-4}|{transpose,3}|{detune,5}|{portamento,3}|{bendRange,-3} |");
         }
     }
 }

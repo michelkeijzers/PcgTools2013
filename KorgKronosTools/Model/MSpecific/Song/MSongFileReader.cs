@@ -24,6 +24,6 @@ namespace PcgTools.Model.MSpecific.Song
         /// <summary>
         /// Number of bytes in a song track (equal to length of a combi timbre).
         /// </summary>
-        public override int SongTrackByteLength { get { return 112; } }
+        public override int SongTrackByteLength => 112;
     }
 }

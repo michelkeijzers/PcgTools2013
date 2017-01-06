@@ -2108,39 +2108,39 @@ Inner exception:
     <value>_Change...</value>
     <comment>Change PCG File name</comment>
   </data>
-  <data name="ConnectedPcgFile" xml:space="preserve">
+  <data name="___ConnectedPcgFile" xml:space="preserve">
     <value>_Connected PCG File:</value>
     <comment>File name that is connected to SNG file</comment>
   </data>
-  <data name="Parameter" xml:space="preserve">
+  <data name="___Parameter" xml:space="preserve">
     <value>_Parameter</value>
     <comment>Menu item</comment>
   </data>
-  <data name="EditParameterAbsoluteValue" xml:space="preserve">
+  <data name="___EditParameterAbsoluteValue" xml:space="preserve">
     <value>_Absolute Value</value>
     <comment>Radio button name</comment>
   </data>
-  <data name="EditParameterByteOffset" xml:space="preserve">
+  <data name="___EditParameterByteOffset" xml:space="preserve">
     <value>_Byte Offset</value>
     <comment>Label name</comment>
   </data>
-  <data name="EditParameterCombi" xml:space="preserve">
+  <data name="___EditParameterCombi" xml:space="preserve">
     <value>_Combi</value>
     <comment>Radio button name</comment>
   </data>
-  <data name="EditParameterCombiSelection" xml:space="preserve">
+  <data name="___EditParameterCombiSelection" xml:space="preserve">
     <value>Combi Selection</value>
     <comment>Group box name</comment>
   </data>
-  <data name="EditParameterDecimal" xml:space="preserve">
+  <data name="___EditParameterDecimal" xml:space="preserve">
     <value>_Decimal</value>
     <comment>Label name</comment>
   </data>
-  <data name="EditParameterValueRangeAfterChange" xml:space="preserve">
+  <data name="___EditParameterValueRangeAfterChange" xml:space="preserve">
     <value>Value Range After Change</value>
     <comment>Label name</comment>
   </data>
-  <data name="EditParameterMask" xml:space="preserve">
+  <data name="___EditParameterMask" xml:space="preserve">
     <value>_Mask</value>
     <comment>Label name</comment>
   </data>
@@ -2148,47 +2148,47 @@ Inner exception:
     <value>Fill in a valid parameter change rule above.</value>
     <comment>Error text (empty text).</comment>
   </data>
-  <data name="EditParameterMinRange" xml:space="preserve">
+  <data name="___EditParameterMinRange" xml:space="preserve">
     <value>Min Range</value>
     <comment>Label name</comment>
   </data>
-  <data name="EditParameterNumberOfBytes" xml:space="preserve">
+  <data name="___EditParameterNumberOfBytes" xml:space="preserve">
     <value>#_Bytes</value>
     <comment>Label name</comment>
   </data>
-  <data name="EditParameterParameterChangeRule" xml:space="preserve">
+  <data name="___EditParameterParameterChangeRule" xml:space="preserve">
     <value>Parameter Change Rule</value>
     <comment>Group box name</comment>
   </data>
-  <data name="EditParameterPercentage" xml:space="preserve">
+  <data name="___EditParameterPercentage" xml:space="preserve">
     <value>_Percentage</value>
     <comment>Radio button name</comment>
   </data>
-  <data name="EditParameterRelativeValue" xml:space="preserve">
+  <data name="___EditParameterRelativeValue" xml:space="preserve">
     <value>_Relative Value</value>
     <comment>Radio button name</comment>
   </data>
-  <data name="EditParameterTimbre" xml:space="preserve">
+  <data name="___EditParameterTimbre" xml:space="preserve">
     <value>Timbre</value>
     <comment>Radio button</comment>
   </data>
-  <data name="EditParameterTimbres" xml:space="preserve">
+  <data name="___EditParameterTimbres" xml:space="preserve">
     <value>_Timbres</value>
     <comment>Button name</comment>
   </data>
-  <data name="EditParameterPreview" xml:space="preserve">
+  <data name="___EditParameterPreview" xml:space="preserve">
     <value>Preview</value>
     <comment>Group box name</comment>
   </data>
-  <data name="EditParameterValueChange" xml:space="preserve">
+  <data name="___EditParameterValueChange" xml:space="preserve">
     <value>Value Change</value>
     <comment>Group box name</comment>
   </data>
-  <data name="EditParameterWarningNumberOfPatchesWithClippedValues" xml:space="preserve">
+  <data name="___EditParameterWarningNumberOfPatchesWithClippedValues" xml:space="preserve">
     <value>Warning: Number of Patches with Clipped Values:</value>
     <comment>Warning/label name</comment>
   </data>
-  <data name="EditParameterWindow" xml:space="preserve">
+  <data name="___EditParameterWindow" xml:space="preserve">
     <value>Edit Parameter</value>
     <comment>Window title</comment>
   </data>
@@ -2196,59 +2196,59 @@ Inner exception:
     <value>_Select All / Drums</value>
     <comment>Select all Except drums button name (keep short)</comment>
   </data>
-  <data name="EditParameterDecimalValue" xml:space="preserve">
+  <data name="___EditParameterDecimalValue" xml:space="preserve">
     <value>_Decimal Value</value>
     <comment>Edit box (decimal value</comment>
   </data>
-  <data name="EditParameterValueRangeBeforeChange" xml:space="preserve">
+  <data name="___EditParameterValueRangeBeforeChange" xml:space="preserve">
     <value>Value Range Before Change</value>
     <comment>Label name</comment>
   </data>
-  <data name="EditParameterHexadecimalValue" xml:space="preserve">
+  <data name="___EditParameterHexadecimalValue" xml:space="preserve">
     <value>_Hex Value</value>
     <comment>Edit box (hexadecimal value)</comment>
   </data>
-  <data name="EditParameterHexadecimalValueRange" xml:space="preserve">
+  <data name="___EditParameterHexadecimalValueRange" xml:space="preserve">
     <value>Hex Value Range</value>
     <comment>Edit box, hexadecimal value range</comment>
   </data>
-  <data name="EditParameterLsbBit" xml:space="preserve">
+  <data name="___EditParameterLsbBit" xml:space="preserve">
     <value>_LSB Bit</value>
     <comment>Edit box</comment>
   </data>
-  <data name="EditParameterMaxByteOffset" xml:space="preserve">
+  <data name="___EditParameterMaxByteOffset" xml:space="preserve">
     <value>Max Byte Offset</value>
     <comment>Edit box</comment>
   </data>
-  <data name="EditParameterMaxNumberOfBytes" xml:space="preserve">
+  <data name="___EditParameterMaxNumberOfBytes" xml:space="preserve">
     <value>Max # Bytes</value>
     <comment>Edit box</comment>
   </data>
-  <data name="EditParameterUpdate" xml:space="preserve">
+  <data name="___EditParameterUpdate" xml:space="preserve">
     <value>_Update</value>
     <comment>Button</comment>
   </data>
-  <data name="EditParameterNumberOfClippedPatches" xml:space="preserve">
+  <data name="___EditParameterNumberOfClippedPatches" xml:space="preserve">
     <value>#Clipped Patches</value>
     <comment>Edit box, number of patches with clipped values</comment>
   </data>
-  <data name="EditParameterSigned" xml:space="preserve">
+  <data name="___EditParameterSigned" xml:space="preserve">
     <value>_Signed</value>
     <comment>Edit box, signed (pos/neg) or unsigned (pos)</comment>
   </data>
-  <data name="ResultAfterChange" xml:space="preserve">
+  <data name="___ResultAfterChange" xml:space="preserve">
     <value>Result After Change</value>
     <comment>Group box (results after making the changes)</comment>
   </data>
-  <data name="EditParameterCalculate" xml:space="preserve">
+  <data name="___EditParameterCalculate" xml:space="preserve">
     <value>_Calculate</value>
     <comment>Button name (verb)</comment>
   </data>
-  <data name="EditParameterCalculateAutomatically" xml:space="preserve">
+  <data name="___EditParameterCalculateAutomatically" xml:space="preserve">
     <value>Calculate _Automatically</value>
     <comment>Radio button</comment>
   </data>
-  <data name="EditParameterCalculateManually" xml:space="preserve">
+  <data name="___EditParameterCalculateManually" xml:space="preserve">
     <value>Calculate _Manually</value>
     <comment>Radio button</comment>
   </data>
@@ -2257,11 +2257,11 @@ Inner exception:
     <comment>Show the descriptions of set list slots as a single line</comment>
   </data>
   <data name="DoubleToSingleKeyboard" xml:space="preserve">
-    <value>_Double to Single Keyboard</value>
+    <value>_Double to Single Keyboard Setup</value>
     <comment>Menu item</comment>
   </data>
   <data name="DoubleToSingleKeyboardWindowTitle" xml:space="preserve">
-    <value>Double to Single Keyboard</value>
+    <value>Double to Single Keyboard Setup</value>
     <comment>Window title</comment>
   </data>
   <data name="MidiChannelMainKeyboard" xml:space="preserve">
@@ -2394,5 +2394,17 @@ Inner exception:
   </data>
   <data name="EmptyOrInitPatchName" xml:space="preserve">
     <value>Empty or initialized patch</value>
+  </data>
+  <data name="HexExport" xml:space="preserve">
+    <value>_Hex Export</value>
+    <comment>Menu item</comment>
+  </data>
+  <data name="ColumnSetListSlotReferenceId" xml:space="preserve">
+    <value>Ref ID</value>
+    <comment>Keep it short</comment>
+  </data>
+  <data name="ColumnSetListSlotReferenceName" xml:space="preserve">
+    <value>Reference Name</value>
+    <comment>Patch name of referenced set list slot</comment>
   </data>
 </root>

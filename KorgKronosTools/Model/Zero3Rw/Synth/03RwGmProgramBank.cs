@@ -50,15 +50,12 @@ namespace PcgTools.Model.Zero3Rw.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Hd1; }
-        }
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Hd1;
 
 
         /// <summary>
         /// E.g. GM banks have index 1.
         /// </summary>
-        public override int IndexOffset { get { return 1; } }
+        public override int IndexOffset => 1;
     }
 }

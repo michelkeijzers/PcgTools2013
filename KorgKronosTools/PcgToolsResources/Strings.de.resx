@@ -1754,7 +1754,7 @@ Interner Fehler:
     <value>_Maximaler Speicher (MB)</value>
   </data>
   <data name="DrumKit" xml:space="preserve">
-    <value>Drum Kits</value>
+    <value>Drum Kit</value>
   </data>
   <data name="NumberOfPatches" xml:space="preserve">
     <value># Patches:</value>
@@ -1763,12 +1763,143 @@ Interner Fehler:
     <value>Patch Typ</value>
   </data>
   <data name="WaveSequence" xml:space="preserve">
-    <value>Wavesequenz</value>
+    <value>Wave Sequenz</value>
   </data>
   <data name="ShowSingleLinedSetListSlotDescriptions" xml:space="preserve">
     <value>_Einzeilige Set List Slot Beschreibung</value>
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unbekannt</value>
+  </data>
+  <data name="DrumPattern" xml:space="preserve">
+    <value>Drum Pattern</value>
+  </data>
+  <data name="DrumPatterns" xml:space="preserve">
+    <value>Drum Patterns</value>
+  </data>
+  <data name="DrumPatternsInRadioButton" xml:space="preserve">
+    <value>_Drum Patterns</value>
+  </data>
+  <data name="EmptyOrInitPatchName" xml:space="preserve">
+    <value>Leerer oder initialisierter Patch</value>
+  </data>
+  <data name="ExportToFile" xml:space="preserve">
+    <value>_Exportiere nach Datei</value>
+  </data>
+  <data name="ExternalLinksPersonal" xml:space="preserve">
+    <value>Externe Links Persönliche Links</value>
+  </data>
+  <data name="ExternalLinksPersonalMenuItem" xml:space="preserve">
+    <value>_Externe Links Persönliche Links</value>
+  </data>
+  <data name="FilterDrumPatternNames" xml:space="preserve">
+    <value>_Filter Drum Pattern Name</value>
+  </data>
+  <data name="FilterDrumPatterns" xml:space="preserve">
+    <value>Filter Drum Patterns</value>
+  </data>
+  <data name="HexExport" xml:space="preserve">
+    <value>_Hex Export</value>
+  </data>
+  <data name="HexExportDlgTitle" xml:space="preserve">
+    <value>Hex Export</value>
+  </data>
+  <data name="IgnoreEmptyInitDrumPatterns" xml:space="preserve">
+    <value>_Ignoriere leere/initialisierte Drum Patterns</value>
+  </data>
+  <data name="InitAsMpeCombi" xml:space="preserve">
+    <value>_Initialisiere als MPE Combi</value>
+  </data>
+  <data name="MidiChannelMainKeyboard" xml:space="preserve">
+    <value>MIDI Kanal Haupt Keyboard</value>
+  </data>
+  <data name="MidiChannelSecondaryKeyboard" xml:space="preserve">
+    <value>MIDI Kanal sekundäres Keyboard</value>
+  </data>
+  <data name="MidiTracks" xml:space="preserve">
+    <value>_MIDI Spuren</value>
+  </data>
+  <data name="OverwriteFilledDrumKits" xml:space="preserve">
+    <value>_Überschreibe gefüllte Drumkits</value>
+  </data>
+  <data name="OverwriteFilledDrumKitsToolTip" xml:space="preserve">
+    <value>Überschreibe gefüllte 
+ Drumkits</value>
+  </data>
+  <data name="OverwriteFilledDrumPatterns" xml:space="preserve">
+    <value>_Überschreibe gefüllte Drum Patterns</value>
+  </data>
+  <data name="OverwriteFilledDrumPatternsToolTip" xml:space="preserve">
+    <value>Überschreibe gefüllte (nicht-leere/initialisierte) Drum Patterns</value>
+  </data>
+  <data name="OverwriteFilledWaveSequences" xml:space="preserve">
+    <value>_Überschreibe gefüllte Wave Sequencen</value>
+  </data>
+  <data name="OverwriteFilledWaveSequencesToolTip" xml:space="preserve">
+    <value>Überschreibe gefüllte (nicht-leere initialisierte) Wave Sequencen</value>
+  </data>
+  <data name="PasteDuplicateDrumKits" xml:space="preserve">
+    <value>_Duplizierte Drum Kits einfügen</value>
+  </data>
+  <data name="PasteDuplicateDrumKitsToolTip" xml:space="preserve">
+    <value>Drum Kits im PCG einfügen</value>
+  </data>
+  <data name="PasteDuplicateDrumPatterns" xml:space="preserve">
+    <value>_Duplizierte Drum Patterns einfügen</value>
+  </data>
+  <data name="PasteDuplicateDrumPatternsToolTip" xml:space="preserve">
+    <value>Drum Patterns im PCG einfügen</value>
+  </data>
+  <data name="PasteDuplicateWaveSequences" xml:space="preserve">
+    <value>_Duplizierte Wave Sequencen einfügen</value>
+  </data>
+  <data name="PasteDuplicateWaveSequencesToolTip" xml:space="preserve">
+    <value>Wave Sequenzen in PCG einfügen</value>
+  </data>
+  <data name="SelectAllExceptDrums" xml:space="preserve">
+    <value>_Wähle alles / Drums</value>
+  </data>
+  <data name="SourceSetList" xml:space="preserve">
+    <value>Quell Set List</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInMultipleBanks" xml:space="preserve">
+    <value>{0} Drum Patterns in {1} Banks</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInOneBank" xml:space="preserve">
+    <value>{0} Drum Patterns in 1 Bank</value>
+  </data>
+  <data name="Stb_OneDrumPatternInMultipleBanks" xml:space="preserve">
+    <value>1 Drum Pattern in {0} Banks</value>
+  </data>
+  <data name="Stb_OneDrumPatternInOneBank" xml:space="preserve">
+    <value>1 Drum Pattern in 1 Bank</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TargetCombiBank" xml:space="preserve">
+    <value>Ziel Combi Bank</value>
+  </data>
+  <data name="TargetSetList" xml:space="preserve">
+    <value>Ziel Set List</value>
+  </data>
+  <data name="WaveSequences" xml:space="preserve">
+    <value>Wave Sequencen in PCG einfügen</value>
+  </data>
+  <data name="ChangePcgFileName" xml:space="preserve">
+    <value>_Ändern...</value>
+  </data>
+  <data name="DoubleToSingleKeyboard" xml:space="preserve">
+    <value>_Doppeltes Keyboard Setup zu einfachem Keyboard Setup</value>
+  </data>
+  <data name="DoubleToSingleKeyboardWindowTitle" xml:space="preserve">
+    <value>Doppeltes Keyboard Setup zu einfachem Keyboard Setup
+</value>
+  </data>
+  <data name="DrumKits" xml:space="preserve">
+    <value>Drum Kits</value>
+  </data>
+  <data name="EditParameterChangeEmpty" xml:space="preserve">
+    <value>Saisir un paramètre valide pour changer la règle ci-dessus.</value>
   </data>
 </root>

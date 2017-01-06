@@ -4,7 +4,6 @@ using System;
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.MntxSeriesSpecific.Pcg;
-using PcgTools.Model.MSpecific.Pcg;
 using PcgTools.Model.Z1Specific.Synth;
 
 
@@ -40,19 +39,19 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// <summary>
         /// 
         /// </summary>
-        public override bool HasProgramCategories { get { return true; } }
+        public override bool HasProgramCategories => true;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool HasCombiCategories { get { return false; } }
+        public override bool HasCombiCategories => false;
 
 
         /// <summary>
         /// Hardcoded (taken from Mode parameter).
         /// </summary>
-        public override int NumberOfCategories { get { return 18; } }
+        public override int NumberOfCategories => 18;
 
 
         /// <summary>
@@ -70,10 +69,6 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// <summary>
         /// 
         /// </summary>
-        public override bool AreCategoriesEditable
-        {
-            get { return true; }
-        }
-
+        public override bool AreCategoriesEditable => true;
     }
 }

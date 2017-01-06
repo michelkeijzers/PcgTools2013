@@ -19,28 +19,19 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// <summary>
         /// Category names are not in PCG.
         /// </summary>
-        protected override int CategoryNameLength
-        {
-            get { return 14; }
-        }
+        protected override int CategoryNameLength => 14;
 
 
         /// <summary>
         /// Hardcoded.
         /// </summary>
-        protected override int PcgOffsetCategories
-        {
-            get { return -1; }
-        }
+        protected override int PcgOffsetCategories => -1;
 
 
         /// <summary>
         /// Categories are fixed.
         /// </summary>
-        protected override int NrOfCategories
-        {
-            get { return 18; }
-        }
+        protected override int NrOfCategories => 18;
 
 
         /// <summary>
@@ -68,11 +59,11 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// <returns></returns>
         public override List<string> GetCategoryNames(ECategoryType type)
         {
-            List<String> names = null;
+            List<string> names = null;
 
             if (type == ECategoryType.Program)
             {
-                names = new List<String>
+                names = new List<string>
                 {
                     "Synth-Hard",
                     "Synth-Soft",
@@ -108,7 +99,7 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// <returns></returns>
         public override string GetCategoryName(IPatch patch)
         {
-            var categoryName = String.Empty;
+            var categoryName = string.Empty;
 
             if (patch is IProgram)
             {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using PcgTools.Model.Common.Synth.Meta;
+﻿using PcgTools.Model.Common.Synth.Meta;
 
 namespace PcgTools.Model.Common.Synth.PatchInterfaces
 {

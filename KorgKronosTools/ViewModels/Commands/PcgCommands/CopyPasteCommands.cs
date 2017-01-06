@@ -857,7 +857,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 return Strings.PasteWarning;
             }
 
-            return String.Empty; // No info string
+            return string.Empty; // No info string
         }
 
 

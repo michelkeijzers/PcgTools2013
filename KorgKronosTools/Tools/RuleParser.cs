@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
@@ -45,10 +43,7 @@ namespace PcgTools.Tools
         /// <summary>
         /// 
         /// </summary>
-        public Dictionary<IPatch, IPatch> ParsedRules
-        {
-            get { return _parsedRules; }
-        }
+        public Dictionary<IPatch, IPatch> ParsedRules => _parsedRules;
 
 
         /// <summary>

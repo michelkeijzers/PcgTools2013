@@ -56,10 +56,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override IIntParameter Color
-        {
-            get { return _color; }
-        }
+        public override IIntParameter Color => _color;
 
 
         // Name
@@ -88,10 +85,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 24; }
-        }
+        public override int MaxNameLength => 24;
 
 
         // Description.
@@ -191,11 +185,8 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxDescriptionLength
-        {
-            get { return 512; }
-        }
-        
+        public override int MaxDescriptionLength => 512;
+
 
         // ListSubType
 
@@ -218,27 +209,15 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override IBank UsedProgramBank
-        {
-            get
-            {
-                return PcgRoot.ProgramBanks.GetBankWithPcgId(Util.GetBits(PcgRoot.Content,
-                (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16) ? Stl2BankOffset : DefaultBankOffset, 4, 0));
-            }
-        }
+        protected override IBank UsedProgramBank => PcgRoot.ProgramBanks.GetBankWithPcgId(Util.GetBits(PcgRoot.Content,
+            (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16) ? Stl2BankOffset : DefaultBankOffset, 4, 0));
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override IBank UsedCombiBank
-        {
-            get
-            {
-                return PcgRoot.CombiBanks[Util.GetBits(PcgRoot.Content,
-                    (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16) ? Stl2BankOffset : DefaultBankOffset, 4, 0)];
-            }
-        }
+        protected override IBank UsedCombiBank => PcgRoot.CombiBanks[Util.GetBits(PcgRoot.Content,
+            (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16) ? Stl2BankOffset : DefaultBankOffset, 4, 0)];
 
 
         /// <summary>
@@ -320,8 +299,8 @@ namespace PcgTools.Model.KronosSpecific.Synth
                 Util.SetInt(PcgRoot, PcgRoot.Content, Stl2PatchOffset, 1, combi.Index);
             }
 
-            combi.RaisePropertyChanged(String.Empty, false);
-            RaisePropertyChanged(String.Empty, false);
+            combi.RaisePropertyChanged(string.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
         }
 
 
@@ -337,8 +316,8 @@ namespace PcgTools.Model.KronosSpecific.Synth
             SetUsedProgramBank(bank);
             SetUsedProgram(bank, program);
 
-            program.RaisePropertyChanged(String.Empty, false);
-            RaisePropertyChanged(String.Empty, false);
+            program.RaisePropertyChanged(string.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
         }
 
 
@@ -507,65 +486,46 @@ namespace PcgTools.Model.KronosSpecific.Synth
                 PcgRoot.Content[Stl2PatchOffset] = 0; // Index 0
             }
 
-            RaisePropertyChanged(String.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
         }
 
 
         /// <summary>
         /// Used for non OS 1.5/1.6.
         /// </summary>
-        private int DefaultBankOffset
-        {
-            get { return ByteOffset + 25; }
-        }
+        private int DefaultBankOffset => ByteOffset + 25;
 
 
         /// <summary>
         /// Used for OS 1.5/1.6.
         /// </summary>
-        public int Stl2BankOffset
-        {
-            get
-            {
-                return (((SetLists) (Parent.Parent)).Stl2PcgOffset +
-                        128*Convert.ToInt16(((SetList) Parent).Id) + Index);
-            }
-        }
+        public int Stl2BankOffset => (((SetLists) (Parent.Parent)).Stl2PcgOffset +
+                                      128*Convert.ToInt16(((SetList) Parent).Id) + Index);
 
 
         /// <summary>
         /// Used for non OS 1.5/1.6.
         /// </summary>
-        private int  DefaultPatchOffset
-        {
-            get { return ByteOffset + 26; }
-        }
+        private int  DefaultPatchOffset => ByteOffset + 26;
 
 
         /// <summary>
         /// Used for OS 1.5/1.6.
         /// </summary>
-        public int Stl2PatchOffset
-        {
-            // first 128 = # banks, 2nd/3th 128 = slots/bank
-            get
-            {
-                return 128 * 128 + ((SetLists) (Parent.Parent)).Stl2PcgOffset + 
-                    128 * Convert.ToInt16(((SetList) Parent).Id) + Index; 
-            }
-        }
+        public int Stl2PatchOffset => 128 * 128 + ((SetLists) (Parent.Parent)).Stl2PcgOffset + 
+                                      128 * Convert.ToInt16(((SetList) Parent).Id) + Index;
 
 
         /// <summary>
         /// 
         /// </summary>
-        private int TypeOffset { get { return ByteOffset + 24; } }
+        private int TypeOffset => ByteOffset + 24;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public static int SizeBetweenStl2AndSbk2 { get { return 8; } }
+        public static int SizeBetweenStl2AndSbk2 => 8;
 
 
         /// <summary>

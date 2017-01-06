@@ -3,9 +3,7 @@
 using System;
 using System.Text;
 using Common.Extensions;
-using Common.Utils;
 using PcgTools.Model.Common.Synth.Meta;
-using PcgTools.Model.Common.Synth.PatchSetLists;
 using PcgTools.PcgToolsResources;
 
 namespace PcgTools.Model.Common.Synth.PatchDrumPatterns

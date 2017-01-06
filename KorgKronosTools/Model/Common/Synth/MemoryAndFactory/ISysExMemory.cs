@@ -1,9 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace PcgTools.Model.Common.Synth.MemoryAndFactory
 {
     /// <summary>

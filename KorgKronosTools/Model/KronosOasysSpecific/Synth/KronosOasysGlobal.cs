@@ -14,25 +14,27 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int CategoryNameLength { get { return 24; } }
+        protected override int CategoryNameLength => 24;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int PcgOffsetCategories { get { return 12912; } } // 12918 for kronos ? 9558; } } // In full PCG: global at 3613a0, categories at 363902
+        protected override int PcgOffsetCategories => 12912;
+
+// 12918 for kronos ? 9558; } } // In full PCG: global at 3613a0, categories at 363902
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int NrOfCategories { get { return 18; } }
+        protected override int NrOfCategories => 18;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int NrOfSubCategories { get { return 8; } }
+        protected override int NrOfSubCategories => 8;
 
 
         /// <summary>

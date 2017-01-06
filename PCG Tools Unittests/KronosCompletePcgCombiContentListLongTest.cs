@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosCompletePcgCombiContentListLongTest
     {
-        const string PcgFileName = @"C:\users\michel\source\repos\PCG Tools TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
 
         
         PcgMemory _pcgMemory;
@@ -46,7 +45,7 @@ namespace PCG_Tools_Unittests
                              SelectedProgramBanks = new ObservableBankCollection<IProgramBank>(),
                              SelectedCombiBanks = new ObservableBankCollection<ICombiBank>(),
                              ListOutputFormat = ListGenerator.OutputFormat.AsciiTable,
-                             OutputFileName = "output.txt"
+                             OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt"
                          };
 
             if (_pcgMemory != null)

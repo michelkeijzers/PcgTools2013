@@ -145,7 +145,7 @@ namespace PcgTools.ListGenerator
                 foreach (var setListSlot in
                     (from setListSlot in ((SetList) PcgMemory.SetLists[setListIndex]).Patches
                      where
-                         ((IBank) (setListSlot.Parent)).IsLoaded &&
+                         ((IBank) setListSlot.Parent).IsLoaded &&
                          setListSlot.UseInList(
                              IgnoreInitSetListSlots, FilterOnText, FilterText,
                              FilterCaseSensitive,
@@ -227,8 +227,8 @@ namespace PcgTools.ListGenerator
             var setListSlotInList = _list.OfType<SetListSlot>().Any();
             var setListSlotMaxSize = 0;
 
-            var favoriteLineHeaderText = _areFavoritesSupported ? "---+" : String.Empty;
-            var favoriteHeaderText = _areFavoritesSupported ? "Fav|" : String.Empty;
+            var favoriteLineHeaderText = _areFavoritesSupported ? "---+" : string.Empty;
+            var favoriteHeaderText = _areFavoritesSupported ? "Fav|" : string.Empty;
 
 // ReSharper disable LoopCanBeConvertedToQuery, do NOT change into LINQ (otherwise it will not work anymore)
             foreach (var patch in _list)            
@@ -272,18 +272,51 @@ namespace PcgTools.ListGenerator
         {
             foreach (var patch in _list)
             {
-                var description = String.Empty;
-                var setListName = String.Empty;
-                var patchType = String.Empty;
+                var description = string.Empty;
+                var setListName = string.Empty;
+                var patchType = string.Empty;
                 var isFavorite = " ";
-                var category = String.Empty;
-                var subCategory = String.Empty;
+                var category = string.Empty;
+                var subCategory = string.Empty;
                 var checksumIncludingName = OptionalColumnCrcIncludingName
-                    ? String.Format("{0,6} ", patch.CalcCrc(true))
-                    : String.Empty;
+                    ? $"{patch.CalcCrc(true),6} "
+                    : string.Empty;
                 var checksumExcludingName = OptionalColumnCrcExcludingName
-                    ? String.Format("{0,6} ", patch.CalcCrc(false))
-                    : String.Empty;
+                    ? $"{patch.CalcCrc(false),6} "
+                    : string.Empty;
+                var setListSlotReferenceId = string.Empty;
+                if (OptionalColumnSetListSlotReferenceId)
+                {
+                    var slot = patch as ISetListSlot;
+                    var usedPatch = slot?.UsedPatch;
+                    if (usedPatch is IProgram)
+                    {
+                        setListSlotReferenceId = $"Prg {usedPatch.Id,-8}";
+                    }
+                    else if (usedPatch is ICombi)
+                    {
+                        setListSlotReferenceId = $"Cmb {usedPatch.Id,-8}";
+                    }
+                    else
+                    {
+                        setListSlotReferenceId = $"{"",-12}";
+                    }
+                }
+
+                var setListSlotReferenceName = string.Empty;
+                if (OptionalColumnSetListSlotReferenceName)
+                {
+                    var slot = patch as ISetListSlot;
+                    var usedPatch = slot?.UsedPatch;
+                    if (usedPatch is IProgram || usedPatch is ICombi)
+                    {
+                        setListSlotReferenceName = $"{usedPatch.Name,-24}";
+                    }
+                    else
+                    {
+                        setListSlotReferenceName = $"{"",-24}";
+                    }
+                }
 
                 var program = patch as IProgram;
                 if (program != null)
@@ -324,7 +357,8 @@ namespace PcgTools.ListGenerator
                 }
 
                 WritePatch(writer, setListSlotInList, setListSlotMaxSize, patch, isFavorite, patchType, 
-                    category, subCategory, checksumIncludingName, checksumExcludingName, setListName, description);
+                    category, subCategory, checksumIncludingName, checksumExcludingName, setListName,
+                    setListSlotReferenceId, setListSlotReferenceName, description);
             }
         }
 
@@ -366,7 +400,7 @@ namespace PcgTools.ListGenerator
             ref string subCategory)
         {
             isFavorite = (_areFavoritesSupported && combi.GetParam(ParameterNames.CombiParameterName.Favorite).Value) ? "X" : " ";
-            patchType = "Combi  "; // Align combis and programs becasue of (sub)category
+            patchType = "Combi  "; // Align combis and programs because of (sub)category
             category = combi.CategoryAsName;
             subCategory = combi.SubCategoryAsName;
             return isFavorite;
@@ -387,8 +421,8 @@ namespace PcgTools.ListGenerator
         {
             patchType = "SetListSlot";
             // Set list slots do not have to be aligned, because they have no (sub)category
-            setListName = ((SetList) (patch.Parent)).Name;
-            description = String.Format("{0}", slot.Description.Replace('\n', '\\'));
+            setListName = ((SetList) patch.Parent).Name;
+            description = $"{slot.Description.Replace('\n', '\\')}";
             return patchType;
         }
 
@@ -407,31 +441,38 @@ namespace PcgTools.ListGenerator
         /// <param name="checksumIncludingName"></param>
         /// <param name="checksumExcludingName"></param>
         /// <param name="setListName"></param>
+        /// <param name="setListSlotReferenceName"></param>
         /// <param name="description"></param>
+        /// <param name="setListSlotReferenceId"></param>
         private void WritePatch(TextWriter writer, bool setListSlotInList, int setListSlotMaxSize, IPatch patch,
             string isFavorite, string patchType, string category, string subCategory, string checksumIncludingName,
-            string checksumExcludingName, string setListName, string description)
+            string checksumExcludingName, string setListName, string setListSlotReferenceId,
+            string setListSlotReferenceName, string description)
         {
             switch (ListOutputFormat)
             {
                 case OutputFormat.AsciiTable:
                     WriteAsciiTablePatch(writer, patch, isFavorite, patchType, category, subCategory, checksumIncludingName,
-                        checksumExcludingName, setListSlotInList, setListSlotMaxSize, setListName, description);
+                        checksumExcludingName, setListSlotInList, setListSlotMaxSize, setListName, setListSlotReferenceId,
+                        setListSlotReferenceName, description);
                     break;
 
                 case OutputFormat.Text:
                     WriteTextPatch(writer, patch, isFavorite, patchType, category, subCategory, checksumIncludingName,
-                        checksumExcludingName, setListSlotInList, setListSlotMaxSize, setListName, description);
+                        checksumExcludingName, setListSlotInList, setListSlotMaxSize, setListName, setListSlotReferenceId,
+                        setListSlotReferenceName, description);
 
                     break;
 
                 case OutputFormat.Csv:
                     WriteCsvPatch(writer, isFavorite, patch, patchType, category, subCategory, checksumIncludingName,
-                        checksumExcludingName, setListSlotInList, setListName, description);
+                        checksumExcludingName, setListSlotInList, setListName, setListSlotReferenceId,
+                        setListSlotReferenceName, description);
                     break;
 
                 case OutputFormat.Xml:
-                    WriteXmlPatch(writer, patchType, patch, isFavorite, category, subCategory, setListName, description);
+                    WriteXmlPatch(writer, patchType, patch, isFavorite, category, subCategory, setListName, 
+                        setListSlotReferenceId, setListSlotReferenceName, description);
                     break;
 
                 default:
@@ -523,28 +564,22 @@ namespace PcgTools.ListGenerator
         private string WriteAsciiNoSetListInSlotTableHeader(TextWriter writer, string favoriteLineHeaderText,
             string favoriteHeaderText, string categoryHeaderName, string subCategoryHeaderName)
         {
-            var asciiTableHeaderLine = String.Format(
-                "+------------------------+------------+-----------+{0}{1}{2}{3}{4}",
-                favoriteLineHeaderText,
-                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories)
-                    ? "----------------+"
-                    : String.Empty,
-                PcgMemory.HasSubCategories ? "----------------+" : String.Empty,
-                (OptionalColumnCrcIncludingName ? "-------+" : String.Empty),
-                (OptionalColumnCrcExcludingName ? "-------+" : String.Empty));
+            var asciiTableHeaderLine =
+                $"+------------------------+------------+-----------+{favoriteLineHeaderText}"+
+                $"{((PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? "----------------+" : string.Empty)}" +
+                $"{(PcgMemory.HasSubCategories ? "----------------+" : string.Empty)}" +
+                $"{(OptionalColumnCrcIncludingName ? "-------+" : string.Empty)}" +
+                $"{(OptionalColumnCrcExcludingName ? "-------+" : string.Empty)}";
 
             writer.WriteLine(asciiTableHeaderLine);
 
-            writer.WriteLine(
-                String.Format(
-                    "|Patch Name              |Patch Type  |Patch ID   |{0}{1}{2}{3}{4}",
-                    favoriteHeaderText,
-                    (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories)
-                        ? String.Format("{0,-16}|", categoryHeaderName)
-                        : String.Empty,
-                    PcgMemory.HasSubCategories ? String.Format("{0,-16}|", subCategoryHeaderName) : String.Empty,
-                    OptionalColumnCrcIncludingName ? "CRC Inc|" : String.Empty,
-                    OptionalColumnCrcExcludingName ? "CRC Exc|" : String.Empty).Trim());
+            writer.WriteLine((
+                $"|Patch Name              |Patch Type  |Patch ID   |{favoriteHeaderText}" +
+                $"{((PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? $"{categoryHeaderName,-16}|" : string.Empty)}" +
+                $"{(PcgMemory.HasSubCategories ? $"{subCategoryHeaderName,-16}|" : string.Empty)}" +
+                $"{(OptionalColumnCrcIncludingName ? "CRC Inc|" : string.Empty)}" +
+                $"{(OptionalColumnCrcExcludingName ? "CRC Exc|" : string.Empty)}")
+                    .Trim());
 
             writer.WriteLine(asciiTableHeaderLine);
             return asciiTableHeaderLine;
@@ -567,34 +602,31 @@ namespace PcgTools.ListGenerator
             string asciiTableHeaderLine;
 // ReSharper disable RedundantStringFormatCall
             asciiTableHeaderLine =
-                (String.Format(
-                    "+------------------------+------------+-----------+{0}{1}{2}{3}{4}------------------------+{5}",
-                    favoriteLineHeaderText,
-                    (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories)
-                        ? "----------------+"
-                        : String.Empty,
-                    PcgMemory.HasSubCategories ? "----------------+" : String.Empty,
-                    (OptionalColumnCrcIncludingName ? "-------+" : String.Empty),
-                    (OptionalColumnCrcExcludingName ? "-------+" : String.Empty),
-                    new string('-', setListSlotMaxSize) + "+"));
+                ($"+------------------------+------------+-----------+{favoriteLineHeaderText}" +
+                $"{((PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? "----------------+" : string.Empty)}" +
+                $"{(PcgMemory.HasSubCategories ? "----------------+" : string.Empty)}" + 
+                $"{(OptionalColumnCrcIncludingName ? "-------+" : string.Empty)}" +
+                $"{(OptionalColumnCrcExcludingName ? "-------+" : string.Empty)}" +
+                $"------------------------+" +
+                $"{(OptionalColumnSetListSlotReferenceId ? "------------+" : string.Empty)}" +
+                $"{(OptionalColumnSetListSlotReferenceName ? "------------------------+" : string.Empty)}" +
+                $"{new string('-', setListSlotMaxSize) + "+"}");
 
             writer.WriteLine(asciiTableHeaderLine);
 
             const string setListSlotDescriptionHeader = "Set List Slot Description";
 
             writer.WriteLine(
-                String.Format(
-                    "|Patch Name              |Patch Type  |Patch ID   |{0}{1}{2}{3}{4}{5}{6}{7}",
-                    favoriteHeaderText,
-                    (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories)
-                        ? String.Format("{0,-16}|", categoryHeaderName)
-                        : String.Empty,
-                    PcgMemory.HasSubCategories ? String.Format("{0,-16}|", subCategoryHeaderName) : String.Empty,
-                    (OptionalColumnCrcIncludingName ? "CRC Inc|" : String.Empty),
-                    (OptionalColumnCrcExcludingName ? "CRC Exc|" : String.Empty),
-                    String.Format("{0,-24}|", Strings.SetList),
-                    setListSlotDescriptionHeader,
-                    new string(' ', setListSlotMaxSize - setListSlotDescriptionHeader.Length) + "|"));
+                $"|Patch Name              |Patch Type  |Patch ID   |" +
+                $"{favoriteHeaderText}{((PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? $"{categoryHeaderName,-16}|" : string.Empty)}"+
+                $"{(PcgMemory.HasSubCategories ? $"{subCategoryHeaderName,-16}|" : string.Empty)}"+
+                $"{(OptionalColumnCrcIncludingName ? "CRC Inc|" : string.Empty)}" +
+                $"{(OptionalColumnCrcExcludingName ? "CRC Exc|" : string.Empty)}" +
+                $"{string.Format($"{Strings.SetList,-24}|", Strings.SetList)}" +
+                $"{(OptionalColumnSetListSlotReferenceId ? "Ref Patch ID|" : string.Empty)}" +
+                $"{(OptionalColumnSetListSlotReferenceName ? "Ref Patch Name          |" : string.Empty)}" +
+                $"{setListSlotDescriptionHeader}" +
+                $"{new string(' ', setListSlotMaxSize - setListSlotDescriptionHeader.Length) + "|"}");
 
             writer.WriteLine(asciiTableHeaderLine);
             return asciiTableHeaderLine;
@@ -610,9 +642,7 @@ namespace PcgTools.ListGenerator
             writer.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
             // ReSharper disable RedundantStringFormatCall
             writer.WriteLine(
-                String.Format(
-                    "<?xml-stylesheet type=\"text/xsl\" href=\"{0}\"?>",
-                    Path.ChangeExtension(OutputFileName, "xsl")));
+                $"<?xml-stylesheet type=\"text/xsl\" href=\"{Path.ChangeExtension(OutputFileName, "xsl")}\"?>");
             // ReSharper restore RedundantStringFormatCall
             writer.WriteLine("<patch_list xml:lang=\"en\">");
         }
@@ -632,10 +662,13 @@ namespace PcgTools.ListGenerator
         /// <param name="setListSlotInList"></param>
         /// <param name="setListSlotMaxSize"></param>
         /// <param name="setListName"></param>
+        /// <param name="setListSlotReferenceName"></param>
         /// <param name="description"></param>
+        /// <param name="setListSlotReferenceId"></param>
         private void WriteAsciiTablePatch(TextWriter writer, IPatch patch, string isFavorite, string patchType, string category,
             string subCategory, string checksumIncludingName, string checksumExcludingName, bool setListSlotInList,
-            int setListSlotMaxSize, string setListName, string description)
+            int setListSlotMaxSize, string setListName, string setListSlotReferenceId, string setListSlotReferenceName, 
+            string description)
         {
             if ((patch is Program) || (patch is Combi))
             {
@@ -645,7 +678,8 @@ namespace PcgTools.ListGenerator
             else if (patch is SetListSlot)
             {
                 WriteAsciiTableSetListSlotPatch(writer, patch, patchType, checksumIncludingName, checksumExcludingName, 
-                    setListSlotInList, setListSlotMaxSize, setListName, description);
+                    setListSlotInList, setListSlotMaxSize, setListName, setListSlotReferenceId, setListSlotReferenceName, 
+                    description);
             }
             else if ((patch is DrumKit) || (patch is DrumPattern) || (patch is WaveSequence))
             {
@@ -677,36 +711,19 @@ namespace PcgTools.ListGenerator
             bool setListSlotInList, int setListSlotMaxSize)
         {
             var favoriteText = _areFavoritesSupported
-                ? String.Format(" {0} |", isFavorite)
-                : String.Empty;
-            writer.WriteLine(
-                String.Format(
-                    "|{0,-24}|{1,-12}|{2,-11}|{3}{4}{5}{6}{7}{8}{9}",
-                    patch.Name, // {0}
-                    patchType, // {1}
-                    patch.Id, // {2}
-                    favoriteText, // {3}
-                    (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories)
-                        ? (category.Equals(String.Empty)
-                            ? "                |"
-                            : String.Format("{0,-16}|", category))
-                        : String.Empty,
-                    // {4}
-                    PcgMemory.HasSubCategories
-                        ? (subCategory.Equals(String.Empty)
-                            ? String.Empty
-                            : String.Format("{0,-16}|", subCategory))
-                        : String.Empty,
-                    // {5}
-                    OptionalColumnCrcIncludingName ? checksumIncludingName + "|" : String.Empty, // {6}
-                    OptionalColumnCrcExcludingName ? checksumExcludingName + "|" : String.Empty, // {7}
-                    setListSlotInList
-                        ? new string(' ', setListSlotInList ? 24 : 0) + "|"
-                        : String.Empty, // {8},
-                    setListSlotInList
-                        ? new string(' ', setListSlotInList ? setListSlotMaxSize : 0) + "|"
-                        : String.Empty) // {9},
-                    .Trim());
+                ? $" {isFavorite} |"
+                : string.Empty;
+            writer.WriteLine((
+                $"|{patch.Name,-24}|{patchType,-12}|{patch.Id,-11}|{favoriteText}" +
+                $"{((PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? (category.Equals(string.Empty) ? "                |" : $"{category,-16}|") : string.Empty)}" +
+                $"{(PcgMemory.HasSubCategories ? (subCategory.Equals(string.Empty) ? string.Empty : $"{subCategory,-16}|") : string.Empty)}" +
+                $"{(OptionalColumnCrcIncludingName ? checksumIncludingName + "|" : string.Empty)}" +
+                $"{(OptionalColumnCrcExcludingName ? checksumExcludingName + "|" : string.Empty)}" +
+                $"{(setListSlotInList ? new string(' ', 24) + "|" : string.Empty)}" +
+                $"{(setListSlotInList && OptionalColumnSetListSlotReferenceId ? new string(' ', 12) + "|" : string.Empty)}" +
+                $"{(setListSlotInList && OptionalColumnSetListSlotReferenceName ? new string(' ', 24) + "|" : string.Empty)}" +
+                $"{(setListSlotInList ? new string(' ', setListSlotMaxSize) + "|" : string.Empty)}")
+                .Trim());
         }
 
 
@@ -719,30 +736,34 @@ namespace PcgTools.ListGenerator
         /// <param name="checksumIncludingName"></param>
         /// <param name="checksumExcludingName"></param>
         /// <param name="setListSlotInList"></param>
+        /// <param name="setListSlotReferenceName"></param>
         /// <param name="setListSlotMaxSize"></param>
         /// <param name="setListName"></param>
         /// <param name="description"></param>
+        /// <param name="setListSlotReferenceId"></param>
         private void WriteAsciiTableSetListSlotPatch(TextWriter writer, IPatch patch, string patchType,
-            string checksumIncludingName, string checksumExcludingName, bool setListSlotInList, int setListSlotMaxSize,
-            string setListName, string description)
+            string checksumIncludingName, string checksumExcludingName, bool setListSlotInList,  int setListSlotMaxSize,
+            string setListName, string setListSlotReferenceId, string setListSlotReferenceName, string description)
         {
             writer.WriteLine(
-                "|{0,-24}|{1,-12}|{2,-11}|{3}{4}{5}{6}{7}{8}{9}{10}|", patch.Name, patchType, patch.Id,
-                _areFavoritesSupported ? "   |" : String.Empty, // {3}
-                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? "                |" : String.Empty,
+                "|{0,-24}|{1,-12}|{2,-11}|{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}|", patch.Name, patchType, patch.Id,
+                _areFavoritesSupported ? "   |" : string.Empty, // {3}
+                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? "                |" : string.Empty,
                 // {4}
-                PcgMemory.HasSubCategories ? "                |" : String.Empty, // {5}
-                OptionalColumnCrcIncludingName ? checksumIncludingName + "|" : String.Empty, // {6}
-                OptionalColumnCrcExcludingName ? checksumExcludingName + "|" : String.Empty, // {7}
+                PcgMemory.HasSubCategories ? "                |" : string.Empty, // {5}
+                OptionalColumnCrcIncludingName ? checksumIncludingName + "|" : string.Empty, // {6}
+                OptionalColumnCrcExcludingName ? checksumExcludingName + "|" : string.Empty, // {7}
                 setListSlotInList
-                    ? ((String.Format("{0,-24}", setListName) + "|"))
-                    : (new string(' ', 24) + "|"), // {8}
-                description, // {9}
+                    ? $"{setListName,-24}" + "|"
+                    : new string(' ', 24) + "|", // {8}
+                OptionalColumnSetListSlotReferenceId && setListSlotInList ? setListSlotReferenceId + "|" : string.Empty, // {9}
+                OptionalColumnSetListSlotReferenceName && setListSlotInList ? setListSlotReferenceName + "|" : string.Empty, // {10}
+                description, // {11}
                 new string(
                     ' ', setListSlotInList
                         ? (setListSlotMaxSize +
                            description.Count(c => c == '\r') - description.Length)
-                        : 0)); // {10}
+                        : 0)); // {12}
 
             // {9}
         }
@@ -763,26 +784,16 @@ namespace PcgTools.ListGenerator
             string patchType, string checksumIncludingName, string checksumExcludingName, bool setListSlotInList,
             int setListSlotMaxSize)
         {
-            writer.WriteLine(
-                String.Format(
-                    "|{0,-24}|{1,-12}|{2,-11}|{3}{4}{5}{6}{7}{8}{9}", patch.Name, patchType, patch.Id,
-                    _areFavoritesSupported
-                        ? String.Format(" {0} |", isFavorite)
-                        : " ",
-                    (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories)
-                        ? String.Format("{0,-16}|", String.Empty)
-                        : String.Empty,
-                    // {4}
-                    PcgMemory.HasSubCategories ? String.Format("{0,-16}|", String.Empty) : String.Empty,
-                    // {5}
-                    OptionalColumnCrcIncludingName ? checksumIncludingName + "|" : String.Empty,
-                    OptionalColumnCrcExcludingName ? checksumExcludingName + "|" : String.Empty,
-                    setListSlotInList
-                        ? new string(' ', setListSlotInList ? 24 : 0) + "|"
-                        : String.Empty,
-                    setListSlotInList
-                        ? new string(' ', setListSlotInList ? setListSlotMaxSize : 0) + "|"
-                        : String.Empty)
+            writer.WriteLine((
+                $"|{patch.Name,-24}|{patchType,-12}|{patch.Id,-11}|{(_areFavoritesSupported ? $" {isFavorite} |" : " ")}" +
+                $"{((PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? $"{string.Empty,-16}|" : string.Empty)}" +
+                $"{(PcgMemory.HasSubCategories ? $"{string.Empty,-16}|" : string.Empty)}" +
+                $"{(OptionalColumnCrcIncludingName ? checksumIncludingName + "|" : string.Empty)}" +
+                $"{(OptionalColumnCrcExcludingName ? checksumExcludingName + "|" : string.Empty)}" +
+                $"{(setListSlotInList ? new string(' ', 24) + "|" : string.Empty)}" +
+                $"{(setListSlotInList && OptionalColumnSetListSlotReferenceId ? new string(' ', 12) + "|" : string.Empty)}" +
+                $"{(setListSlotInList && OptionalColumnSetListSlotReferenceName ? new string(' ', 24) + "|" : string.Empty)}" +
+                $"{(setListSlotInList ? new string(' ', setListSlotMaxSize) + "|" : string.Empty)}")
                     .Trim());
         }
 
@@ -801,10 +812,13 @@ namespace PcgTools.ListGenerator
         /// <param name="setListSlotInList"></param>
         /// <param name="setListSlotMaxSize"></param>
         /// <param name="setListName"></param>
+        /// <param name="setListSlotReferenceName"></param>
         /// <param name="description"></param>
+        /// <param name="setListSlotReferenceId"></param>
         private void WriteTextPatch(TextWriter writer, IPatch patch, string isFavorite, string patchType, string category,
             string subCategory, string checksumIncludingName, string checksumExcludingName, bool setListSlotInList,
-            int setListSlotMaxSize, string setListName, string description)
+            int setListSlotMaxSize, string setListName, string setListSlotReferenceId, string setListSlotReferenceName, 
+            string description)
         {
             if ((patch is Program) || (patch is Combi))
             {
@@ -814,7 +828,7 @@ namespace PcgTools.ListGenerator
             else if (patch is SetListSlot)
             {
                 WriteTextSetListSlotPatch(writer, patch, patchType, checksumIncludingName, checksumExcludingName,
-                    setListSlotInList, setListSlotMaxSize, setListName, description);
+                    setListSlotInList, setListSlotMaxSize, setListName, setListSlotReferenceId, setListSlotReferenceName, description);
             }
             else if ((patch is DrumKit) || (patch is DrumPattern) || (patch is WaveSequence))
             {
@@ -841,35 +855,15 @@ namespace PcgTools.ListGenerator
             string category, string subCategory, string checksumIncludingName, string checksumExcludingName,
             bool setListSlotInList, int setListSlotMaxSize)
         {
-            var favoriteText = _areFavoritesSupported ? String.Format("{0} ", isFavorite) : String.Empty;
-            writer.WriteLine(
-                String.Format(
-                    "{0,-24} {1,-12} {2,-11}{3}{4}{5}{6}{7}{8}{9}",
-                    patch.Name, // {0}
-                    patchType, // {1}
-                    patch.Id, // {2}
-                    favoriteText, // {3}
-                    (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories)
-                        ? (category.Equals(String.Empty)
-                            ? String.Empty
-                            : String.Format("{0,-16} ", category))
-                        : String.Empty,
-                    // {4}
-                    PcgMemory.HasSubCategories
-                        ? (subCategory.Equals(String.Empty)
-                            ? String.Empty
-                            : String.Format("{0,-16} ", subCategory))
-                        : String.Empty,
-                    // {5}
-                    OptionalColumnCrcIncludingName ? checksumIncludingName + " " : String.Empty, // {6}
-                    OptionalColumnCrcExcludingName ? checksumExcludingName + " " : String.Empty, // {7}
-                    setListSlotInList
-                        ? new string(' ', setListSlotInList ? setListSlotMaxSize : 0)
-                        : String.Empty, // {8}
-                    setListSlotInList
-                        ? new string(' ', setListSlotInList ? setListSlotMaxSize : 0)
-                        : String.Empty) // {9}
-                    // {8},
+            var favoriteText = _areFavoritesSupported ? $"{isFavorite} " : string.Empty;
+            writer.WriteLine((
+                $"{patch.Name,-24} {patchType,-12} {patch.Id,-11}{favoriteText}" +
+                $"{((PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? (category.Equals(string.Empty) ? string.Empty : $"{category,-16} ") : string.Empty)}" +
+                $"{(PcgMemory.HasSubCategories ? (subCategory.Equals(string.Empty) ? string.Empty : $"{subCategory,-16} ") : string.Empty)}" +
+                $"{(OptionalColumnCrcIncludingName ? checksumIncludingName + " " : string.Empty)}" +
+                $"{(OptionalColumnCrcExcludingName ? checksumExcludingName + " " : string.Empty)}" +
+                $"{(setListSlotInList ? new string(' ', setListSlotMaxSize) : string.Empty)}" +
+                $"{(setListSlotInList ? new string(' ', setListSlotMaxSize) : string.Empty)}")
                     .Trim());
         }
 
@@ -885,24 +879,29 @@ namespace PcgTools.ListGenerator
         /// <param name="setListSlotInList"></param>
         /// <param name="setListSlotMaxSize"></param>
         /// <param name="setListName"></param>
+        /// <param name="setListSlotReferenceName"></param>
         /// <param name="description"></param>
+        /// <param name="setListSlotReferenceId"></param>
         private void WriteTextSetListSlotPatch(TextWriter writer, IPatch patch, string patchType, string checksumIncludingName,
-            string checksumExcludingName, bool setListSlotInList, int setListSlotMaxSize, string setListName, string description)
+            string checksumExcludingName, bool setListSlotInList, int setListSlotMaxSize, string setListName,
+             string setListSlotReferenceId, string setListSlotReferenceName, string description)
         {
             writer.WriteLine(
-                "{0,-24} {1,-12} {2,-11} {3}{4}{5}{6}{7}{8}{9}{10}", patch.Name, patchType, patch.Id,
-                _areFavoritesSupported ? "   " : String.Empty, // {3}
-                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? "                " : String.Empty, // {4}
-                PcgMemory.HasSubCategories ? "                " : String.Empty, // {5}
-                OptionalColumnCrcIncludingName ? checksumIncludingName + " " : String.Empty, // {6}
-                OptionalColumnCrcExcludingName ? checksumExcludingName + " " : String.Empty, // {7}
-                setListSlotInList ? string.Format("{0,-24}", setListName) : String.Empty, // {8}
-                setListSlotInList ? description : String.Empty, // {9}
+                "{0,-24} {1,-12} {2,-11} {3}{4}{5}{6}{7}{8}{9}{10}{11}{12}", patch.Name, patchType, patch.Id,
+                _areFavoritesSupported ? "   " : string.Empty, // {3}
+                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? "                " : string.Empty, // {4}
+                PcgMemory.HasSubCategories ? "                " : string.Empty, // {5}
+                OptionalColumnCrcIncludingName ? checksumIncludingName + " " : string.Empty, // {6}
+                OptionalColumnCrcExcludingName ? checksumExcludingName + " " : string.Empty, // {7}
+                setListSlotInList ? $"{setListName,-24} " : string.Empty, // {8}
+                OptionalColumnSetListSlotReferenceId && setListSlotInList ? setListSlotReferenceId + " " : string.Empty, // {9}
+                OptionalColumnSetListSlotReferenceName && setListSlotInList ? setListSlotReferenceName + " " : string.Empty, // {10}
+                setListSlotInList ? description : string.Empty, // {11}
                 new string(
                     ' ', setListSlotInList
                         ? (setListSlotMaxSize +
                            description.Count(c => c == '\r') - description.Length)
-                        : 0)); // {10}
+                        : 0)); // {12}
         }
 
 
@@ -920,28 +919,15 @@ namespace PcgTools.ListGenerator
         private void WriteTextDrumKitOrDrumPatternOrWaveSequencePatch(TextWriter writer, IPatch patch, string isFavorite, string patchType,
             string checksumIncludingName, string checksumExcludingName, bool setListSlotInList, int setListSlotMaxSize)
         {
-            writer.WriteLine(
-                String.Format(
-                    "{0,-24} {1,-12} {2,-11}{3}{4}{5}{6}{7}{8}{9}", patch.Name, patchType, patch.Id,
-                    _areFavoritesSupported
-                        ? String.Format("{0} ", isFavorite)
-                        : " ",
-                    (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories)
-                        ? String.Format("{0,-16} ", String.Empty)
-                        : String.Empty,
-                    // {4}
-                    PcgMemory.HasSubCategories ? String.Format("{0,-16} ", String.Empty) : String.Empty,
-                    // {5}
-                    OptionalColumnCrcIncludingName ? checksumIncludingName + " " : String.Empty, // {6}
-                    OptionalColumnCrcExcludingName ? checksumExcludingName + " " : String.Empty, // {7}
-                    setListSlotInList
-                        ? new string(' ', setListSlotInList ? 24 : 0) // {8}
-                        : String.Empty,
-                    setListSlotInList
-                        ? new string(' ', setListSlotInList ? setListSlotMaxSize : 0)
-                        : String.Empty)
-                    // {9}
-                    .Trim());
+            writer.WriteLine((
+                $"{patch.Name,-24} {patchType,-12} {patch.Id,-11}{(_areFavoritesSupported ? $"{isFavorite} " : " ")}" +
+                $"{(PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories ? $"{string.Empty,-16} " : string.Empty)}" +
+                $"{(PcgMemory.HasSubCategories ? $"{string.Empty,-16} " : string.Empty)}" +
+                $"{(OptionalColumnCrcIncludingName ? checksumIncludingName + " " : string.Empty)}" +
+                $"{(OptionalColumnCrcExcludingName ? checksumExcludingName + " " : string.Empty)}" +
+                $"{(setListSlotInList ? new string(' ', 24) : string.Empty)}" +
+                $"{(setListSlotInList ? new string(' ', setListSlotMaxSize) : string.Empty)}") // {9}
+                .Trim());
         }
 
 
@@ -958,12 +944,14 @@ namespace PcgTools.ListGenerator
         /// <param name="checksumExcludingName"></param>
         /// <param name="setListSlotInList"></param>
         /// <param name="setListName"></param>
+        /// <param name="setListSlotReferenceName"></param>
         /// <param name="description"></param>
+        /// <param name="setListSlotReferenceId"></param>
         private void WriteCsvPatch(TextWriter writer, string isFavorite, IPatch patch, string patchType, string category,
             string subCategory, string checksumIncludingName, string checksumExcludingName, bool setListSlotInList,
-            string setListName, string description)
+            string setListName, string setListSlotReferenceId, string setListSlotReferenceName, string description)
         {
-            var favoriteCsvText = _areFavoritesSupported ? String.Format("{0},", isFavorite) : String.Empty;
+            var favoriteCsvText = _areFavoritesSupported ? $"{isFavorite}," : string.Empty;
             if ((patch is Program) || (patch is Combi))
             {
                 WriteCsvProgramOrCombi(writer, patch, patchType, category, subCategory, checksumIncludingName, 
@@ -972,9 +960,9 @@ namespace PcgTools.ListGenerator
             else if (patch is SetListSlot)
             {
                 WriteCsvSetListSlot(writer, patch, patchType, checksumIncludingName, checksumExcludingName, setListName,
-                    description);
+                    setListSlotInList, setListSlotReferenceId, setListSlotReferenceName, description);
             }
-            else if ((patch is DrumKit) || (patch is WaveSequence))
+            else if (patch is DrumKit || patch is WaveSequence)
             {
                 WriteCsvDrumKitOrDrumPatternOrWaveSequence(writer, patch, patchType, category, subCategory, checksumIncludingName, 
                     checksumExcludingName, setListSlotInList, favoriteCsvText);
@@ -1000,13 +988,13 @@ namespace PcgTools.ListGenerator
         {
             writer.WriteLine(
                 "{0},{1},{2},{3}{4}{5}{6}{7}{8}{9}", patch.Name.Replace(',', '_'), patchType, patch.Id,
-                _areFavoritesSupported ? favoriteCsvText + "," : String.Empty,
-                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? category + "," : String.Empty,
-                PcgMemory.HasSubCategories ? subCategory + "," : String.Empty,
-                OptionalColumnCrcIncludingName ? checksumIncludingName + "," : String.Empty,
-                OptionalColumnCrcExcludingName ? checksumExcludingName + "," : String.Empty,
-                setListSlotInList ? "," : String.Empty,
-                setListSlotInList ? "," : String.Empty);
+                _areFavoritesSupported ? favoriteCsvText + "," : string.Empty,
+                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? category + "," : string.Empty,
+                PcgMemory.HasSubCategories ? subCategory + "," : string.Empty,
+                OptionalColumnCrcIncludingName ? checksumIncludingName + "," : string.Empty,
+                OptionalColumnCrcExcludingName ? checksumExcludingName + "," : string.Empty,
+                setListSlotInList ? "," : string.Empty,
+                setListSlotInList ? "," : string.Empty);
         }
 
 
@@ -1019,18 +1007,24 @@ namespace PcgTools.ListGenerator
         /// <param name="checksumIncludingName"></param>
         /// <param name="checksumExcludingName"></param>
         /// <param name="setListName"></param>
+        /// <param name="setListSlotInList"></param>
+        /// <param name="setListSlotReferenceName"></param>
         /// <param name="description"></param>
+        /// <param name="setListSlotReferenceId"></param>
         private void WriteCsvSetListSlot(TextWriter writer, IPatch patch, string patchType, string checksumIncludingName,
-            string checksumExcludingName, string setListName, string description)
+            string checksumExcludingName, string setListName, bool setListSlotInList, string setListSlotReferenceId,
+            string setListSlotReferenceName, string description)
         {
             writer.WriteLine(
-                "{0},{1},{2},{3}{4}{5}{6}{7}{8}{9}", patch.Name.Replace(',', '_'), patchType, patch.Id,
-                _areFavoritesSupported ? "," : String.Empty,
-                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? "," : String.Empty,
-                PcgMemory.HasSubCategories ? "," : String.Empty,
-                OptionalColumnCrcIncludingName ? checksumIncludingName + "," : String.Empty,
-                OptionalColumnCrcExcludingName ? checksumExcludingName + "," : String.Empty,
+                "{0},{1},{2},{3}{4}{5}{6}{7}{8}{9}{10}{11}", patch.Name.Replace(',', '_'), patchType, patch.Id,
+                _areFavoritesSupported ? "," : string.Empty,
+                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? "," : string.Empty,
+                PcgMemory.HasSubCategories ? "," : string.Empty,
+                OptionalColumnCrcIncludingName ? checksumIncludingName + "," : string.Empty,
+                OptionalColumnCrcExcludingName ? checksumExcludingName + "," : string.Empty,
                 setListName + ",",
+                OptionalColumnSetListSlotReferenceId && setListSlotInList ? setListSlotReferenceId + ",": string.Empty,
+                OptionalColumnSetListSlotReferenceName && setListSlotInList ? setListSlotReferenceName + "," : string.Empty,
                 description.Replace('\r', ';').Replace('\n', ';')); //
         }
 
@@ -1053,13 +1047,13 @@ namespace PcgTools.ListGenerator
         {
             writer.WriteLine(
                 "{0},{1},{2},{3}{4}{5}{6}{7}{8}{9}", patch.Name.Replace(',', '_'), patchType, patch.Id,
-                _areFavoritesSupported ? favoriteCsvText + "," : String.Empty,
-                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? category + "," : String.Empty,
-                PcgMemory.HasSubCategories ? subCategory + "," : String.Empty,
-                OptionalColumnCrcIncludingName ? checksumIncludingName + "," : String.Empty,
-                OptionalColumnCrcExcludingName ? checksumExcludingName + "," : String.Empty,
-                setListSlotInList ? "," : String.Empty,
-                setListSlotInList ? "," : String.Empty);
+                _areFavoritesSupported ? favoriteCsvText + "," : string.Empty,
+                (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories) ? category + "," : string.Empty,
+                PcgMemory.HasSubCategories ? subCategory + "," : string.Empty,
+                OptionalColumnCrcIncludingName ? checksumIncludingName + "," : string.Empty,
+                OptionalColumnCrcExcludingName ? checksumExcludingName + "," : string.Empty,
+                setListSlotInList ? "," : string.Empty,
+                setListSlotInList ? "," : string.Empty);
         }
 
 
@@ -1073,48 +1067,69 @@ namespace PcgTools.ListGenerator
         /// <param name="category"></param>
         /// <param name="subCategory"></param>
         /// <param name="setListName"></param>
+        /// <param name="setListSlotReferenceName"></param>
         /// <param name="description"></param>
+        /// <param name="setListSlotReferenceId"></param>
         private void WriteXmlPatch(TextWriter writer, string patchType, IPatch patch, string isFavorite, string category,
-            string subCategory, string setListName, string description)
+            string subCategory, string setListName, string setListSlotReferenceId, string setListSlotReferenceName, 
+            string description)
         {
             writer.WriteLine("  <patch>");
             writer.WriteLine("    <type>{0}</type>", patchType);
             writer.WriteLine("    <id>{0}</id>", patch.Id);
-            writer.WriteLine("    <name>{0}</name>", patch.Name.ConvertToXml());
+            writer.WriteLine("    <name>{0}</name>", patch.Name.ConvertToXml().Trim());
             if (PcgMemory.AreFavoritesSupported)
             {
-                writer.WriteLine("    <favorite>{0}</favorite>", isFavorite);
+                writer.WriteLine("    <favorite>{0}</favorite>", 
+                    isFavorite);
             }
 
             if (PcgMemory.HasProgramCategories || PcgMemory.HasCombiCategories)
             {
-                writer.WriteLine("    <category>{0}</category>", category.ConvertToXml());
+                writer.WriteLine("    <category>{0}</category>", 
+                    category.ConvertToXml().Trim());
             }
 
             if (PcgMemory.HasSubCategories)
             {
-                writer.WriteLine("    <subcategory>{0}</subcategory>", subCategory.ConvertToXml());
+                writer.WriteLine("    <subcategory>{0}</subcategory>",
+                    subCategory.ConvertToXml().Trim());
             }
 
             if (OptionalColumnCrcIncludingName)
             {
-                writer.WriteLine("    <crc_including_name>{0}</crc_including_name>", patch.CalcCrc(true));
+                writer.WriteLine("    <crc_including_name>{0}</crc_including_name>", 
+                    patch.CalcCrc(true).ToString().Trim());
             }
 
             if (OptionalColumnCrcExcludingName)
             {
-                writer.WriteLine("    <crc_excluding_name>{0}</crc_excluding_name>", patch.CalcCrc(false));
+                writer.WriteLine("    <crc_excluding_name>{0}</crc_excluding_name>", 
+                    patch.CalcCrc(false).ToString().Trim());
             }
 
             if (PcgMemory.SetLists != null)
             {
-                writer.WriteLine("    <setlistname>{0}</setlistname>", setListName.ConvertToXml());
+                writer.WriteLine("    <setlistname>{0}</setlistname>", 
+                    setListName.ConvertToXml().Trim());
             }
 
             if (PcgMemory.SetLists != null)
             {
-                //writer.WriteLine("    <setlistname>{0}</setlistname>", setListName.ConvertToXml());
-                writer.WriteLine("    <description>{0}</description>", description.ConvertToXml());
+                writer.WriteLine("    <setlistslotreferenceid>{0}</setlistslotreferenceid>", 
+                    setListSlotReferenceId.ConvertToXml().Trim());
+            }
+
+            if (PcgMemory.SetLists != null)
+            {
+                writer.WriteLine("    <setlistslotreferencename>{0}</setlistslotreferencename>", 
+                    setListSlotReferenceName.ConvertToXml().Trim());
+            }
+
+            if (PcgMemory.SetLists != null)
+            {
+                writer.WriteLine("    <description>{0}</description>", 
+                    description.ConvertToXml().Trim());
             }
 
             writer.WriteLine("  </patch>");
@@ -1131,7 +1146,7 @@ namespace PcgTools.ListGenerator
             builder.AppendLine("<?xml version=\"1.0\"?>");
             builder.AppendLine(" <xsl:stylesheet version=\"1.0\"");
             builder.AppendLine(" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
-            builder.AppendLine(String.Empty);
+            builder.AppendLine(string.Empty);
             builder.AppendLine(" <xsl:template match=\"/\">");
             builder.AppendLine("   <html>");
             builder.AppendLine("   <body>");
@@ -1149,7 +1164,7 @@ namespace PcgTools.ListGenerator
             builder.AppendLine("   </body>");
             builder.AppendLine("   </html>");
             builder.AppendLine(" </xsl:template>");
-            builder.AppendLine(String.Empty);
+            builder.AppendLine(string.Empty);
             builder.AppendLine(" </xsl:stylesheet>");
             File.WriteAllText(Path.ChangeExtension(OutputFileName, "xsl"), builder.ToString());
         }
@@ -1175,14 +1190,14 @@ namespace PcgTools.ListGenerator
             {
                 var categoryHeaderName =
                     PcgMemory.UsesCategoriesAndSubCategories ? Strings.Category : Strings.Genre;
-                builder.AppendLine(String.Format("         <th>{0}</th>", categoryHeaderName));
+                builder.AppendLine($"         <th>{categoryHeaderName}</th>");
             }
 
             if (PcgMemory.HasSubCategories)
             {
                 var subCategoryHeaderName =
                     PcgMemory.UsesCategoriesAndSubCategories ? Strings.SubCategory : Strings.Category;
-                builder.AppendLine(String.Format("         <th>{0}</th>", subCategoryHeaderName));
+                builder.AppendLine($"         <th>{subCategoryHeaderName}</th>");
             }
 
             if (OptionalColumnCrcIncludingName)
@@ -1198,6 +1213,16 @@ namespace PcgTools.ListGenerator
             var setListSlotInList = _list.OfType<SetListSlot>().Any();
             if (setListSlotInList)
             {
+                if (OptionalColumnSetListSlotReferenceId)
+                {
+                    builder.AppendLine("         <th>Set List Slot Reference Id</th>");
+                }
+
+                if (OptionalColumnSetListSlotReferenceName)
+                { 
+                    builder.AppendLine("         <th>Set List Slot Reference Name</th>");
+                }
+
                 builder.AppendLine("         <th>Set List Name</th>");
                 builder.AppendLine("         <th>Description</th>");
             }
@@ -1245,6 +1270,16 @@ namespace PcgTools.ListGenerator
 
             if (setListSlotInList)
             {
+                if (OptionalColumnSetListSlotReferenceId)
+                {
+                    builder.AppendLine("           <td><xsl:value-of select=\"setlistslotreferenceid\"/></td>");
+                }
+
+                if (OptionalColumnSetListSlotReferenceName)
+                {
+                    builder.AppendLine("           <td><xsl:value-of select=\"setlistslotreferencename\"/></td>");
+                }
+
                 builder.AppendLine("           <td><xsl:value-of select=\"setlistname\"/></td>");
                 builder.AppendLine("           <td><xsl:value-of select=\"description\"/></td>");
             }

@@ -1,6 +1,4 @@
-﻿using PcgTools.Common;
-
-namespace PcgTools.Model.Common.Synth.OldParameters
+﻿namespace PcgTools.Model.Common.Synth.OldParameters
 {
     /// <summary>
     /// Contains parameter names.

@@ -1,9 +1,7 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 
-using System.Collections.Generic;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.KronosSpecific.Pcg;
 using PcgTools.Model.KronosSpecific.Synth;

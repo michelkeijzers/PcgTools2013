@@ -26,28 +26,27 @@ namespace PcgTools.Model.TrinitySpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int PcgOffsetCategories { get { return 146; } }
+        protected override int PcgOffsetCategories => 146;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int SizeOfProgramsCategoriesAndSubCategories
-        {
-            get { return NrOfCategories * 2 * CategoryNameLength; } // For both A and B categories
-        }
+        protected override int SizeOfProgramsCategoriesAndSubCategories => NrOfCategories * 2 * CategoryNameLength;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int CategoryNameLength { get { return 16; } }
+        protected override int CategoryNameLength => 16;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int NrOfCategories { get { return 16; } } // 16 for A and 16 for B.
+        protected override int NrOfCategories => 16;
+
+// 16 for A and 16 for B.
 
 
         /// <summary>

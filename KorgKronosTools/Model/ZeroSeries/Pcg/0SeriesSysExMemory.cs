@@ -39,13 +39,13 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// <summary>
         /// 
         /// </summary>
-        public override bool HasSubCategories { get { return false; } }
+        public override bool HasSubCategories => false;
 
 
         /// <summary>
         /// Hardcoded (taken from Mode parameter).
         /// </summary>
-        public override int NumberOfCategories { get { return 4; } }
+        public override int NumberOfCategories => 4;
 
 
         /// <summary>
@@ -63,10 +63,7 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// <summary>
         /// 
         /// </summary>
-        public override bool AreCategoriesEditable
-        {
-            get { return false; }
-        }
+        public override bool AreCategoriesEditable => false;
 
 
         /// <summary>

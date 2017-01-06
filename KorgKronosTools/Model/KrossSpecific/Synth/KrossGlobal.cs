@@ -18,7 +18,7 @@ namespace PcgTools.Model.KrossSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int PcgOffsetCategories { get { return 334; } }
+        protected override int PcgOffsetCategories => 334;
 
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace PcgTools.Model.KrossSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int NrOfCategories { get { return 12; } }
+        protected override int NrOfCategories => 12;
 
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Diagnostics;
 using Common.Utils;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -28,10 +27,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         /// <summary>
         /// 
         /// </summary>
-        public static BoolParameter Instance
-        {
-            get { return _instance ?? (_instance = new BoolParameter()); }
-        }
+        public static BoolParameter Instance => _instance ?? (_instance = new BoolParameter());
 
 
         /// <summary>
@@ -67,7 +63,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
                 PcgMemory.IsDirty |= BitsUtil.SetBit(PcgData, PcgOffset, _bit, value);
                 if (Patch != null)
                 {
-                    Patch.RaisePropertyChanged(String.Empty, false);
+                    Patch.RaisePropertyChanged(string.Empty, false);
                 }
             }
         }

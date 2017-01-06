@@ -26,25 +26,19 @@ namespace PcgTools.Model.Zero3Rw.Synth
             : base(programBank, index)
         {
             _name = name;
-            Id = string.Format("{0}{1:000}", programBank.Id, UserIndex);
+            Id = $"{programBank.Id}{UserIndex:000}";
         }
 
 
         /// <summary>
         /// The user index is the same as index, except for GM programs which are named as GM001 instead of GM000 etc.
         /// </summary>
-        public override int UserIndex
-        {
-            get { return Index + 1; }
-        }
+        public override int UserIndex => Index + 1;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override string Name
-        {
-            get { return _name; }
-        }
+        public override string Name => _name;
     }
 }

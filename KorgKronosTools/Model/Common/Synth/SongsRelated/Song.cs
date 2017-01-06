@@ -4,11 +4,8 @@ using Common.Mvvm;
 using Common.Utils;
 using PcgTools.Model.Common.File;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
-using PcgTools.Model.KronosSpecific.Synth;
 using PcgTools.OpenedFiles;
-using PcgTools.Songs;
 
 namespace PcgTools.Model.Common.Synth.SongsRelated
 {
@@ -140,25 +137,13 @@ namespace PcgTools.Model.Common.Synth.SongsRelated
         /// <summary>
         /// 
         /// </summary>
-        public IMemory Root
-        {
-            get
-            {
-                return Memory;
-            }
-        }
+        public IMemory Root => Memory;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public INavigable Parent
-        {
-            get
-            {
-                return Memory;
-            }
-        }
+        public INavigable Parent => Memory;
 
 
         /// <summary>

@@ -36,7 +36,7 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        int NrOfPatchensUserBank { get { return 32; } }
+        int NrOfPatchensUserBank => 32;
 
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresSizeConstant { get { return 188; } }
+        static int TimbresSizeConstant => 188;
 
 
         /// <summary>
@@ -137,13 +137,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int UsedProgramId
-        {
-            get
-            {
-                return Combi.PcgRoot.Content[GetProgramOffset()];
-            }
-        }
+        protected override int UsedProgramId => Combi.PcgRoot.Content[GetProgramOffset()];
 
 
         /// <summary>

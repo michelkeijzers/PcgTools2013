@@ -51,10 +51,6 @@ namespace PcgTools.Model.TritonLeSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Hi; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Hi;
     }
 }

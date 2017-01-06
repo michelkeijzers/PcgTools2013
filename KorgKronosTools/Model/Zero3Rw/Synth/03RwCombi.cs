@@ -24,7 +24,7 @@ namespace PcgTools.Model.Zero3Rw.Synth
 
             if (combiBank.Type == BankType.EType.Int)
             {
-                Id = string.Format("{0}{1}", combiBank.Id, (index).ToString("00"));
+                Id = $"{combiBank.Id}{(index).ToString("00")}";
             }
             else
             {

@@ -50,15 +50,12 @@ namespace PcgTools.Model.KrossSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Edsx; }
-        }
-        
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Edsx;
+
 
         /// <summary>
         /// E.g. GM banks have index 1.
         /// </summary>
-        public override int IndexOffset { get { return 1; } }
+        public override int IndexOffset => 1;
     }
 }

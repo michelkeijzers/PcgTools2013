@@ -14,7 +14,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int NrOfSetLists { get { return 128;  } }
+        static int NrOfSetLists => 128;
 
 
         /// <summary>

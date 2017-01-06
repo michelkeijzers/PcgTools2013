@@ -3,7 +3,6 @@
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
-using PcgTools.Model.KromeSpecific.Synth;
 using PcgTools.Model.MSpecific.Synth;
 
 namespace PcgTools.Model.KrossSpecific.Synth

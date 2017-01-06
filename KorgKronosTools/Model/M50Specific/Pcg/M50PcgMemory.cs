@@ -4,7 +4,6 @@
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.M50Specific.Synth;
 using PcgTools.Model.MSpecific.Pcg;
-using PcgTools.Model.MSpecific.Synth;
 
 namespace PcgTools.Model.M50Specific.Pcg
 {

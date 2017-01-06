@@ -6,7 +6,6 @@ using System.Windows.Input;
 using PcgTools.PcgToolsResources;
 
 // (c) 2011 Michel Keijzers
-using Xceed.Wpf.DataGrid.Views;
 
 namespace PcgTools.Help
 {
@@ -128,8 +127,7 @@ namespace PcgTools.Help
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, String.Format("{0}.\n{1}:{2}", 
-                    Strings.LinkWarning, Strings.Message, exception.Message), 
+                MessageBox.Show(this, $"{Strings.LinkWarning}.\n{Strings.Message}:{exception.Message}", 
                     Strings.PcgTools,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }

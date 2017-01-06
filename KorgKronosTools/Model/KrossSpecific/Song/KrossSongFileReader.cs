@@ -3,7 +3,6 @@
 using PcgTools.Model.Common.File;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.SongsRelated;
-using PcgTools.Model.KromeSpecific.Synth;
 using PcgTools.Model.KrossSpecific.Synth;
 
 namespace PcgTools.Model.KrossSpecific.Song
@@ -27,7 +26,7 @@ namespace PcgTools.Model.KrossSpecific.Song
         /// <summary>
         /// Number of bytes in a song track (equal to length of a combi timbre).
         /// </summary>
-        public override int SongTrackByteLength { get { return 44; } }
+        public override int SongTrackByteLength => 44;
 
 
         /// <summary>

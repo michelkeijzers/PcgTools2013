@@ -13,7 +13,7 @@ namespace PcgTools.Model.MSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresPerCombiConstant { get { return 16; } }
+        static int TimbresPerCombiConstant => 16;
 
 
         /// <summary>

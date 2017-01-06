@@ -36,12 +36,12 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        public IPcgMemory PcgMemory { get { return _pcgMemory; }}
+        public IPcgMemory PcgMemory => _pcgMemory;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public ISongMemory SongMemory { get { return _songMemory; }}
+        public ISongMemory SongMemory => _songMemory;
     }
 }

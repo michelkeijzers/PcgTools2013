@@ -1,12 +1,12 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows;
 using System.Windows.Input;
 using Common.Mvvm;
 using Common.Utils;
@@ -15,13 +15,11 @@ using PcgTools.ClipBoard;
 using PcgTools.MasterFiles;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.PatchPrograms;
-using PcgTools.Model.Common.Synth.PatchSetLists;
 using PcgTools.Model.Common.Synth.SongsRelated;
 using PcgTools.Properties;
 using PcgTools.PcgToolsResources;
 using PcgTools.Songs;
 using PcgTools.ViewModels.Commands;
-using PcgTools.Windows;
 using WPF.MDI;
 
 namespace PcgTools.ViewModels
@@ -34,7 +32,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public const string Version = "2.8 TEST NOT FOR RELEASE";
+        public const string Version = "2.8.0";
 
 
         /// <summary>
@@ -66,7 +64,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         public void UpdateAppTitle()
         {
-            AppTitle = String.Format("{0} {1}  ©2011-2016 Michel Keijzers", Strings.PcgTools, Version);
+            AppTitle = $"{Strings.PcgTools} {Version}  ©2011-2016 Michel Keijzers";
         }
 
 
@@ -108,7 +106,7 @@ namespace PcgTools.ViewModels
             MasterFiles.MasterFiles.Instances.Set(this);
             OpenedPcgWindows = new OpenedPcgWindows();
 
-            _fileFormats = String.Format(
+            _fileFormats = string.Format(
                 "Korg PCG {0} (*.pcg)|*.pcg|" +
                 "Korg Sysex {0} (*.syx)|*.syx|" +
                 "Korg Midi {0} (*.mid)|*.mid|" +
@@ -572,8 +570,7 @@ namespace PcgTools.ViewModels
         public ICommand SaveFileCommand
         {
             get { return _saveFileCommand ?? (_saveFileCommand = new RelayCommand(param => SaveFile(), 
-                param => ((CurrentChildViewModel != null) && (CurrentChildViewModel.SelectedMemory is PcgMemory) && 
-                CurrentChildViewModel.SelectedMemory.IsDirty))); }
+                param => (CurrentChildViewModel?.SelectedMemory is PcgMemory && CurrentChildViewModel.SelectedMemory.IsDirty))); }
         }
 
 
@@ -593,7 +590,7 @@ namespace PcgTools.ViewModels
             get
             {
                 return _saveAsFileCommand ?? (_saveAsFileCommand = new RelayCommand(param => SaveAsFile(),
-                    param => ((CurrentChildViewModel != null) && (CurrentChildViewModel.SelectedMemory is IPcgMemory)))); 
+                    param => (CurrentChildViewModel?.SelectedMemory is IPcgMemory))); 
             }
         }
 
@@ -615,9 +612,7 @@ namespace PcgTools.ViewModels
             {
                 return _revertToSavedFileCommand ??
                        (_revertToSavedFileCommand = new RelayCommand(param => RevertToSavedFile(),
-                           param =>
-                               ((CurrentChildViewModel != null) && 
-                               (CurrentChildViewModel.SelectedMemory is IPcgMemory))));
+                           param =>(CurrentChildViewModel?.SelectedMemory is IPcgMemory)));
             }
         }
 
@@ -706,7 +701,7 @@ namespace PcgTools.ViewModels
             catch (NotSupportedException exc)
             {
                 ShowMessageBox(
-                    String.Format(Strings.FileOpenException,
+                    string.Format(Strings.FileOpenException,
                         exc.Message + "\n\n" + exc.InnerException, exc.StackTrace), Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok,
                         WindowUtils.EMessageBoxImage.Error, WindowUtils.EMessageBoxResult.Ok);
             }
@@ -728,7 +723,7 @@ namespace PcgTools.ViewModels
             if (IsFileAlreadyOpened(fileNameToOpen))
             {
                 ShowMessageBox(
-                    String.Format(Strings.OpenedDuplicateWarning, fileNameToOpen),
+                    string.Format(Strings.OpenedDuplicateWarning, fileNameToOpen),
                     Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok, WindowUtils.EMessageBoxImage.Warning,
                     WindowUtils.EMessageBoxResult.Ok);
             }
@@ -746,7 +741,7 @@ namespace PcgTools.ViewModels
         private bool IsFileAlreadyOpened(string fileName)
         {
             return (ChildWindows.Any(child => (child.Memory != null) &&
-                (String.Equals(child.Memory.FileName, fileName, StringComparison.CurrentCultureIgnoreCase))));
+                (string.Equals(child.Memory.FileName, fileName, StringComparison.CurrentCultureIgnoreCase))));
         }
 
 
@@ -795,13 +790,14 @@ namespace PcgTools.ViewModels
         private void SaveAsFile()
         {
             var extension = Path.GetExtension(SelectedMemory.FileName);
-            if (!String.IsNullOrEmpty(extension))
+            if (!string.IsNullOrEmpty(extension))
             {
                 extension = extension.Remove(0, 1); // Remove dot at first position
             }
-            var filter = (extension == String.Empty) ?
-                             String.Format("No Extension {0} (*)|*", Strings.FileSaveDialogFile.ToLower()) :
-                             String.Format("{0} {1} (*.{0})|*.{0}", extension, Strings.FileSaveDialogFile.ToLower());
+            var filter = (extension == string.Empty) ?
+                $"No Extension {Strings.FileSaveDialogFile.ToLower()} (*)|*"
+                :
+                             string.Format("{0} {1} (*.{0})|*.{0}", extension, Strings.FileSaveDialogFile.ToLower());
 
             dynamic result = SaveFileDialog(
                 Strings.SelectFileToSaveTo,
@@ -964,8 +960,8 @@ namespace PcgTools.ViewModels
         /// <param name="memory"></param>
         private void UpdateStatusBarForPcg(IPcgMemory memory)
         {
-            StatusBarSongs = String.Empty;
-            StatusBarSamples = String.Empty;
+            StatusBarSongs = string.Empty;
+            StatusBarSamples = string.Empty;
             var pcgMemory = memory;
 
             RecalculateStatusBarPrograms(pcgMemory);
@@ -1001,7 +997,7 @@ namespace PcgTools.ViewModels
             if ((PcgClipBoard.IsEmpty) ||
                 ((nrPrograms == 0) && (nrCombis == 0) && (nrSetListSlots == 0) && (nrDrumKits == 0) && (nrDrumPatterns == 0) && (nrWaveSequences == 0)))
             {
-                StatusBarClipBoard = String.Format("{0}: {1}", Strings.Clipboard, String.Empty);
+                StatusBarClipBoard = $"{Strings.Clipboard}: {string.Empty}";
             }
             else
             {
@@ -1023,8 +1019,7 @@ namespace PcgTools.ViewModels
         /// <returns></returns>
         private StringBuilder UpdateStatusBarForClipBoard(int nrCombis, int nrSetListSlots, int nrDrumKits, int nrDrumPatterns, int nrWaveSequences)
         {
-            var builder = new StringBuilder(String.Format("{0}: {1}: ",
-                Strings.Clipboard, PcgClipBoard.Model.ModelAndVersionAsString));
+            var builder = new StringBuilder($"{Strings.Clipboard}: {PcgClipBoard.Model.ModelAndVersionAsString}: ");
 
             // Add programs.
             for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
@@ -1034,40 +1029,34 @@ namespace PcgTools.ViewModels
                 if (uncopied > 0)
                 {
                     builder.Append(
-                        String.Format(
-                            " {0} {1} {2} ", uncopied,
-                            ProgramBank.SynthesisTypeAsString((ProgramBank.SynthesisType) index), programsString));
+                        $" {uncopied} {ProgramBank.SynthesisTypeAsString((ProgramBank.SynthesisType) index)} {programsString} ");
                 }
             }
 
             if (nrCombis > 0)
             {
-                builder.Append(String.Format(" {0} {1}", nrCombis,
-                    nrCombis == 1 ? Strings.Combi : Strings.Combis));
+                builder.Append($" {nrCombis} {(nrCombis == 1 ? Strings.Combi : Strings.Combis)}");
             }
 
             if (nrSetListSlots > 0)
             {
-                builder.Append(String.Format(" {0} {1}", nrSetListSlots,
-                    nrSetListSlots == 1 ? Strings.SetListSlot : Strings.SetListSlots));
+                builder.Append($" {nrSetListSlots} {(nrSetListSlots == 1 ? Strings.SetListSlot : Strings.SetListSlots)}");
             }
 
             if (nrDrumKits > 0)
             {
-                builder.Append(String.Format(" {0} {1}", nrDrumKits,
-                    nrDrumKits == 1 ? Strings.DrumKit : Strings.DrumKits));
+                builder.Append($" {nrDrumKits} {(nrDrumKits == 1 ? Strings.DrumKit : Strings.DrumKits)}");
             }
 
             if (nrDrumPatterns > 0)
             {
-                builder.Append(String.Format(" {0} {1}", nrDrumPatterns,
-                    nrDrumPatterns == 1 ? Strings.DrumPattern : Strings.DrumPatterns));
+                builder.Append($" {nrDrumPatterns} {(nrDrumPatterns == 1 ? Strings.DrumPattern : Strings.DrumPatterns)}");
             }
 
             if (nrWaveSequences > 0)
             {
-                builder.Append(String.Format(" {0} {1}", nrSetListSlots,
-                    nrSetListSlots == 1 ? Strings.WaveSequence : Strings.WaveSequences));
+                builder.Append(
+                    $" {nrWaveSequences} {(nrWaveSequences == 1 ? Strings.WaveSequence : Strings.WaveSequences)}");
             }
             return builder;
         }
@@ -1081,18 +1070,18 @@ namespace PcgTools.ViewModels
             var selectedMemory = SelectedMemory as SongMemory;
             if (selectedMemory != null)
             {
-                StatusBarPrograms = String.Empty;
-                StatusBarCombis = String.Empty;
-                StatusBarSetLists = String.Empty;
-                StatusBarDrumKits = String.Empty;
-                StatusBarDrumPatterns = String.Empty;
-                StatusBarWaveSequences = String.Empty;
+                StatusBarPrograms = string.Empty;
+                StatusBarCombis = string.Empty;
+                StatusBarSetLists = string.Empty;
+                StatusBarDrumKits = string.Empty;
+                StatusBarDrumPatterns = string.Empty;
+                StatusBarWaveSequences = string.Empty;
 
                 var songMemory = selectedMemory;
-                StatusBarSongs = String.Format("{0} {1}", songMemory.Songs.SongCollection.Count,
-                    songMemory.Songs.SongCollection.Count == 1 ? Strings.Song : Strings.Songs);
-                StatusBarSamples = String.Format("{0} {1}", songMemory.Regions.RegionsCollection.Count,
-                    songMemory.Regions.RegionsCollection.Count == 1 ? Strings.Sample : Strings.Samples);
+                StatusBarSongs =
+                    $"{songMemory.Songs.SongCollection.Count} {(songMemory.Songs.SongCollection.Count == 1 ? Strings.Song : Strings.Songs)}";
+                StatusBarSamples =
+                    $"{songMemory.Regions.RegionsCollection.Count} {(songMemory.Regions.RegionsCollection.Count == 1 ? Strings.Sample : Strings.Samples)}";
             }
             else
             {
@@ -1106,17 +1095,17 @@ namespace PcgTools.ViewModels
         /// </summary>
         private void EmptyStatusBar()
         {
-            StatusBarModel = String.Empty;
-            StatusBarFileType = String.Empty;
-            StatusBarPrograms = String.Empty;
-            StatusBarCombis = String.Empty;
-            StatusBarSetLists = String.Empty;
-            StatusBarDrumKits = String.Empty;
-            StatusBarDrumPatterns = String.Empty;
-            StatusBarWaveSequences = String.Empty;
-            StatusBarClipBoard = String.Empty;
-            StatusBarSongs = String.Empty;
-            StatusBarSamples = String.Empty;
+            StatusBarModel = string.Empty;
+            StatusBarFileType = string.Empty;
+            StatusBarPrograms = string.Empty;
+            StatusBarCombis = string.Empty;
+            StatusBarSetLists = string.Empty;
+            StatusBarDrumKits = string.Empty;
+            StatusBarDrumPatterns = string.Empty;
+            StatusBarWaveSequences = string.Empty;
+            StatusBarClipBoard = string.Empty;
+            StatusBarSongs = string.Empty;
+            StatusBarSamples = string.Empty;
         }
 
 
@@ -1126,7 +1115,7 @@ namespace PcgTools.ViewModels
         /// <param name="pcgMemory"></param>
         private void RecalculateStatusBarWaveSequences(IPcgMemory pcgMemory)
         {
-            StatusBarWaveSequences = String.Empty;
+            StatusBarWaveSequences = string.Empty;
             if (pcgMemory.WaveSequenceBanks != null)
             {
                 var waveSequences = pcgMemory.WaveSequenceBanks.CountFilledPatches;
@@ -1145,7 +1134,7 @@ namespace PcgTools.ViewModels
                                 break;
 
                             default:
-                                StatusBarPrograms = String.Format(
+                                StatusBarPrograms = string.Format(
                                     Strings.Stb_OneWaveSequenceInMultipleBanks, waveSequenceBanks);
                                 break;
                         }
@@ -1155,12 +1144,12 @@ namespace PcgTools.ViewModels
                         switch (waveSequenceBanks)
                         {
                             case 1:
-                                StatusBarWaveSequences = String.Format(
+                                StatusBarWaveSequences = string.Format(
                                     Strings.Stb_MultipleWaveSequencesInOneBank, waveSequences);
                                 break;
 
                             default: // > 1
-                                StatusBarWaveSequences = String.Format(
+                                StatusBarWaveSequences = string.Format(
                                     Strings.Stb_MultipleWaveSequencesInMultipleBanks, waveSequences,
                                     waveSequenceBanks);
                                 break;
@@ -1177,7 +1166,7 @@ namespace PcgTools.ViewModels
         /// <param name="pcgMemory"></param>
         private void RecalculateStatusBarDrumKits(IPcgMemory pcgMemory)
         {
-            StatusBarDrumKits = String.Empty;
+            StatusBarDrumKits = string.Empty;
             if (pcgMemory.DrumKitBanks != null)
             {
                 var drumKits = pcgMemory.DrumKitBanks.CountFilledPatches;
@@ -1196,7 +1185,7 @@ namespace PcgTools.ViewModels
                                 break;
 
                             default:
-                                StatusBarPrograms = String.Format(
+                                StatusBarPrograms = string.Format(
                                     Strings.Stb_OneDrumKitInMultipleBanks, drumKits);
                                 break;
                         }
@@ -1206,11 +1195,11 @@ namespace PcgTools.ViewModels
                         switch (drumKitBanks)
                         {
                             case 1:
-                                StatusBarDrumKits = String.Format(Strings.Stb_MultipleDrumKitsInOneBank, drumKits);
+                                StatusBarDrumKits = string.Format(Strings.Stb_MultipleDrumKitsInOneBank, drumKits);
                                 break;
 
                             default: // > 1
-                                StatusBarDrumKits = String.Format(
+                                StatusBarDrumKits = string.Format(
                                     Strings.Stb_MultipleDrumKitsInMultipleBanks, drumKits, drumKitBanks);
                                 break;
                         }
@@ -1226,7 +1215,7 @@ namespace PcgTools.ViewModels
         /// <param name="pcgMemory"></param>
         private void RecalculateStatusBarDrumPatterns(IPcgMemory pcgMemory)
         {
-            StatusBarDrumPatterns = String.Empty;
+            StatusBarDrumPatterns = string.Empty;
             if (pcgMemory.DrumPatternBanks != null)
             {
                 var drumPatterns = pcgMemory.DrumPatternBanks.CountFilledPatches;
@@ -1245,7 +1234,7 @@ namespace PcgTools.ViewModels
                                 break;
 
                             default:
-                                StatusBarPrograms = String.Format(
+                                StatusBarPrograms = string.Format(
                                     Strings.Stb_OneDrumPatternInMultipleBanks, drumPatterns);
                                 break;
                         }
@@ -1255,11 +1244,11 @@ namespace PcgTools.ViewModels
                         switch (drumPatternBanks)
                         {
                             case 1:
-                                StatusBarDrumPatterns = String.Format(Strings.Stb_MultipleDrumPatternsInOneBank, drumPatterns);
+                                StatusBarDrumPatterns = string.Format(Strings.Stb_MultipleDrumPatternsInOneBank, drumPatterns);
                                 break;
 
                             default: // > 1
-                                StatusBarDrumPatterns = String.Format(
+                                StatusBarDrumPatterns = string.Format(
                                     Strings.Stb_MultipleDrumPatternsInMultipleBanks, drumPatterns, drumPatternBanks);
                                 break;
                         }
@@ -1271,7 +1260,7 @@ namespace PcgTools.ViewModels
 
         private void RecalculateStatusBarSetListSlots(IPcgMemory pcgMemory)
         {
-            StatusBarSetLists = String.Empty;
+            StatusBarSetLists = string.Empty;
 
             if (pcgMemory.SetLists != null)
             {
@@ -1291,7 +1280,7 @@ namespace PcgTools.ViewModels
                                 break;
 
                             default:
-                                StatusBarPrograms = String.Format(
+                                StatusBarPrograms = string.Format(
                                     Strings.Stb_OneSetListSlotInMultipleSetLists, setLists);
                                 break;
                         }
@@ -1301,12 +1290,12 @@ namespace PcgTools.ViewModels
                         switch (setLists)
                         {
                             case 1:
-                                StatusBarSetLists = String.Format(
+                                StatusBarSetLists = string.Format(
                                     Strings.Stb_MultipleSetListSlotsInOneSetList, setListSlots);
                                 break;
 
                             default: // > 1
-                                StatusBarSetLists = String.Format(
+                                StatusBarSetLists = string.Format(
                                     Strings.Stb_MultipleSetListSlotsInMultipleSetLists, setListSlots, setLists);
                                 break;
                         }
@@ -1322,7 +1311,7 @@ namespace PcgTools.ViewModels
         /// <param name="pcgMemory"></param>
         private void RecalculateStatusBarCombis(IPcgMemory pcgMemory)
         {
-            StatusBarCombis = String.Empty;
+            StatusBarCombis = string.Empty;
             if (pcgMemory.CombiBanks != null)
             {
                 var combis = pcgMemory.CombiBanks.CountFilledPatches;
@@ -1341,7 +1330,7 @@ namespace PcgTools.ViewModels
                                 break;
 
                             default:
-                                StatusBarPrograms = String.Format(
+                                StatusBarPrograms = string.Format(
                                     Strings.Stb_OneCombiInMultipleBanks, combiBanks);
                                 break;
                         }
@@ -1351,11 +1340,11 @@ namespace PcgTools.ViewModels
                         switch (combiBanks)
                         {
                             case 1:
-                                StatusBarCombis = String.Format(Strings.Stb_MultipleCombisInOneBank, combis);
+                                StatusBarCombis = string.Format(Strings.Stb_MultipleCombisInOneBank, combis);
                                 break;
 
                             default: // > 1
-                                StatusBarCombis = String.Format(
+                                StatusBarCombis = string.Format(
                                     Strings.Stb_MultipleCombisInMultipleBanks, combis, combiBanks);
                                 break;
                         }
@@ -1371,7 +1360,7 @@ namespace PcgTools.ViewModels
         /// <param name="pcgMemory"></param>
         private void RecalculateStatusBarPrograms(IPcgMemory pcgMemory)
         {
-            StatusBarPrograms = String.Empty;
+            StatusBarPrograms = string.Empty;
             if (pcgMemory.ProgramBanks != null)
             {
                 var programs = pcgMemory.ProgramBanks.CountFilledAndNonEmptyPatches;
@@ -1390,7 +1379,7 @@ namespace PcgTools.ViewModels
                                 break;
 
                             default:
-                                StatusBarPrograms = String.Format(
+                                StatusBarPrograms = string.Format(
                                     Strings.Stb_OneProgramInMultipleBanks, programBanks);
                                 break;
                         }
@@ -1400,11 +1389,11 @@ namespace PcgTools.ViewModels
                         switch (programBanks)
                         {
                             case 1:
-                                StatusBarPrograms = String.Format(Strings.Stb_MultipleProgramsInOneBank, programs);
+                                StatusBarPrograms = string.Format(Strings.Stb_MultipleProgramsInOneBank, programs);
                                 break;
 
                             default: // > 1
-                                StatusBarPrograms = String.Format(
+                                StatusBarPrograms = string.Format(
                                     Strings.Stb_MultipleProgramsInMultipleBanks, programs, programBanks);
                                 break;
                         }
@@ -1578,7 +1567,7 @@ namespace PcgTools.ViewModels
         /// Settings have been changed. 
         /// </summary>
         /// <param name="property"></param>
-        public void ActOnSettingsChanged(string property)
+        public static void ActOnSettingsChanged(string property)
         {
             // IsShowSingleLinedSetListSlotDescriptions = Settings.Default.SingleLinedSetListSlotDescriptions;
         }
@@ -1660,7 +1649,7 @@ namespace PcgTools.ViewModels
             catch (Exception exc)
             {
                 ShowMessageBox(
-                    String.Format(Strings.CouldNotOpenManualWarning,
+                    string.Format(Strings.CouldNotOpenManualWarning,
                         exc.Message, exc.InnerException), Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok, 
                         WindowUtils.EMessageBoxImage.Error, WindowUtils.EMessageBoxResult.Ok);
             }
@@ -1701,7 +1690,7 @@ namespace PcgTools.ViewModels
             catch (Exception exc)
             {
                 ShowMessageBox(
-                    String.Format(Strings.CouldNotOpenHomePageWarning,
+                    string.Format(Strings.CouldNotOpenHomePageWarning,
                         exc.Message, exc.InnerException), Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok,
                         WindowUtils.EMessageBoxImage.Error, WindowUtils.EMessageBoxResult.Ok);
             }
@@ -2002,10 +1991,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public static string PcgToolsApplicationDataDir
-        {
-            get { return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/PCGTools"; }
-        }
+        public static string PcgToolsApplicationDataDir => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"/PCGTools";
 
 
         /// <summary>
@@ -2146,7 +2132,7 @@ namespace PcgTools.ViewModels
             {
                 var childWindow = ChildWindows[index];
                 if ((childWindow.ViewModel.SelectedMemory is IPcgMemory) &&
-                    (String.Equals(childWindow.ViewModel.SelectedMemory.FileName, fileName, 
+                    (string.Equals(childWindow.ViewModel.SelectedMemory.FileName, fileName, 
                     StringComparison.CurrentCultureIgnoreCase)))
                 {
                     if (!childWindow.ViewModel.Close(true))
@@ -2228,6 +2214,42 @@ namespace PcgTools.ViewModels
         /// Opened PCG windows.
         /// </summary>
         public OpenedPcgWindows OpenedPcgWindows { get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="extension"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public int GetFilterIndexOfFile(string extension, string filter)
+        {
+            var model = SelectedMemory.Model.ModelAsString;
+            var filterParts = filter.Split('|');
+            var filters = new List<string>();
+
+            for (var index = 0; index < filterParts.Length; index += 2)
+            {
+                // Combine every two filter parts because a filter is made up by two |'s, e.g.: 
+                // "MicroKorg XL {0} (*.mkxl_all,*.syx)|*.mkxl_all;*.syx|" +
+                filters.Add(filterParts[index] + filterParts[index + 1]);
+            }
+
+            var foundFilter = filters.FirstOrDefault(filterToCheck => filterToCheck.Contains(model + " ")) ??
+                              filters.FirstOrDefault(
+                                  filterToCheck => filterToCheck.ToUpper().Contains(extension.ToUpper() + ",") ||
+                                                   filterToCheck.ToUpper().Contains(extension.ToUpper() + ")"));
+
+            for (var n = 0; n < filters.Count; n++)
+            {
+                if (filters[n] == foundFilter)
+                {
+                    return n + 1; // First filter is index 1
+                }
+            }
+
+            return 0;
+        }
     }
 }
 

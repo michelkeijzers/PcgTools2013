@@ -22,10 +22,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         /// <summary>
         /// 
         /// </summary>
-        public static TitleComparer Instance
-        {
-            get { return _instance; }
-        }
+        public static TitleComparer Instance => _instance;
 
 
         /// <summary>
@@ -52,7 +49,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
                 return 0;
             }
 
-            return String.Compare(patch1.Title, patch2.Title, StringComparison.Ordinal);
+            return string.Compare(patch1.Title, patch2.Title, StringComparison.Ordinal);
         }
     }
 

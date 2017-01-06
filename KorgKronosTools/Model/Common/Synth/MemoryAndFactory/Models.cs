@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Mvvm;
 using PcgTools.PcgToolsResources;
@@ -110,10 +109,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        private static IEnumerable<MemoryAndFactory.Model> Instance
-        {
-            get { return _instance ?? (_instance = new Models()); }
-        }
+        private static IEnumerable<MemoryAndFactory.Model> Instance => _instance ?? (_instance = new Models());
 
 
         /// <summary>
@@ -125,28 +121,28 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
             Add(new MemoryAndFactory.Model(EModelType.Kronos, EOsVersion.EOsVersionKronos15_16, Strings.Version1516));
             Add(new MemoryAndFactory.Model(EModelType.Kronos, EOsVersion.EOsVersionKronos2x, Strings.Version2x));
             Add(new MemoryAndFactory.Model(EModelType.Kronos, EOsVersion.EOsVersionKronos3x, Strings.Version3x));
-            Add(new MemoryAndFactory.Model(EModelType.Oasys, EOsVersion.EOsVersionOasys, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.Krome, EOsVersion.EOsVersionKrome, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.Kross, EOsVersion.EOsVersionKross, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.M1, EOsVersion.EOsVersionM1, String.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.Oasys, EOsVersion.EOsVersionOasys, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.Krome, EOsVersion.EOsVersionKrome, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.Kross, EOsVersion.EOsVersionKross, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.M1, EOsVersion.EOsVersionM1, string.Empty));
             Add(new MemoryAndFactory.Model(EModelType.M3, EOsVersion.EOsVersionM3_1X, Strings.Version1x));
             Add(new MemoryAndFactory.Model(EModelType.M3, EOsVersion.EOsVersionM3_20, Strings.Version1x));
-            Add(new MemoryAndFactory.Model(EModelType.M3R, EOsVersion.EOsVersionM3R, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.M50, EOsVersion.EOsVersionM50, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.Ms2000, EOsVersion.EOsVersionMs2000, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.MicroKorgXl, EOsVersion.EOsVersionMicroKorgXl, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.MicroKorgXlPlus, EOsVersion.EOsVersionMicroKorgXlPlus, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.MicroStation, EOsVersion.EOsVersionMicroStation, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.TritonExtreme, EOsVersion.EOsVersionTritonExtreme, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.TritonTrClassicStudioRack, EOsVersion.EOsVersionTritonTrClassicStudioRack, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.TritonKarma, EOsVersion.EOsVersionTritonKarma, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.TritonLe, EOsVersion.EOsVersionTritonLe, String.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.M3R, EOsVersion.EOsVersionM3R, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.M50, EOsVersion.EOsVersionM50, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.Ms2000, EOsVersion.EOsVersionMs2000, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.MicroKorgXl, EOsVersion.EOsVersionMicroKorgXl, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.MicroKorgXlPlus, EOsVersion.EOsVersionMicroKorgXlPlus, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.MicroStation, EOsVersion.EOsVersionMicroStation, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.TritonExtreme, EOsVersion.EOsVersionTritonExtreme, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.TritonTrClassicStudioRack, EOsVersion.EOsVersionTritonTrClassicStudioRack, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.TritonKarma, EOsVersion.EOsVersionTritonKarma, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.TritonLe, EOsVersion.EOsVersionTritonLe, string.Empty));
             Add(new MemoryAndFactory.Model(EModelType.Trinity, EOsVersion.EOsVersionTrinityV2, Strings.VersionV2));
             Add(new MemoryAndFactory.Model(EModelType.Trinity, EOsVersion.EOsVersionTrinityV3, Strings.VersionV3));
-            Add(new MemoryAndFactory.Model(EModelType.TSeries, EOsVersion.EOsVersionTSeries, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.Z1, EOsVersion.EOsVersionZ1, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.ZeroSeries, EOsVersion.EOsVersionZeroSeries, String.Empty));
-            Add(new MemoryAndFactory.Model(EModelType.Zero3Rw, EOsVersion.EosVersionZero3Rw, String.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.TSeries, EOsVersion.EOsVersionTSeries, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.Z1, EOsVersion.EOsVersionZ1, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.ZeroSeries, EOsVersion.EOsVersionZeroSeries, string.Empty));
+            Add(new MemoryAndFactory.Model(EModelType.Zero3Rw, EOsVersion.EosVersionZero3Rw, string.Empty));
         }
         
 

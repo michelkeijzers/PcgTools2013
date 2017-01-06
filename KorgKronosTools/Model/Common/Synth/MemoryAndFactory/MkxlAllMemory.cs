@@ -23,54 +23,42 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        public override bool HasSubCategories { get { return true; } }
+        public override bool HasSubCategories => true;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override int NumberOfCategories { get { return 8; } }
+        public override int NumberOfCategories => 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override int NumberOfSubCategories { get { return 8; } }
+        public override int NumberOfSubCategories => 8;
 
 
         /// <summary>
         /// On the MicroKorg XL, programs are divided into genres, then into categories.
         /// </summary>
-        public override string CategoryName
-        {
-            get { return Strings.Genre; }
-        }
+        public override string CategoryName => Strings.Genre;
 
 
         /// <summary>
         /// On the MicroKorg XL, programs are divided into genres, then into categories.
         /// </summary>
-        public override string SubCategoryName
-        {
-            get { return Strings.Category; }
-        }
+        public override string SubCategoryName => Strings.Category;
 
 
         /// <summary>
         /// MicroKorg XL uses genres and categories instead of categories and sub categories.
         /// </summary>
-        public override bool UsesCategoriesAndSubCategories
-        {
-            get { return false; }
-        }
+        public override bool UsesCategoriesAndSubCategories => false;
 
 
         /// <summary>
         /// On the MicroKorg XL, categories (actually genres and categories) are not editable.
         /// </summary>
-        public override bool AreCategoriesEditable
-        {
-            get { return false; }
-        }
+        public override bool AreCategoriesEditable => false;
     }
 }

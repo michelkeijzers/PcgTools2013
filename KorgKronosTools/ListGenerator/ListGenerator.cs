@@ -57,6 +57,18 @@ namespace PcgTools.ListGenerator
 
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool OptionalColumnSetListSlotReferenceId { protected get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool OptionalColumnSetListSlotReferenceName { protected get; set; }
+
+
+        /// <summary>
         /// Only used for combi content list.
         /// </summary>
         public enum SubType

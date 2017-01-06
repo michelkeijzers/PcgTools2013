@@ -14,10 +14,7 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int NrOfPatches
-        {
-            get { { return 16; } }
-        }
+        public override int NrOfPatches => 16;
 
 
         /// <summary>

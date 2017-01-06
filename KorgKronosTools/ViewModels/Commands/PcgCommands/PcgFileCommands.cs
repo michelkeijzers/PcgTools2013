@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Common.Utils;
 using PcgTools.MasterFiles;
 using PcgTools.Model.Common.File;
@@ -31,7 +28,7 @@ namespace PcgTools.ViewModels.Commands
             if (memory == null)
             {
                 _mainViewModel.ShowMessageBox(
-                    String.Format(Strings.FileTypeNotSupportedForThisWorkstation,
+                    string.Format(Strings.FileTypeNotSupportedForThisWorkstation,
                         Memory.FileTypeAsString(korgFileReader.FileType),
                         Model.Common.Synth.MemoryAndFactory.Model.ModelTypeAsString(korgFileReader.ModelType)),
                     Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok, WindowUtils.EMessageBoxImage.Error,
@@ -96,7 +93,7 @@ namespace PcgTools.ViewModels.Commands
                             if (masterFile.FileName != loadedPcgFileName)
                             {
                                 var result = _mainViewModel.ShowMessageBox(
-                                    String.Format(Strings.AskForMasterFile, masterFile.FileName),
+                                    string.Format(Strings.AskForMasterFile, masterFile.FileName),
                                     Strings.PcgTools, WindowUtils.EMessageBoxButton.YesNo,
                                     WindowUtils.EMessageBoxImage.Information,
                                     WindowUtils.EMessageBoxResult.Yes);

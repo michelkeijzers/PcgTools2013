@@ -34,7 +34,7 @@ namespace PcgTools.Edit
             if (text.Length > maxLength)
             {
 // ReSharper disable RedundantStringFormatCall
-                return string.Format(String.Format("{0} too long", checkType));
+                return string.Format($"{checkType} too long");
 // ReSharper restore RedundantStringFormatCall
             }
 
@@ -73,7 +73,7 @@ namespace PcgTools.Edit
                 }
             }
 
-            return String.Empty;
+            return string.Empty;
         }
     }
 }

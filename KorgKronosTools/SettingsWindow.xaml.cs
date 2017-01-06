@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -12,7 +13,6 @@ using PcgTools.Model.Common.Synth.PatchSorting;
 using PcgTools.PcgToolsResources;
 using PcgTools.Properties;
 using Common.Extensions;
-using PcgTools.ViewModels;
 using PcgTools.ViewModels.Commands.PcgCommands;
 
 
@@ -124,7 +124,21 @@ namespace PcgTools
             
             WindowLoadedMasterFile();
 
+            if ((Settings.Default.Slg_DefaultOutputFolder == string.Empty) || 
+                    !Directory.Exists(Settings.Default.Slg_DefaultOutputFolder))
+            {
+                Settings.Default.Slg_DefaultOutputFolder =
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
+
             textBoxDefaultOutputDirectory.Text = Settings.Default.Slg_DefaultOutputFolder;
+
+            if ((Settings.Default.Slg_DefaultOutputFolderForSequencerFiles == string.Empty) ||
+                !Directory.Exists(Settings.Default.Slg_DefaultOutputFolderForSequencerFiles))
+            {
+                Settings.Default.Slg_DefaultOutputFolderForSequencerFiles =
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
 
             textBoxDefaultOutputDirectoryForSequencerFiles.Text =
                 Settings.Default.Slg_DefaultOutputFolderForSequencerFiles;
@@ -418,9 +432,9 @@ namespace PcgTools
                 SelectedPath = Settings.Default.Slg_DefaultOutputFolder
             };
 
-            if (dialog.SelectedPath == string.Empty)
+            if ((dialog.SelectedPath == string.Empty) || !Directory.Exists(dialog.SelectedPath))
             {
-                dialog.SelectedPath = Environment.SpecialFolder.MyDocuments.ToString();
+                dialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -444,9 +458,9 @@ namespace PcgTools
                 SelectedPath = Settings.Default.Slg_DefaultOutputFolderForSequencerFiles
             };
 
-            if (dialog.SelectedPath == string.Empty)
+            if ((dialog.SelectedPath == string.Empty) || !Directory.Exists(dialog.SelectedPath))
             {
-                dialog.SelectedPath = Environment.SpecialFolder.MyDocuments.ToString();
+                dialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -472,7 +486,7 @@ namespace PcgTools
 
             if (dialog.FileName == string.Empty)
             {
-                dialog.FileName = Environment.SpecialFolder.MyDocuments.ToString();
+                dialog.FileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -515,7 +529,7 @@ namespace PcgTools
         /// <param name="e"></param>
         private void textBoxSplitCharacter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (EditUtils.CheckText(textBoxSplitCharacter.Text, 1, EditUtils.ECheckType.SplitCharacter) != String.Empty)
+            if (EditUtils.CheckText(textBoxSplitCharacter.Text, 1, EditUtils.ECheckType.SplitCharacter) != string.Empty)
             {
                 textBoxSplitCharacter.Text = DefaultSplitCharacter;
             }
@@ -539,10 +553,10 @@ namespace PcgTools
 
                 if (radioButtonSortArtistTitle.IsEnabled)
                 {
-                    radioButtonSortTitleArtist.Content = String.Format(
-                        "{0} {1} {2}", Strings.Title_settw, textBoxSplitCharacter.Text, Strings.Artist_settw);
-                    radioButtonSortArtistTitle.Content = String.Format(
-                        "{0} {1} {2}", Strings.Artist_settw, textBoxSplitCharacter.Text, Strings.Title_settw);
+                    radioButtonSortTitleArtist.Content =
+                        $"{Strings.Title_settw} {textBoxSplitCharacter.Text} {Strings.Artist_settw}";
+                    radioButtonSortArtistTitle.Content =
+                        $"{Strings.Artist_settw} {textBoxSplitCharacter.Text} {Strings.Title_settw}";
                 }
             }
         }

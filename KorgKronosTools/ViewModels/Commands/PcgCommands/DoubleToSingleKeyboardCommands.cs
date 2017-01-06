@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchSetLists;
 
@@ -61,7 +59,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 // change suffix sourcemidi 
                 sourceSetListSlot.PcgRoot.CopyPatch(sourceSetListSlot, setListTarget.Patches[currentTargetSetListSlotIndex]);
                 var targetSetListSlot = setListTarget.Patches[currentTargetSetListSlotIndex];
-                targetSetListSlot.SetNameSuffix(String.Format("/MC{0}", mainMidiChannel));
+                targetSetListSlot.SetNameSuffix($"/MC{mainMidiChannel}");
                 currentTargetSetListSlotIndex++;
 
                 if (sourceSetListSlot.SelectedPatchType == SetListSlot.PatchType.Combi)
@@ -110,7 +108,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 }
                 sourceCombi.PcgRoot.CopyPatch(sourceCombi, combiBankTarget.Patches[currentTargetCombiIndex]);
                 var combi = (ICombi) combiBankTarget.Patches[currentTargetCombiIndex];
-                combi.SetNameSuffix(String.Format("/MC{0}", secondaryMidiChannel));
+                combi.SetNameSuffix($"/MC{secondaryMidiChannel}");
                 combi.SwitchMidiChannels(mainMidiChannel, secondaryMidiChannel);
                 currentTargetCombiIndex++;
 
@@ -123,7 +121,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
 
                 sourceSetListSlot.PcgRoot.CopyPatch(sourceSetListSlot, setListTarget.Patches[currentTargetSetListSlotIndex]);
                 var setListSlotSecondary = (ISetListSlot) setListTarget.Patches[currentTargetSetListSlotIndex];
-                setListSlotSecondary.SetNameSuffix(String.Format("/MC{0}", secondaryMidiChannel));
+                setListSlotSecondary.SetNameSuffix($"/MC{secondaryMidiChannel}");
                 setListSlotSecondary.UsedPatch = combi;
                 currentTargetSetListSlotIndex++;
             }

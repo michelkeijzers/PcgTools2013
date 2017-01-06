@@ -12,7 +12,6 @@ using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.Common.Synth.PatchDrumPatterns;
-using PcgTools.Model.Common.Synth.PatchInterfaces;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.Common.Synth.PatchSetLists;
 using PcgTools.Model.Common.Synth.PatchWaveSequences;
@@ -393,10 +392,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        public PcgMemory PcgRoot
-        {
-            get { return this; }
-        }
+        public PcgMemory PcgRoot => this;
 
 
         /// <summary>
@@ -410,19 +406,13 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        public virtual bool HasProgramCategories
-        {
-            get { return true; }
-        }
+        public virtual bool HasProgramCategories => true;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual bool HasCombiCategories
-        {
-            get { return true; }
-        }
+        public virtual bool HasCombiCategories => true;
 
 
         /// <summary>
@@ -478,13 +468,13 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
                 }
             }
 
-            patch.RaisePropertyChanged(String.Empty, false);
+            patch.RaisePropertyChanged(string.Empty, false);
             if (patch is Program)
             {
                 (patch as Program).Update("All");
             }
 
-            otherPatch.RaisePropertyChanged(String.Empty, false);
+            otherPatch.RaisePropertyChanged(string.Empty, false);
             if (otherPatch is Program)
             {
                 (otherPatch as Program).Update("All");
@@ -500,7 +490,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         public virtual void CopyPatch(IClipBoardPatch patchToPaste, IPatch patch)
         {
             Util.CopyBytes(this, patchToPaste.Data, patch.Root.Content, patch.ByteOffset, patch.ByteLength);
-            patch.RaisePropertyChanged(String.Empty, false);
+            patch.RaisePropertyChanged(string.Empty, false);
         }
 
 
@@ -514,7 +504,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
             Debug.Assert(patchToPaste.GetType() == patch.GetType());
             Debug.Assert(patchToPaste.ByteLength == patch.ByteLength);
             Util.CopyBytes(this, patchToPaste.ByteOffset, patch.Root.Content, patch.ByteOffset, patch.ByteLength);
-            patch.RaisePropertyChanged(String.Empty, false);
+            patch.RaisePropertyChanged(string.Empty, false);
         }
 
 
@@ -525,36 +515,9 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// - Global section.
         /// Set lists are not necessary (no references needed to master file.
         /// </summary>
-        public bool AreAllNeededProgramsCombisAndGlobalPresent
-        {
-            get
-            {
-                /* Debug code
-                 
-                var s = string.Empty;
-
-                foreach (var bank in ProgramBanks)
-                {
-                    s += bank.Id;
-                    s +=bank.ByteOffset;
-                    s += bank.IsWritable;
-                    s += "\n";
-                }
-
-                foreach (var bank in CombiBanks)
-                {
-                    s += bank.Id;
-                    s += bank.ByteOffset;
-                    s += bank.IsWritable;
-                    s += "\n";
-                }
-                */
-
-                return ((Global != null) &&
-                        AreAllNeededProgramBanksPresent &&
-                        AreAllNeededCombiBanksPresent);
-            }
-        }
+        public bool AreAllNeededProgramsCombisAndGlobalPresent => ((Global != null) &&
+                                                                   AreAllNeededProgramBanksPresent &&
+                                                                   AreAllNeededCombiBanksPresent);
 
 
         /// <summary>
@@ -616,36 +579,23 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        public virtual string CategoryName
-        {
-            get { return Strings.Category; }
-        }
+        public virtual string CategoryName => Strings.Category;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual string SubCategoryName
-        {
-            get { return Strings.SubCategory; }
-        }
+        public virtual string SubCategoryName => Strings.SubCategory;
 
 
         /// <summary>
         /// Returns true if the memory CAN only contain one patch. 
         /// Used for generating banks before the content of the file is actually read.
         /// </summary>
-        public bool CanContainOnlyOnePatch
-        {
-            get
-            {
-                return
-                    ((ContentTypeType == ContentType.CurrentProgram) ||
-                     (ContentTypeType == ContentType.CurrentCombi) ||
-                     (ContentTypeType == ContentType.CurrentSequence) ||
-                     (ContentTypeType == ContentType.CurrentArpeggioPattern));
-            }
-        }
+        public bool CanContainOnlyOnePatch => ((ContentTypeType == ContentType.CurrentProgram) ||
+                                               (ContentTypeType == ContentType.CurrentCombi) ||
+                                               (ContentTypeType == ContentType.CurrentSequence) ||
+                                               (ContentTypeType == ContentType.CurrentArpeggioPattern));
 
 
         /// <summary>
@@ -703,7 +653,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         public void SynchronizeProgramName()
         {
             var firstProgram = (Program) ((ProgramBank) ProgramBanks[0])[0];
-            if (firstProgram.Name == String.Empty)
+            if (firstProgram.Name == string.Empty)
             {
                 var fileName = Path.GetFileNameWithoutExtension(FileName);
                 if (fileName != null)
@@ -721,7 +671,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         public void SynchronizeCombiName()
         {
             var firstCombi = (Combi) ((CombiBank) CombiBanks[0])[0];
-            if (firstCombi.Name == String.Empty)
+            if (firstCombi.Name == string.Empty)
             {
                 var fileName = Path.GetFileNameWithoutExtension(FileName);
                 if (fileName != null)

@@ -14,7 +14,7 @@ namespace PcgTools.Model.TritonExtremeSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant { get { return 224; } }
+        static int TimbresOffsetConstant => 224;
 
 
         /// <summary>

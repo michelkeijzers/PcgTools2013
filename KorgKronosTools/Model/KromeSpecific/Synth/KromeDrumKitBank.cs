@@ -1,4 +1,5 @@
 ﻿
+using System;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.MSpecific.Synth;
@@ -32,6 +33,28 @@ namespace PcgTools.Model.KromeSpecific.Synth
         public override void CreatePatch(int index)
         {
             Add(new KromeDrumKit(this, index));
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override int NrOfPatches
+        {
+            get
+            {
+                switch (Type)
+                {
+                    case BankType.EType.Int:
+                        return 1000;
+
+                    case BankType.EType.User:
+                        return 1000;
+
+                    default:
+                        throw new NotSupportedException();
+                }
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
 
-using PcgTools.Model.Common.Synth;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.KronosOasysSpecific.Synth;
@@ -42,19 +41,12 @@ namespace PcgTools.Model.OasysSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultModeledSynthesisType
-        {
-            get { return SynthesisType.Exi; }
-        }
+        public override SynthesisType DefaultModeledSynthesisType => SynthesisType.Exi;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Hd1; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Hd1;
     }
 }

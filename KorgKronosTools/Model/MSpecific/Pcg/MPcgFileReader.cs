@@ -34,44 +34,43 @@ namespace PcgTools.Model.MSpecific.Pcg
         /// <summary>
         /// 
         /// </summary>
-        protected override int Div1Offset { get { return 0x1C; } }
+        protected override int Div1Offset => 0x1C;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int BetweenChunkGapSize { get { return 12; } }
+        protected override int BetweenChunkGapSize => 12;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int GapSizeAfterMbk1ChunkName { get { return 4; } }
+        protected override int GapSizeAfterMbk1ChunkName => 4;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int Pbk1NumberOfProgramsOffset { get { return 12; } }
+        protected override int Pbk1NumberOfProgramsOffset => 12;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int SizeBetweenCmb1AndCbk1 { get { return 8; } }
+        protected override int SizeBetweenCmb1AndCbk1 => 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int Cbk1NumberOfCombisOffset { get { return 12; } }
+        protected override int Cbk1NumberOfCombisOffset => 12;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int Dbk1NumberOfDrumKitsOffset { get { return 12; } }
-
+        protected override int Dbk1NumberOfDrumKitsOffset => 12;
 
 
         protected override int Dpi1NumberOfDrumPatternsOffset

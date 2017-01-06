@@ -15,7 +15,7 @@ namespace PcgTools.Model.KrossSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        private static int TimbresSizeConstant { get { return 44; } }
+        private static int TimbresSizeConstant => 44;
 
 
         /// <summary>

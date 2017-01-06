@@ -14,7 +14,7 @@ namespace PcgTools.Model.KromeSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant { get { return 836; } }
+        static int TimbresOffsetConstant => 836;
 
 
         /// <summary>

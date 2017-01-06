@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using PcgTools.Model.Common.Synth.PatchCombis;
 
 namespace PcgTools.Model.KronosOasysSpecific.Synth
@@ -31,16 +30,13 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 24; }
-        }
+        public override int MaxNameLength => 24;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit { get { return ((Name == String.Empty) || (Name.Contains("Init") && Name.Contains("Combi"))); } }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("Init") && Name.Contains("Combi")));
 
 
         /// <summary>

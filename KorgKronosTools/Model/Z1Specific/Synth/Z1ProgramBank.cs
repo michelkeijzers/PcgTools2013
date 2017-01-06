@@ -2,7 +2,6 @@
 
 using System;
 using PcgTools.Model.Common.Synth.Meta;
-using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.MntxSeriesSpecific.Synth;
 
 namespace PcgTools.Model.Z1Specific.Synth
@@ -50,10 +49,6 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.AnalogModeling; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.AnalogModeling;
     }
 }

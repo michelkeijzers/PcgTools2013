@@ -13,13 +13,13 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresPerCombiConstant { get { return 6; } }
+        static int TimbresPerCombiConstant => 6;
 
 
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant { get { return 16; } }
+        static int TimbresOffsetConstant => 16;
 
 
         /// <summary>

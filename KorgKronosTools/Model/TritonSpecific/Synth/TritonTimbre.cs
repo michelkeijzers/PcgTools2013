@@ -16,7 +16,7 @@ namespace PcgTools.Model.TritonSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresSizeConstant { get { return 28; } }
+        static int TimbresSizeConstant => 28;
 
 
         /// <summary>

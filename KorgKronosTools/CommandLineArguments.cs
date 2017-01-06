@@ -140,12 +140,12 @@ namespace PcgTools
                 {
                     if (_parameters.Count > 0)
                     {
-                        throw new CommandLineArgumentException(String.Format(Strings.CliOptionError, arguments[i]));
+                        throw new CommandLineArgumentException(string.Format(Strings.CliOptionError, arguments[i]));
                     }
                     
                     if (i + 1 >= arguments.Count)
                     {
-                        throw new CommandLineArgumentException(String.Format(Strings.CliIllegalOptionError, arguments[i]));
+                        throw new CommandLineArgumentException(string.Format(Strings.CliIllegalOptionError, arguments[i]));
                     }
 
                     _options[arguments[i]] = arguments[i + 1];
@@ -197,7 +197,7 @@ namespace PcgTools
                 break;
 
             default:
-                throw new CommandLineArgumentException(String.Format(Strings.IllegalListType, _parameters[1]));
+                throw new CommandLineArgumentException(string.Format(Strings.IllegalListType, _parameters[1]));
             } // Default not needed (exception thrown)
 
             switch (GetMatch(new List<string> {"COMPACT", "SHORT", "DEFAULT"}, _parameters[2]))
@@ -215,7 +215,7 @@ namespace PcgTools
                 break;
 
             default:
-                throw new CommandLineArgumentException(String.Format(Strings.IllegalSubType, _parameters[2]));
+                throw new CommandLineArgumentException(string.Format(Strings.IllegalSubType, _parameters[2]));
             }
 
             ListGenerator.OutputFileName = _parameters[3];
@@ -390,7 +390,7 @@ namespace PcgTools
                     break;
 
                 default:
-                    throw new CommandLineArgumentException(String.Format(Strings.IllegalOption, optionPair.Key));
+                    throw new CommandLineArgumentException(string.Format(Strings.IllegalOption, optionPair.Key));
             }
         }
 
@@ -406,7 +406,7 @@ namespace PcgTools
                 if (diffListGenerator == null)
                 {
                     throw new CommandLineArgumentException(
-                        String.Format(Strings.OnlyDifferencesError, optionPair.Key));
+                        string.Format(Strings.OnlyDifferencesError, optionPair.Key));
                 }
 
                 diffListGenerator.MaxDiffs = GetIntOptionValue(optionPair, 0, 1000);
@@ -425,7 +425,7 @@ namespace PcgTools
                 if (diffListGenerator == null)
                 {
                     throw new CommandLineArgumentException(
-                        String.Format(Strings.OnlyDifferencesError, optionPair.Key));
+                        string.Format(Strings.OnlyDifferencesError, optionPair.Key));
                 }
 
                 diffListGenerator.IgnorePatchNames = GetBooleanOptionValue(optionPair);
@@ -444,7 +444,7 @@ namespace PcgTools
                 if (diffListGenerator == null)
                 {
                     throw new CommandLineArgumentException(
-                        String.Format(Strings.OnlyDifferencesError, optionPair.Key));
+                        string.Format(Strings.OnlyDifferencesError, optionPair.Key));
                 }
 
                 diffListGenerator.IgnoreSetListSlotDescriptions = GetBooleanOptionValue(optionPair);
@@ -463,7 +463,7 @@ namespace PcgTools
                 if (diffListGenerator == null)
                 {
                     throw new CommandLineArgumentException(
-                        String.Format(Strings.OnlyDifferencesError, optionPair.Key));
+                        string.Format(Strings.OnlyDifferencesError, optionPair.Key));
                 }
 
                 diffListGenerator.SearchBothDirections = GetBooleanOptionValue(optionPair);
@@ -787,7 +787,7 @@ namespace PcgTools
         {
             if (!_options.Keys.Contains(requiredOption))
             {
-                throw new CommandLineArgumentException(String.Format(Strings.CliRequiresError, option.Key, requiredOption));
+                throw new CommandLineArgumentException(string.Format(Strings.CliRequiresError, option.Key, requiredOption));
             }
         }
 
@@ -818,8 +818,8 @@ namespace PcgTools
             if ((value < minimumValue) || (value > maximumValue))
             {
                 throw new CommandLineArgumentException(
-                    String.Format(Strings.CliOutOfRangeError, optionPair.Value, optionPair.Key,
-                    String.Format("[{0}..{1}]", minimumValue, maximumValue)));
+                    string.Format(Strings.CliOutOfRangeError, optionPair.Value, optionPair.Key,
+                        $"[{minimumValue}..{maximumValue}]"));
             }
             return value;
         }
@@ -830,7 +830,7 @@ namespace PcgTools
         /// </summary>
         /// <param name="optionPair"></param>
         /// <returns></returns>
-        static List<String> GetBankNamesOptionValue(KeyValuePair<string, string> optionPair)
+        static List<string> GetBankNamesOptionValue(KeyValuePair<string, string> optionPair)
         {
             var bankNames = new string[0];
 
@@ -882,7 +882,7 @@ namespace PcgTools
 
             if (error)
             {
-                throw new CommandLineArgumentException(String.Format(Strings.CliIllegalBankName,
+                throw new CommandLineArgumentException(string.Format(Strings.CliIllegalBankName,
                     optionPair.Key, optionPair.Value, bank));
             }
         }
@@ -939,12 +939,12 @@ namespace PcgTools
 
                 if (startingValues.Count == 0)
                 {
-                    throw new CommandLineArgumentException(String.Format(Strings.CliUnknownOption, valueToFind));
+                    throw new CommandLineArgumentException(string.Format(Strings.CliUnknownOption, valueToFind));
                 }
                 
                 if (startingValues.Count > 1)
                 {
-                    throw new CommandLineArgumentException(String.Format(Strings.CliAmbiguousOption, valueToFind));
+                    throw new CommandLineArgumentException(string.Format(Strings.CliAmbiguousOption, valueToFind));
                 }
                 
                 matchedValue = startingValues[0];

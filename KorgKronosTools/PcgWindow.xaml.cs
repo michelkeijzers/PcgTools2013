@@ -51,9 +51,9 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        public IPcgMemory PcgMemory { get { return PcgViewModel.SelectedPcgMemory; } }
+        public IPcgMemory PcgMemory => PcgViewModel.SelectedPcgMemory;
 
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -156,10 +156,7 @@ namespace PcgTools
                             throw new ApplicationException("Illegal window type");
                     }
 
-                    if (window != null)
-                    {
-                        window.ShowDialog();
-                    }
+                    window?.ShowDialog();
                 },
 
 
@@ -244,7 +241,7 @@ namespace PcgTools
                 },
 
 
-                EditParameterWindow = (patches) =>
+                EditParameterWindow = patches =>
                 {
                     var window = new WindowEditParameter(patches);
                     window.ShowDialog();
@@ -402,7 +399,7 @@ namespace PcgTools
 
             columns[0].Width = 50;
             columns[1].Width = 0;
-            columns[1].Header = String.Empty;
+            columns[1].Header = string.Empty;
 
             listViewBanks.Visibility = Visibility.Visible;
             if (PcgViewModel.SelectedPcgMemory.CombiBanks.BankCollection.Any(bank => bank.IsSelected))
@@ -498,7 +495,7 @@ namespace PcgTools
 
             columns[0].Width = 60;
             columns[1].Width = 0;
-            columns[1].Header = String.Empty;
+            columns[1].Header = string.Empty;
 
             listViewBanks.Visibility = Visibility.Visible;
             if (PcgViewModel.SelectedPcgMemory.DrumKitBanks.BankCollection.Any(bank => bank.IsSelected))
@@ -535,7 +532,7 @@ namespace PcgTools
 
             columns[0].Width = 60;
             columns[1].Width = 0;
-            columns[1].Header = String.Empty;
+            columns[1].Header = string.Empty;
 
             listViewBanks.Visibility = Visibility.Visible;
             if (PcgViewModel.SelectedPcgMemory.DrumPatternBanks.BankCollection.Any(bank => bank.IsSelected))
@@ -572,7 +569,7 @@ namespace PcgTools
 
             columns[0].Width = 60;
             columns[1].Width = 0;
-            columns[1].Header = String.Empty;
+            columns[1].Header = string.Empty;
 
             listViewBanks.Visibility = Visibility.Visible;
             if (PcgViewModel.SelectedPcgMemory.WaveSequenceBanks.BankCollection.Any(bank => bank.IsSelected))
@@ -713,9 +710,8 @@ namespace PcgTools
         /// <returns></returns>
         private string GenerateCombiWindowTitle(IPatch combi)
         {
-            return String.Format("{0} {1}, {2} {3}: {4}", Strings.TimbresOf,
-                                 PcgViewModel.SelectedPcgMemory.FileName,
-                                 Strings.Combi.ToLower(), combi.Id, combi.Name);
+            return
+                $"{Strings.TimbresOf} {PcgViewModel.SelectedPcgMemory.FileName}, {Strings.Combi.ToLower()} {combi.Id}: {combi.Name}";
         }
 
 
@@ -775,9 +771,9 @@ namespace PcgTools
 
             var selectedPatches = listViewPatches.SelectedItems.Count;
             if ((selectedPatches == 1) && (listViewPatches.SelectedItem is IProgram) ||
-                (listViewPatches.SelectedItem is ICombi))
+                listViewPatches.SelectedItem is ICombi)
             {
-                PcgViewModel.LastSelectedProgramOrCombi = listViewPatches.SelectedItem as IPatch;
+                PcgViewModel.LastSelectedProgramOrCombi = (IPatch) listViewPatches.SelectedItem;
             }
 
             PcgViewModel.NumberOfSelectedPatches = PcgViewModel.Patches.Count(item => item.IsSelected);
@@ -1088,12 +1084,9 @@ namespace PcgTools
 
             if (listViewPatches.ItemsSource != null)
             {
-                foreach (IPatch patch in listViewPatches.ItemsSource)
+                foreach (ISetListSlot patch in listViewPatches.ItemsSource.OfType<ISetListSlot>())
                 {
-                    if (patch is ISetListSlot)
-                    {
-                        patch.Update("ShowSingleLinedSetListSlotDescriptions");
-                    }
+                    patch.Update("ShowSingleLinedSetListSlotDescriptions");
                 }
             }
         }

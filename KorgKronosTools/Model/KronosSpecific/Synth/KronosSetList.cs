@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System.ComponentModel;
 using PcgTools.Model.Common;
 
 using PcgTools.Model.Common.Synth.Meta;

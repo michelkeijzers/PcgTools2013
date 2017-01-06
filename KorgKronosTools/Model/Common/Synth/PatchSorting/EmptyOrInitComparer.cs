@@ -22,7 +22,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         /// <summary>
         /// 
         /// </summary>
-        public static EmptyOrInitComparer Instance { get { return _instance; } }
+        public static EmptyOrInitComparer Instance => _instance;
 
 
         /// <summary>

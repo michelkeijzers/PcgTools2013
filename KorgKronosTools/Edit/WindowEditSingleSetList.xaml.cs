@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -71,7 +70,7 @@ namespace PcgTools.Edit
             labelError.Content = EditUtils.CheckText(textBoxName.Text, _setList.MaxNameLength, 
                 EditUtils.ECheckType.Name);
 
-            buttonOk.IsEnabled = labelError.Content.Equals(String.Empty);
+            buttonOk.IsEnabled = labelError.Content.Equals(string.Empty);
         }
 
 

@@ -35,13 +35,13 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <summary>
         /// 
         /// </summary>
-        public BankType.EType Type { get { return _type; }  }
+        public BankType.EType Type => _type;
 
 
         /// <summary>
         /// Default is 128 patches per bank.
         /// </summary>
-        public virtual int NrOfPatches { get { return 128; } }
+        public virtual int NrOfPatches {  get { return 128; } }
 
 
         /// <summary>
@@ -92,13 +92,13 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <summary>
         /// 
         /// </summary>
-        public bool FilterForUi { get { return IsWritable; } }
+        public bool FilterForUi => IsWritable;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public int PcgId { get { return _pcgId; } }
+        public int PcgId => _pcgId;
 
 
         /// <summary>
@@ -128,19 +128,19 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public IPatch this[int index] { get { return Patches[index]; } }
-        
-       
-        /// <summary>
-        /// 
-        /// </summary>
-        public IMemory Root { get { return _banks.Root; } }
+        public IPatch this[int index] => Patches[index];
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected IPcgMemory PcgRoot { get { return _banks.Root as IPcgMemory; } }
+        public IMemory Root => _banks.Root;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected IPcgMemory PcgRoot => _banks.Root as IPcgMemory;
 
 
         /// <summary>
@@ -193,10 +193,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <summary>
         /// 
         /// </summary>
-        public INavigable Parent
-        {
-            get { return _banks; }
-        }
+        public INavigable Parent => _banks;
 
 
         /// <summary>
@@ -214,7 +211,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <summary>
         /// 
         /// </summary>
-        public int CountPatches { get { return Patches.Count; } }
+        public int CountPatches => Patches.Count;
 
 
         /// <summary>
@@ -309,7 +306,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <summary>
         /// E.g. GM banks have index 0.
         /// </summary>
-        public virtual int IndexOffset { get { return 0; } }
+        public virtual int IndexOffset => 0;
 
 
         /// <summary>

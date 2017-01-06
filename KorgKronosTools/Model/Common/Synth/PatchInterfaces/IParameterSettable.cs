@@ -1,6 +1,4 @@
-﻿using PcgTools.Model.Common.Synth.OldParameters;
-
-namespace PcgTools.Model.Common.Synth.PatchInterfaces
+﻿namespace PcgTools.Model.Common.Synth.PatchInterfaces
 {
     /// <summary>
     /// 

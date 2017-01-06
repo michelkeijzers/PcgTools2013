@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -81,25 +80,25 @@ namespace PcgTools.Model.KronosSpecific.Synth
 
 
             Add(new KronosProgramBank(
-                this, BankType.EType.UserExtended, "U-AA", 24, ProgramBank.SynthesisType.Unknown, String.Empty));                           // 13
+                this, BankType.EType.UserExtended, "U-AA", 24, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 13
             
             Add(new KronosProgramBank(
-                this, BankType.EType.UserExtended, "U-BB", 25, ProgramBank.SynthesisType.Unknown, String.Empty));                           // 14
+                this, BankType.EType.UserExtended, "U-BB", 25, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 14
             
             Add(new KronosProgramBank(
-                this, BankType.EType.UserExtended, "U-CC", 26, ProgramBank.SynthesisType.Unknown, String.Empty));                           // 15
+                this, BankType.EType.UserExtended, "U-CC", 26, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 15
             
             Add(new KronosProgramBank(
-                this, BankType.EType.UserExtended, "U-DD", 27, ProgramBank.SynthesisType.Unknown, String.Empty));                           // 16
+                this, BankType.EType.UserExtended, "U-DD", 27, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 16
             
             Add(new KronosProgramBank(
-                this, BankType.EType.UserExtended, "U-EE", 28, ProgramBank.SynthesisType.Unknown, String.Empty));                           // 17 
+                this, BankType.EType.UserExtended, "U-EE", 28, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 17 
             
             Add(new KronosProgramBank(
-                this, BankType.EType.UserExtended, "U-FF", 29, ProgramBank.SynthesisType.Unknown, String.Empty));                           // 18
+                this, BankType.EType.UserExtended, "U-FF", 29, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 18
             
             Add(new KronosProgramBank(
-                this, BankType.EType.UserExtended, "U-GG", 30, ProgramBank.SynthesisType.Unknown, String.Empty));                           // 19
+                this, BankType.EType.UserExtended, "U-GG", 30, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 19
 
             //Add(new KronosGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(1)", 7,  "GM2 Main programs"));             // [7]
             //Add(new KronosGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(2)", 8,  "GM2 Main programs"));             // [8]
@@ -146,9 +145,9 @@ namespace PcgTools.Model.KronosSpecific.Synth
                     Add(
                         new KronosProgramBank(
                             this, BankType.EType.Virtual,
-                            string.Format("V{0}-{1}", bankGroupIndex, bankNames[bankIndex]),        // [20..83]
+                            $"V{bankGroupIndex}-{bankNames[bankIndex]}",        // [20..83]
                             FirstVirtualBankId + bankGroupIndex * bankNames.Count + bankIndex, 
-                            ProgramBank.SynthesisType.Unknown, String.Empty));
+                            ProgramBank.SynthesisType.Unknown, string.Empty));
                 }
             }
         }

@@ -51,10 +51,6 @@ namespace PcgTools.Model.MicroStationSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Edsi; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Edsi;
     }
 }

@@ -6,9 +6,9 @@
     <ScrollViewer>
         <StackPanel Orientation="Vertical">
             <Label Content="Warnings"/>
-            <TextBox x:Name="WarningsTextBox" Margin="4,0" Background="#FFFBD9D9"/>
+            <TextBox x:Name="WarningsTextBox" Margin="4,0" Background="#FFFBD9D9" FontFamily="Courier New" FontSize="11"/>
             <Label Content="Translations" Background="White"/>
-            <TextBox x:Name="TranslationsTextBox"  Margin="4,0" Background="#FFDAF3EE"/>
+            <TextBox x:Name="TranslationsTextBox"  Margin="4,0" Background="#FFDAF3EE" FontSize="11"/>
         </StackPanel>
     </ScrollViewer>
 </Window>

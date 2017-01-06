@@ -3,8 +3,6 @@
 using System;
 using Common.Mvvm;
 using PcgTools.ClipBoard;
-using PcgTools.Model.Common.Synth.OldParameters;
-using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
 
 namespace PcgTools.Model.Common.Synth.Meta

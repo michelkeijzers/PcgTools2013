@@ -57,8 +57,7 @@ namespace PcgTools.Help
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, String.Format("{0}.\n{1}: {2}", 
-                    Strings.LinkWarning, Strings.Message, exception.Message), 
+                MessageBox.Show(this, $"{Strings.LinkWarning}.\n{Strings.Message}: {exception.Message}", 
                     Strings.PcgTools,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -103,8 +102,7 @@ namespace PcgTools.Help
             }
             catch (Exception exception)
             {
-                MessageBox.Show(this, String.Format("{0}.\n{1}: {2}",
-                    Strings.DonateWarning, Strings.Message, exception.Message),
+                MessageBox.Show(this, $"{Strings.DonateWarning}.\n{Strings.Message}: {exception.Message}",
                     Strings.PcgTools,
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }

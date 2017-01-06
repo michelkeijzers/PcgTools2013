@@ -376,6 +376,9 @@
     <Compile Include="Model\Common\Synth\SongsRelated\ISongTimbres.cs" />
     <Compile Include="Model\Common\Synth\SongsRelated\SongTimbre.cs" />
     <Compile Include="Model\Common\Synth\SongsRelated\SongTimbres.cs" />
+    <Compile Include="Model\KromeSpecific\Synth\KromeDrumPattern.cs" />
+    <Compile Include="Model\KromeSpecific\Synth\KromeDrumPatternBank.cs" />
+    <Compile Include="Model\KromeSpecific\Synth\KromeDrumPatternBanks.cs" />
     <Compile Include="Model\KronosOasysSpecific\Synth\KronosOasysDrumPattern.cs" />
     <Compile Include="Model\KronosOasysSpecific\Synth\KronosOasysDrumPatternBank.cs" />
     <Compile Include="Model\KronosOasysSpecific\Synth\KronosOasysDrumPatternBanks.cs" />
@@ -1379,6 +1382,7 @@
     <Resource Include="Help\External Links\GitaarDemo.png" />
     <Resource Include="Help\External Links\NothingElseMatters.png" />
     <Resource Include="Help\External Links\BK-facebook.gif" />
+    <Resource Include="Help\External Links\RadiasLibrarian.png" />
     <Content Include="Paper.dll" />
     <Resource Include="Gui\Tool Bar Icons\cut.png" />
     <Resource Include="Help\External Links\Kronoscopie.jpg" />

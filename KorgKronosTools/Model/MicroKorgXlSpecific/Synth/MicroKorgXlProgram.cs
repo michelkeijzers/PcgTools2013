@@ -19,7 +19,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
         public MicroKorgXlProgram(IProgramBank programBank, int index)
             : base(programBank, index)
         {
-            Id = string.Format("{0}{1}{2}", programBank.Id, index / 8 + 1, index % 8 + 1);
+            Id = $"{programBank.Id}{index/8 + 1}{index%8 + 1}";
         }
 
 
@@ -44,22 +44,13 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 8; }
-        }
+        public override int MaxNameLength => 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get
-            {
-                return ((Name == String.Empty) || (Name.Contains("Init") && Name.Contains("Prog")));
-            }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("Init") && Name.Contains("Prog")));
 
 
         /// <summary>
@@ -67,8 +58,8 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
-            RaisePropertyChanged(String.Empty, false);
+            Name = string.Empty;
+            RaisePropertyChanged(string.Empty, false);
         }
 
 

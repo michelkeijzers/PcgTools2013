@@ -1,6 +1,5 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
 using System.Collections.Generic;
 using System.Text;
 using PcgTools.Model.Common.Synth.Meta;
@@ -25,11 +24,11 @@ namespace PcgTools.Model.ZeroSeries.Synth
             switch (programBank.Type)
             {
                 case BankType.EType.Int:
-                    Id = string.Format("{0}{1}", programBank.Id, index.ToString("00"));
+                    Id = $"{programBank.Id}{index.ToString("00")}";
                     break;
 
                 case BankType.EType.Virtual:
-                    Id = string.Format("{0}-{1}", programBank.Id, index.ToString("00"));
+                    Id = $"{programBank.Id}-{index.ToString("00")}";
                     break;
 
                 // default: Do nothing.
@@ -76,19 +75,13 @@ namespace PcgTools.Model.ZeroSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int MaxNameLength
-        {
-            get { return 10; }
-        }
+        public override int MaxNameLength => 10;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public override bool IsEmptyOrInit
-        {
-            get { return ((Name == String.Empty) || (Name.Contains("INIT") && Name.Contains("Prog"))); }
-        }
+        public override bool IsEmptyOrInit => ((Name == string.Empty) || (Name.Contains("INIT") && Name.Contains("Prog")));
 
 
         /// <summary>
@@ -96,8 +89,8 @@ namespace PcgTools.Model.ZeroSeries.Synth
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
-            RaisePropertyChanged(String.Empty, false);
+            Name = string.Empty;
+            RaisePropertyChanged(string.Empty, false);
         }
 
 

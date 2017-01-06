@@ -150,42 +150,52 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="pcgMemory"></param>
-        public ListGeneratorWindow(PcgMemory pcgMemory) 
+        public ListGeneratorWindow(PcgMemory pcgMemory)
         {
             //Parent = mainWindow;
             _pcgMemory = pcgMemory;
             InitializeComponent();
-
-            // Save dialog.
-            _saveDialog = new SaveFileDialog
-            {
-                AddExtension = true,
-                CheckPathExists = true,
-                DefaultExt = Strings.TxtExtension,
-
-                FileName = textBoxOutputFile.Text = String.Format(@"{0}\{1}",
-                 Settings.Default.Slg_DefaultOutputFolder, Strings.OutputTxt),
-                Filter = Strings.TextFilesFilter,
-                Title = Strings.SelectWriteFile,
-                ValidateNames = true
-            };
 
             // Main type of list.
             radioButtonPatchList.IsChecked = true;
 
             InitBanks();
 
-            if ((_pcgMemory.ProgramBanks == null) || 
+            if ((_pcgMemory.ProgramBanks == null) ||
                 ((((_pcgMemory.CombiBanks == null) || (_pcgMemory.CombiBanks.CountWritablePatches == 0)) &&
-                 (((_pcgMemory.SetLists == null)) || (_pcgMemory.SetLists.CountWritablePatches == 0)))))
+                  (((_pcgMemory.SetLists == null)) || (_pcgMemory.SetLists.CountWritablePatches == 0)))))
             {
                 radioButtonProgramUsageList.Visibility = Visibility.Collapsed;
             }
 
+            // Save dialog.
+            var folderName = $"{Settings.Default.Slg_DefaultOutputFolder}";
+            if ((folderName == string.Empty) || !Directory.Exists(folderName))
+            {
+                folderName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
+
+            var fileName =
+                $@"{folderName}\{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}" +
+                $@"_{Strings.OutputTxt}";
+
+            _saveDialog = new SaveFileDialog
+            {
+                AddExtension = true,
+                CheckPathExists = true,
+                DefaultExt = Strings.TxtExtension,
+
+                FileName = textBoxOutputFile.Text = fileName,
+                InitialDirectory = Path.GetDirectoryName(fileName),
+                Filter = Strings.TextFilesFilter,
+                Title = Strings.SelectWriteFile,
+                ValidateNames = true
+            };
+
             // Sorting.
             InitSorting();
 
-            InitOutput();
+            InitOutput(fileName);
 
             InitDrumKits();
 
@@ -195,8 +205,12 @@ namespace PcgTools.ListGenerator
 
             InitFavoriteGroups();
 
-            Width = Settings.Default.UI_ListGeneratorWindowWidth == 0 ? 1000 : Settings.Default.UI_ListGeneratorWindowWidth;
-            Height = Settings.Default.UI_ListGeneratorWindowHeight == 0 ? 800 : Settings.Default.UI_ListGeneratorWindowHeight;
+            Width = Settings.Default.UI_ListGeneratorWindowWidth == 0
+                ? 1000
+                : Settings.Default.UI_ListGeneratorWindowWidth;
+            Height = Settings.Default.UI_ListGeneratorWindowHeight == 0
+                ? 800
+                : Settings.Default.UI_ListGeneratorWindowHeight;
         }
 
 
@@ -347,17 +361,12 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        private void InitOutput()
+        private void InitOutput(string fileName)
         {
             radioButtonTypeBankIndex.IsChecked = true;
             radioButtonAsciiTable.IsChecked = true;
 
-            var folder = Settings.Default.Slg_DefaultOutputFolder;
-            if (folder == String.Empty)
-            {
-                folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            }
-            textBoxOutputFile.Text = String.Format(@"{0}\{1}", folder, Strings.OutputTxt);
+            textBoxOutputFile.Text = fileName;
         }
 
 
@@ -591,6 +600,8 @@ namespace PcgTools.ListGenerator
         {
             checkBoxCrcIncludingName.IsChecked = false;
             checkBoxCrcExcludingName.IsChecked = false;
+            checkBoxSetListSlotReferenceId.IsChecked = true;
+            checkBoxSetListSlotReferenceName.IsChecked = true;
         }
 
 
@@ -855,15 +866,9 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        private bool LongCombiContentListSelected
-        {
-            get
-            {
-                return (radioButtonCombiContentList.IsReallyChecked() &&
-                        (comboBoxListSubType.SelectedItem != null) && 
-                        (SelectedSubType == ListGenerator.SubType.Long));
-            }
-        }
+        private bool LongCombiContentListSelected => (radioButtonCombiContentList.IsReallyChecked() &&
+                                                      (comboBoxListSubType.SelectedItem != null) && 
+                                                      (SelectedSubType == ListGenerator.SubType.Long));
 
 
         /// <summary>
@@ -922,19 +927,13 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        private bool XmlButtonCheckedButDisabled
-        {
-            get { return radioButtonXml.IsReallyChecked() && !radioButtonXml.IsEnabled; }
-        }
+        private bool XmlButtonCheckedButDisabled => radioButtonXml.IsReallyChecked() && !radioButtonXml.IsEnabled;
 
 
         /// <summary>
         /// 
         /// </summary>
-        private ListGenerator.SubType SelectedSubType
-        {
-            get { return (ListGenerator.SubType) ((ComboBoxItem) comboBoxListSubType.SelectedItem).Tag; }
-        }
+        private ListGenerator.SubType SelectedSubType => (ListGenerator.SubType) ((ComboBoxItem) comboBoxListSubType.SelectedItem).Tag;
 
 
         /// <summary>
@@ -1827,9 +1826,8 @@ namespace PcgTools.ListGenerator
             catch (UnauthorizedAccessException ex) 
             {
                 Mouse.OverrideCursor = Cursors.Arrow;
-                MessageBox.Show(this, String.Format("{0}: \n\n{1}: {2}\n\n{3}: {4}\n\n{5}: {6}",
-                    Strings.ErrorOccurred, Strings.Message, ex.Message, Strings.InnerExceptionMessage,
-                    ex.InnerException == null ? String.Empty : ex.InnerException.Message, Strings.StackTrace, ex.StackTrace), 
+                MessageBox.Show(this,
+                    $"{Strings.ErrorOccurred}: \n\n{Strings.Message}: {ex.Message}\n\n{Strings.InnerExceptionMessage}: {(ex.InnerException == null ? string.Empty : ex.InnerException.Message)}\n\n{Strings.StackTrace}: {ex.StackTrace}", 
                     Strings.PcgTools, MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
@@ -1848,6 +1846,8 @@ namespace PcgTools.ListGenerator
         {
             generator.OptionalColumnCrcIncludingName = checkBoxCrcIncludingName.IsReallyChecked();
             generator.OptionalColumnCrcExcludingName = checkBoxCrcExcludingName.IsReallyChecked();
+            generator.OptionalColumnSetListSlotReferenceId = checkBoxSetListSlotReferenceId.IsReallyChecked();
+            generator.OptionalColumnSetListSlotReferenceName = checkBoxSetListSlotReferenceName.IsReallyChecked();
         }
 
 
@@ -2184,6 +2184,7 @@ namespace PcgTools.ListGenerator
         private void RadioButtonAsciiTableChecked(object sender, RoutedEventArgs e)
         {
             _saveDialog.DefaultExt = Strings.TxtExtension;
+            _saveDialog.InitialDirectory = Path.GetDirectoryName(textBoxOutputFile.Text);
             textBoxOutputFile.Text = Path.ChangeExtension(textBoxOutputFile.Text, Strings.TxtExtension);
             _saveDialog.FileName = textBoxOutputFile.Text;
             _saveDialog.Filter = Strings.AsciiFilter;
@@ -2199,6 +2200,7 @@ namespace PcgTools.ListGenerator
         private void RadioButtonTextChecked(object sender, RoutedEventArgs e)
         {
             _saveDialog.DefaultExt = "txt";
+            _saveDialog.InitialDirectory = Path.GetDirectoryName(textBoxOutputFile.Text);
             textBoxOutputFile.Text = Path.ChangeExtension(textBoxOutputFile.Text, "txt");
             _saveDialog.FileName = textBoxOutputFile.Text;
             _saveDialog.Filter = Strings.AsciiFilter;
@@ -2213,6 +2215,7 @@ namespace PcgTools.ListGenerator
         private void RadioButtonCsvChecked(object sender, RoutedEventArgs e)
         {
             _saveDialog.DefaultExt = "csv";
+            _saveDialog.InitialDirectory = Path.GetDirectoryName(textBoxOutputFile.Text);
             textBoxOutputFile.Text = Path.ChangeExtension(textBoxOutputFile.Text, "csv");
             _saveDialog.FileName = textBoxOutputFile.Text;
             _saveDialog.Filter = Strings.CsvFileFilter;
@@ -2228,6 +2231,7 @@ namespace PcgTools.ListGenerator
         private void RadioButtonXmlChecked(object sender, RoutedEventArgs e)
         {
             _saveDialog.DefaultExt = "xml";
+            _saveDialog.InitialDirectory = Path.GetDirectoryName(textBoxOutputFile.Text);
             textBoxOutputFile.Text = Path.ChangeExtension(textBoxOutputFile.Text, "xml");
             _saveDialog.FileName = textBoxOutputFile.Text;
             _saveDialog.Filter = Strings.XmlFileFilter;

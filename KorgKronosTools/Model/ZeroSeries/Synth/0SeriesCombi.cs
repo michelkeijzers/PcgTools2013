@@ -4,7 +4,6 @@ using System;
 using System.Text;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.OldParameters;
-using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.MntxSeriesSpecific.Synth;
 
 namespace PcgTools.Model.ZeroSeries.Synth
@@ -24,11 +23,11 @@ namespace PcgTools.Model.ZeroSeries.Synth
         {
             if (combiBank.Type == BankType.EType.Int)
             {
-                Id = string.Format("{0}{1}", combiBank.Id, (index).ToString("00"));
+                Id = $"{combiBank.Id}{(index).ToString("00")}";
             }
             else if (combiBank.Type == BankType.EType.Virtual)
             {
-                Id = string.Format("{0}-{1}", combiBank.Id, index.ToString("00"));
+                Id = $"{combiBank.Id}-{index.ToString("00")}";
             }
             else
             {

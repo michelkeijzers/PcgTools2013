@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Common.Mvvm;
+﻿using Common.Mvvm;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
@@ -33,19 +32,13 @@ namespace PcgTools.Model.Common.Synth.SongsRelated
         /// <summary>
         /// 
         /// </summary>
-        public IMemory Root
-        {
-            get { return _song.Memory; }
-        }
+        public IMemory Root => _song.Memory;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public INavigable Parent
-        {
-            get { return _song; }
-        }
+        public INavigable Parent => _song;
 
 
         /// <summary>

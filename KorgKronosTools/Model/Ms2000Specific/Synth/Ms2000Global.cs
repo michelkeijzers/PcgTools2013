@@ -17,28 +17,19 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         /// <summary>
         /// Category names are not in PCG.
         /// </summary>
-        protected override int CategoryNameLength
-        {
-            get { return 16; }
-        }
+        protected override int CategoryNameLength => 16;
 
 
         /// <summary>
         /// Hardcoded.
         /// </summary>
-        protected override int PcgOffsetCategories
-        {
-            get { return -1; }
-        }
+        protected override int PcgOffsetCategories => -1;
 
 
         /// <summary>
         /// Categories are taken from Mode.
         /// </summary>
-        protected override int NrOfCategories
-        {
-            get { return 4; }
-        }
+        protected override int NrOfCategories => 4;
 
 
         /// <summary>

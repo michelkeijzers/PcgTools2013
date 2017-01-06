@@ -15,7 +15,7 @@ namespace PcgTools.Model.M50Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        private static int TimbresSizeConstant { get { return 112; } }
+        private static int TimbresSizeConstant => 112;
 
 
         /// <summary>

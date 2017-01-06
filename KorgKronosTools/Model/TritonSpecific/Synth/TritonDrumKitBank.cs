@@ -1,7 +1,4 @@
-﻿using System;
-
-
-// (c) 2011 Michel Keijzers
+﻿// (c) 2011 Michel Keijzers
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
 
@@ -15,10 +12,7 @@ namespace PcgTools.Model.TritonSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override int NrOfPatches
-        {
-            get { return 16; }
-        }
+        public override int NrOfPatches => 16;
 
 
         /// <summary>

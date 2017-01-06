@@ -151,7 +151,7 @@
     <value>Назначенная на очистку программа:</value>
   </data>
   <data name="AutoExtendPaste" xml:space="preserve">
-    <value>Авто расширенние вставки выбранного одиночного патча</value>
+    <value>_Авто расширенние вставки выбранного одиночного патча</value>
   </data>
   <data name="AutoExtendPasteToolTip" xml:space="preserve">
     <value>Продолжить вставку патчей, даже если был выбран только один</value>
@@ -363,7 +363,7 @@
     <value>Пустой</value>
   </data>
   <data name="Enabled" xml:space="preserve">
-    <value>_отметить</value>
+    <value>_включить</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>Английский (English)</value>
@@ -372,13 +372,13 @@
     <value>произошла ошибка</value>
   </data>
   <data name="Event" xml:space="preserve">
-    <value>PCG Tools has пользуются более чем 850 пользователей!</value>
+    <value>Программой PCG Tools пользуются более чем 850 пользователей!</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>_выход</value>
   </data>
   <data name="ExitCutCopyPasteMode" xml:space="preserve">
-    <value>В_ыход из режим Cut/Copy/Paste</value>
+    <value>В_ыход из режима Cut/Copy/Paste</value>
   </data>
   <data name="ExitCutCopyPasteModeToolTip" xml:space="preserve">
     <value>Выход из режима Cut/Copy/Paste</value>
@@ -467,7 +467,7 @@
     <value>Ссылка на форум/дискуссию</value>
   </data>
   <data name="FourParametersNeededError" xml:space="preserve">
-    <value>Требуется точно 4 параметра (название входнонго PCG файла, тип списка, подтип списка, имя выходного файла).</value>
+    <value>Требуется все 4 параметра (название входнонго PCG файла, тип списка, подтип списка, имя выходного файла).</value>
   </data>
   <data name="French" xml:space="preserve">
     <value>Французский (French)</value>
@@ -491,7 +491,7 @@
     <value>Греческий (Greek)</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>_помощь</value>
+    <value>_Помощь</value>
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
@@ -685,7 +685,7 @@
     <value>Вставка Combis в PCG, даже когда уже имеются в PCG</value>
   </data>
   <data name="PasteDuplicatePrograms" xml:space="preserve">
-    <value>_Вставлять дубликат Программ</value>
+    <value>_Вставлять дубликаты Программ</value>
   </data>
   <data name="PasteDuplicateSetListSlots" xml:space="preserve">
     <value>_Вставка дубликата слота Set List</value>
@@ -868,10 +868,10 @@
     <value>Испанский (Spanish)</value>
   </data>
   <data name="SpecialEvent" xml:space="preserve">
-    <value>_Особый случай</value>
+    <value>_Информация</value>
   </data>
   <data name="SpecialEventToolTip" xml:space="preserve">
-    <value>Просмотреть особые случаи</value>
+    <value>Просмотреть Информацию</value>
   </data>
   <data name="SponsoredBy" xml:space="preserve">
     <value>При поддержке</value>
@@ -1015,10 +1015,10 @@
     <value>Категория А</value>
   </data>
   <data name="CategorySetB_setw" xml:space="preserve">
-    <value>Категоря B</value>
+    <value>Категория B</value>
   </data>
   <data name="CategorySetSelect_setw" xml:space="preserve">
-    <value>Выбор установки категории  (только Корг Тринити)</value>
+    <value>Выбор установок категории  (только Корг Тринити)</value>
   </data>
   <data name="EFileTypePcg" xml:space="preserve">
     <value>PCG</value>
@@ -1246,7 +1246,7 @@
     <value>программы</value>
   </data>
   <data name="Stb_MultipleCombisInMultipleBanks" xml:space="preserve">
-    <value>{0} Combis in {1} банке (ах)</value>
+    <value>{0} Combis в {1} банке (ах)</value>
   </data>
   <data name="Stb_MultipleCombisInOneBank" xml:space="preserve">
     <value>{0} Combis в 1 банке</value>
@@ -1261,7 +1261,7 @@
     <value>{0} Программ (ы) в {1} банке (ах)</value>
   </data>
   <data name="Stb_MultipleProgramsInOneBank" xml:space="preserve">
-    <value>{0} программ (ы) в 1 банке</value>
+    <value>{0} Программ (ы) в 1 банке</value>
   </data>
   <data name="Stb_MultipleSetListSlotsInMultipleSetLists" xml:space="preserve">
     <value>{0} слот (ов) в {1} Set List</value>
@@ -1663,7 +1663,7 @@
     <value>назначение на слот сет листа</value>
   </data>
   <data name="AutoFillInSetListSlotNames" xml:space="preserve">
-    <value>Авто запонение наименований слотов сет листа</value>
+    <value>_Авто запонение наименований слотов сет листа</value>
   </data>
   <data name="Capitalization" xml:space="preserve">
     <value>_Верхний регистр</value>
@@ -1760,5 +1760,113 @@
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>неизвестно</value>
+  </data>
+  <data name="DrumPattern" xml:space="preserve">
+    <value>Drum Pattern</value>
+  </data>
+  <data name="DrumPatterns" xml:space="preserve">
+    <value>Drum Patterns</value>
+  </data>
+  <data name="DrumPatternsInRadioButton" xml:space="preserve">
+    <value>_Drum Patterns</value>
+  </data>
+  <data name="EmptyOrInitPatchName" xml:space="preserve">
+    <value>Пустой или инициализированный патч</value>
+  </data>
+  <data name="ExportToFile" xml:space="preserve">
+    <value>Экспорт в файл</value>
+  </data>
+  <data name="ExternalLinksPersonal" xml:space="preserve">
+    <value>Внешние ссылки Персональные ссылки</value>
+  </data>
+  <data name="ExternalLinksPersonalMenuItem" xml:space="preserve">
+    <value>Внешние ссылки _Персональные ссылки</value>
+  </data>
+  <data name="FilterDrumPatternNames" xml:space="preserve">
+    <value>_Фильтр по наименованиям Drum Pattern</value>
+  </data>
+  <data name="FilterDrumPatterns" xml:space="preserve">
+    <value>Фильтр Drum Patterns</value>
+  </data>
+  <data name="HexExportDlgTitle" xml:space="preserve">
+    <value>Hex Экспорт</value>
+  </data>
+  <data name="IgnoreEmptyInitDrumPatterns" xml:space="preserve">
+    <value>_Игнорировать Empty/Init Drum Patterns</value>
+  </data>
+  <data name="InitAsMpeCombi" xml:space="preserve">
+    <value>_Init как MPE Combi</value>
+  </data>
+  <data name="MidiChannelMainKeyboard" xml:space="preserve">
+    <value>MIDI канал основной клавиатуры</value>
+  </data>
+  <data name="MidiChannelSecondaryKeyboard" xml:space="preserve">
+    <value>MIDI канал вторичной клавиатуры</value>
+  </data>
+  <data name="MidiTracks" xml:space="preserve">
+    <value>_MIDI каналы</value>
+  </data>
+  <data name="OverwriteFilledDrumKits" xml:space="preserve">
+    <value>_Переписать заполненные Drumkits</value>
+  </data>
+  <data name="OverwriteFilledDrumKitsToolTip" xml:space="preserve">
+    <value>Переписать заполненные (не empty/initialized) Drum Kits</value>
+  </data>
+  <data name="OverwriteFilledDrumPatterns" xml:space="preserve">
+    <value>_Переписать заполненные Drum Patterns</value>
+  </data>
+  <data name="OverwriteFilledDrumPatternsToolTip" xml:space="preserve">
+    <value>Переписать заполненные (не empty/initialized) Drum Patterns</value>
+  </data>
+  <data name="OverwriteFilledWaveSequences" xml:space="preserve">
+    <value>_Переписать заполненные Wave Sequences</value>
+  </data>
+  <data name="OverwriteFilledWaveSequencesToolTip" xml:space="preserve">
+    <value>переписать заполненные (не empty/initialized) wave sequences</value>
+  </data>
+  <data name="PasteDuplicateDrumKits" xml:space="preserve">
+    <value>_Вставить дубликат Drum Kits</value>
+  </data>
+  <data name="PasteDuplicateDrumKitsToolTip" xml:space="preserve">
+    <value>Вставить drum kits в PCG</value>
+  </data>
+  <data name="PasteDuplicateDrumPatterns" xml:space="preserve">
+    <value>_Вставить дубликат Drum Patterns</value>
+  </data>
+  <data name="PasteDuplicateDrumPatternsToolTip" xml:space="preserve">
+    <value>Вставить Drum Patterns в PCG</value>
+  </data>
+  <data name="PasteDuplicateWaveSequences" xml:space="preserve">
+    <value>_Вставить дубликат Wave Sequences</value>
+  </data>
+  <data name="PasteDuplicateWaveSequencesToolTip" xml:space="preserve">
+    <value>Вставить Wave Sequences в  PCG</value>
+  </data>
+  <data name="SelectAllExceptDrums" xml:space="preserve">
+    <value>_Выбрать All / Drums</value>
+  </data>
+  <data name="SourceSetList" xml:space="preserve">
+    <value>Источник Setlist</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInMultipleBanks" xml:space="preserve">
+    <value>{0} Drum Patterns в {1} Банках</value>
+  </data>
+  <data name="Stb_MultipleDrumPatternsInOneBank" xml:space="preserve">
+    <value>{0} Drum Patterns в 1 Банке</value>
+  </data>
+  <data name="Stb_OneDrumPatternInMultipleBanks" xml:space="preserve">
+    <value>1 Drum Pattern в {0} Банках</value>
+  </data>
+  <data name="Stb_OneDrumPatternInOneBank" xml:space="preserve">
+    <value>1 Drum Pattern в 1 Банке</value>
+  </data>
+  <data name="TargetCombiBank" xml:space="preserve">
+    <value>Target Combi Bank</value>
+  </data>
+  <data name="TargetSetList" xml:space="preserve">
+    <value>Target Set List</value>
+  </data>
+  <data name="WaveSequences" xml:space="preserve">
+    <value>Wave Sequences</value>
   </data>
 </root>

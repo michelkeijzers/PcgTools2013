@@ -50,10 +50,6 @@ namespace PcgTools.Model.M50Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        public override SynthesisType DefaultSampledSynthesisType
-        {
-            get { return SynthesisType.Eds; }
-        }
-
+        public override SynthesisType DefaultSampledSynthesisType => SynthesisType.Eds;
     }
 }

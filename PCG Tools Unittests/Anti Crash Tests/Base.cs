@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using PcgTools.ListGenerator;
 using PcgTools.Model.Common.File;
 
@@ -21,7 +18,7 @@ namespace PCG_Tools_Unittests
     /// </summary>
     public abstract class AntiCrashTests
     {
-        private const string DefaultDirectory = @"C:\users\michel\source\repos\PCG Tools TestFiles\";
+        private const string DefaultDirectory = @"C:\PCG Tools Test Files\TestFiles\";
 
 
         private PcgMemory _pcgMemory;
@@ -122,7 +119,7 @@ namespace PCG_Tools_Unittests
         private void Run()
         {
             _generator.Run(false);
-            _lines = File.ReadAllLines("output.txt");
+            _lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
         }
 
 
@@ -130,7 +127,7 @@ namespace PCG_Tools_Unittests
         {
             _generator.PcgMemory = _pcgMemory;
             _generator.FilterOnText = false;
-            _generator.FilterText = String.Empty;
+            _generator.FilterText = string.Empty;
             _generator.FilterCaseSensitive = false;
             _generator.FilterSetListSlotDescription = true;
             _generator.SelectedProgramBanks = new ObservableBankCollection<IProgramBank>();
@@ -168,7 +165,7 @@ namespace PCG_Tools_Unittests
             _generator.IgnoreInitWaveSequences = true;
             _generator.SortMethod = ListGenerator.Sort.Alphabetical;
             _generator.ListOutputFormat = ListGenerator.OutputFormat.Text;
-            _generator.OutputFileName = "output.txt";
+            _generator.OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt";
             _lines = null;
         }
     }

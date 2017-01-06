@@ -94,11 +94,11 @@ namespace PcgTools.Model.KronosSpecific.Pcg
         /// <param name="pbkIndex"></param>
         /// <param name="mbkIndex"></param>
         /// <param name="cbkIndex"></param>
-        /// <param name="wbqIndex"></param>
+        /// <param name="wbkIndex"></param>
         /// <param name="dbkIndex"></param>
         /// <returns></returns>
         private bool FindIni2Offset(IChunk chunk, out int offsetInIni2,
-            ref int pbkIndex, ref int mbkIndex, ref int cbkIndex, ref int wbqIndex, ref int dbkIndex)
+            ref int pbkIndex, ref int mbkIndex, ref int cbkIndex, ref int wbkIndex, ref int dbkIndex)
         {
             switch (chunk.Name)
             {
@@ -121,9 +121,9 @@ namespace PcgTools.Model.KronosSpecific.Pcg
                     offsetInIni2 = FindIni2Or3Offset("SLS1", 0); // Only one
                     break;
                 
-                case "WBQ1":
-                    offsetInIni2 = FindIni2Or3Offset(chunk.Name, wbqIndex);
-                    wbqIndex++;
+                case "WBK1":
+                    offsetInIni2 = FindIni2Or3Offset(chunk.Name, wbkIndex);
+                    wbkIndex++;
                     break;
 
                 case "DBK1":
@@ -173,7 +173,7 @@ namespace PcgTools.Model.KronosSpecific.Pcg
         }
 
 
-        public override bool AreFavoritesSupported { get { return true; } }
+        public override bool AreFavoritesSupported => true;
 
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace PcgTools.Model.KronosSpecific.Pcg
                     }
                 }
 
-                patch.RaisePropertyChanged(String.Empty, false);
+                patch.RaisePropertyChanged(string.Empty, false);
             }
         }
 
@@ -304,7 +304,7 @@ namespace PcgTools.Model.KronosSpecific.Pcg
                     }
                 }
 
-                patch.RaisePropertyChanged(String.Empty, false);
+                patch.RaisePropertyChanged(string.Empty, false);
             }
         }
         

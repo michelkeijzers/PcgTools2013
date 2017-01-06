@@ -34,7 +34,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         {
             Bank = programBank;
             Index = index;
-            Id = string.Format("{0}{1}", programBank.Id, index.ToString("000"));
+            Id = $"{programBank.Id}{index.ToString("000")}";
         }
 
 
@@ -68,7 +68,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// </summary>
         public override void Clear()
         {
-            Name = String.Empty;
+            Name = string.Empty;
             var category = GetParam(ParameterNames.ProgramParameterName.Category);
             if (category != null)
             {
@@ -84,7 +84,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
             }
             Update("Category");
 
-            RaisePropertyChanged(String.Empty, false);
+            RaisePropertyChanged(string.Empty, false);
         }
 
 
@@ -93,20 +93,14 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// </summary>
         [UsedImplicitly]
         // ReSharper disable once UnusedMember.Global
-        public string Favorite
-        {
-            get { return Root.AreFavoritesSupported && GetParam(ParameterNames.ProgramParameterName.Favorite).Value ? "X" : String.Empty; }
-        }
+        public string Favorite => Root.AreFavoritesSupported && GetParam(ParameterNames.ProgramParameterName.Favorite).Value ? "X" : string.Empty;
 
 
         /// <summary>
         /// 
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public string PatchTypeAsString
-        {
-            get { return Strings.Program; }
-        }
+        public string PatchTypeAsString => Strings.Program;
 
 
         /// <summary>
@@ -116,14 +110,9 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         // ReSharper disable UnusedMember.Global
         public string NumberOfReferencesAsString
             // ReSharper restore UnusedMember.Global
-        {
-            get
-            {
-                return Settings.Default.UI_ShowNumberOfReferencesColumn
-                    ? NumberOfReferences.ToString(CultureInfo.InvariantCulture)
-                    : String.Empty;
-            }
-        }
+            => Settings.Default.UI_ShowNumberOfReferencesColumn
+                ? NumberOfReferences.ToString(CultureInfo.InvariantCulture)
+                : string.Empty;
 
 
         /// <summary>
@@ -252,10 +241,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <summary>
         /// Return empty list by default. Override when drum kits are supported.
         /// </summary>
-        public virtual List<IDrumKit> UsedDrumKits
-        {
-            get { return new List<IDrumKit>(); }
-        }
+        public virtual List<IDrumKit> UsedDrumKits => new List<IDrumKit>();
 
 
         /// <summary>
@@ -353,10 +339,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// 
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public bool IsDrumProgram
-        {
-            get { return (CategoryAsName.ToUpper().Contains("DRUM")); }
-        }
+        public bool IsDrumProgram => (CategoryAsName.ToUpper().Contains("DRUM"));
 
 
         /// <summary>

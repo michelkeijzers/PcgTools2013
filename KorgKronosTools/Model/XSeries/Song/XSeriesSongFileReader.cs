@@ -2,7 +2,6 @@
 
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.SongsRelated;
-using PcgTools.Model.KromeSpecific.Synth;
 using PcgTools.Model.MntxSeriesSpecific.Song;
 using PcgTools.Model.XSeries.Synth;
 

@@ -18,38 +18,26 @@ namespace PcgTools.Model.MicroStationSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int CategoryNameLength
-        {
-            get { return 24; }
-        }
+        protected override int CategoryNameLength => 24;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int PcgOffsetCategories
-        {
-            get { return 5312; }
-        }
+        protected override int PcgOffsetCategories => 5312;
 
 
         /// <summary>
         /// Despite the system exclusive information which allow for 18 values, only 8 are 
         /// shown in the manual (and are hardcoded).
         /// </summary>
-        protected override int NrOfCategories
-        {
-            get { return 8; }
-        }
+        protected override int NrOfCategories => 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int NrOfSubCategories
-        {
-            get { return 8; }
-        }
+        protected override int NrOfSubCategories => 8;
 
 
         /// <summary>

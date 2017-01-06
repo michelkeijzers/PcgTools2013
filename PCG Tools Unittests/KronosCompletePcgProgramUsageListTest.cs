@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosCompletePcgProgramUsageListTest
     {
-        const string PcgFileName = @"C:\users\michel\source\repos\PCG Tools TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
 
 
         PcgMemory _pcgMemory;
@@ -56,7 +55,7 @@ namespace PCG_Tools_Unittests
                              WaveSequencesEnabled = true,
                              IgnoreInitWaveSequences = true,
                              ListOutputFormat = ListGenerator.OutputFormat.Text,
-                             OutputFileName = "output.txt"
+                             OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt"
                          };
             if (_pcgMemory != null)
             {
@@ -78,7 +77,7 @@ namespace PCG_Tools_Unittests
         private void Run()
         {
             _generator.Run();
-            _lines = File.ReadAllLines("output.txt");
+            _lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
         }
 
 

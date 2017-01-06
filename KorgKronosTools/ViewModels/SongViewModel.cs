@@ -1,15 +1,10 @@
 ﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Common.Mvvm;
-using PcgTools.Annotations;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.SongsRelated;
 using PcgTools.OpenedFiles;
@@ -41,7 +36,7 @@ namespace PcgTools.ViewModels
         private void OpenedPcgWindowsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             // If no file selected and model is correct, use it.
-            if (String.IsNullOrEmpty(SelectedPcgFileName))
+            if (string.IsNullOrEmpty(SelectedPcgFileName))
             {
                 if (e.NewItems != null)
                 {
@@ -125,9 +120,8 @@ namespace PcgTools.ViewModels
         // ReSharper disable once MemberCanBePrivate.Global
         public void UpdateWindowTitle()
         {
-            WindowTitle = string.Format("{0}{1} ({2})", SelectedMemory.FileName,
-                SelectedMemory.IsDirty ? " *" : String.Empty,
-                SelectedMemory.Model.ModelAndVersionAsString);
+            WindowTitle =
+                $"{SelectedMemory.FileName}{(SelectedMemory.IsDirty ? " *" : string.Empty)} ({SelectedMemory.Model.ModelAndVersionAsString})";
         }
 
 
@@ -227,11 +221,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public ISongMemory SelectedSongMemory
-        {
-            get { return (ISongMemory) SelectedMemory; }
-        }
-
+        public ISongMemory SelectedSongMemory => (ISongMemory) SelectedMemory;
 
 
         /// <summary>

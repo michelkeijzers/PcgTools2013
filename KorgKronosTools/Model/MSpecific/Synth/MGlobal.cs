@@ -14,19 +14,19 @@ namespace PcgTools.Model.MSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int CategoryNameLength { get { return 24; } }
+        protected override int CategoryNameLength => 24;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int NrOfCategories { get { return 18; } }
+        protected override int NrOfCategories => 18;
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected override int NrOfSubCategories { get { return 8; } }
+        protected override int NrOfSubCategories => 8;
 
 
         /// <summary>

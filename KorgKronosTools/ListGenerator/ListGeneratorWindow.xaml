@@ -259,11 +259,15 @@
 
         <Expander  x:Name="groupBoxOptionalColumns" Header="{Binding OptionalColumns, Source={StaticResource LocStrings}}" Margin="4" Padding="4" IsExpanded="True">
             <StackPanel>
+                <CheckBox Content="{Binding ColumnCrcValueExcludingName, Source={StaticResource LocStrings}}"
+                    x:Name="checkBoxCrcExcludingName" Margin="4"/>
                 <CheckBox Content="{Binding ColumnCrcValueIncludingName, Source={StaticResource LocStrings}}"
-                                      x:Name="checkBoxCrcIncludingName" Margin="4"/>
-            <CheckBox Content="{Binding ColumnCrcValueExcludingName, Source={StaticResource LocStrings}}"
-                                      x:Name="checkBoxCrcExcludingName" Margin="4"/>
-                </StackPanel>
+                    x:Name="checkBoxCrcIncludingName" Margin="4"/>
+                <CheckBox Content="{Binding ColumnSetListSlotReferenceId, Source={StaticResource LocStrings}}"
+                    x:Name="checkBoxSetListSlotReferenceId" Margin="4"/>
+                <CheckBox Content="{Binding ColumnSetListSlotReferenceName, Source={StaticResource LocStrings}}"
+                    x:Name="checkBoxSetListSlotReferenceName" Margin="4"/>
+            </StackPanel>
         </Expander>
         
             <Expander Header="{Binding Sorting, Source={StaticResource LocStrings}}"

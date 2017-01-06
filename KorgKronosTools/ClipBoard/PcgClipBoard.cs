@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using PcgTools.Model.Common;
-using PcgTools.Model.Common.Synth;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.OldParameters;
@@ -682,7 +681,7 @@ namespace PcgTools.ClipBoard
             if (waveSequence.PcgRoot.Content != null)
             {
                 var clipBoardWaveSequence = new ClipBoardWaveSequence(waveSequence);
-                SetListSlots.CopiedPatches.Add(clipBoardWaveSequence);
+                WaveSequences.CopiedPatches.Add(clipBoardWaveSequence);
 
                 if (clearAfterCopy)
                 {
@@ -1156,7 +1155,7 @@ namespace PcgTools.ClipBoard
                         {
                             throw new ApplicationException("Illegal clip board reference");
                         }
-                        setListSlot.RaisePropertyChanged(String.Empty, false);
+                        setListSlot.RaisePropertyChanged(string.Empty, false);
                     }
                 }
             }

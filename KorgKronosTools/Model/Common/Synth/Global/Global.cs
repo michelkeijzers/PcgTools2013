@@ -165,7 +165,7 @@ namespace PcgTools.Model.Common.Synth.Global
         /// <returns></returns>
         public virtual List<string> GetCategoryNames(ECategoryType type)
         {
-            var categories = new List<String>();
+            var categories = new List<string>();
 
             for (var category = 0; category < NrOfCategories; category++)
             {
@@ -183,9 +183,9 @@ namespace PcgTools.Model.Common.Synth.Global
         /// <param name="type"></param>
         /// <param name="category"></param>
         /// <returns></returns>
-        public LinkedList<String> GetSubCategoryNames(ECategoryType type, int category)
+        public LinkedList<string> GetSubCategoryNames(ECategoryType type, int category)
         {
-            var categories = new LinkedList<String>();
+            var categories = new LinkedList<string>();
             for (var subCategory = 0; subCategory < NrOfSubCategories; subCategory++)
             {
                 categories.AddLast(
@@ -236,24 +236,12 @@ namespace PcgTools.Model.Common.Synth.Global
         /// <summary>
         /// 
         /// </summary>
-        protected virtual int SizeOfProgramsCategoriesAndSubCategories
-        {
-            get
-            {
-                return NrOfCategories * (CategoryNameLength + SubCategoriesSize);
-            }
-        }
+        protected virtual int SizeOfProgramsCategoriesAndSubCategories => NrOfCategories * (CategoryNameLength + SubCategoriesSize);
 
 
         /// <summary>
         /// 
         /// </summary>
-        protected int SubCategoriesSize
-        {
-            get
-            {
-                return PcgMemory.HasSubCategories ? NrOfSubCategories * CategoryNameLength : 0;
-            }
-        }
+        protected int SubCategoriesSize => PcgMemory.HasSubCategories ? NrOfSubCategories * CategoryNameLength : 0;
     }
 }

@@ -73,19 +73,19 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
          /// 
          /// </summary>
-        public INavigable Parent { get { return null; } }
+        public INavigable Parent => null;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public int ByteOffset { get { return 0; }}
+        public int ByteOffset => 0;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual bool AreFavoritesSupported { get { return false; } }
+        public virtual bool AreFavoritesSupported => false;
 
 
         /// <summary>
@@ -177,25 +177,19 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// MicroKorg XL uses genres and categories instead of categories and sub categories.
         /// </summary>
-        public virtual bool UsesCategoriesAndSubCategories
-        {
-            get { return true; }
-        }
+        public virtual bool UsesCategoriesAndSubCategories => true;
 
 
         /// <summary>
         /// True if categories (and thus sub categories are editable
         /// </summary>
-        public virtual bool AreCategoriesEditable
-        {
-            get { return true; }
-        }
+        public virtual bool AreCategoriesEditable => true;
 
 
         /// <summary>
         /// 
         /// </summary>
-        public IMemory Root { get { return this; } }
+        public IMemory Root => this;
 
 
         /// <summary>

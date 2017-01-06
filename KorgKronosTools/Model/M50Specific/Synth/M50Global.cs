@@ -14,7 +14,9 @@ namespace PcgTools.Model.M50Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        protected override int PcgOffsetCategories { get { return 9558; } } // In full PCG: global at 3613a0, categories at 363902
+        protected override int PcgOffsetCategories => 9558;
+
+// In full PCG: global at 3613a0, categories at 363902
 
 
         /// <summary>

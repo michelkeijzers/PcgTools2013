@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosCompletePcgDifferencesListTest
     {
-        const string PcgFileName = @"C:\users\michel\source\repos\PCG Tools TestFiles\Workstations\Kronos\PRELOAD.pcg";
+        const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\PRELOAD.pcg";
 
 
         PcgMemory _pcgMemory;
@@ -81,7 +80,7 @@ namespace PCG_Tools_Unittests
                 DrumPatternsEnabled = false,
                 WaveSequencesEnabled = false,
                 ListOutputFormat = ListGenerator.OutputFormat.Text,
-                OutputFileName = "output.txt"
+                OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt"
             };
             _generator.SelectedProgramBanks.Add((IProgramBank)_pcgMemory.ProgramBanks[0]);
             _generator.SelectedProgramBanks.Add((IProgramBank)_pcgMemory.ProgramBanks[6]);
@@ -117,7 +116,7 @@ namespace PCG_Tools_Unittests
                 SelectedCombiBanks = new ObservableBankCollection<ICombiBank>(),
                 SetListsEnabled = false,
                 ListOutputFormat = ListGenerator.OutputFormat.Csv,
-                OutputFileName = "output.csv"
+                OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.csv"
             };
 
             _generator.SelectedCombiBanks.Add((CombiBank) _pcgMemory.CombiBanks[0]); // [0] = I-A
@@ -157,7 +156,7 @@ namespace PCG_Tools_Unittests
                 WaveSequencesEnabled = true,
                 IgnoreInitWaveSequences = true,
                 ListOutputFormat = ListGenerator.OutputFormat.AsciiTable,
-                OutputFileName = "output.txt"
+                OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt"
             };
 
             // Only 1 program bank and 2 combi banks to improve speed.
@@ -177,7 +176,7 @@ namespace PCG_Tools_Unittests
             // Run.
             Run();
 
-            Assert.AreEqual(62, _lines.Length);
+            Assert.AreEqual(66, _lines.Length);
         }
 
 
@@ -192,7 +191,7 @@ namespace PCG_Tools_Unittests
                 SelectedCombiBanks = new ObservableBankCollection<ICombiBank>(),
                 SetListsEnabled = false,
                 ListOutputFormat = ListGenerator.OutputFormat.AsciiTable,
-                OutputFileName = "output.txt"
+                OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt"
             };
 
             for (var index = 0; index < 3; index++) // Only 3 bank to improve performance.
@@ -203,7 +202,7 @@ namespace PCG_Tools_Unittests
             // Run.
             Run();
 
-            Assert.AreEqual(40, _lines.Length);
+            Assert.AreEqual(44, _lines.Length);
         }
     }
 }

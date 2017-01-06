@@ -35,27 +35,14 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// Used for OS 1.5/1.6.
         /// </summary>
-        public int Drk2BankOffset
-        {
-            get
-            {
-                return (((DrumPatternBanks)(Parent.Parent)).Drk2PcgOffset +
-                        128 * Convert.ToInt16(((DrumPatternBank)Parent).Id) + Index);
-            }
-        }
+        public int Drk2BankOffset => (((DrumPatternBanks)(Parent.Parent)).Drk2PcgOffset +
+                                      128 * Convert.ToInt16(((DrumPatternBank)Parent).Id) + Index);
 
 
         /// <summary>
         /// Used for OS 1.5/1.6.
         /// </summary>
-        public int Drk2PatchOffset
-        {
-            // first 128 = # banks, 2nd/3th 128 = slots/bank
-            get
-            {
-                return 128 * 128 + ((KronosDrumPatternBanks)(Parent.Parent)).Drk2PcgOffset +
-                    128 * Convert.ToInt16(((SetList)Parent).Id) + Index;
-            }
-        }
+        public int Drk2PatchOffset => 128 * 128 + ((KronosDrumPatternBanks)(Parent.Parent)).Drk2PcgOffset +
+                                      128 * Convert.ToInt16(((SetList)Parent).Id) + Index;
     }
 }

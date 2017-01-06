@@ -15,7 +15,7 @@ namespace PcgTools.Model.TSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant { get { return 36; } }
+        static int TimbresOffsetConstant => 36;
 
 
         /// <summary>

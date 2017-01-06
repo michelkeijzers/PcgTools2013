@@ -14,7 +14,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class CommandLineArgumentTest
     {
-        const string PcgFileName = @"C:\users\michel\source\repos\PCG Tools TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
 
         static void Run(CommandLineArguments args)
         {

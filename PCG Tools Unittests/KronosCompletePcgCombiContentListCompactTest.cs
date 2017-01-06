@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosCompletePcgCombiContentListCompactTest
     {
-        private const string PcgFileName = @"C:\users\michel\source\repos\PCG Tools TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        private const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
 
 
         PcgMemory _pcgMemory;
@@ -45,7 +44,7 @@ namespace PCG_Tools_Unittests
                              SelectedProgramBanks = new ObservableBankCollection<IProgramBank>(),
                              SelectedCombiBanks = new ObservableBankCollection<ICombiBank>(),
                              ListOutputFormat = ListGenerator.OutputFormat.Text,
-                             OutputFileName = "output.txt"
+                             OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt"
                          };
 
             if (_pcgMemory != null)
@@ -230,7 +229,7 @@ namespace PCG_Tools_Unittests
         {
             // Set non defaults and run.
             _generator.ListOutputFormat = ListGenerator.OutputFormat.AsciiTable;
-            _generator.OutputFileName = "output.txt";
+            _generator.OutputFileName = Path.ChangeExtension(_generator.OutputFileName, "txt");
             Run();
 
             // No ': '.
@@ -244,7 +243,7 @@ namespace PCG_Tools_Unittests
         {
             // Set non defaults and run.
             _generator.ListOutputFormat = ListGenerator.OutputFormat.Csv;
-            _generator.OutputFileName = "output.csv";
+            _generator.OutputFileName = Path.ChangeExtension(_generator.OutputFileName, "csv");
             Run();
 
             // No ': '.
@@ -258,7 +257,7 @@ namespace PCG_Tools_Unittests
         {
             // Set non defaults and run.
             _generator.ListOutputFormat = ListGenerator.OutputFormat.Xml;
-            _generator.OutputFileName = "output.xml";
+            _generator.OutputFileName = Path.ChangeExtension(_generator.OutputFileName, "xsl");
             Run();
 
             // No ': '.

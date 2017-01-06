@@ -15,7 +15,7 @@ namespace PcgTools.Model.OasysSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresSizeConstant { get { return 186; } }
+        static int TimbresSizeConstant => 186;
 
 
         /// <summary>

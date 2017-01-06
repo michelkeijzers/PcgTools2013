@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PcgTools.Model.Common.Synth.OldParameters
+﻿namespace PcgTools.Model.Common.Synth.OldParameters
 {
     /// <summary>
     /// This is a parameter tied to a combi, not used as a regular parameter.
