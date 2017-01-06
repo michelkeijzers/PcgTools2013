@@ -674,3 +674,17 @@ Use this in download.php:
                     {"GLB1", _factory.CreateGlb1PcgChunkParser(_pcg)},
                     {"DPI1", _factory.CreateDpi1PcgChunkParser(_pcg)},
 
+
+
+===============================
+
+Changes for references wave sequences/drum kits/drum patterns:
+
+- Generic: when a patch is removed, try to link all references to that patch 
+  to a duplicate in the same PCG.
+- Drum Track program: when copying a program, also copy the used drum track program and drum pattern
+- Drum Track program: when copying a combi, also copy the used drum track program and drum pattern
+- Drum Kits: when copying a program, also copy the used drum kits, also from the drum program (?)
+
+
+As above but for all models
