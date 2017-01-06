@@ -602,7 +602,7 @@ Warning: Changed drum kits, drum patterns and wave sequences are NOT synced in p
 I hope to add this in a later edition.
 
 =============================================================================================
-===   Version 2.9.0  Date: 02-03-2017
+===   Version 2.9.0  Date: 01-03-2017
 
 Improv  : List generator pach files optionally contain columns for set list slot reference ID and name.
 Improv  : List generator file names now include the name of the PCG/source file.
@@ -674,3 +674,17 @@ Use this in download.php:
                     {"GLB1", _factory.CreateGlb1PcgChunkParser(_pcg)},
                     {"DPI1", _factory.CreateDpi1PcgChunkParser(_pcg)},
 
+
+
+===============================
+
+Changes for references wave sequences/drum kits/drum patterns:
+
+- Generic: when a patch is removed, try to link all references to that patch 
+  to a duplicate in the same PCG.
+- Drum Track program: when copying a program, also copy the used drum track program and drum pattern
+- Drum Track program: when copying a combi, also copy the used drum track program and drum pattern
+- Drum Kits: when copying a program, also copy the used drum kits, also from the drum program (?)
+
+
+As above but for all models
