@@ -688,3 +688,6 @@ Changes for references wave sequences/drum kits/drum patterns:
 
 
 As above but for all models
+
+
+test 7 jan 16:52 desktop
