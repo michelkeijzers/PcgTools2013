@@ -690,3 +690,4 @@ Changes for references wave sequences/drum kits/drum patterns:
 As above but for all models
 
 7 jan 15:16 added on laptop in MiKeDevBranch
+again 15:27
