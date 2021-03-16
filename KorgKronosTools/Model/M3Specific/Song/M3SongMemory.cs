@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -18,7 +18,7 @@ namespace PcgTools.Model.M3Specific.Song
         public M3SongMemory(string fileName)
             : base(fileName)
         {
-            Model = Models.Find(Models.EOsVersion.EOsVersionM3_20); // Songs are always considered M3 2.0 files
+            Model = Models.Find(Models.EOsVersion.M3_20); // Songs are always considered M3 2.0 files
         }
     }
 }

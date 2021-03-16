@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Diagnostics;
@@ -109,7 +109,7 @@ namespace PcgTools.Model.TrinitySpecific.Pcg
             if (mProgramBanks > 0)
             {
                 // Only V3 have M (Moss) bank(s).
-                CurrentPcgMemory.Model = Models.Find(Models.EOsVersion.EOsVersionTrinityV3); 
+                CurrentPcgMemory.Model = Models.Find(Models.EOsVersion.TrinityV3); 
             }
             
             ReadProgramBanks(programBanks, programsInProgramBank);
@@ -348,7 +348,7 @@ namespace PcgTools.Model.TrinitySpecific.Pcg
                 for (var patchIndex = 0; patchIndex < patches; patchIndex++)
                 {
                     // Place in PcgMemory.
-                    var program = (Program)bank[index];
+                    var program = (Program)bank[patchIndex];
                     program.ByteOffset = _index;
                     program.ByteLength = bank.ByteLength;
                     program.IsLoaded = true;

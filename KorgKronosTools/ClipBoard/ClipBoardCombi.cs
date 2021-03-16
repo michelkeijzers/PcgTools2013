@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -39,19 +39,17 @@ namespace PcgTools.ClipBoard
             KronosOs1516Content = 
                 new byte[KronosCombiBanks.ParametersInCbk2Chunk * KronosTimbres.TimbresPerCombiConstant];
 
-            var memory = combi.Root as KronosPcgMemory;
-
             // CBK2 content.
-            if ((memory != null) && (memory.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16))
+            if ((combi.Root is KronosPcgMemory memory) && (memory.Model.OsVersion == Models.EOsVersion.Kronos15_16))
             {
-                for (var parameter = 0; parameter < KronosCombiBanks.ParametersInCbk2Chunk; parameter++)
+                for (int parameter = 0; parameter < KronosCombiBanks.ParametersInCbk2Chunk; parameter++)
                 {
-                    for (var timbre = 0; timbre < KronosTimbres.TimbresPerCombiConstant; timbre++)
+                    for (int timbre = 0; timbre < KronosTimbres.TimbresPerCombiConstant; timbre++)
                     {
-                        var patchParameterOffset = ((KronosCombiBank) 
+                        int patchParameterOffset = ((KronosCombiBank)
                             (combi.Parent)).GetParameterOffsetInCbk2(combi.Index, timbre, parameter);
-                        
-                        KronosOs1516Content[parameter + timbre * KronosCombiBanks.ParametersInCbk2Chunk] = 
+
+                        KronosOs1516Content[parameter + (timbre * KronosCombiBanks.ParametersInCbk2Chunk)] =
                             combi.Root.Content[patchParameterOffset];
                     }
                 }

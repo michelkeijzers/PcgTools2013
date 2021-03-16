@@ -134,10 +134,10 @@
                             <Setter Property="Content" Value="{Binding ColorAzure, Source={StaticResource LocStrings}}"/>
                         </Style>
 
-                        <Style x:Key="ComboBoxItemDanim" TargetType="{x:Type ComboBoxItem}">
+                        <Style x:Key="ComboBoxItemDenim" TargetType="{x:Type ComboBoxItem}">
                             <Setter Property="Background" Value="#6A7F96"/>
                             <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Content" Value="{Binding ColorDanim, Source={StaticResource LocStrings}}"/>
+                            <Setter Property="Content" Value="{Binding ColorDenim, Source={StaticResource LocStrings}}"/>
                         </Style>
 
                         <Style x:Key="ComboBoxItemSilver" TargetType="{x:Type ComboBoxItem}">
@@ -181,7 +181,7 @@
                             <ComboBoxItem Grid.Row="2" Grid.Column="2" Style="{DynamicResource ComboBoxItemRose}" />
                             <ComboBoxItem Grid.Row="2" Grid.Column="3" Style="{DynamicResource ComboBoxItemLavender}" />
                             <ComboBoxItem Grid.Row="3" Grid.Column="0" Style="{DynamicResource ComboBoxItemAzure}" />
-                            <ComboBoxItem Grid.Row="3" Grid.Column="1" Style="{DynamicResource ComboBoxItemDanim}" />
+                            <ComboBoxItem Grid.Row="3" Grid.Column="1" Style="{DynamicResource ComboBoxItemDenim}" />
                             <ComboBoxItem Grid.Row="3" Grid.Column="2" Style="{DynamicResource ComboBoxItemSilver}" />
                             <ComboBoxItem Grid.Row="3" Grid.Column="3" Style="{DynamicResource ComboBoxItemSlate}" />
                     </ComboBox>

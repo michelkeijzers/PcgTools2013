@@ -1336,15 +1336,15 @@ Au nom de tous les bénéficiaires d'un code pour leur Korg Kronos, je tiens à 
     <value>{0} contient des caractères illégaux</value>
   </data>
   <data name="ColorAzure" xml:space="preserve">
-    <value>Ciel</value>
+    <value>Azure</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorBrick" xml:space="preserve">
-    <value>Brique</value>
+    <value>Brick</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorBurgundy" xml:space="preserve">
-    <value>Bordeaux</value>
+    <value>Burgundy</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorCacao" xml:space="preserve">
@@ -1352,19 +1352,19 @@ Au nom de tous les bénéficiaires d'un code pour leur Korg Kronos, je tiens à 
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorCharcoal" xml:space="preserve">
-    <value>Charbon</value>
+    <value>Charcoal</value>
     <comment>In Edit Set List Slot</comment>
   </data>
-  <data name="ColorDanim" xml:space="preserve">
-    <value>Jean</value>
+  <data name="ColorDenim" xml:space="preserve">
+    <value>Denim</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorDefault" xml:space="preserve">
-    <value>Defaut</value>
+    <value>Default</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorGold" xml:space="preserve">
-    <value>Or</value>
+    <value>Gold</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorIndigo" xml:space="preserve">
@@ -1372,15 +1372,15 @@ Au nom de tous les bénéficiaires d'un code pour leur Korg Kronos, je tiens à 
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorIvy" xml:space="preserve">
-    <value>Lierre</value>
+    <value>Ivy</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorLavender" xml:space="preserve">
-    <value>Lavande</value>
+    <value>Lavander</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorNavy" xml:space="preserve">
-    <value>Marine</value>
+    <value>Navy</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorOlive" xml:space="preserve">
@@ -1392,11 +1392,11 @@ Au nom de tous les bénéficiaires d'un code pour leur Korg Kronos, je tiens à 
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorSilver" xml:space="preserve">
-    <value>Argent</value>
+    <value>Silver</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorSlate" xml:space="preserve">
-    <value>Ardoise</value>
+    <value>Slate</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColumnCrcValueExcludingName" xml:space="preserve">
@@ -1901,5 +1901,12 @@ Exception interne:
   </data>
   <data name="EditParameterChangeEmpty" xml:space="preserve">
     <value>Saisir un paramètre valide pour changer la règle ci-dessus.</value>
+  </data>
+  <data name="EModelTypeKross2" xml:space="preserve">
+    <value>Kross 2</value>
+  </data>
+  <data name="EModelTypeNautilus" xml:space="preserve">
+    <value>Nautilus</value>
+    <comment>Enumeration of Model Type</comment>
   </data>
 </root>

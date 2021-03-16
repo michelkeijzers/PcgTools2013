@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -91,7 +91,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
             Content = newContent.ToArray();
 
 #if DEBUG
-            System.IO.File.WriteAllBytes(@"D:\SYSEX.syx", Content);
+            System.IO.File.WriteAllBytes(@"E:\SYSEX.syx", Content);
 #endif
         }
 

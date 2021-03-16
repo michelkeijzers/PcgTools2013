@@ -16,7 +16,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosPartialPcgPatchListTest
     {
-        const string PcgDirectory = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\";
+        const string PcgDirectory = @"E:\PCG Tools Test Files\TestFiles\Workstations\Kronos\";
 
 
         PcgMemory _pcgMemory;
@@ -54,6 +54,7 @@ namespace PCG_Tools_Unittests
             _generator.IgnoreInitCombis = true;
             _generator.IgnoreFirstProgram = false;
             _generator.IgnoreMutedOffTimbres = true;
+            _generator.IgnoreMutedOffFirstProgramTimbre = true;
             _generator.SetListsEnabled = true;
             _generator.SetListsRangeFrom = 0;
             _generator.SetListsRangeTo = 0;

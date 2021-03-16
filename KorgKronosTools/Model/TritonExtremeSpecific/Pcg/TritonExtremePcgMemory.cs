@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -26,7 +26,7 @@ namespace PcgTools.Model.TritonExtremeSpecific.Pcg
             DrumKitBanks = new TritonExtremeDrumKitBanks(this);
             DrumPatternBanks = null;
             Global = new TritonExtremeGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionTritonExtreme);
+            Model = Models.Find(Models.EOsVersion.TritonExtreme);
         }
 
     }

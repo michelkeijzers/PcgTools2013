@@ -67,23 +67,26 @@ namespace PcgTools.MasterFiles
             MainViewModel = mainViewModel;
             MasterFilesWindow = MasterFilesWindow;
 
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionKronos3x), Settings.Default.MasterFile_KronosOS3x));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionKronos2x), Settings.Default.MasterFile_KronosOS2x));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionKronos15_16), Settings.Default.MasterFile_KronosOS15_16));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionKronos10_11), Settings.Default.MasterFile_KronosOS10_11));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionOasys), Settings.Default.MasterFile_Oasys));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionKrome), Settings.Default.MasterFile_Krome));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionKross), Settings.Default.MasterFile_Kross));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionM3_1X), Settings.Default.MasterFile_M3_OS1x));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionM3_20), Settings.Default.MasterFile_M3_OS20));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionM50),  Settings.Default.MasterFile_M50));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionMicroStation), Settings.Default.MasterFile_MicroStation));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionTritonExtreme), Settings.Default.MasterFile_TritonExtreme));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionTritonTrClassicStudioRack), Settings.Default.MasterFile_TritonTrClassicStudioRack));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionTritonLe), Settings.Default.MasterFile_TritonLe));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionTritonKarma), Settings.Default.MasterFile_TritonKarma));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionTrinityV2), Settings.Default.MasterFile_TrinityV2));
-            Add(new MasterFile(Models.Find(Models.EOsVersion.EOsVersionTrinityV3), Settings.Default.MasterFile_TrinityV3));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.Nautilus), Settings.Default.MasterFile_Nautilus));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.Kronos3x), Settings.Default.MasterFile_KronosOS3x));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.Kronos2x), Settings.Default.MasterFile_KronosOS2x));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.Kronos15_16), Settings.Default.MasterFile_KronosOS15_16));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.Kronos10_11), Settings.Default.MasterFile_KronosOS10_11));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.Oasys), Settings.Default.MasterFile_Oasys));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.Krome), Settings.Default.MasterFile_Krome));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.KromeEx), Settings.Default.MasterFile_KromeEx));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.Kross), Settings.Default.MasterFile_Kross));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.Kross2), Settings.Default.MasterFile_Kross2));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.M3_1X), Settings.Default.MasterFile_M3_OS1x));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.M3_20), Settings.Default.MasterFile_M3_OS20));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.M50),  Settings.Default.MasterFile_M50));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.MicroStation), Settings.Default.MasterFile_MicroStation));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.TritonExtreme), Settings.Default.MasterFile_TritonExtreme));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.TritonTrClassicStudioRack), Settings.Default.MasterFile_TritonTrClassicStudioRack));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.TritonLe), Settings.Default.MasterFile_TritonLe));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.TritonKarma), Settings.Default.MasterFile_TritonKarma));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.TrinityV2), Settings.Default.MasterFile_TrinityV2));
+            Add(new MasterFile(Models.Find(Models.EOsVersion.TrinityV3), Settings.Default.MasterFile_TrinityV3));
 
             MainViewModel.PropertyChanged += OnMainViewModelPropertyChanged;
         }

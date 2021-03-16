@@ -45,30 +45,50 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             var currentTargetCombiIndex = 0;
 
             var finishedPrematurely = false;
+            var errorText = string.Empty;
 
-            foreach (var patch in setListSource.Patches.Where(patch => !((ISetListSlot)patch).IsEmptyOrInit))
+            if (!setListSource.IsLoaded)
             {
-                var sourceSetListSlot = (ISetListSlot) patch;
-                if (currentTargetSetListSlotIndex >= setListTarget.Patches.Count)
+                finishedPrematurely = true;
+                errorText = PcgToolsResources.Strings.KeyboardSetupErrorSetListsNotPresent; //TODO page 178 manual
+            }
+            else if (setListTarget.CountFilledPatches > 0)
+            {
+                finishedPrematurely = true;
+                errorText = PcgToolsResources.Strings.KeyboardSetupErrorTargetSetListNotEmpty;
+            }
+            else if (!combiBankTarget.IsWritable)
+            {
+                finishedPrematurely = true;
+                errorText = PcgToolsResources.Strings.KeyboardSetupErrorTargetCombiBankNotPresent;
+            }
+            else
+            { 
+                foreach (var patch in setListSource.Patches.Where(patch => !((ISetListSlot)patch).IsEmptyOrInit))
                 {
-                    finishedPrematurely = true;
-                    break;
-                }
-
-                // copy set list slot to target set list.
-                // change suffix sourcemidi 
-                sourceSetListSlot.PcgRoot.CopyPatch(sourceSetListSlot, setListTarget.Patches[currentTargetSetListSlotIndex]);
-                var targetSetListSlot = setListTarget.Patches[currentTargetSetListSlotIndex];
-                targetSetListSlot.SetNameSuffix($"/MC{mainMidiChannel}");
-                currentTargetSetListSlotIndex++;
-
-                if (sourceSetListSlot.SelectedPatchType == SetListSlot.PatchType.Combi)
-                {
-                    if (CopySecondaryPatches(setListTarget, combiBankTarget, mainMidiChannel, secondaryMidiChannel,
-                        sourceSetListSlot,
-                        ref currentTargetCombiIndex, ref finishedPrematurely, ref currentTargetSetListSlotIndex))
+                    var sourceSetListSlot = (ISetListSlot)patch;
+                    if (currentTargetSetListSlotIndex >= setListTarget.Patches.Count)
                     {
+                        finishedPrematurely = true;
+                        errorText = PcgToolsResources.Strings.KeyboardSetupErrorNotEnoughSetListSlotsInTargetSetList;
                         break;
+                    }
+
+                    // copy set list slot to target set list.
+                    // change suffix sourcemidi 
+                    sourceSetListSlot.PcgRoot.CopyPatch(sourceSetListSlot, setListTarget.Patches[currentTargetSetListSlotIndex]);
+                    var targetSetListSlot = setListTarget.Patches[currentTargetSetListSlotIndex];
+                    targetSetListSlot.SetNameSuffix($"/MC{mainMidiChannel}");
+                    currentTargetSetListSlotIndex++;
+
+                    if (sourceSetListSlot.SelectedPatchType == SetListSlot.PatchType.Combi)
+                    {
+                        if (CopySecondaryPatches(setListTarget, combiBankTarget, mainMidiChannel, secondaryMidiChannel,
+                            sourceSetListSlot,
+                            ref currentTargetCombiIndex, ref finishedPrematurely, ref currentTargetSetListSlotIndex))
+                        {
+                            break;
+                        }
                     }
                 }
             }
@@ -76,7 +96,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             if (finishedPrematurely)
             {
                 // Show message box.
-                Console.WriteLine("SHOW" );
+                Console.WriteLine(errorText);
             }
         }
 

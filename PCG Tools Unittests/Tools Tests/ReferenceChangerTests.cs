@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
+using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchPrograms;
 using PcgTools.Model.Common.Synth.PatchSetLists;
@@ -26,6 +28,14 @@ namespace PCG_Tools_Unittests
 
             combiIa000.Timbres.TimbresCollection[0].UsedProgram = programIa000;
             
+            // Set most virtual banks loaded to save time.
+            foreach (var bank in pcg.CombiBanks.BankCollection.Where(
+                bank => (bank.Type == BankType.EType.Virtual) && (bank.Id !="V-0A")))
+            {
+                bank.IsLoaded = false;
+            }
+
+            // Run actual test.
             var referenceChanger = new ReferenceChanger(pcg);
             var ruleParser = new RuleParser(pcg);
             referenceChanger.ParseRules(ruleParser, "I-A000->I-B000");
@@ -92,7 +102,7 @@ namespace PCG_Tools_Unittests
         private static IPcgMemory CreatePcg()
         {
             IPcgMemory memory = new KronosPcgMemory("test.pcg");
-            memory.Model = new Model(Models.EModelType.Kronos, Models.EOsVersion.EOsVersionKronos3x, "3.0");
+            memory.Model = new Model(Models.EModelType.Kronos, Models.EOsVersion.Kronos3x, "3.0");
             memory.Content = new byte[10000000]; // Enough for timbre parameters
 
             var byteOffset = 1000;

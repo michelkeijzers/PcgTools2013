@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Windows.Media.Imaging;
@@ -25,6 +25,7 @@ namespace PcgTools
         {
             InitializeComponent();
             DrawLogoAndName();
+            labelCopyright.Content = MainViewModel.Copyright;
         }
 
 

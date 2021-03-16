@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Linq;
@@ -23,19 +23,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <summary>
         /// 
         /// </summary>
-        private readonly int _pcgId;
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly BankType.EType _type;
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public BankType.EType Type => _type;
+        public BankType.EType Type { get; }
 
 
         /// <summary>
@@ -54,7 +42,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         protected Bank(IBanks banks, BankType.EType type, string id, int pcgId)
         {
             _banks = banks;
-            _type = type;
+            Type = type;
 
             // A GM bank is always loaded.
             if (type == BankType.EType.Gm)
@@ -63,7 +51,7 @@ namespace PcgTools.Model.Common.Synth.Meta
             }
 
             Id = id;
-            _pcgId = pcgId;
+            PcgId = pcgId;
             Patches = new ObservablePatchCollection();
         }
 
@@ -98,13 +86,13 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <summary>
         /// 
         /// </summary>
-        public int PcgId => _pcgId;
+        public int PcgId { get; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        //public int Index { get; }
+        public int Index => ((IBanks) Parent).IndexOfBank(this);
 
 
         /// <summary>

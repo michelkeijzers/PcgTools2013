@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System.Linq;
 
@@ -29,7 +29,7 @@ namespace PcgTools.Model.TrinitySpecific.Pcg
             DrumKitBanks = new TrinityDrumKitBanks(this);
             DrumPatternBanks = null;
             Global = new TrinityGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionTrinityV2); // Will be replaced later by V3 if a Moss bank is found.
+            Model = Models.Find(Models.EOsVersion.TrinityV2); // Will be replaced later by V3 if a Moss bank is found.
         }
 
 

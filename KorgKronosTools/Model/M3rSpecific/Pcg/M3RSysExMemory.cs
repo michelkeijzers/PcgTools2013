@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 
@@ -25,7 +25,7 @@ namespace PcgTools.Model.M3rSpecific.Pcg
             DrumKitBanks = null;
             DrumPatternBanks = null;
             Global = new M3RGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionM3R);
+            Model = Models.Find(Models.EOsVersion.M3R);
         }
         
 

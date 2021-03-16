@@ -192,32 +192,26 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 {
                     PcgClipBoard.CopySetListSlotToClipBoard(setListSlot as ISetListSlot, cutPasteAction);
                 }
-                /*TODO DRUM KITS
                 // Copy drum kits.
                 foreach (var drumKit in Patches.Where(patch => patch.IsSelected && (patch is IDrumKit)))
                 {
                     // Always copy drum kits.
                     PcgClipBoard.CopyDrumKitToClipBoard(drumKit as IDrumKit, cutPasteAction);
                 }
-                */
-
-                /*TODO DRUM PATTERNS
+                
                 // Copy drum patterns.
                 foreach (var drumPattern in Patches.Where(patch => patch.IsSelected && (patch is IDrumPattern)))
                 {
                     // Always copy patterns.
                     PcgClipBoard.CopyDrumPatternToClipBoard(drumPattern as IDrumPattern, cutPasteAction);
                 }
-                */
-
-                /*TODO WAVE SEQUENCES
+                
                 // Copy wave sequences.
                 foreach (var waveSequence in Patches.Where(patch => patch.IsSelected && (patch is IWaveSequence)))
                 {
                     // Always copy wave sequences.
                     PcgClipBoard.CopyWaveSequenceToClipBoard(waveSequence as IWaveSequence, cutPasteAction);
                 }
-                */
             }
         }
 

@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -148,11 +148,15 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         public enum ChecksumType
         {
             None,
+            Nautilus,
             Kronos1516,
             Kronos2XOr3X,
             Krome,
+            KromeEx,
             Kross,
-            M3
+            Kross2,
+            M3,
+            MicroStation
         }
 
 
@@ -262,8 +266,10 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             get
             {
-                return ProgramBanks.BankCollection.Where(
-                    bank => !((IProgramBank) bank).IsModeled && bank.IsWritable).Sum(bank => bank.NrOfPatches);
+                return ProgramBanks == null
+                    ? 0
+                    : ProgramBanks.BankCollection.Where(
+                      bank => !((IProgramBank) bank).IsModeled && bank.IsWritable).Sum(bank => bank.NrOfPatches);
             }
         }
 
@@ -276,8 +282,10 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             get
             {
-                return ProgramBanks.BankCollection.Where(
-                    bank => ((IProgramBank) bank).IsModeled && bank.IsWritable).Sum(bank => bank.NrOfPatches);
+                return ProgramBanks == null
+                    ? 0
+                    : ProgramBanks.BankCollection.Where(
+                      bank => ((IProgramBank) bank).IsModeled && bank.IsWritable).Sum(bank => bank.NrOfPatches);
             }
         }
 
@@ -294,7 +302,9 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         // ReSharper disable once UnusedMember.Global
         public int CountCombis
         {
-            get { return CombiBanks.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches); }
+            get { return CombiBanks == null
+                    ? 0
+                    : CombiBanks.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches); }
         }
 
 
@@ -310,7 +320,9 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         // ReSharper disable once UnusedMember.Global
         public int CountSetListSlots
         {
-            get { return SetLists.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches); }
+            get { return SetLists == null
+                    ? 0
+                    : SetLists.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches); }
         }
 
 
@@ -328,7 +340,9 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             get
             {
-                return WaveSequenceBanks.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches);
+                return WaveSequenceBanks == null
+                    ? 0
+                    : WaveSequenceBanks.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches);
             }
         }
 
@@ -345,7 +359,9 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         // ReSharper disable once UnusedMember.Global
         public int CountDrumKits
         {
-            get { return DrumKitBanks.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches); }
+            get { return DrumKitBanks == null
+                    ? 0
+                    : DrumKitBanks.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches); }
         }
 
 
@@ -360,7 +376,9 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// </summary>
         public int CountDrumPatterns
         {
-            get { return DrumPatternBanks.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches); }
+            get { return DrumPatternBanks == null 
+                    ? 0
+                    : DrumPatternBanks.BankCollection.Where(bank => bank.IsWritable).Sum(bank => bank.NrOfPatches); }
         }
 
 
@@ -448,7 +466,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
             Util.SwapBytes(this, Content, patch.ByteOffset, Content, otherPatch.ByteOffset, patch.ByteLength);
 
             // Swap PRG2 content (only used for Kronos, OS1.5/1.6).
-            if (patch.Root.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+            if (patch.Root.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
                 if (patch is KronosProgram)
                 {
@@ -620,7 +638,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             get
             {
-                Debug.Assert(HasOnlyOnePatch);
+                //Debug.Assert(HasOnlyOnePatch);
 
                 var foundPatch = FindOnlyPatch(ProgramBanks) ?? FindOnlyPatch(CombiBanks);
                 Debug.Assert(foundPatch != null, "No patch found");

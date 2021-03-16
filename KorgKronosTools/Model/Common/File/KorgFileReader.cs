@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Linq;
@@ -6,13 +6,16 @@ using System.Linq;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.KromeSpecific.Synth;
+using PcgTools.Model.KromeExSpecific.Synth;
 using PcgTools.Model.KronosSpecific.Synth;
+using PcgTools.Model.Kross2Specific.Synth;
 using PcgTools.Model.KrossSpecific.Synth;
 using PcgTools.Model.M1Specific.Synth;
 using PcgTools.Model.M3Specific.Synth;
 using PcgTools.Model.M3rSpecific.Synth;
 using PcgTools.Model.M50Specific.Synth;
 using PcgTools.Model.Ms2000Specific.Synth;
+using PcgTools.Model.NautilusSpecific.Synth;
 using PcgTools.Model.TSeries.Synth;
 using PcgTools.Model.XSeries.Synth;
 using PcgTools.Model.Z1Specific.Synth;
@@ -101,6 +104,10 @@ namespace PcgTools.Model.Common.File
                 Factory factory;
                 switch (ModelType)
                 {
+                    case Models.EModelType.Nautilus:
+                        factory = new NautilusFactory();
+                        break;
+
                     case Models.EModelType.Kronos:
                         factory = new KronosFactory();
                         break;
@@ -145,8 +152,16 @@ namespace PcgTools.Model.Common.File
                         factory = new KromeFactory();
                         break;
 
+                    case Models.EModelType.KromeEx:
+                        factory = new KromeExFactory();
+                        break;
+
                     case Models.EModelType.Kross:
                         factory = new KrossFactory(ContentType);
+                        break;
+
+                    case Models.EModelType.Kross2:
+                        factory = new Kross2Factory(ContentType);
                         break;
 
                     case Models.EModelType.Trinity:
@@ -427,12 +442,15 @@ namespace PcgTools.Model.Common.File
         ///                            63                                       Triton LE
         ///                            68                                       Kronos
         ///                            70                                       Oasys
+        ///                            99 TODO                                  Nautilus
         ///                            75       0x00     0x02 0x00              M3 pcm_version checksum_flag, see x4100pcg.txt
         ///                            7A                                       X50/microX
         ///                            85                                       M50
         ///                            8D                                       microSTATION
         ///                            95                                       Krome
         ///                            96                                       Kross
+        ///                            C9                                       Kross2
+        ///                            D2                                       Krome Ex                            
         /// 
         /// MemoryFileType: 00 = PCG 01=SNG 02=EXL
         /// </summary>
@@ -690,6 +708,18 @@ namespace PcgTools.Model.Common.File
 
                 case 0x96:
                     ModelType = Models.EModelType.Kross;
+                    break;
+
+                case 0xC9:
+                    ModelType = Models.EModelType.Kross2;
+                    break;
+
+                case 0xD2:
+                    ModelType = Models.EModelType.KromeEx;
+                    break;
+
+                case 0xDD:
+                    ModelType = Models.EModelType.Nautilus;
                     break;
 
                 default:

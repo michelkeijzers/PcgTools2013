@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.MSpecific.Pcg;
@@ -28,6 +28,8 @@ namespace PcgTools.Model.MicroStationSpecific.Pcg
             // Dkt1Chunk Dkt1Chunk;
             // Arp1Chunk Arp1Chunk;
             // Glb1Chunk Glb1Chunk;
+
+            currentPcgMemory.PcgChecksumType = PcgMemory.ChecksumType.MicroStation;
         }
 
         protected override int Dpi1NumberOfDrumPatternsOffset

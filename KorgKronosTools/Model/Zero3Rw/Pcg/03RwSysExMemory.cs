@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Zero3Rw.Synth;
@@ -31,7 +31,7 @@ namespace PcgTools.Model.Zero3Rw.Pcg
             DrumKitBanks = null;
             DrumPatternBanks = null;
             Global = new Zero3RwGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EosVersionZero3Rw);
+            Model = Models.Find(Models.EOsVersion.Zero3Rw);
         }
     }
 }

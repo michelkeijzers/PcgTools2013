@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -74,7 +74,14 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         {
             get
             {
-                return _enumValues[BitsUtil.GetBits(PcgData, PcgOffset, _highBit, _lowBit)];
+                try
+                {
+                    return _enumValues[BitsUtil.GetBits(PcgData, PcgOffset, _highBit, _lowBit)];
+                }
+                catch
+                {
+                    return _enumValues[0]; //TODO_NAUTILUS
+                }
             }
 
             set

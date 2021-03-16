@@ -19,7 +19,7 @@ namespace PcgTools.PcgToolsResources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -66,15 +66,6 @@ namespace PcgTools.PcgToolsResources {
         public static string ___ConnectedPcgFile {
             get {
                 return ResourceManager.GetString("___ConnectedPcgFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to _Absolute Value.
-        /// </summary>
-        public static string ___EditParameterAbsoluteValue {
-            get {
-                return ResourceManager.GetString("___EditParameterAbsoluteValue", resourceCulture);
             }
         }
         
@@ -147,6 +138,15 @@ namespace PcgTools.PcgToolsResources {
         public static string ___EditParameterDecimalValue {
             get {
                 return ResourceManager.GetString("___EditParameterDecimalValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Fixed Value.
+        /// </summary>
+        public static string ___EditParameterFixedValue {
+            get {
+                return ResourceManager.GetString("___EditParameterFixedValue", resourceCulture);
             }
         }
         
@@ -718,6 +718,24 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Change Volume.
+        /// </summary>
+        public static string ChangeVolume {
+            get {
+                return ResourceManager.GetString("ChangeVolume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Volume.
+        /// </summary>
+        public static string ChangeVolume_chvolwin {
+            get {
+                return ResourceManager.GetString("ChangeVolume_chvolwin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} contains illegal character(s).
         /// </summary>
         public static string CheckTypeContainsIllegalCharacters {
@@ -952,20 +970,20 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Danim.
-        /// </summary>
-        public static string ColorDanim {
-            get {
-                return ResourceManager.GetString("ColorDanim", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
         public static string ColorDefault {
             get {
                 return ResourceManager.GetString("ColorDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Denim.
+        /// </summary>
+        public static string ColorDenim {
+            get {
+                return ResourceManager.GetString("ColorDenim", resourceCulture);
             }
         }
         
@@ -1896,6 +1914,15 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Krome EX.
+        /// </summary>
+        public static string EModelTypeKromeEx {
+            get {
+                return ResourceManager.GetString("EModelTypeKromeEx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kronos.
         /// </summary>
         public static string EModelTypeKronos {
@@ -1910,6 +1937,15 @@ namespace PcgTools.PcgToolsResources {
         public static string EModelTypeKross {
             get {
                 return ResourceManager.GetString("EModelTypeKross", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kross 2.
+        /// </summary>
+        public static string EModelTypeKross2 {
+            get {
+                return ResourceManager.GetString("EModelTypeKross2", resourceCulture);
             }
         }
         
@@ -1991,6 +2027,15 @@ namespace PcgTools.PcgToolsResources {
         public static string EModelTypeMs2000 {
             get {
                 return ResourceManager.GetString("EModelTypeMs2000", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nautilus.
+        /// </summary>
+        public static string EModelTypeNautilus {
+            get {
+                return ResourceManager.GetString("EModelTypeNautilus", resourceCulture);
             }
         }
         
@@ -2445,6 +2490,24 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External Links Video Creators.
+        /// </summary>
+        public static string ExternalLinksVideoCreators {
+            get {
+                return ResourceManager.GetString("ExternalLinksVideoCreators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _External Links Video Creators....
+        /// </summary>
+        public static string ExternalLinksVideoCreatorsMenuItem {
+            get {
+                return ResourceManager.GetString("ExternalLinksVideoCreatorsMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fav.
         /// </summary>
         public static string Fav {
@@ -2680,6 +2743,15 @@ namespace PcgTools.PcgToolsResources {
         public static string FilterWaveSequences {
             get {
                 return ResourceManager.GetString("FilterWaveSequences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Fixed.
+        /// </summary>
+        public static string Fixed_chvolwin {
+            get {
+                return ResourceManager.GetString("Fixed_chvolwin", resourceCulture);
             }
         }
         
@@ -2963,6 +3035,15 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Ignore Muted/Off First Program Timbre.
+        /// </summary>
+        public static string IgnoreMutedOffFirstProgramTimbre {
+            get {
+                return ResourceManager.GetString("IgnoreMutedOffFirstProgramTimbre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Ignore Muted/Off Timbres.
         /// </summary>
         public static string IgnoreMutedOffTimbres {
@@ -3085,6 +3166,42 @@ namespace PcgTools.PcgToolsResources {
         public static string Italian {
             get {
                 return ResourceManager.GetString("Italian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are not enough set list slots in the target set list to convert all source set list slots..
+        /// </summary>
+        public static string KeyboardSetupErrorNotEnoughSetListSlotsInTargetSetList {
+            get {
+                return ResourceManager.GetString("KeyboardSetupErrorNotEnoughSetListSlotsInTargetSetList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The PCGfile does not contain any set lists..
+        /// </summary>
+        public static string KeyboardSetupErrorSetListsNotPresent {
+            get {
+                return ResourceManager.GetString("KeyboardSetupErrorSetListsNotPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The target combi bank is not present..
+        /// </summary>
+        public static string KeyboardSetupErrorTargetCombiBankNotPresent {
+            get {
+                return ResourceManager.GetString("KeyboardSetupErrorTargetCombiBankNotPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The target set list is not empty..
+        /// </summary>
+        public static string KeyboardSetupErrorTargetSetListNotEmpty {
+            get {
+                return ResourceManager.GetString("KeyboardSetupErrorTargetSetListNotEmpty", resourceCulture);
             }
         }
         
@@ -3213,6 +3330,15 @@ namespace PcgTools.PcgToolsResources {
         public static string Manual_grt {
             get {
                 return ResourceManager.GetString("Manual_grt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Mapped.
+        /// </summary>
+        public static string Mapped_chvolwin {
+            get {
+                return ResourceManager.GetString("Mapped_chvolwin", resourceCulture);
             }
         }
         
@@ -3388,7 +3514,7 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no programs, combis and set list slots in PCG file:.
+        ///   Looks up a localized string similar to There are no programs, combis and set list slots, drum kits, drum patterns and wave sequences in PCG file:.
         /// </summary>
         public static string NoContentWarning {
             get {
@@ -3578,7 +3704,7 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to _Overwrite Filled Drumkits.
+        ///   Looks up a localized string similar to _Overwrite Filled Drum Kits.
         /// </summary>
         public static string OverwriteFilledDrumKits {
             get {
@@ -3897,6 +4023,15 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _Percentage.
+        /// </summary>
+        public static string Percentage_chvolwin {
+            get {
+                return ResourceManager.GetString("Percentage_chvolwin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Polish (Polish).
         /// </summary>
         public static string Polish {
@@ -4109,6 +4244,15 @@ namespace PcgTools.PcgToolsResources {
         public static string ReferenceTypeSong {
             get {
                 return ResourceManager.GetString("ReferenceTypeSong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Relative.
+        /// </summary>
+        public static string Relative_chvolwin {
+            get {
+                return ResourceManager.GetString("Relative_chvolwin", resourceCulture);
             }
         }
         
@@ -4437,7 +4581,7 @@ namespace PcgTools.PcgToolsResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set List Generator.
+        ///   Looks up a localized string similar to List Generator.
         /// </summary>
         public static string SetListGenerator_settw {
             get {
@@ -4613,6 +4757,15 @@ namespace PcgTools.PcgToolsResources {
         public static string SinglePatchFiles_groupbox {
             get {
                 return ResourceManager.GetString("SinglePatchFiles_groupbox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to _Smart Mapped.
+        /// </summary>
+        public static string SmartMapped_chvolwin {
+            get {
+                return ResourceManager.GetString("SmartMapped_chvolwin", resourceCulture);
             }
         }
         

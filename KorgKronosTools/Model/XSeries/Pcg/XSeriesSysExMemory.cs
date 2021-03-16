@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -30,7 +30,7 @@ namespace PcgTools.Model.XSeries.Pcg
             DrumKitBanks = null;
             DrumPatternBanks = null;
             Global = new XSeriesGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionXSeries);
+            Model = Models.Find(Models.EOsVersion.XSeries);
         }
         
 

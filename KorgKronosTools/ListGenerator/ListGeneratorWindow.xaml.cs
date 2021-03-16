@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -341,8 +341,10 @@ namespace PcgTools.ListGenerator
             {
                 SetCombiBankButtons();
                 checkBoxIgnoreMutedOffTimbres.IsChecked = true;
+                checkBoxIgnoreMutedOffFirstProgramTimbre.IsChecked = true;
                 checkBoxCombiBanksIgnoreInitCombis.IsChecked = true;
                 checkBoxIgnoreMutedOffTimbres.IsEnabled = false;
+                checkBoxIgnoreMutedOffFirstProgramTimbre.IsEnabled = false;
             }
         }
 
@@ -517,6 +519,7 @@ namespace PcgTools.ListGenerator
         {
             checkBoxCombiBanksIgnoreInitCombis.IsEnabled = true;
             checkBoxIgnoreMutedOffTimbres.IsEnabled = false;
+            checkBoxIgnoreMutedOffFirstProgramTimbre.IsEnabled = false;
         }
 
 
@@ -632,6 +635,7 @@ namespace PcgTools.ListGenerator
 
             checkBoxCombiBanksIgnoreInitCombis.IsEnabled = true;
             checkBoxIgnoreMutedOffTimbres.IsEnabled = true;
+            checkBoxIgnoreMutedOffFirstProgramTimbre.IsEnabled = true;
 
             UpdateFilterOptions(false);
 
@@ -655,6 +659,7 @@ namespace PcgTools.ListGenerator
 
             checkBoxCombiBanksIgnoreInitCombis.IsEnabled = true;
             checkBoxIgnoreMutedOffTimbres.IsEnabled = true;
+            checkBoxIgnoreMutedOffFirstProgramTimbre.IsEnabled = true;
             
             var longList = (SelectedSubType == ListGenerator.SubType.Long);
             UpdateFilterOptions(longList);
@@ -679,7 +684,7 @@ namespace PcgTools.ListGenerator
 
             checkBoxCombiBanksIgnoreInitCombis.IsEnabled = true;
             checkBoxIgnoreMutedOffTimbres.IsEnabled = false;
-
+            checkBoxIgnoreMutedOffFirstProgramTimbre.IsEnabled = false;
 
             UpdateFilterOptions(false);
 
@@ -706,7 +711,8 @@ namespace PcgTools.ListGenerator
 
             checkBoxCombiBanksIgnoreInitCombis.IsEnabled = false;
             checkBoxIgnoreMutedOffTimbres.IsEnabled = false;
-
+            checkBoxIgnoreMutedOffFirstProgramTimbre.IsEnabled = false;
+            
             UpdateFilterOptions(false);
 
             groupBoxSorting.Visibility = Visibility.Collapsed;
@@ -2000,6 +2006,7 @@ namespace PcgTools.ListGenerator
             generator.IgnoreInitCombis = checkBoxCombiBanksIgnoreInitCombis.IsReallyChecked();
             generator.IgnoreFirstProgram = checkBoxIgnoreFirstProgram.IsReallyChecked();
             generator.IgnoreMutedOffTimbres = checkBoxIgnoreMutedOffTimbres.IsReallyChecked();
+            generator.IgnoreMutedOffFirstProgramTimbre = checkBoxIgnoreMutedOffFirstProgramTimbre.IsReallyChecked();
         }
 
 
@@ -2172,6 +2179,7 @@ namespace PcgTools.ListGenerator
             if ((showDialog != null) && showDialog.Value)
             {
                 textBoxOutputFile.Text = _saveDialog.FileName;
+                _saveDialog.InitialDirectory = Path.GetDirectoryName(textBoxOutputFile.Text);
             }
         }
 

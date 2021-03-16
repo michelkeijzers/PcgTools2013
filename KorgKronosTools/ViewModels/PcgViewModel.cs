@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -503,6 +503,7 @@ namespace PcgTools.ViewModels
             SetEnableTypeDrumKits();
             SetEnableTypeDrumPatterns();
             SetEnableTypeWaveSequences();
+            SetEnableTypeAllPatches();
         }
 
 
@@ -585,6 +586,17 @@ namespace PcgTools.ViewModels
             }
         }
 
+
+        private void SetEnableTypeAllPatches()
+        {
+            AllPatchesEnabled =
+                ProgramsEnabled &&
+                CombisEnabled &&
+                SetListSlotsEnabled &&
+                DrumKitsEnabled &&
+                DrumPatternsEnabled &&
+                WaveSequencesEnabled;
+        }
 
         /// <summary>
         /// 
@@ -870,6 +882,35 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
+        bool _allPatchesEnabled;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [UsedImplicitly]
+        // ReSharper disable once MemberCanBePrivate.Global
+        public bool AllPatchesEnabled
+        {
+            get
+            {
+                return _allPatchesEnabled;
+            }
+
+            set
+            {
+                if (value != _allPatchesEnabled)
+                {
+                    _allPatchesEnabled = value;
+                    OnPropertyChanged("AllPatchesEnabled");
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         // ReSharper disable once UnusedMember.Global
         public bool IsPcgEmpty => (!_programsEnabled && !_combisEnabled && !_setListSlotsEnabled);
 
@@ -1069,7 +1110,15 @@ namespace PcgTools.ViewModels
                             if (drumPattern != null)
                             {
                                 FixDrumPatternReferences(drumPattern, otherPatch);
-                            }   
+                            }
+                            else
+                            {
+                                var waveSequence = patch as IWaveSequence;
+                                if (waveSequence != null)
+                                {
+                                    FixWaveSequenceReferences(waveSequence, otherPatch);
+                                }
+                            }  
                         }
                     }
                 }
@@ -1093,10 +1142,7 @@ namespace PcgTools.ViewModels
             };
             SelectedPcgMemory.CombiBanks.ChangeTimbreReferences(changes, SelectedPcgMemory);
 
-            if (SelectedPcgMemory.SetLists != null)
-            {
-                SelectedPcgMemory.SetLists.ChangeProgramReferences(changes);
-            }
+            SelectedPcgMemory.SetLists?.ChangeProgramReferences(changes);
         }
         
 
@@ -1112,10 +1158,8 @@ namespace PcgTools.ViewModels
                 {combi, (ICombi) otherPatch},
                 {(ICombi) otherPatch, combi}
             };
-            if (SelectedPcgMemory.SetLists != null)
-            {
-                SelectedPcgMemory.SetLists.ChangeCombiReferences(changes);
-            }
+
+            SelectedPcgMemory.SetLists?.ChangeCombiReferences(changes);
         }
 
 
@@ -1135,11 +1179,8 @@ namespace PcgTools.ViewModels
                 {(IDrumKit) otherPatch, drumKit}
             };
 
-            if (SelectedPcgMemory.ProgramBanks != null)
-            {
-                SelectedPcgMemory.ProgramBanks.ChangeDrumKitReferences(changes);
-            }
-             */
+            SelectedPcgMemory.ProgramBanks?.ChangeDrumKitReferences(changes);
+            */
         }
 
 
@@ -1156,12 +1197,25 @@ namespace PcgTools.ViewModels
                 {(IDrumKit) otherPatch, drumKit}
             };
 
-            if (SelectedPcgMemory.ProgramBanks != null)
-            {
-                SelectedPcgMemory.ProgramBanks.ChangeDrumKitReferences(changes);
-            }
+            SelectedPcgMemory.ProgramBanks?.ChangeDrumKitReferences(changes);
         }
-    
+
+        /// <summary>
+        /// Fix drum kit references (from wave sequence).
+        /// </summary>
+        /// <param name="waveSequence"></param>
+        /// <param name="otherPatch"></param>
+        private void FixWaveSequenceReferences(IWaveSequence waveSequence, INavigable otherPatch)
+        {
+            var changes = new Dictionary<IWaveSequence, IWaveSequence>
+            {
+                {waveSequence, (IWaveSequence) otherPatch},
+                {(IWaveSequence) otherPatch, waveSequence}
+            };
+
+            SelectedPcgMemory.ProgramBanks?.ChangeWaveSequenceReferences(changes);
+        }
+
 
         /// <summary>
         /// 
@@ -1242,7 +1296,7 @@ namespace PcgTools.ViewModels
             {
                 folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
-            var fileName = $@"{folder}\{Path.GetFileNameWithoutExtension(SelectedPcgMemory.FileName)}_Cubase.txt";
+            var fileName = $@"{folder}\Cubase.txt";
 
             try
             {
@@ -2543,8 +2597,150 @@ namespace PcgTools.ViewModels
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        ICommand _changeVolumeCommand;
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // ReSharper disable once UnusedMember.Global
+        [UsedImplicitly]
+        public ICommand ChangeVolumeCommand
+        {
+            get
+            {
+                return _changeVolumeCommand ?? (_changeVolumeCommand = new RelayCommand(param => ChangeVolume(),
+                    param => CanExecuteChangeVolumeCommand));
+            }
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        bool CanExecuteChangeVolumeCommand
+        {
+            get
+            {
+                // Memory selected
+                return (SelectedPcgMemory != null) &&
+                       // Patches set
+                       (Patches != null) &&
+                       // Combi banks or set list slots selected
+                       (CombiBanksSelected || (SetListsSelected) &&
+                       // Banks selected and at least one nonempty combi 
+                       (((SelectedScopeSet == ScopeSet.Banks) &&
+                         (Banks.Count(item => item.IsSelected) > 0) &&
+                         (Banks.Sum(item => item.CountFilledAndNonEmptyPatches)) > 0)
+                        ||
+                        // Patches selected and at least one nonempty combi or set list slot
+                        ((SelectedScopeSet == ScopeSet.Patches) &&
+                         (Patches.Count(item => item.IsSelected && !item.IsEmptyOrInit) > 0))) &&
+                       // Not busy with paste action
+                       (!PcgClipBoard.PasteDuplicatesExecuted || PcgClipBoard.IsEmpty) &&
+                       // Only combis selected
+                       Patches.All(item => !item.IsSelected || (item is ICombi) || (item is ISetListSlot)));
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void ChangeVolume()
+        {
+            var parameters = new ChangeVolumeParameters();
+            var window = new ChangeVolumeWindow(parameters);
+            window.ShowDialog();
+            if ((!window.DialogResult.HasValue) || !window.DialogResult.Value)
+            {
+                return;
+            }
+
+            // In case of mapping, find min/max.
+            int minValue = Int32.MaxValue;
+            int maxValue = Int32.MinValue;
+
+            if (parameters.ChangeType == ChangeVolumeParameters.EChangeType.SmartMapped)
+            {
+                if (SelectedScopeSet == ScopeSet.Banks)
+                {
+                    // Iterate through banks.
+                    foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(
+                        bank => bank.Patches).Where(patch => !patch.IsEmptyOrInit))
+                    {
+                        if (patch is ICombi)
+                        {
+                            minValue = Math.Min(minValue, ((ICombi)patch).GetMinimumVolume());
+                            maxValue = Math.Max(minValue, ((ICombi)patch).GetMaximumVolume());
+                        }
+                        else if (patch is ISetListSlot)
+                        {
+                            minValue = Math.Min(minValue, ((ISetListSlot)patch).Volume);
+                            maxValue = Math.Max(maxValue, ((ISetListSlot)patch).Volume);
+                        }
+                    }
+                }
+                else
+                {
+                    // Iterate through patches.
+                    foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
+                    {
+                        if (patch is ICombi)
+                        {
+                            minValue = Math.Min(minValue, ((ICombi)patch).GetMinimumVolume());
+                            maxValue = Math.Max(minValue, ((ICombi)patch).GetMaximumVolume());
+                        }
+                        else if (patch is ISetListSlot)
+                        {
+                            minValue = Math.Min(minValue, ((ISetListSlot)patch).Volume);
+                            maxValue = Math.Max(maxValue, ((ISetListSlot)patch).Volume);
+                        }
+                    }
+                }
+            }
+
+            // Change volume.
+            if (SelectedScopeSet == ScopeSet.Banks)
+            {
+                // Iterate through banks.
+                foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(
+                    bank => bank.Patches).Where(patch => !patch.IsEmptyOrInit))
+                {
+                    if (patch is ICombi)
+                    {
+                        ((ICombi)patch).ChangeVolume(parameters, minValue, maxValue);
+                    }
+                    else if (patch is ISetListSlot)
+                    {
+                        ((ISetListSlot)patch).ChangeVolume(parameters, minValue, maxValue);
+                    }
+                }
+            }
+            else
+            {
+                // Iterate through patches.
+                foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
+                {
+                    if (patch is ICombi)
+                    {
+                        ((ICombi)patch).ChangeVolume(parameters, minValue, maxValue);
+                    }
+                    else if (patch is ISetListSlot)
+                    {
+                        ((ISetListSlot)patch).ChangeVolume(parameters, minValue, maxValue);
+                    }
+                }
+            }
+
+            UpdateTimbresWindows();
+        }
+
+               
         /// <summary>
         /// 
         /// </summary>
@@ -2564,7 +2760,7 @@ namespace PcgTools.ViewModels
                     param => CanExecuteInitAsMpeCombiCommand));
             }
         }
-
+        
 
         /// <summary>
         /// 
@@ -3161,7 +3357,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteCompactCommand => (SelectedPcgMemory != null) &&
+        private bool CanExecuteCompactCommand => (SelectedPcgMemory != null) &&
                                          AreMultipleItemsSelected &&
                                          (!PcgClipBoard.PasteDuplicatesExecuted || PcgClipBoard.IsEmpty) &&
                                          !AllPatchesSelected;
@@ -3171,7 +3367,7 @@ namespace PcgTools.ViewModels
         /// Compacts the selected banks or patches by storing the empty patches at the end. Per bank type, create a list
         ///  (e.g. Kronos sampled/modeled program banks). Then compact each list.
         /// </summary>
-        void Compact()
+        private void Compact()
         {
             SetCursor(WindowUtils.ECursor.Wait);
 
@@ -3328,9 +3524,8 @@ namespace PcgTools.ViewModels
                 return (SelectedPcgMemory != null) &&
                     (Patches != null) && 
                     (SelectedScopeSet == ScopeSet.Patches) &&
-                    (Patches.Count(item => item.IsSelected) > 0) &&
-                    (Patches.LastOrDefault(item => item.IsSelected) != Patches.ToArray()[Patches.Count - 1]) &&
-                        (!PcgClipBoard.PasteDuplicatesExecuted || PcgClipBoard.IsEmpty);
+                    (Patches.Count(item => item.IsSelected) == 1) &&
+                    (!PcgClipBoard.PasteDuplicatesExecuted || PcgClipBoard.IsEmpty);
             }
         }
 

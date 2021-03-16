@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -168,7 +168,7 @@ namespace PcgTools
                         break;
 
                     case MainViewModel.WindowType.About:
-                        window = new AboutWindow(MainViewModel.Version) {Owner = this};
+                        window = new AboutWindow(MainViewModel.Version, MainViewModel.Copyright) {Owner = this};
                         break;
 
                     case MainViewModel.WindowType.ExternalLinksKorgRelated:
@@ -177,6 +177,10 @@ namespace PcgTools
 
                     case MainViewModel.WindowType.ExternalLinksContributors:
                         window = new ExternalLinksContributorsWindow { Owner = this };
+                        break;
+
+                    case MainViewModel.WindowType.ExternalLinksVideoCreators:
+                        window = new ExternalLinksVideoCreatorsWindow { Owner = this };
                         break;
 
                     case MainViewModel.WindowType.ExternalLinksDonators:

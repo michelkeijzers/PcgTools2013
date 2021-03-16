@@ -15,7 +15,7 @@ namespace ExternalUtilities
     public partial class LanguageCrossReferenceWindow : Window
     {
         private const string ResourcePath = 
-            @"c:\users\michel\OneDrive\pcgtools2013\korgkronostools\pcgtoolsresources\";
+            @"E:\users\michel\OneDrive\pcgtools2013\korgkronostools\pcgtoolsresources\";
 
         // Key: text fragment to translate (keyword)
         // Value: English translation.

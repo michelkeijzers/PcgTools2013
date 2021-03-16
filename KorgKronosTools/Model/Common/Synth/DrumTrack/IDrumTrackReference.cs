@@ -1,4 +1,5 @@
 ﻿using PcgTools.Model.Common.Synth.PatchDrumPatterns;
+using System.Collections.Generic;
 
 namespace PcgTools.Model.Common.Synth.PatchPrograms
 {
@@ -10,6 +11,6 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <summary>
         /// Drum pattern assigned to the program.
         /// </summary>
-        IDrumPattern UsedDrumTrackPattern { get; set; }
+        List<IDrumPattern> UsedDrumTrackPatterns { get; }
     }
 }

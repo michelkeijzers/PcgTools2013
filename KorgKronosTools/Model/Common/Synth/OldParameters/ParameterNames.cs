@@ -17,14 +17,23 @@
 
             Category,
             SubCategory,
-            
 
+            // Kronos and before
             DrumTrackCommonPatternBank,
-            DrumTrackCommonPatternNumber,
+            DrumTrackCommonPatternNumber, // Kronos and before
 
             DrumTrackProgramBank,
             DrumTrackProgramNumber,
-            
+
+            // Nautilus
+            Scene1DrumTrackPatternBank,
+            Scene1DrumTrackPatternNumber,
+            Scene2DrumTrackPatternBank,
+            Scene2DrumTrackPatternNumber,
+            Scene3DrumTrackPatternBank,
+            Scene3DrumTrackPatternNumber,
+            Scene4DrumTrackPatternBank,
+            Scene4DrumTrackPatternNumber,
         }
 
 
@@ -38,8 +47,19 @@
             Favorite,
             Tempo,
 
+            // Kronos and before
             DrumTrackCommonPatternBank,
-            DrumTrackCommonPatternNumber
+            DrumTrackCommonPatternNumber,
+
+            // Nautilus
+            Scene1DrumTrackPatternBank,
+            Scene1DrumTrackPatternNumber,
+            Scene2DrumTrackPatternBank,
+            Scene2DrumTrackPatternNumber,
+            Scene3DrumTrackPatternBank,
+            Scene3DrumTrackPatternNumber,
+            Scene4DrumTrackPatternBank,
+            Scene4DrumTrackPatternNumber,
         }
 
 

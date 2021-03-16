@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ using PcgTools.Model.Common.Synth.PatchDrumPatterns;
 using PcgTools.Model.Common.Synth.PatchSetLists;
 using PcgTools.PcgToolsResources;
 using PcgTools.Properties;
+using PcgTools.ViewModels.Commands.PcgCommands;
 
 namespace PcgTools.Model.Common.Synth.PatchCombis
 {
@@ -280,7 +281,12 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         public override void Clear()
         {
             Name = string.Empty;
-            GetParam(ParameterNames.CombiParameterName.Category).Value = 0;
+
+            if (PcgRoot.HasCombiCategories)
+            {
+                GetParam(ParameterNames.CombiParameterName.Category).Value = 0;
+            }
+
             if (PcgRoot.HasSubCategories)
             {
                 GetParam(ParameterNames.CombiParameterName.SubCategory).Value = 0;
@@ -417,10 +423,13 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                 }
                 else
                 {
-                    builder.Append(UsedDrumTrackPattern == null
-                        ? string.Empty
-                        : ("Used Drum Track Pattern: " + UsedDrumTrackPattern.Id + "\n"));
-
+                    List<string> patternIds = UsedDrumTrackPatterns.Select(pattern => pattern.Id).ToList();
+                    if (patternIds.Count > 0)
+                    {
+                        builder.Append("Used Drum Track Patterns: ");
+                        builder.Append(String.Join(", ", patternIds));
+                        builder.Append("\n");
+                    }
                 }
 
                 return builder.ToString().RemoveLastNewLine();
@@ -431,10 +440,12 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        public IDrumPattern UsedDrumTrackPattern
+        virtual public List<IDrumPattern> UsedDrumTrackPatterns
         {
             get
             {
+                List<IDrumPattern> patterns = new List<IDrumPattern>();
+
                 var paramBank = GetParam(ParameterNames.CombiParameterName.DrumTrackCommonPatternBank);
                 if (paramBank != null)
                 {
@@ -444,26 +455,98 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                     var paramNumber = GetParam(ParameterNames.CombiParameterName.DrumTrackCommonPatternNumber);
                     if (paramNumber != null)
                     {
-                        return bank.Patches[paramNumber.Value];
+                        patterns.Add(bank.Patches[paramNumber.Value]);
                     }
                 }
 
-                return null;
+                return patterns;
+            }
+        }
+
+
+        /// <summary>
+        /// Minimum volume of all (used) timbres
+        /// </summary>
+        /// <returns></returns>
+        public int GetMinimumVolume()
+        {
+            int minVolume = 127;
+
+            foreach (var timbre in this.Timbres.TimbresCollection)
+            {
+                if ((timbre.GetParam(ParameterNames.TimbreParameterName.Mute) == null) ||
+                     (!timbre.GetParam(ParameterNames.TimbreParameterName.Mute).Value) &&
+                     new List<string> { "Int", "On", "Both" }.Contains(timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value))
+                {
+                    minVolume = Math.Min(minVolume, timbre.GetParam(ParameterNames.TimbreParameterName.Volume).Value);
+                }
             }
 
-            set
-            {
-                var paramBank = GetParam(ParameterNames.CombiParameterName.DrumTrackCommonPatternBank);
-                if (paramBank != null)
-                {
-                    paramBank.Value = ((IDrumPatternBank) value.Parent).PcgId;
+            return minVolume;
+        }
 
-                    var paramNumber = GetParam(ParameterNames.CombiParameterName.DrumTrackCommonPatternNumber);
-                    if (paramNumber != null)
-                    {
-                        paramNumber.Value = value.Index;
-                    }
+
+        /// <summary>
+        /// Maximum volume of all (used) timbres
+        /// </summary>
+        /// <returns></returns>
+        public int GetMaximumVolume()
+        {
+            int maxVolume = 0;
+
+            foreach (var timbre in this.Timbres.TimbresCollection)
+            {
+                if ((timbre.GetParam(ParameterNames.TimbreParameterName.Mute) == null) ||
+                     (!timbre.GetParam(ParameterNames.TimbreParameterName.Mute).Value) &&
+                     new List<string> { "Int", "On", "Both" }.Contains(timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value))
+                {
+                    maxVolume = Math.Max(maxVolume, timbre.GetParam(ParameterNames.TimbreParameterName.Volume).Value);
                 }
+            }
+
+            return maxVolume;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="minimumVolume"></param>
+        /// <param name="maximumVolume"></param>
+        public void ChangeVolume(ChangeVolumeParameters parameters, int minimumVolume, int maximumVolume)
+        {
+            foreach (var timbre in this.Timbres.TimbresCollection)
+            {
+                var currentVolumeParameter = timbre.GetParam(ParameterNames.TimbreParameterName.Volume);
+                
+                switch (parameters.ChangeType)
+                {
+                    case ChangeVolumeParameters.EChangeType.Fixed:
+                        currentVolumeParameter.Value = parameters.Value;
+                        break;
+
+                    case ChangeVolumeParameters.EChangeType.Relative:
+                        currentVolumeParameter.Value = MathUtils.ClipValue(currentVolumeParameter.Value + parameters.Value, 0, 127);
+                        break;
+
+                    case ChangeVolumeParameters.EChangeType.Percentage:
+                        currentVolumeParameter.Value = (int)(currentVolumeParameter.Value * (float)parameters.Value / 100.0 + 0.5);
+                        break;
+
+                    case ChangeVolumeParameters.EChangeType.Mapped:
+                        currentVolumeParameter.Value = MathUtils.MapValue(currentVolumeParameter.Value, 0, 127, parameters.Value, parameters.ToValue);
+                        break;
+
+                    case ChangeVolumeParameters.EChangeType.SmartMapped:
+                        currentVolumeParameter.Value = MathUtils.MapValue(currentVolumeParameter.Value, minimumVolume, maximumVolume, parameters.Value, parameters.ToValue);
+                        break;
+
+                    default:
+                        throw new ApplicationException("Illegal ChangeVolumeParameter");
+                }
+
+                Update("ContentChanged");
             }
         }
     }

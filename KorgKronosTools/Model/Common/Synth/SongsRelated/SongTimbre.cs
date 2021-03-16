@@ -27,12 +27,6 @@ namespace PcgTools.Model.Common.Synth.SongsRelated
         /// <summary>
         /// 
         /// </summary>
-        private int TimbresSize { get; set; }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="timbres"></param>
         /// <param name="index"></param>
         /// <param name="timbresSize"></param>

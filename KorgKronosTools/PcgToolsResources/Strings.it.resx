@@ -1338,11 +1338,11 @@ Clicca OK per generare la lista o Annulla per annullare l'operazione.</value>
   <data name="ColorCharcoal" xml:space="preserve">
     <value>Charcoal</value>
   </data>
-  <data name="ColorDanim" xml:space="preserve">
+  <data name="ColorDenim" xml:space="preserve">
     <value>Denim</value>
   </data>
   <data name="ColorDefault" xml:space="preserve">
-    <value>Predefinito</value>
+    <value>Default</value>
   </data>
   <data name="ColorGold" xml:space="preserve">
     <value>Gold</value>
@@ -1820,5 +1820,30 @@ Eccezione interna:
   </data>
   <data name="WaveSequences" xml:space="preserve">
     <value>Wave Sequence</value>
+  </data>
+  <data name="EModelTypeKross2" xml:space="preserve">
+    <value>Kross 2</value>
+  </data>
+  <data name="ChangeVolume_chvolwin" xml:space="preserve">
+    <value>Cambia Volume</value>
+  </data>
+  <data name="Fixed_chvolwin" xml:space="preserve">
+    <value>_Fisso</value>
+  </data>
+  <data name="Mapped_chvolwin" xml:space="preserve">
+    <value>_Mappato</value>
+  </data>
+  <data name="Percentage_chvolwin" xml:space="preserve">
+    <value>_Percentuale</value>
+  </data>
+  <data name="Relative_chvolwin" xml:space="preserve">
+    <value>_Relativo</value>
+  </data>
+  <data name="SmartMapped_chvolwin" xml:space="preserve">
+    <value>_Smart</value>
+  </data>
+  <data name="EModelTypeNautilus" xml:space="preserve">
+    <value>Nautilus</value>
+    <comment>Enumeration of Model Type</comment>
   </data>
 </root>

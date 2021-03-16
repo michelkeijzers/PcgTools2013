@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -345,6 +345,10 @@ namespace PcgTools
                     ListGenerator.IgnoreMutedOffTimbres = GetBooleanOptionValue(optionPair);
                     break;
 
+                case "-ifipr":
+                    ListGenerator.IgnoreMutedOffFirstProgramTimbre = GetBooleanOptionValue(optionPair);
+                    break;
+
                 case "-fsl":
                     ListGenerator.SetListsEnabled = GetBooleanOptionValue(optionPair);
                     break;
@@ -577,6 +581,11 @@ namespace PcgTools
             if (!_options.Keys.Contains("-imot"))
             {
                 ListGenerator.IgnoreMutedOffTimbres = true;
+            }
+
+            if (!_options.Keys.Contains("-ifipr"))
+            {
+                ListGenerator.IgnoreMutedOffFirstProgramTimbre = true;
             }
 
             if (!_options.Keys.Contains("-fsl"))

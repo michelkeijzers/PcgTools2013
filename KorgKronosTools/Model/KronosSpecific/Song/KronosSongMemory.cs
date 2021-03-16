@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -25,7 +25,7 @@ namespace PcgTools.Model.KronosSpecific.Song
         public KronosSongMemory(string fileName)
             : base(fileName)
         {
-            Model = Models.Find(Models.EOsVersion.EOsVersionKronos2x); // Songs are always considered Kronos 2.x files
+            Model = Models.Find(Models.EOsVersion.Kronos2x); // Songs are always considered Kronos 2.x files
         }
 
 

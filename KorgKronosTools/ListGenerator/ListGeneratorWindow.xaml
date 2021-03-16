@@ -153,7 +153,9 @@
                 				HorizontalAlignment="Left" Margin="4" x:Name="checkBoxCombiBanksIgnoreInitCombis"  />
                             <CheckBox Content="{Binding IgnoreMutedOffTimbres, Source={StaticResource LocStrings}}" 
                 				Margin="4" x:Name="checkBoxIgnoreMutedOffTimbres"/>
-                        </StackPanel>
+                        <CheckBox Content="{Binding IgnoreMutedOffFirstProgramTimbre, Source={StaticResource LocStrings}}" 
+                				Margin="4" x:Name="checkBoxIgnoreMutedOffFirstProgramTimbre"/>
+                    </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <Button Content="{Binding SelectAll, Source={StaticResource LocStrings}}"

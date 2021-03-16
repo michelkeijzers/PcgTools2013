@@ -1,6 +1,7 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 
+using System;
 using System.Collections.Generic;
 using PcgTools.Model.Common.Synth.OldParameters;
 using PcgTools.Model.Common.Synth.PatchPrograms;
@@ -46,7 +47,7 @@ namespace PcgTools.Model.OasysSpecific.Synth
             {
                 case ParameterNames.ProgramParameterName.OscMode:
                     parameter = EnumParameter.Instance.Set(Root, Root.Content, ByteOffset + 2546, 1, 0,
-                        new List<string> { "Single", "Double", "Drums" }, this);
+                        new List<string> { "Single", "Double", "Drums", "- (EXI)", "- (Unused)", "Double Drums" }, this);
                     break;
 
                 case ParameterNames.ProgramParameterName.Category:
@@ -71,10 +72,15 @@ namespace PcgTools.Model.OasysSpecific.Synth
         /// <param name="osc"></param>
         /// <param name="zone"></param>
         /// <returns></returns>
-        protected override int GetDrumKitByteOffset(int osc, int zone)
+        protected override int GetZoneMsByteOffset(int osc, int zone)
         {
-            return ByteOffset + 2732 + osc * (3032 - 2732) +
-                   zone * (2738 - 2732) + (2734 - 2732);
+            return ByteOffset + 2732 + osc * (3032 - 2732) + zone * (2738 - 2732);
         }
+
+
+        /// <summary>
+        /// Number of zones.
+        /// </summary>
+        protected override int NumberOfZones => 4;
     }
 }

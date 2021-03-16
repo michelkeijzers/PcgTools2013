@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System.Linq;
 
@@ -70,9 +70,9 @@ namespace PcgTools.Model.Common.File
         }
 
 
-        /// <summary>
-        /// Length of one timbre.
-        /// </summary>
-        protected int TimbreByteSize { get; set; }
+        // <summary>
+        // Length of one timbre.
+        // </summary>
+        //protected int TimbreByteSize { get; set; }
     }
 }

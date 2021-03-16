@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -410,8 +410,7 @@ namespace PcgTools.ListGenerator
         {
             var builder = new StringBuilder();
             builder.AppendLine("<?xml version=\"1.0\"?>");
-            builder.AppendLine(" <xsl:stylesheet version=\"1.0\"");
-            builder.AppendLine(" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
+            builder.AppendLine(" <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
             builder.AppendLine(string.Empty);
             builder.AppendLine(" <xsl:template match=\"/\">");
             builder.AppendLine("   <html>");

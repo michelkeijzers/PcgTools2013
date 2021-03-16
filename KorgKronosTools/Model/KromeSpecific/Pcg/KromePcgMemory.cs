@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ namespace PcgTools.Model.KromeSpecific.Pcg
             DrumKitBanks = new KromeDrumKitBanks(this);
             DrumPatternBanks = new KromeDrumPatternBanks(this);
             Global = new KromeGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionKrome);
+            Model = Models.Find(Models.EOsVersion.Krome);
         }
 
 

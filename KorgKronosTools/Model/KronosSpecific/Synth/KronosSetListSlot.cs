@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Diagnostics;
@@ -38,9 +38,9 @@ namespace PcgTools.Model.KronosSpecific.Synth
         {
             _color = null;
 
-            if ((PcgRoot.Model.OsVersion != Models.EOsVersion.EOsVersionKronos10_11) &&
-                (PcgRoot.Model.OsVersion != Models.EOsVersion.EOsVersionKronos15_16) &&
-                (PcgRoot.Model.OsVersion != Models.EOsVersion.EOsVersionKronos2x))
+            if ((PcgRoot.Model.OsVersion != Models.EOsVersion.Kronos10_11) &&
+                (PcgRoot.Model.OsVersion != Models.EOsVersion.Kronos15_16) &&
+                (PcgRoot.Model.OsVersion != Models.EOsVersion.Kronos2x))
             {
                 _color = new IntParameterBitsInByte("Color", this, 24, 5, 2, 0, 16);
             }
@@ -210,14 +210,14 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// 
         /// </summary>
         protected override IBank UsedProgramBank => PcgRoot.ProgramBanks.GetBankWithPcgId(Util.GetBits(PcgRoot.Content,
-            (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16) ? Stl2BankOffset : DefaultBankOffset, 4, 0));
+            (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16) ? Stl2BankOffset : DefaultBankOffset, 4, 0));
 
 
         /// <summary>
         /// 
         /// </summary>
         protected override IBank UsedCombiBank => PcgRoot.CombiBanks[Util.GetBits(PcgRoot.Content,
-            (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16) ? Stl2BankOffset : DefaultBankOffset, 4, 0)];
+            (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16) ? Stl2BankOffset : DefaultBankOffset, 4, 0)];
 
 
         /// <summary>
@@ -287,14 +287,14 @@ namespace PcgTools.Model.KronosSpecific.Synth
 
             // Set bank.
             Util.SetInt(PcgRoot, PcgRoot.Content, DefaultBankOffset, 1, combiBanks.BankCollection.IndexOf(combiBank));
-            if (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+            if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
                 Util.SetInt(PcgRoot, PcgRoot.Content, Stl2BankOffset, 1, combiBanks.BankCollection.IndexOf(combiBank));
             }
 
             // Set combi.
             Util.SetInt(PcgRoot, PcgRoot.Content, DefaultPatchOffset, 1, combi.Index);
-            if (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+            if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
                 Util.SetInt(PcgRoot, PcgRoot.Content, Stl2PatchOffset, 1, combi.Index);
             }
@@ -332,20 +332,20 @@ namespace PcgTools.Model.KronosSpecific.Synth
             {
                 switch (PcgRoot.Model.OsVersion)
                 {
-                    case Models.EOsVersion.EOsVersionKronos10_11:
+                    case Models.EOsVersion.Kronos10_11:
                         Util.SetInt(PcgRoot, PcgRoot.Content, DefaultPatchOffset, 1, 0); // Index 0
                         break;
 
-                    case Models.EOsVersion.EOsVersionKronos15_16:
+                    case Models.EOsVersion.Kronos15_16:
                         Util.SetInt(PcgRoot, PcgRoot.Content, DefaultPatchOffset, 1, 0); // Index 0
                         Util.SetInt(PcgRoot, PcgRoot.Content, Stl2PatchOffset, 1, program.Index);
                         break;
 
-                    case Models.EOsVersion.EOsVersionKronos2x:
+                    case Models.EOsVersion.Kronos2x:
                         Util.SetInt(PcgRoot, PcgRoot.Content, DefaultPatchOffset, 1, program.Index);
                         break;
 
-                    case Models.EOsVersion.EOsVersionKronos3x:
+                    case Models.EOsVersion.Kronos3x:
                         Util.SetInt(PcgRoot, PcgRoot.Content, DefaultPatchOffset, 1, program.Index);
                         break;
 
@@ -356,7 +356,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             else // Bank I-A..U-G
             {
                 Util.SetInt(PcgRoot, PcgRoot.Content, DefaultPatchOffset, 1, program.Index);
-                if (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+                if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
                 {
                     Util.SetInt(PcgRoot, PcgRoot.Content, Stl2PatchOffset, 1, program.Index);
                 }
@@ -374,20 +374,20 @@ namespace PcgTools.Model.KronosSpecific.Synth
             {
                 switch (PcgRoot.Model.OsVersion)
                 {
-                    case Models.EOsVersion.EOsVersionKronos10_11:
+                    case Models.EOsVersion.Kronos10_11:
                         Util.SetInt(PcgRoot, PcgRoot.Content, DefaultBankOffset, 1, 23); // 23 = U-G
                         break;
 
-                    case Models.EOsVersion.EOsVersionKronos15_16:
+                    case Models.EOsVersion.Kronos15_16:
                         Util.SetInt(PcgRoot, PcgRoot.Content, DefaultBankOffset, 1, 23); // 23 = U-G
                         Util.SetInt(PcgRoot, PcgRoot.Content, Stl2BankOffset, 1, bank.PcgId);
                         break;
 
-                    case Models.EOsVersion.EOsVersionKronos2x:
+                    case Models.EOsVersion.Kronos2x:
                         Util.SetInt(PcgRoot, PcgRoot.Content, DefaultBankOffset, 1, bank.PcgId);
                         break;
 
-                    case Models.EOsVersion.EOsVersionKronos3x:
+                    case Models.EOsVersion.Kronos3x:
                         Util.SetInt(PcgRoot, PcgRoot.Content, DefaultBankOffset, 1, bank.PcgId);
                         break;
 
@@ -398,7 +398,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             else // Bank I-A..U-G
             {
                 Util.SetInt(PcgRoot, PcgRoot.Content, DefaultBankOffset, 1, bank.PcgId);
-                if (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+                if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
                 {
                     Util.SetInt(PcgRoot, PcgRoot.Content, Stl2BankOffset, 1, bank.PcgId);
                 }
@@ -414,7 +414,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             get
             {
                 var combiId = Util.GetInt(PcgRoot.Content,
-                    (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+                    (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
                         ? Stl2PatchOffset
                         : DefaultPatchOffset, 1);
 
@@ -444,7 +444,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             get
             {
                 var programId = Util.GetInt(PcgRoot.Content,
-                    (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+                    (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
                         ? Stl2PatchOffset
                         : DefaultPatchOffset, 1);
 
@@ -475,13 +475,13 @@ namespace PcgTools.Model.KronosSpecific.Synth
             PcgRoot.Content[TypeOffset] = (int)PatchType.Program;
 
             PcgRoot.Content[DefaultBankOffset] = 0; // Program bank I-A.
-            if (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+            if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
                 PcgRoot.Content[Stl2BankOffset] = 0;
             }
 
             PcgRoot.Content[DefaultPatchOffset] = 0; // index 0
-            if (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+            if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
                 PcgRoot.Content[Stl2PatchOffset] = 0; // Index 0
             }
@@ -557,7 +557,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
 
             // Take SLS2 differences into account.
-            if (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+            if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
                 var otherSetListSlot = otherPatch as KronosSetListSlot;
                 Debug.Assert(otherSetListSlot != null);
@@ -586,7 +586,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
 
             // Take SLS2 differences into account.
-            if (PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+            if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
                 diffs += (Util.GetInt(PcgRoot.Content, Stl2BankOffset, 1) != 
                     otherSetListSlot.KronosOs1516Bank) ? 1 : 0;

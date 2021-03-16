@@ -17,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class CopyBetweenFilesTests
     {
-        const string PcgDirectory = @"C:\PCG Tools Test Files\TestFiles\Workstations\";
+        const string PcgDirectory = @"E:\PCG Tools Test Files\TestFiles\Workstations\";
 
 
         private PcgMemory _pcgOs2;

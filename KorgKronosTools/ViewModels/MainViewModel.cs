@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -32,7 +32,13 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public const string Version = "2.8.0";
+        public const string Version = "3.2.0";
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string Copyright = "©2011-2021";
 
 
         /// <summary>
@@ -64,7 +70,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         public void UpdateAppTitle()
         {
-            AppTitle = $"{Strings.PcgTools} {Version}  ©2011-2016 Michel Keijzers";
+            AppTitle = $"{Strings.PcgTools} {Version} {MainViewModel.Copyright} Michel Keijzers";
         }
 
 
@@ -119,10 +125,12 @@ namespace PcgTools.ViewModels
                 "Korg microSTATION {0} (*.pcg)|*.pcg|" +
                 "Korg Karma {0} (*.pcg)|*.pcg|" +
                 "Korg Krome {0} (*.pcg)|*.pcg|" +
+                "Korg Krome EX {0} (*.pcg)|*.pcg|" +
                 "Korg Kronos series {0} (*.pcg)|*.pcg|" +
                 "Korg Kross {0} (*.pcg)|*.pcg|" +
                 "Korg Kross {0} (*.pcg,*.KRSall,*.KRSapr,*.KRSbpr,*.KRSpr,*.KRSacm,*.KRSbcm,*.KRScm)|" +
                                 "*.pcg;*.KRSall;*.KRSapr;*.KRSbpr;*.KRSpr;*.KRSacm;*.KRSbcm;*.KRScm|" +
+                "Korg Kross 2 {0} (*.pcg)|*.pcg|" +
                 "Korg M1 series {0} (*.syx,*.mid)|*.syx;*.mid|" +
                 "Korg M3 series {0} (*.pcg)|*.pcg|" +
                 "Korg M3R {0} (*.syx)|*.syx|" +
@@ -874,8 +882,10 @@ namespace PcgTools.ViewModels
         {
             Settings,
             About,
+            ChangeVolume,
             ExternalLinksKorgRelated,
             ExternalLinksContributors,
+            ExternalLinksVideoCreators,
             ExternalLinksDonators,
             ExternalLinksTranslators,
             ExternalLinksThirdParties,
@@ -1784,6 +1794,37 @@ namespace PcgTools.ViewModels
         void ShowExternalLinksContributors()
         {
             ShowDialog(WindowType.ExternalLinksContributors);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ICommand _showExternalLinksVideoCreatorsCommand;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [UsedImplicitly]
+        // ReSharper disable once UnusedMember.Global
+        public ICommand ShowExternalLinksVideoCreatorsCommand
+        {
+            get
+            {
+                return _showExternalLinksVideoCreatorsCommand ??
+                    (_showExternalLinksVideoCreatorsCommand = new RelayCommand(param => ShowExternalLinksVideoCreators(),
+                param => true));
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void ShowExternalLinksVideoCreators()
+        {
+            ShowDialog(WindowType.ExternalLinksVideoCreators);
         }
 
 

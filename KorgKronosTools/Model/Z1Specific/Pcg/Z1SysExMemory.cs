@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 
@@ -32,7 +32,7 @@ namespace PcgTools.Model.Z1Specific.Pcg
             DrumKitBanks = null;
             DrumPatternBanks = null;
             Global = new Z1Global(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionZ1);
+            Model = Models.Find(Models.EOsVersion.Z1);
         }
         
 

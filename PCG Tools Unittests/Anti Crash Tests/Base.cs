@@ -18,7 +18,7 @@ namespace PCG_Tools_Unittests
     /// </summary>
     public abstract class AntiCrashTests
     {
-        private const string DefaultDirectory = @"C:\PCG Tools Test Files\TestFiles\";
+        private const string DefaultDirectory = @"E:\PCG Tools Test Files\TestFiles\";
 
 
         private PcgMemory _pcgMemory;
@@ -78,7 +78,7 @@ namespace PCG_Tools_Unittests
             }
 
             // Test save.
-            _pcgMemory.FileName = "C:\\test.pcg";
+            _pcgMemory.FileName = "E:\\test.pcg";
             _pcgMemory.SaveFile(false, false);
 
         }
@@ -154,6 +154,7 @@ namespace PCG_Tools_Unittests
             _generator.IgnoreInitCombis = true;
             _generator.IgnoreFirstProgram = false;
             _generator.IgnoreMutedOffTimbres = true;
+            _generator.IgnoreMutedOffFirstProgramTimbre = true;
             _generator.SetListsEnabled = false;
             _generator.SetListsRangeFrom = 0;
             _generator.SetListsRangeTo = 0;

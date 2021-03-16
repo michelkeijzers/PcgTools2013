@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using PcgTools.Model.Common;
@@ -62,8 +62,7 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// <returns></returns>
         public override IParameter GetParam(ParameterNames.ProgramParameterName name)
         {
-            IParameter parameter;
-
+            IParameter parameter = null;
 
             switch (name)
             {
@@ -73,9 +72,6 @@ namespace PcgTools.Model.Z1Specific.Synth
                     parameter = new FixedParameter();
                     ((FixedParameter)parameter).Set(PcgRoot, PcgRoot.Content, FixedParameter.EType.Category, this);
                     break;
-
-                default:
-                    throw new ApplicationException("Illegal case");
             }
 
             return parameter;

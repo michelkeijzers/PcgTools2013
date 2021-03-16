@@ -19,7 +19,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <param name="type"></param>
         /// <param name="id"></param>
         /// <param name="pcgId"></param>
-        public KronosWaveSequenceBank(WaveSequenceBanks waveSeqBanks, BankType.EType type, string id, int pcgId)
+        public KronosWaveSequenceBank(IWaveSequenceBanks waveSeqBanks, BankType.EType type, string id, int pcgId)
             : base(waveSeqBanks, type, id, pcgId)
         {
         }

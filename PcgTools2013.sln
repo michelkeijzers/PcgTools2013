@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcgTools Application", "KorgKronosTools\PcgTools Application.csproj", "{D18ED6C7-B8D0-4D9E-B498-744DC88A06AA}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -24,11 +24,7 @@ Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Installation", "Installatio
 		{D18ED6C7-B8D0-4D9E-B498-744DC88A06AA} = {D18ED6C7-B8D0-4D9E-B498-744DC88A06AA}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_Documentation", "Documentation\Documentation.vcxproj", "{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF.MDI", "WPF.MDI\WPF.MDI.csproj", "{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "_Website", "_Website\_Website.vcxproj", "{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalUtilities", "ExternalUtilities\ExternalUtilities.csproj", "{99BA6AAC-192B-41E3-8564-7019D9F38165}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -46,13 +42,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatchDbFrontEnd", "PatchDbF
 		{73D973AE-C79A-4E25-A669-C91DB950C709} = {73D973AE-C79A-4E25-A669-C91DB950C709}
 	EndProjectSection
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "___Documentation", "___Documentation\___Documentation.shproj", "{EA7C98FF-3BCA-4014-B9CB-0C28E8821823}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "___Website", "___Website\___Website.shproj", "{E06709E2-0AEF-4CC7-A39D-FAB53A08A06C}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		___Documentation\___Documentation.projitems*{ea7c98ff-3bca-4014-b9cb-0c28e8821823}*SharedItemsImports = 13
 		___Website\___Website.projitems*{e06709e2-0aef-4cc7-a39d-fab53a08a06c}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -245,46 +238,6 @@ Global
 		{1AED83AF-B204-4560-A2BD-90F277BDC928}.SingleImage|x64.Build.0 = SingleImage
 		{1AED83AF-B204-4560-A2BD-90F277BDC928}.SingleImage|x86.ActiveCfg = SingleImage
 		{1AED83AF-B204-4560-A2BD-90F277BDC928}.SingleImage|x86.Build.0 = SingleImage
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.CD_ROM|Any CPU.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.CD_ROM|Mixed Platforms.Build.0 = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.CD_ROM|Win32.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.CD_ROM|Win32.Build.0 = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.CD_ROM|x64.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.CD_ROM|x86.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.CD_ROM|x86.Build.0 = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Debug|Win32.Build.0 = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Debug|x64.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Debug|x86.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Debug|x86.Build.0 = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.DVD-5|Any CPU.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.DVD-5|Mixed Platforms.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.DVD-5|Mixed Platforms.Build.0 = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.DVD-5|Win32.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.DVD-5|Win32.Build.0 = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.DVD-5|x64.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.DVD-5|x86.ActiveCfg = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.DVD-5|x86.Build.0 = Debug|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Release|Any CPU.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Release|Win32.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Release|Win32.Build.0 = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Release|x64.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Release|x86.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.Release|x86.Build.0 = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.SingleImage|Any CPU.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.SingleImage|Mixed Platforms.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.SingleImage|Mixed Platforms.Build.0 = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.SingleImage|Win32.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.SingleImage|Win32.Build.0 = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.SingleImage|x64.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.SingleImage|x86.ActiveCfg = Release|Win32
-		{9918F728-04A5-4C95-A9BB-EAA82FD12F7C}.SingleImage|x86.Build.0 = Release|Win32
 		{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
 		{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Any CPU
@@ -320,46 +273,6 @@ Global
 		{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}.SingleImage|Win32.ActiveCfg = Release|Any CPU
 		{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}.SingleImage|x64.ActiveCfg = Release|Any CPU
 		{BE1ED569-5E0B-4DF0-8964-33AD2AAE4C4A}.SingleImage|x86.ActiveCfg = Release|Any CPU
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.CD_ROM|Any CPU.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.CD_ROM|Mixed Platforms.Build.0 = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.CD_ROM|Win32.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.CD_ROM|Win32.Build.0 = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.CD_ROM|x64.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.CD_ROM|x86.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.CD_ROM|x86.Build.0 = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Debug|Win32.Build.0 = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Debug|x64.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Debug|x86.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Debug|x86.Build.0 = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.DVD-5|Any CPU.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.DVD-5|Mixed Platforms.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.DVD-5|Mixed Platforms.Build.0 = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.DVD-5|Win32.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.DVD-5|Win32.Build.0 = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.DVD-5|x64.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.DVD-5|x86.ActiveCfg = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.DVD-5|x86.Build.0 = Debug|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Release|Any CPU.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Release|Win32.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Release|Win32.Build.0 = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Release|x64.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Release|x86.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.Release|x86.Build.0 = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.SingleImage|Any CPU.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.SingleImage|Mixed Platforms.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.SingleImage|Mixed Platforms.Build.0 = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.SingleImage|Win32.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.SingleImage|Win32.Build.0 = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.SingleImage|x64.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.SingleImage|x86.ActiveCfg = Release|Win32
-		{9ABF561B-0A0F-4BD2-BAEA-38E17070C3DD}.SingleImage|x86.Build.0 = Release|Win32
 		{99BA6AAC-192B-41E3-8564-7019D9F38165}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
 		{99BA6AAC-192B-41E3-8564-7019D9F38165}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{99BA6AAC-192B-41E3-8564-7019D9F38165}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Any CPU
@@ -468,6 +381,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32A05FDB-0E55-45D6-B7AB-5EA1BA1530DB}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = PcgTools.vsmdi

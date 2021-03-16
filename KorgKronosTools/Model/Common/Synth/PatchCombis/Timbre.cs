@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.ComponentModel;
@@ -77,7 +77,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        private int TimbresSize { get; set; }
+        public int TimbresSize { get; set; }
 
 
         /// <summary>
@@ -377,13 +377,32 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
             GetParam(ParameterNames.TimbreParameterName.TopKey).Value = 0;
             GetParam(ParameterNames.TimbreParameterName.BottomVelocity).Value = 0;
             GetParam(ParameterNames.TimbreParameterName.TopVelocity).Value = 0;
-            GetParam(ParameterNames.TimbreParameterName.OscMode).Value = "Mono";
-            GetParam(ParameterNames.TimbreParameterName.OscSelect).Value = "Osc2";
+            var parameter = GetParam(ParameterNames.TimbreParameterName.OscMode);
+            if (parameter != null)
+            {
+                parameter.Value = "Mono";
+            }
+
+            parameter = GetParam(ParameterNames.TimbreParameterName.OscSelect);
+            if (parameter != null)
+            {
+                parameter.Value = "Osc2";
+            }
 
             GetParam(ParameterNames.TimbreParameterName.Transpose).Value = 0;
             GetParam(ParameterNames.TimbreParameterName.Detune).Value = 0;
-            GetParam(ParameterNames.TimbreParameterName.Portamento).Value = 0;
-            GetParam(ParameterNames.TimbreParameterName.BendRange).Value = 0;
+
+            parameter = GetParam(ParameterNames.TimbreParameterName.Portamento);
+            if (parameter != null)
+            {
+                parameter.Value = 0;
+            }
+
+            parameter = GetParam(ParameterNames.TimbreParameterName.BendRange);
+            if (parameter != null)
+            {
+                parameter.Value = 0;
+            }
 
             RefillColumns();
         }

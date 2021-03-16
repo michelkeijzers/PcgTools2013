@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using PcgTools.Model.Common;
@@ -28,7 +28,7 @@ namespace PcgTools.Model.Z1Specific.Pcg
             int sysExStartOffset, int sysExEndOffset)
             : base(currentPcgMemory, content, contentType, sysExStartOffset, sysExEndOffset)
         {
-            TimbreByteSize = 16;
+            //TimbreByteSize = 16;
         }
 
 
@@ -263,7 +263,7 @@ namespace PcgTools.Model.Z1Specific.Pcg
 
                     foreach (var timbre in combi.Timbres.TimbresCollection)
                     {
-                        timbre.ByteOffset = combi.Timbres.ByteOffset + timbre.Index * TimbreByteSize;
+                        timbre.ByteOffset = combi.Timbres.ByteOffset + timbre.Index * timbre.ByteLength;
                     }
 
                     // Skip to next.

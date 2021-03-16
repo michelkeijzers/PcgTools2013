@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -31,27 +31,8 @@ namespace PcgTools.Model.KronosSpecific.Pcg
             // Arp1Chunk Arp1Chunk;
             // Glb1Chunk Glb1Chunk;
 
-            // Checksum flag -> used since Kronos OS 2.x, 1 = OS2.x, 2 = OS3.x
-            switch (content[7])
-            {
-                case 0:
-                    currentPcgMemory.Model = Models.Find(Models.EOsVersion.EOsVersionKronos10_11);
-                     // Will be later set to 1.5/1.6 in case an XXX2 or 3 chunk is found.
-                    break;
-
-                case 1:
-                    currentPcgMemory.Model = Models.Find(Models.EOsVersion.EOsVersionKronos2x);
-                    currentPcgMemory.PcgChecksumType = PcgMemory.ChecksumType.Kronos2XOr3X;
-                    break;
-
-                case 2:
-                    currentPcgMemory.Model = Models.Find(Models.EOsVersion.EOsVersionKronos3x);
-                    currentPcgMemory.PcgChecksumType = PcgMemory.ChecksumType.Kronos2XOr3X;
-                    break;
-
-                default:
-                    throw new ApplicationException("Unsupported file");
-            }
+            currentPcgMemory.Model = Models.Find(Models.EOsVersion.Nautilus);
+            currentPcgMemory.PcgChecksumType = PcgMemory.ChecksumType.Nautilus;
         }
 
         protected override int Dpi1NumberOfDrumPatternsOffset

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.Common.Synth.PatchDrumPatterns;
 using PcgTools.Model.Common.Synth.PatchSetLists;
 
@@ -34,15 +35,15 @@ namespace PcgTools.Model.MSpecific.Synth
         /// <summary>
         /// Used for OS 1.5/1.6.
         /// </summary>
-        public int Drk2BankOffset => (((DrumPatternBanks)(Parent.Parent)).Drk2PcgOffset +
-                                      128 * Convert.ToInt16(((DrumPatternBank)Parent).Id) + Index);
+        public int Drk2BankOffset => ((DrumPatternBanks)Parent.Parent).Drk2PcgOffset +
+                                      128 * ((DrumPatternBank)Parent).Index + Index;
 
 
         /// <summary>
         /// Used for OS 1.5/1.6.
         /// </summary>
-        public int Drk2PatchOffset => 128 * 128 + ((MDrumPatternBanks)(Parent.Parent)).Drk2PcgOffset +
-                                      128 * Convert.ToInt16(((SetList)Parent).Id) + Index;
+        public int Drk2PatchOffset => 128 * 128 + ((MDrumPatternBanks)Parent.Parent).Drk2PcgOffset +
+                                      128 *((DrumPatternBank)Parent).Index + Index;
 
 
         /// <summary>

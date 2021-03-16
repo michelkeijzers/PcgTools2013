@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System.ComponentModel;
 using Common.Mvvm;
@@ -9,7 +9,7 @@ namespace PcgTools.Model.Common.Synth.Meta
     /// <summary>
     /// 
     /// </summary>
-    public interface IBank : INamable, ISelectable, ILoadable, IWritable, ILocatable, ICountable, IUpdatable,
+    public interface IBank : INamable, ISelectable, ILoadable, IWritable, ILocatable, ICountable, IUpdatable, IIndexable,
         INavigable, INotifyPropertyChanged, IObservableObject
     {
         /// <summary>
@@ -35,7 +35,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// </summary>
         int PcgId { get; }
 
-
+        
         /// <summary>
         /// 
         /// </summary>

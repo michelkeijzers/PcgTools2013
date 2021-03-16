@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -30,7 +30,7 @@ namespace PcgTools.Model.TSeries.Pcg
             WaveSequenceBanks = null;
             DrumKitBanks = null;
             Global = new TSeriesGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionTSeries);
+            Model = Models.Find(Models.EOsVersion.TSeries);
         }
         
 

@@ -16,7 +16,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class OasysTest
     {
-        const string PcgDirectory = @"C:\PCG Tools Test Files\TestFiles\Workstations\Oasys";
+        const string PcgDirectory = @"E:\PCG Tools Test Files\TestFiles\Workstations\Oasys";
 
         
         PcgMemory _pcgMemory;
@@ -54,6 +54,7 @@ namespace PCG_Tools_Unittests
             _generator.IgnoreInitCombis = true;
             _generator.IgnoreFirstProgram = false;
             _generator.IgnoreMutedOffTimbres = true;
+            _generator.IgnoreMutedOffFirstProgramTimbre = true;
             _generator.SetListsEnabled = false;
             _generator.DrumKitsEnabled = true;
             _generator.IgnoreInitDrumKits = true;

@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -216,6 +216,12 @@ namespace PcgTools.ListGenerator
         public bool IgnoreMutedOffTimbres { get; set; }
         
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IgnoreMutedOffFirstProgramTimbre { get; set; }
+
+        
         /// <summary>
         /// 
         /// </summary>

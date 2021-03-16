@@ -1327,27 +1327,27 @@
     <value>{0} содержит недопустимый символ (ы)</value>
   </data>
   <data name="ColorAzure" xml:space="preserve">
-    <value>Лазурный</value>
+    <value>Azure</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorBrick" xml:space="preserve">
-    <value>Кирпичный</value>
+    <value>Brick</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorBurgundy" xml:space="preserve">
-    <value>Бордовый</value>
+    <value>Burgundy</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorCacao" xml:space="preserve">
-    <value>Какао</value>
+    <value>Cacao</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorCharcoal" xml:space="preserve">
-    <value>Угольный</value>
+    <value>Charcoal</value>
     <comment>In Edit Set List Slot</comment>
   </data>
-  <data name="ColorDanim" xml:space="preserve">
-    <value>Джинсовый</value>
+  <data name="ColorDenim" xml:space="preserve">
+    <value>Denim</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorDefault" xml:space="preserve">
@@ -1355,39 +1355,39 @@
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorGold" xml:space="preserve">
-    <value>Золотой</value>
+    <value>Gold</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorIndigo" xml:space="preserve">
-    <value>Индиго</value>
+    <value>Indigo</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorIvy" xml:space="preserve">
-    <value>плющ</value>
+    <value>Ivy</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorLavender" xml:space="preserve">
-    <value>Лавандовый</value>
+    <value>Lavender</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorNavy" xml:space="preserve">
-    <value>Морской</value>
+    <value>Navy</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorOlive" xml:space="preserve">
-    <value>оливковый</value>
+    <value>Olive</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorRose" xml:space="preserve">
-    <value>Розовый</value>
+    <value>Rose</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorSilver" xml:space="preserve">
-    <value>Серебряный</value>
+    <value>Silver</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorSlate" xml:space="preserve">
-    <value>Сланцевый</value>
+    <value>Slate</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColumnCrcValueExcludingName" xml:space="preserve">
@@ -1741,7 +1741,7 @@
     <value>Максимальный объем резервных файлов в Мб</value>
   </data>
   <data name="DrumKit" xml:space="preserve">
-    <value>_набор ударных</value>
+    <value>Drum Kit</value>
   </data>
   <data name="NumberOfPatches" xml:space="preserve">
     <value># патчей:</value>
@@ -1868,5 +1868,27 @@
   </data>
   <data name="WaveSequences" xml:space="preserve">
     <value>Wave Sequences</value>
+  </data>
+  <data name="ChangePcgFileName" xml:space="preserve">
+    <value>_Изменить...</value>
+  </data>
+  <data name="DoubleToSingleKeyboard" xml:space="preserve">
+    <value>_Установка двойной в одиночную клавиатуру</value>
+  </data>
+  <data name="DoubleToSingleKeyboardWindowTitle" xml:space="preserve">
+    <value>Установка двойной в одиночную клавиатуру</value>
+  </data>
+  <data name="DrumKits" xml:space="preserve">
+    <value>Drum Kits</value>
+  </data>
+  <data name="EditParameterChangeEmpty" xml:space="preserve">
+    <value>Заполните действительное правило изменения параметра выше.</value>
+  </data>
+  <data name="EModelTypeKross2" xml:space="preserve">
+    <value>Kross 2</value>
+  </data>
+  <data name="EModelTypeNautilus" xml:space="preserve">
+    <value>Nautilus</value>
+    <comment>Enumeration of Model Type</comment>
   </data>
 </root>

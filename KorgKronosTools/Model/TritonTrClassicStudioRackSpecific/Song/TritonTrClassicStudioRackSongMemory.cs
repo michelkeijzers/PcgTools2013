@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -18,7 +18,7 @@ namespace PcgTools.Model.TritonTrClassicStudioRackSpecific.Song
         public TritonTrClassicStudioRackSongMemory(string fileName)
             : base(fileName)
         {
-            Model = Models.Find(Models.EOsVersion.EOsVersionTritonTrClassicStudioRack);
+            Model = Models.Find(Models.EOsVersion.TritonTrClassicStudioRack);
         }
     }
 }

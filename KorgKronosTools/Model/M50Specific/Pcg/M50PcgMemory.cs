@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -26,7 +26,7 @@ namespace PcgTools.Model.M50Specific.Pcg
             DrumKitBanks = new M50DrumKitBanks(this);
             DrumPatternBanks = new M50DrumPatternBanks(this);
             Global = new M50Global(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionM50);
+            Model = Models.Find(Models.EOsVersion.M50);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -52,6 +52,7 @@ namespace PcgTools.Gui
             Add(new Logo("Mike Hildner", string.Empty, string.Empty, 5000));
             Add(new Logo("Miroslav Novak", string.Empty, string.Empty, 200));
             Add(new Logo("Daan Andriessen", "BK-facebook.gif", "www.studiodebovenkamer.nl", 2500));
+            Add(new Logo("Synthesauris", "Synthesaurus.png", "https://www.patreon.com/synthesaurus", 3000));
         }
 
 

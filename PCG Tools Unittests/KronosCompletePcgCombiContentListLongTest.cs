@@ -17,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosCompletePcgCombiContentListLongTest
     {
-        const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        const string PcgFileName = @"E:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
 
         
         PcgMemory _pcgMemory;
@@ -41,6 +41,7 @@ namespace PCG_Tools_Unittests
                              ListSubType = ListGenerator.SubType.Long,
                              IgnoreFirstProgram = false,
                              IgnoreMutedOffTimbres = true,
+                             IgnoreMutedOffFirstProgramTimbre = true,
                              IgnoreInitCombis = true,
                              SelectedProgramBanks = new ObservableBankCollection<IProgramBank>(),
                              SelectedCombiBanks = new ObservableBankCollection<ICombiBank>(),
@@ -160,6 +161,7 @@ namespace PCG_Tools_Unittests
         {
             // Set non defaults and run.
             _generator.IgnoreMutedOffTimbres = false;
+            _generator.IgnoreMutedOffFirstProgramTimbre = false;
             Run();
 
             // U-G program banks would exist but are not shown since they are muted.
@@ -195,6 +197,7 @@ namespace PCG_Tools_Unittests
             // Set non defaults and run.
             _generator.IgnoreInitCombis = false;
             _generator.IgnoreMutedOffTimbres = false;
+            _generator.IgnoreMutedOffFirstProgramTimbre = false;
             Run();
 
             // Combi U-G010 and 11 exist on line 0.

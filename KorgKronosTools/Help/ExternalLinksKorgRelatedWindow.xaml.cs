@@ -149,7 +149,13 @@ namespace PcgTools.Help
                     Url = "http://www.quirobinez.nl",
                     BitmapPath = "quirobinez.png"
                 },
-
+                new ExternalItem
+                {
+                    Name = "Audora",
+                    Description = "Producer of Korg Sounds/Tutorials",
+                    Url = "https://audora.ca/",
+                    BitmapPath = "audora.png"
+                },
                 // Utilities
 
                 new ExternalItem
@@ -254,6 +260,14 @@ namespace PcgTools.Help
                     Url = "http://www.oostendorp-muziek.nl",
                     BitmapPath = "Oostendorpmuziek.jpg"
                 },
+
+                new ExternalItem
+                {
+                    Name="Dan Stesco",
+                    Description ="Sound creator",
+                    Url="http://www.danstesco.ro",
+                    BitmapPath ="DanStesco.png"
+                }
             };
 
             var linkButtons = new List<UserControlExternalLink>

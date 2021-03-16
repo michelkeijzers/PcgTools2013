@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -130,7 +130,7 @@ namespace PcgTools.Model.Common.File
             if (CurrentPcgMemory is KronosPcgMemory)
             {
                 CurrentPcgMemory.PcgChecksumType = PcgMemory.ChecksumType.Kronos1516;
-                CurrentPcgMemory.Model = Models.Find(Models.EOsVersion.EOsVersionKronos15_16);
+                CurrentPcgMemory.Model = Models.Find(Models.EOsVersion.Kronos15_16);
             }
 
             ReadIni2Chunk(chunkSize);
@@ -192,7 +192,7 @@ namespace PcgTools.Model.Common.File
 
                 foreach (var timbre in combi.Timbres.TimbresCollection)
                 {
-                    timbre.ByteOffset = combi.Timbres.ByteOffset + timbre.Index*TimbreByteSize;
+                    timbre.ByteOffset = combi.Timbres.ByteOffset + timbre.Index*timbre.TimbresSize;
                 }
 
                 // Skip to next.

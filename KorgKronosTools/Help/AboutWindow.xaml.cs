@@ -25,10 +25,12 @@ namespace PcgTools.Help
         /// 
         /// </summary>
         /// <param name="version"></param>
-        public AboutWindow(string version)
+        /// /// <param name="copyright"></param>
+        public AboutWindow(string version, string copyRight)
         {
             InitializeComponent();
             labelVersion.Content = version;
+            labelCopyright.Content = copyRight;
         }
 
 

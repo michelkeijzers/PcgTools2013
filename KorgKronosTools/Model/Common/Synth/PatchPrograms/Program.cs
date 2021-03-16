@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.ComponentModel;
@@ -15,6 +15,7 @@ using PcgTools.Model.Common.Synth.PatchCombis;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.Common.Synth.PatchDrumPatterns;
 using PcgTools.Model.Common.Synth.PatchSetLists;
+using PcgTools.Model.Common.Synth.PatchWaveSequences;
 using PcgTools.PcgToolsResources;
 using PcgTools.Properties;
 
@@ -257,6 +258,64 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <summary>
         /// 
         /// </summary>
+        public virtual IEnumerable<IWaveSequence> UsedWaveSequences => new List<IWaveSequence>();
+
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="changes"></param>
+        public virtual void ReplaceWaveSequence(Dictionary<IWaveSequence, IWaveSequence> changes)
+        {
+            for (var osc = 0; osc < 2; osc++)
+            {
+                for (var zone = 0; zone < NumberOfZones; zone++)
+                {
+                    var osc1 = osc;
+                    var zone1 = zone;
+                    foreach (var change in changes.Where(change => GetUsedWaveSequence(osc1, zone1) == change.Key))
+                    {
+                        SetWaveSequence(osc, zone, change.Value);
+                        break; // If one change made, skip other changes (otherwise it reverts back)
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected virtual int NumberOfZones => 0;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="osc"></param>
+        /// /// <param name="zone"></param>
+        /// <returns></returns>
+        public virtual IWaveSequence GetUsedWaveSequence(int osc, int zone)
+        {
+            return null;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="osc"></param>
+        /// /// <param name="zone"></param>
+        /// <param name="waveSequence"></param>
+        public virtual void SetWaveSequence(int osc, int zone, IWaveSequence waveSequence)
+        {
+            // Default without implementation
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         public virtual IParameter GetParam(ParameterNames.ProgramParameterName name)
@@ -469,10 +528,26 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
 
                     builder.Append(UsedDrumTrackProgram == null
                         ? string.Empty
-                        : ("Used Drum Track Program: " + UsedDrumTrackProgram.Id + "\n"));
-                    builder.Append(UsedDrumTrackPattern == null
-                        ? string.Empty
-                        : ("Used Drum Track Pattern: " + UsedDrumTrackPattern.Id + "\n"));
+                        : "Used Drum Track Program: " + UsedDrumTrackProgram.Id + "\n");
+
+                    List<string> patternIds = UsedDrumTrackPatterns.Select(pattern => pattern.Id).ToList();
+                    if (patternIds.Count > 0)
+                    {
+                        builder.Append("Used Drum Track Patterns: ");
+                        builder.Append(String.Join(", ", patternIds));
+                        builder.Append("\n");
+                    }
+                
+                    var usedWaveSequences = UsedWaveSequences.Where(WaveSequence => WaveSequence != null);
+                    if (usedWaveSequences.Any())
+                    {
+                        builder.AppendLine("Used Wave Sequences:");
+                    }
+
+                    foreach (var waveSequence in usedWaveSequences)
+                    {
+                        builder.AppendLine(waveSequence.Id + ": " + waveSequence.Name);
+                    }
                 }
 
                 return builder.ToString().RemoveLastNewLine();
@@ -487,19 +562,20 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         {
             get
             {
+                IProgram program = null;
+
                 var paramBank = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramBank);
                 if (paramBank != null)
                 {
                     var bank = (IProgramBank) PcgRoot.ProgramBanks.GetBankWithPcgId((int) (paramBank.Value));
-
                     var paramNumber = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramNumber);
                     if (paramNumber != null)
                     {
-                        return bank.Patches[paramNumber.Value];
+                        program = bank.Patches[paramNumber.Value];
                     }
                 }
 
-                return null;
+                return program;
             }
 
             set
@@ -522,10 +598,12 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <summary>
         /// 
         /// </summary>
-        public IDrumPattern UsedDrumTrackPattern
+        virtual public List<IDrumPattern> UsedDrumTrackPatterns
         {
             get 
             {
+                List<IDrumPattern> patterns = new List<IDrumPattern>();
+
                 var paramBank = GetParam(ParameterNames.ProgramParameterName.DrumTrackCommonPatternBank);
                 if (paramBank != null)
                 {
@@ -534,26 +612,11 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
                     var paramNumber = GetParam(ParameterNames.ProgramParameterName.DrumTrackCommonPatternNumber);
                     if (paramNumber != null)
                     {
-                        return bank.Patches[paramNumber.Value];
+                        patterns.Add(bank.Patches[paramNumber.Value]);
                     }
                 }
 
-                return null;
-            }
-
-            set
-            {
-                var paramBank = GetParam(ParameterNames.ProgramParameterName.DrumTrackCommonPatternBank);
-                if (paramBank != null)
-                {
-                    paramBank.Value = ((IDrumPatternBank) value.Parent).PcgId;
-
-                    var paramNumber = GetParam(ParameterNames.ProgramParameterName.DrumTrackCommonPatternNumber);
-                    if (paramNumber != null)
-                    {
-                        paramNumber.Value = value.Index;
-                    }
-                }
+                return patterns;
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using Common.Mvvm;
 using PcgTools.Model.Common.Synth.OldParameters;
@@ -82,5 +82,12 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <param name="name"></param>
         /// <returns></returns>
         IParameter GetParam(ParameterNames.TimbreParameterName name);
+
+
+        /// <summary>
+        /// Size
+        /// </summary>
+        int TimbresSize { get; set; }
+
     }
 }

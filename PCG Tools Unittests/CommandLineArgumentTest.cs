@@ -14,7 +14,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class CommandLineArgumentTest
     {
-        const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        const string PcgFileName = @"E:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
 
         static void Run(CommandLineArguments args)
         {
@@ -87,7 +87,7 @@ namespace PCG_Tools_Unittests
 
             // Length.
             var lines = File.ReadAllLines(outputFileName);
-            Assert.AreEqual(21784, lines.Length);
+            Assert.AreEqual(26140, lines.Length);
         }
 
 
@@ -102,7 +102,7 @@ namespace PCG_Tools_Unittests
 
             // Length.
             var lines = File.ReadAllLines(outputFileName);
-            Assert.AreEqual(1094, lines.Length);
+            Assert.AreEqual(1312, lines.Length);
         }
 
 

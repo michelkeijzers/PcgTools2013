@@ -91,71 +91,79 @@ namespace PcgTools.MasterFiles
 
             switch (model.OsVersion)
             {
-                case Models.EOsVersion.EOsVersionKronos3x:
+                case Models.EOsVersion.Kronos3x:
                     Settings.Default.MasterFile_KronosOS3x = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionKronos2x:
+                case Models.EOsVersion.Kronos2x:
                     Settings.Default.MasterFile_KronosOS2x = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionKronos15_16:
+                case Models.EOsVersion.Kronos15_16:
                     Settings.Default.MasterFile_KronosOS15_16 = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionKronos10_11:
+                case Models.EOsVersion.Kronos10_11:
                     Settings.Default.MasterFile_KronosOS10_11 = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionOasys:
+                case Models.EOsVersion.Oasys:
                     Settings.Default.MasterFile_Oasys = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionKrome:
+                case Models.EOsVersion.Krome:
                     Settings.Default.MasterFile_Krome = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionKross:
+                case Models.EOsVersion.KromeEx:
+                    Settings.Default.MasterFile_Krome = fileName;
+                    break;
+
+                case Models.EOsVersion.Kross:
                     Settings.Default.MasterFile_Kross = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionM3_20:
+                case Models.EOsVersion.Kross2:
+                    Settings.Default.MasterFile_Kross2 = fileName;
+                    break;
+
+                case Models.EOsVersion.M3_20:
                     Settings.Default.MasterFile_M3_OS20 = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionM3_1X:
+                case Models.EOsVersion.M3_1X:
                     Settings.Default.MasterFile_M3_OS1x = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionM50:
+                case Models.EOsVersion.M50:
                     Settings.Default.MasterFile_M50 = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionMicroStation:
+                case Models.EOsVersion.MicroStation:
                     Settings.Default.MasterFile_MicroStation = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionTritonExtreme:
+                case Models.EOsVersion.TritonExtreme:
                     Settings.Default.MasterFile_TritonExtreme = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionTritonTrClassicStudioRack:
+                case Models.EOsVersion.TritonTrClassicStudioRack:
                     Settings.Default.MasterFile_TritonTrClassicStudioRack = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionTritonLe:
+                case Models.EOsVersion.TritonLe:
                     Settings.Default.MasterFile_TritonLe = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionTritonKarma:
+                case Models.EOsVersion.TritonKarma:
                     Settings.Default.MasterFile_TritonKarma = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionTrinityV2:
+                case Models.EOsVersion.TrinityV2:
                     Settings.Default.MasterFile_TrinityV2 = fileName;
                     break;
 
-                case Models.EOsVersion.EOsVersionTrinityV3:
+                case Models.EOsVersion.TrinityV3:
                     Settings.Default.MasterFile_TrinityV3 = fileName;
                     break;
                     

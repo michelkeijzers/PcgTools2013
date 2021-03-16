@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -48,7 +48,7 @@ namespace PcgTools.Model.KronosSpecific.Pcg
             var wsqIndex = 0;
             var dbkIndex = 0;
 
-            var startIndex = (checksumType == ChecksumType.Kronos1516 ? 3 : 0); // For OS1.5/1.6, skip DIV1 and INI2/3.
+            var startIndex = checksumType == ChecksumType.Kronos1516 ? 3 : 0; // For OS1.5/1.6, skip DIV1 and INI2/3.
             for (var index = startIndex; index < Chunks.Collection.Count; index++)
             {
                 var chunk = Chunks.Collection[index];
@@ -201,7 +201,7 @@ namespace PcgTools.Model.KronosSpecific.Pcg
             // Copy PRG1 content.
             base.CopyPatch(patchToPaste, patch);
 
-            if (Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+            if (Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
                 if (patch is KronosProgram)
                 {
@@ -260,7 +260,7 @@ namespace PcgTools.Model.KronosSpecific.Pcg
             // Copy PRG1 content.
             base.CopyPatch(patchToPaste, patch);
 
-            if (Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16)
+            if (Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
                 if (patch is KronosProgram)
                 {

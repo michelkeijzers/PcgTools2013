@@ -1676,7 +1676,7 @@ Wyjątek wewnętrzny:
   <data name="ColorCharcoal" xml:space="preserve">
     <value>Charcoal</value>
   </data>
-  <data name="ColorDanim" xml:space="preserve">
+  <data name="ColorDenim" xml:space="preserve">
     <value>Denim</value>
   </data>
   <data name="ColorDefault" xml:space="preserve">
@@ -1733,5 +1733,12 @@ Wyjątek wewnętrzny:
   </data>
   <data name="WaveSequence" xml:space="preserve">
     <value>Wave sekvence</value>
+  </data>
+  <data name="EModelTypeKross2" xml:space="preserve">
+    <value>Kross 2</value>
+  </data>
+  <data name="EModelTypeNautilus" xml:space="preserve">
+    <value>Nautilus</value>
+    <comment>Enumeration of Model Type</comment>
   </data>
 </root>

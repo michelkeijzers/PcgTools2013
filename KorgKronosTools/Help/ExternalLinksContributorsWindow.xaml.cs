@@ -208,6 +208,11 @@ namespace PcgTools.Help
                     Name="Michael Maschek", Description="Bug Reporter",
                     Url="https://www.facebook.com/celticvoyagerband", BitmapPath= "celticvoyager.png"
                 },
+                new ExternalItem
+                {
+                    Name="Dan Stesco", Description="Information Supplier",
+                    Url="http://www.danstesco.ro", BitmapPath="DanStesco.png"
+                }
             };
 
             var linkButtons = new List<UserControlExternalLink>

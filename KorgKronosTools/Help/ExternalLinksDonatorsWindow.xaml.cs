@@ -50,6 +50,13 @@ namespace PcgTools.Help
                 },
                 new ExternalItem
                 {
+                    Name="Synthesaurus", 
+                    Description="Donator",
+                    Url="https://www.patreon.com/synthesaurus",
+                    BitmapPath = "Synthesaurus.png",
+                },
+                new ExternalItem
+                {
                     Name= "Philip Joseph", Description = "Donator",
                 },
                 new ExternalItem()

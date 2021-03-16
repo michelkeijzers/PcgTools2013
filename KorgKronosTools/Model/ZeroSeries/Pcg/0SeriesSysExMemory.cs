@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using PcgTools.Model.Common;
@@ -32,7 +32,7 @@ namespace PcgTools.Model.ZeroSeries.Pcg
             DrumKitBanks = null;
             DrumPatternBanks = null;
             Global = new ZeroSeriesGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionZeroSeries);
+            Model = Models.Find(Models.EOsVersion.ZeroSeries);
         }
         
 

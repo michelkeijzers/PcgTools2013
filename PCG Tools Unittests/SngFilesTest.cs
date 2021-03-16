@@ -9,7 +9,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class SngFilesTest
     {
-        private const string PcgDirectory = @"C:\PCG Tools Test Files\TestFiles\Workstations\";
+        private const string PcgDirectory = @"E:\PCG Tools Test Files\TestFiles\Workstations\";
 
 
         private static void Run(string fileName)

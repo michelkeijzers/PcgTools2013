@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -435,7 +435,6 @@ namespace PcgTools.ClipBoard
                 program.Clear();
             }
 
-            /*TODO DRUM KITS
             // Copy used drum kits.
             if (!CutPasteSelected)
             {
@@ -444,7 +443,6 @@ namespace PcgTools.ClipBoard
                     CopyDrumKitOfProgramToClipBoard(drumKit, clipBoardProgram);
                 }
             }
-            */
 
             /*TODO DRUM TRACK PROGRAM
             // Copy used drum track program.
@@ -601,7 +599,7 @@ namespace PcgTools.ClipBoard
         /// <param name="clearAfterCopy"></param>
         public IClipBoardDrumKit CopyDrumKitToClipBoard(IDrumKit drumKit, bool clearAfterCopy)
         {
-            if (!((IBank)(drumKit.Parent)).IsLoaded)
+            if ((drumKit == null) || !((IBank)drumKit.Parent).IsLoaded)
             {
                 return null;
             }
@@ -639,7 +637,7 @@ namespace PcgTools.ClipBoard
         /// <param name="clearAfterCopy"></param>
         public IClipBoardDrumPattern CopyDrumPatternToClipBoard(IDrumPattern drumPattern, bool clearAfterCopy)
         {
-            if (!((IBank)(drumPattern.Parent)).IsLoaded)
+            if (!((IBank)drumPattern.Parent).IsLoaded)
             {
                 return null;
             }
@@ -666,7 +664,7 @@ namespace PcgTools.ClipBoard
             IClipBoardDrumPattern clipBoardDrumPatternToAdd = FindDrumPattern(drumPattern) ??
                                                       CopyDrumPatternToClipBoard(drumPattern, false);
 
-            // TODO clipBoardProgram.ReferencedDrumPatterns.CopiedPatches.Add(clipBoardDrumPatternToAdd);
+            //clipBoardProgram.ReferencedDrumPatterns.CopiedPatches.Add(clipBoardDrumPatternToAdd);
         }
 
         

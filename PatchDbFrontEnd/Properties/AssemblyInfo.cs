@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PatchDbFrontEnd")]
-[assembly: AssemblyCopyright("Copyright ©2011-2016")]
+[assembly: AssemblyCopyright("Copyright ©2011-2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

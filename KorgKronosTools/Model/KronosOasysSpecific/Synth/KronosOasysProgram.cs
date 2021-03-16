@@ -1,10 +1,13 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System.Collections.Generic;
 using System.Linq;
+using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.OldParameters;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
 using PcgTools.Model.Common.Synth.PatchPrograms;
+using PcgTools.Model.Common.Synth.PatchWaveSequences;
+using System;
 
 namespace PcgTools.Model.KronosOasysSpecific.Synth
 {
@@ -67,7 +70,7 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         protected override bool UseIndexForDifferencing(int index)
         {
             // 2688 = Volume, 2689/2689 = Program reference.
-            return ((index < 2688) || ((index > 2690) && (index < 3706)));
+            return (index < 2688) || ((index > 2690) && (index < 3706));
         }
 
 
@@ -107,10 +110,11 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <returns></returns>
         protected IDrumKit GetUsedDrumKit(int osc, int zone)
         {
-            IntParameter parameter = new IntParameter();
-            parameter.SetMultiBytes(Root, Root.Content, GetDrumKitByteOffset(osc, zone), 2,
+            var parameter = new IntParameter();
+            parameter.SetMultiBytes(Root, Root.Content, GetZoneMsByteOffset(osc, zone) + 2, 2, // + 2: Number (bank unused, always 0?)
                 false, false, null);
             int index = parameter.Value;
+
             IDrumKit drumKit = null;
             if (PcgRoot.DrumKitBanks != null)
             {
@@ -130,8 +134,8 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <returns></returns>
         private void SetUsedDrumKit(int osc, int zone, IDrumKit drumKit)
         {
-            IntParameter parameter = new IntParameter();
-            parameter.SetMultiBytes(Root, Root.Content, GetDrumKitByteOffset(osc, zone), 2,
+            var parameter = new IntParameter();
+            parameter.SetMultiBytes(Root, Root.Content, GetZoneMsByteOffset(osc, zone) + 2, 2, // + 2: Number (bank unused, alwyas 0?)
                 false, false, null);
 
             var index = PcgRoot.DrumKitBanks.FindIndexOf(drumKit);
@@ -177,9 +181,20 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
+        protected enum EMode
+        {
+            Off,
+            Sample,
+            WaveSequence
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="osc"></param>
         /// <param name="zone"></param>
         /// <returns></returns>
-        protected abstract int GetDrumKitByteOffset(int osc, int zone);
+        protected abstract int GetZoneMsByteOffset(int osc, int zone);
     }
 }

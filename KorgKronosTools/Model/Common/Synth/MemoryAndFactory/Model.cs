@@ -51,10 +51,13 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             var map = new Dictionary<Models.EModelType, string>
             {
+                {Models.EModelType.Nautilus, Strings.EModelTypeNautilus},
                 {Models.EModelType.Kronos, Strings.EModelTypeKronos},
                 {Models.EModelType.Oasys, Strings.EModelTypeOasys},
                 {Models.EModelType.Krome, Strings.EModelTypeKrome},
+                {Models.EModelType.KromeEx, Strings.EModelTypeKromeEx},
                 {Models.EModelType.Kross, Strings.EModelTypeKross},
+                {Models.EModelType.Kross2, Strings.EModelTypeKross2},
                 {Models.EModelType.M1, Strings.EModelTypeM1},
                 {Models.EModelType.M3, Strings.EModelTypeM3},
                 {Models.EModelType.M3R, Strings.EModelTypeM3R},

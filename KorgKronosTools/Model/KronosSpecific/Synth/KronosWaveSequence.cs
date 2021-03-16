@@ -33,14 +33,14 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// Used for OS 1.5/1.6.
         /// </summary>
-        public int Wsq2BankOffset => (((WaveSequenceBanks)(Parent.Parent)).Wsq2PcgOffset +
-                                      128 * Convert.ToInt16(((WaveSequenceBank)Parent).Id) + Index);
+        public int Wsq2BankOffset => ((WaveSequenceBanks)Parent.Parent).Wsq2PcgOffset +
+                                     128 * ((WaveSequenceBank)Parent).Index + Index;
 
 
         /// <summary>
         /// Used for OS 1.5/1.6.
         /// </summary>
-        public int Wsq2PatchOffset => 128 * 128 + ((WaveSequenceBanks)(Parent.Parent)).Wsq2PcgOffset +
-                                      128 * Convert.ToInt16(((WaveSequenceBank)Parent).Id) + Index;
+        public int Wsq2PatchOffset => 128 * 128 + ((WaveSequenceBanks)Parent.Parent).Wsq2PcgOffset +
+                                      128 * ((WaveSequenceBank)Parent).Index + Index;
     }
 }

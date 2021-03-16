@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using PcgTools.Model.Common;
 
@@ -35,7 +35,7 @@ namespace PcgTools.ClipBoard
             OriginalLocation = drumKit;
 
             var memory = drumKit.Root as PcgMemory;
-            if ((memory != null) && (memory.PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16))
+            if ((memory != null) && (memory.PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16))
             {
                 KronosOs1516Bank = Util.GetInt(memory.Content, ((KronosDrumKit) drumKit).Drk2BankOffset, 1);
                 KronosOs1516Patch = Util.GetInt(memory.Content, ((KronosDrumKit) drumKit).Drk2PatchOffset, 1);

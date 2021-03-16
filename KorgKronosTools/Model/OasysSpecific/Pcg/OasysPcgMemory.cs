@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -26,7 +26,7 @@ namespace PcgTools.Model.OasysSpecific.Pcg
             DrumKitBanks = new OasysDrumKitBanks(this);
             DrumPatternBanks = null;
             Global = new OasysGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionOasys);
+            Model = Models.Find(Models.EOsVersion.Oasys);
         }
     }
 }

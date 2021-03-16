@@ -1,4 +1,4 @@
-﻿// (c) 2011-2016 Michel Keijzers
+﻿// (c) 2011-2019 Michel Keijzers
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,7 +10,7 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void Test_MS2000__comp_oSynth_prg()
         {
-            TestAll(@"Synths Racks and Modules\MS2000\ comp_oSynth.prg");
+            TestAll(@"Synths Racks and Modules\MS2000\comp_oSynth.prg");
         }
 
         [TestMethod]
@@ -3914,9 +3914,9 @@ namespace PCG_Tools_Unittests
         }
 
         [TestMethod]
-        public void Test_MS2000_reversE___jg_prg()
+        public void Test_MS2000_reversE_jg_prg()
         {
-            TestAll(@"Synths Racks and Modules\MS2000\reversE _jg.prg");
+            TestAll(@"Synths Racks and Modules\MS2000\reversE_jg.prg");
         }
 
         [TestMethod]

@@ -12,7 +12,7 @@ namespace PcgTools.Tools
 {
     /// <summary>
     /// 
-    /// </summary>
+   /// </summary>
     public class ReferenceChanger
     {
         /// <summary>
@@ -20,8 +20,11 @@ namespace PcgTools.Tools
         /// </summary>
         private readonly IPcgMemory _memory;
 
-
         private RuleParser _ruleParser;
+
+        // Processed set list slots/timbres
+        private List<ISetListSlot> _processedSetListSlots;
+        private List<ITimbre> _processedTimbres;
 
         /// <summary>
         /// 
@@ -30,6 +33,8 @@ namespace PcgTools.Tools
         public ReferenceChanger(IPcgMemory memory)
         {
             _memory = memory;
+            _processedSetListSlots = new List<ISetListSlot>();
+            _processedTimbres = new List<ITimbre>();
         }
 
 
@@ -87,18 +92,17 @@ namespace PcgTools.Tools
         /// <param name="rule"></param>
         private void ChangeReferencesInSetListSlots(KeyValuePair<IPatch, IPatch> rule)
         {
-            foreach (var setList in _memory.SetLists.BankCollection)
+            foreach (var setList in _memory.SetLists.BankCollection.Where(setList => setList.IsFilled))
             {
-                if (setList.IsFilled)
+                for (var index = 0; index < setList.Patches.Count; index++)
                 {
-                    for (var index = 0; index < setList.Patches.Count; index++)
+                    var setListSlot = (ISetListSlot) setList[index];
+                    if ((setListSlot.SelectedPatchType == SetListSlot.PatchType.Program) &&
+                        (setListSlot.UsedPatch == rule.Key) &&
+                        !_processedSetListSlots.Contains(setListSlot))
                     {
-                        var setListSlot = (ISetListSlot) setList[index];
-                        if ((setListSlot.SelectedPatchType == SetListSlot.PatchType.Program) &&
-                            (setListSlot.UsedPatch == rule.Key))
-                        {
-                            setListSlot.UsedPatch = rule.Value;
-                        }
+                        setListSlot.UsedPatch = rule.Value;
+                        _processedSetListSlots.Add(setListSlot);
                     }
                 }
             }
@@ -124,14 +128,16 @@ namespace PcgTools.Tools
         /// </summary>
         /// <param name="rule"></param>
         /// <param name="combi"></param>
-        private static void ChangeReferencesInTimbres(KeyValuePair<IPatch, IPatch> rule, ICombi combi)
+        private void ChangeReferencesInTimbres(KeyValuePair<IPatch, IPatch> rule, ICombi combi)
         {
             foreach (var timbre in combi.Timbres.TimbresCollection.Where(timbre => timbre.UsedProgram == rule.Key))
             {
-                if ((timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value == "Off") ||
-                     (timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value == "Int"))
+                if (((timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value == "Off") ||
+                     (timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value == "Int")) &&
+                    !_processedTimbres.Contains(timbre))
                 {
-                    timbre.UsedProgram = (IProgram) rule.Value;
+                    timbre.UsedProgram = (IProgram)rule.Value;
+                    _processedTimbres.Add(timbre);
                 }
             }
         }

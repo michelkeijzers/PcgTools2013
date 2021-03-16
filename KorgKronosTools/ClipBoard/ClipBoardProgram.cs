@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
@@ -28,16 +28,16 @@ namespace PcgTools.ClipBoard
         {
             OriginalLocation = program;
             ReferencedDrumKits = new ClipBoardPatches();
+            ReferencedWaveSequences = new ClipBoardPatches();
 
             KronosOs1516Content = new byte[KronosProgramBanks.ParametersInPbk2Chunk];
-            var memory = program.Root as KronosPcgMemory;
-            if ((memory != null) && (memory.PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos15_16))
-                // PRG2 content
+            if ((program.Root is KronosPcgMemory memory) && (memory.PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16))
+            // PRG2 content
             {
                 for (var parameter = 0; parameter < KronosProgramBanks.ParametersInPbk2Chunk; parameter++)
                 {
-                    var patchParameterOffset =
-                        ((KronosProgramBank) (program.Parent)).GetParameterOffsetInPbk2(program.Index, parameter);
+                    int patchParameterOffset =
+                        ((KronosProgramBank)(program.Parent)).GetParameterOffsetInPbk2(program.Index, parameter);
                     KronosOs1516Content[parameter] = program.Root.Content[patchParameterOffset];
                 }
             }
@@ -45,8 +45,14 @@ namespace PcgTools.ClipBoard
         
 
         /// <summary>
-        /// References to drum kits.
+        /// References to used drum kits.
         /// </summary>
         public IClipBoardPatches ReferencedDrumKits { get; set; }
+
+
+        /// <summary>
+        /// References to used wave sequences.
+        /// </summary>
+        public IClipBoardPatches ReferencedWaveSequences { get; set; }
     }
 }

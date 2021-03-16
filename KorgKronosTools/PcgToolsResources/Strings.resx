@@ -677,7 +677,7 @@ Inner exception:
     <comment>Check box</comment>
   </data>
   <data name="NoContentWarning" xml:space="preserve">
-    <value>There are no programs, combis and set list slots in PCG file:</value>
+    <value>There are no programs, combis and set list slots, drum kits, drum patterns and wave sequences in PCG file:</value>
   </data>
   <data name="NumberOfSelectedPatches" xml:space="preserve">
     <value># Selected Patches:</value>
@@ -1257,7 +1257,7 @@ On behalf of every Korg Kronos receiver of such a code, I would like to thank th
   </data>
   <data name="FilterDrumKitNames" xml:space="preserve">
     <value>_Filter Drum Kit Names</value>
-    <comment>Used in checkbox in set list generator</comment>
+    <comment>Used in checkbox in list generator</comment>
   </data>
   <data name="FilterWaveSequenceNames" xml:space="preserve">
     <value>_Filter Wave Sequence Names</value>
@@ -1502,7 +1502,7 @@ Inner exception:
     <comment>Settings; open folder dialog</comment>
   </data>
   <data name="SetListGenerator_settw" xml:space="preserve">
-    <value>Set List Generator</value>
+    <value>List Generator</value>
     <comment>Settings; Files; group box name</comment>
   </data>
   <data name="Bank_2str" xml:space="preserve">
@@ -1552,7 +1552,7 @@ Inner exception:
   </data>
   <data name="GenreThanPatchName_control" xml:space="preserve">
     <value>_Genre, then Patch Name</value>
-    <comment>Radio button set list generator.</comment>
+    <comment>Radio button list generator.</comment>
   </data>
   <data name="Genre_control" xml:space="preserve">
     <value>_Genre</value>
@@ -1819,8 +1819,8 @@ Inner exception:
     <value>Charcoal</value>
     <comment>In Edit Set List Slot</comment>
   </data>
-  <data name="ColorDanim" xml:space="preserve">
-    <value>Danim</value>
+  <data name="ColorDenim" xml:space="preserve">
+    <value>Denim</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorDefault" xml:space="preserve">
@@ -2116,8 +2116,8 @@ Inner exception:
     <value>_Parameter</value>
     <comment>Menu item</comment>
   </data>
-  <data name="___EditParameterAbsoluteValue" xml:space="preserve">
-    <value>_Absolute Value</value>
+  <data name="___EditParameterFixedValue" xml:space="preserve">
+    <value>_Fixed Value</value>
     <comment>Radio button name</comment>
   </data>
   <data name="___EditParameterByteOffset" xml:space="preserve">
@@ -2288,7 +2288,7 @@ Inner exception:
     <comment>Menu item</comment>
   </data>
   <data name="OverwriteFilledDrumKits" xml:space="preserve">
-    <value>_Overwrite Filled Drumkits</value>
+    <value>_Overwrite Filled Drum Kits</value>
     <comment>Check box</comment>
   </data>
   <data name="OverwriteFilledDrumKitsToolTip" xml:space="preserve">
@@ -2340,7 +2340,7 @@ Inner exception:
   </data>
   <data name="FilterDrumPatternNames" xml:space="preserve">
     <value>_Filter Drum Pattern Names</value>
-    <comment>Used in checkbox in set list generator</comment>
+    <comment>Used in checkbox in list generator</comment>
   </data>
   <data name="FilterDrumPatterns" xml:space="preserve">
     <value>Filter Drum Patterns</value>
@@ -2406,5 +2406,71 @@ Inner exception:
   <data name="ColumnSetListSlotReferenceName" xml:space="preserve">
     <value>Reference Name</value>
     <comment>Patch name of referenced set list slot</comment>
+  </data>
+  <data name="KeyboardSetupErrorNotEnoughSetListSlotsInTargetSetList" xml:space="preserve">
+    <value>There are not enough set list slots in the target set list to convert all source set list slots.</value>
+    <comment>Error</comment>
+  </data>
+  <data name="KeyboardSetupErrorSetListsNotPresent" xml:space="preserve">
+    <value>The PCGfile does not contain any set lists.</value>
+    <comment>Error</comment>
+  </data>
+  <data name="KeyboardSetupErrorTargetCombiBankNotPresent" xml:space="preserve">
+    <value>The target combi bank is not present.</value>
+    <comment>Error</comment>
+  </data>
+  <data name="KeyboardSetupErrorTargetSetListNotEmpty" xml:space="preserve">
+    <value>The target set list is not empty.</value>
+    <comment>Error</comment>
+  </data>
+  <data name="ExternalLinksVideoCreators" xml:space="preserve">
+    <value>External Links Video Creators</value>
+    <comment>Window title</comment>
+  </data>
+  <data name="ExternalLinksVideoCreatorsMenuItem" xml:space="preserve">
+    <value>_External Links Video Creators...</value>
+    <comment>Menu item</comment>
+  </data>
+  <data name="EModelTypeKross2" xml:space="preserve">
+    <value>Kross 2</value>
+  </data>
+  <data name="IgnoreMutedOffFirstProgramTimbre" xml:space="preserve">
+    <value>_Ignore Muted/Off First Program Timbre</value>
+    <comment>Check box (ignore only I-A000 muted/off timbre)</comment>
+  </data>
+  <data name="ChangeVolume" xml:space="preserve">
+    <value>_Change Volume</value>
+    <comment>Menu item</comment>
+  </data>
+  <data name="EModelTypeKromeEx" xml:space="preserve">
+    <value>Krome EX</value>
+  </data>
+  <data name="Fixed_chvolwin" xml:space="preserve">
+    <value>_Fixed</value>
+    <comment>Change volume window</comment>
+  </data>
+  <data name="ChangeVolume_chvolwin" xml:space="preserve">
+    <value>Change Volume</value>
+    <comment>Change volume window</comment>
+  </data>
+  <data name="Mapped_chvolwin" xml:space="preserve">
+    <value>_Mapped</value>
+    <comment>Change volume window</comment>
+  </data>
+  <data name="Percentage_chvolwin" xml:space="preserve">
+    <value>_Percentage</value>
+    <comment>Change volume window</comment>
+  </data>
+  <data name="Relative_chvolwin" xml:space="preserve">
+    <value>_Relative</value>
+    <comment>Change volume window</comment>
+  </data>
+  <data name="SmartMapped_chvolwin" xml:space="preserve">
+    <value>_Smart Mapped</value>
+    <comment>Change volume window</comment>
+  </data>
+  <data name="EModelTypeNautilus" xml:space="preserve">
+    <value>Nautilus</value>
+    <comment>Enumeration of Model Type</comment>
   </data>
 </root>

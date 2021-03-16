@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.MSpecific.Pcg;
@@ -30,7 +30,7 @@ namespace PcgTools.Model.M3Specific.Pcg
             // Glb1Chunk Glb1Chunk;
 
             currentPcgMemory.Model = Models.Find(content[9] == 1 
-                ? Models.EOsVersion.EOsVersionM3_20 : Models.EOsVersion.EOsVersionM3_1X);
+                ? Models.EOsVersion.M3_20 : Models.EOsVersion.M3_1X);
             if (content[9] == 1)
             {
                 currentPcgMemory.PcgChecksumType = PcgMemory.ChecksumType.M3;

@@ -1455,4 +1455,11 @@ U ime svih Korg Kronos dobitnika ovih kodova, želim da se zahvalim sledećim os
   <data name="ExternalLinksOasysVoucherCodeSponsorsMenuItem" xml:space="preserve">
     <value>_Linkovi Oasys kodovi - sponzori...</value>
   </data>
+  <data name="EModelTypeKross2" xml:space="preserve">
+    <value>Kross 2</value>
+  </data>
+  <data name="EModelTypeNautilus" xml:space="preserve">
+    <value>Nautilus</value>
+    <comment>Enumeration of Model Type</comment>
+  </data>
 </root>

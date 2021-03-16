@@ -17,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosCompletePcgPatchListTest
     {
-        const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        const string PcgFileName = @"E:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
 
         PcgMemory _pcgMemory;
 
@@ -251,6 +251,7 @@ namespace PCG_Tools_Unittests
             // Set non defaults and run.
             _generator.IgnoreInitCombis = false;
             _generator.IgnoreMutedOffTimbres = false;
+            _generator.IgnoreMutedOffFirstProgramTimbre = false;
             Run();
 
             // Combi U-G exist.
@@ -332,7 +333,7 @@ namespace PCG_Tools_Unittests
             // No ': '.
             AssertAll("<");
             AssertAll(">");
-            Assert.AreEqual(21784, _lines.Length);
+            Assert.AreEqual(26140, _lines.Length);
         }
     }
 }

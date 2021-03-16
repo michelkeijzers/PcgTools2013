@@ -1,4 +1,4 @@
-﻿// (c) 2011-2016 Michel Keijzers
+﻿// (c) 2011-2019 Michel Keijzers
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -145,6 +145,12 @@ namespace PCG_Tools_Unittests
         public void Test_Krome_Universe()
         {
             TestAll(@"Workstations\Krome\Universe.PCG");
+        }
+
+        [TestMethod]
+        public void Test_Krome_INSPIANO_PCG()
+        {
+            TestAll(@"Workstations\Krome\INSPIANO.PCG");
         }
     }
 }

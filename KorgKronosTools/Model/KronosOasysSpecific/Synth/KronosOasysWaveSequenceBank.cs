@@ -26,17 +26,15 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
                     
                     case BankType.EType.User:
                         return 32;
-                }
 
-                throw new NotImplementedException();
+                    case BankType.EType.Gm: // fall through
+                    case BankType.EType.UserExtended: // fall through
+                    case BankType.EType.Virtual: // fall through
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
         }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        int NrOfPatchensUserBank => 32;
 
 
         /// <summary>
@@ -46,8 +44,7 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <param name="type"></param>
         /// <param name="id"></param>
         /// <param name="pcgId"></param>
-        protected KronosOasysWaveSequenceBank(IWaveSequenceBanks waveSeqBanks, BankType.EType type, string id, int pcgId)
-            : base(waveSeqBanks, type, id, pcgId)
+        protected KronosOasysWaveSequenceBank(IWaveSequenceBanks waveSeqBanks, BankType.EType type, string id, int pcgId) : base(waveSeqBanks, type, id, pcgId)
         {
         }
     }

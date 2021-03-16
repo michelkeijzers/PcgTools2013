@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -71,7 +71,7 @@ namespace PcgTools.Edit
             WindowEditLoadedSetTextSize();
 
             // Set transpose.
-            if (_patch.PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos3x)
+            if (_patch.PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos3x)
             {
                 intupdownTranspose.Value = _patch.Transpose;
             }
@@ -124,7 +124,7 @@ namespace PcgTools.Edit
         /// </summary>
         private void WindowEditLoadedSetTextSize()
         {
-            if (_patch.PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos3x)
+            if (_patch.PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos3x)
             {
                 switch (_patch.SelectedTextSize)
                 {
@@ -237,7 +237,7 @@ namespace PcgTools.Edit
                 }
 
                 // Set transpose/ text size.
-                if (_patch.PcgRoot.Model.OsVersion == Models.EOsVersion.EOsVersionKronos3x)
+                if (_patch.PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos3x)
                 {
                     _patch.Transpose = intupdownTranspose.Value.HasValue ? (int) intupdownTranspose.Value : 0;
 

@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace PcgTools.Model.KrossSpecific.Pcg
             DrumKitBanks = new KrossDrumKitBanks(this);
             DrumPatternBanks = null;
             Global = new KrossGlobal(this);
-            Model = Models.Find(Models.EOsVersion.EOsVersionKross);
+            Model = Models.Find(Models.EOsVersion.Kross);
         }
 
 

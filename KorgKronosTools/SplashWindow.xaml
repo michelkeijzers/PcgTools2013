@@ -22,7 +22,7 @@
                    Margin="4"  VerticalAlignment="Top" Foreground="White"/>
             <Label Content="&lt;x.y.z&gt;" Foreground="White" HorizontalAlignment="Left" Margin="4"
                    VerticalAlignment="Top" Name="labelVersion" />
-            <Label Content="(c) 2011-2016" HorizontalAlignment="Left" Margin="4" VerticalAlignment="Top" Foreground="White" />
+            <Label Content="(c) ????-????" Name="labelCopyright" HorizontalAlignment="Left" Margin="4" VerticalAlignment="Top" Foreground="White" />
         </StackPanel>
 
         <Label Content="{Binding DevelopedBy, Source={StaticResource LocStrings}}" 

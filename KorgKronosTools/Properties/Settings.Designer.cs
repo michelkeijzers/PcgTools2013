@@ -12,7 +12,7 @@ namespace PcgTools.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -512,6 +512,18 @@ namespace PcgTools.Properties {
             }
             set {
                 this["MasterFile_Kross"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MasterFile_Kross2 {
+            get {
+                return ((string)(this["MasterFile_Kross2"]));
+            }
+            set {
+                this["MasterFile_Kross2"] = value;
             }
         }
         
@@ -1040,6 +1052,30 @@ namespace PcgTools.Properties {
             }
             set {
                 this["CopyPaste_PasteDuplicateDrumPatterns"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MasterFile_Nautilus {
+            get {
+                return ((string)(this["MasterFile_Nautilus"]));
+            }
+            set {
+                this["MasterFile_Nautilus"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MasterFile_KromeEx {
+            get {
+                return ((string)(this["MasterFile_KromeEx"]));
+            }
+            set {
+                this["MasterFile_KromeEx"] = value;
             }
         }
     }

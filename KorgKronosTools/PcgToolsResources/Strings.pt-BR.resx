@@ -1329,67 +1329,67 @@ Em nome de todos os beneficiados, eu gostaria de agradecer as seguintes pessoas:
     <value>{0} contém caracteres ilegais</value>
   </data>
   <data name="ColorAzure" xml:space="preserve">
-    <value>Azul</value>
+    <value>Azure</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorBrick" xml:space="preserve">
-    <value>Tijolo</value>
+    <value>Brick</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorBurgundy" xml:space="preserve">
-    <value>Vermelho Borgonha</value>
+    <value>Burgundy</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorCacao" xml:space="preserve">
-    <value>Cacau</value>
+    <value>Cacao</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorCharcoal" xml:space="preserve">
-    <value>Carvão</value>
+    <value>Charcoal</value>
     <comment>In Edit Set List Slot</comment>
   </data>
-  <data name="ColorDanim" xml:space="preserve">
+  <data name="ColorDenim" xml:space="preserve">
     <value>Denim</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorDefault" xml:space="preserve">
-    <value>Cor padrão</value>
+    <value>Default</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorGold" xml:space="preserve">
-    <value>Dourado</value>
+    <value>Gold</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorIndigo" xml:space="preserve">
-    <value>Azul indigo</value>
+    <value>Indigo</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorIvy" xml:space="preserve">
-    <value>Verde hera</value>
+    <value>Ivy</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorLavender" xml:space="preserve">
-    <value>Lavanda</value>
+    <value>Lavander</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorNavy" xml:space="preserve">
-    <value>Azul marinho</value>
+    <value>Navy</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorOlive" xml:space="preserve">
-    <value>Verde Oliva</value>
+    <value>Olive</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorRose" xml:space="preserve">
-    <value>Rosa</value>
+    <value>Rose</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorSilver" xml:space="preserve">
-    <value>Prata</value>
+    <value>Silver</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColorSlate" xml:space="preserve">
-    <value>Ardósia</value>
+    <value>Slate</value>
     <comment>In Edit Set List Slot</comment>
   </data>
   <data name="ColumnCrcValueExcludingName" xml:space="preserve">
@@ -1900,5 +1900,30 @@ Excepção interna:
   </data>
   <data name="EditParameterChangeEmpty" xml:space="preserve">
     <value>Preencher acima com uma regra de alteração de parâmetros válida.</value>
+  </data>
+  <data name="EModelTypeKross2" xml:space="preserve">
+    <value>Kross 2</value>
+  </data>
+  <data name="ChangeVolume_chvolwin" xml:space="preserve">
+    <value>Alterar o Volume</value>
+  </data>
+  <data name="Fixed_chvolwin" xml:space="preserve">
+    <value>_Fixo</value>
+  </data>
+  <data name="Mapped_chvolwin" xml:space="preserve">
+    <value>_Mapeado</value>
+  </data>
+  <data name="Percentage_chvolwin" xml:space="preserve">
+    <value>_Porcentagem</value>
+  </data>
+  <data name="Relative_chvolwin" xml:space="preserve">
+    <value>_Relativo</value>
+  </data>
+  <data name="SmartMapped_chvolwin" xml:space="preserve">
+    <value>Mapeamento _Inteligente</value>
+  </data>
+  <data name="EModelTypeNautilus" xml:space="preserve">
+    <value>Nautilus</value>
+    <comment>Enumeration of Model Type</comment>
   </data>
 </root>

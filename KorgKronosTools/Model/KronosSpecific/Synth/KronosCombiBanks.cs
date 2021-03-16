@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -73,7 +73,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
 
             for (var bankGroupIndex = 0; bankGroupIndex < 8; bankGroupIndex++)
             {
-                foreach (char bankName in bankNames)
+                foreach (var bankName in bankNames)
                 {
                     Add(
                         new KronosCombiBank(

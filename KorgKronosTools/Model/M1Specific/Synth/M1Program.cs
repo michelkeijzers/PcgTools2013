@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System;
 using System.Collections.Generic;
@@ -114,7 +114,7 @@ namespace PcgTools.Model.M1Specific.Synth
                     break;
 
                 default:
-                    throw new ApplicationException("Illegal case");
+                    return base.GetParam(name);
             }
 
             return parameter;

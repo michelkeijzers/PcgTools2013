@@ -140,5 +140,23 @@ namespace PcgTools.Model.Common.Synth.Meta
         {
             return BankCollection.FirstOrDefault(bank => bank.PcgId == pcgId);
         }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual int IndexOfBank(IBank bank)
+        {
+            for (var index = 0; index < BankCollection.Count; index++)
+            {
+                if (BankCollection[index] == bank)
+                {
+                    return index;
+                }
+            }
+
+            throw new ApplicationException("Bank not found");
+        }
     }
 }

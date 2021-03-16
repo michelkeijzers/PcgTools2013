@@ -1,4 +1,4 @@
-﻿// (c) Copyright 2011-2016 MiKeSoft, Michel Keijzers, All rights reserved
+﻿// (c) Copyright 2011-2019 MiKeSoft, Michel Keijzers, All rights reserved
 
 using System.ComponentModel;
 using PcgTools.Model.Common.Synth.PatchInterfaces;
@@ -24,6 +24,14 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <param name="index"></param>
         /// <returns></returns>
         IBank this[int index] { get; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bank"></param>
+        /// <returns></returns>
+        int IndexOfBank(IBank bank);
 
 
         /// <summary>

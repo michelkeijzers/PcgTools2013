@@ -17,7 +17,7 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosCompletePcgDifferencesListTest
     {
-        const string PcgFileName = @"C:\PCG Tools Test Files\TestFiles\Workstations\Kronos\PRELOAD.pcg";
+        const string PcgFileName = @"E:\PCG Tools Test Files\TestFiles\Workstations\Kronos\PRELOAD.pcg";
 
 
         PcgMemory _pcgMemory;
