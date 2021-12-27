@@ -29,7 +29,7 @@ namespace PcgTools.Model.TrinitySpecific.Synth
         public TrinityTimbres(ICombi combi)
             : base(combi, TimbresPerCombiConstant, TimbresOffsetConstant)
         {
-            for (var n = 0; n < TimbresPerCombi; n++)
+            for (int n = 0; n < TimbresPerCombi; n++)
             {
                 TimbresCollection.Add(new TrinityTimbre(this, n));
             }

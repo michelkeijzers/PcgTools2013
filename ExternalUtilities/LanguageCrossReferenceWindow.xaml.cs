@@ -37,7 +37,7 @@ namespace ExternalUtilities
             //CreateReferenceLanguageList();
             //CheckOtherLanguages();
 
-            var text = ShowAllTexts();
+            StringBuilder text = ShowAllTexts();
             TranslationsTextBox.Text = text.ToString();
             WarningsTextBox.Text = _warnings.ToString();
 
@@ -51,12 +51,12 @@ namespace ExternalUtilities
         /// <returns></returns>
         private StringBuilder ShowAllTexts()
         {
-            var text = new StringBuilder();
-            foreach (var key in _referenceTranslations.Keys)
+            StringBuilder text = new StringBuilder();
+            foreach (string key in _referenceTranslations.Keys)
             {
                 text.Append(key + ": ");
-                var languages = new StringBuilder();
-                foreach (var langValue in _referenceTranslations[key])
+                StringBuilder languages = new StringBuilder();
+                foreach (char langValue in _referenceTranslations[key])
                 {
                     languages.Append(langValue);
                 }
@@ -67,7 +67,7 @@ namespace ExternalUtilities
 
         private void CheckLanguages()
         {
-            var cultures = new[] { "", "cs", "de", "el", "es", "fr", "nl", "pl",
+            string[] cultures = new[] { "", "cs", "de", "el", "es", "fr", "nl", "pl",
                 "pt-BR", "pt-BR", "ru", "tr" }; // Removed: "sr-Latn-RS",
 
             _warnings.Append($"{"Phrase/Word/Item",-50} ");
@@ -76,17 +76,17 @@ namespace ExternalUtilities
                 _warnings.Append($"{(culture == "" ? "English" : culture),-6} ");
             }
             _warnings.AppendLine("\n");
-            
-            var dict = new Dictionary<string, List<bool>>(); // Word -> present[culture]
+
+            Dictionary<string, List<bool>> dict = new Dictionary<string, List<bool>>(); // Word -> present[culture]
 
              // Create word list
-            for (var cultureIndex = 0; cultureIndex < cultures.Length; cultureIndex++)
+            for (int cultureIndex = 0; cultureIndex < cultures.Length; cultureIndex++)
             {
-                var culture = cultures[cultureIndex];
-                var fileName = ResourcePath + "Strings" + (culture == "" ? "" : ".") + culture + ".resx";
-                var xElement = XDocument.Load(fileName).Root;
+                string culture = cultures[cultureIndex];
+                string fileName = ResourcePath + "Strings" + (culture == "" ? "" : ".") + culture + ".resx";
+                XElement xElement = XDocument.Load(fileName).Root;
                 if (xElement != null)
-                    foreach (var key in from elem in xElement.Elements("data")
+                    foreach (string key in from elem in xElement.Elements("data")
                         let xAttribute = elem.Attribute("name")
                         where xAttribute != null
                         let key = xAttribute.Value
@@ -102,7 +102,7 @@ namespace ExternalUtilities
                         else
                         {
                             dict[key] = new List<bool>();
-                            for (var listIndex = 0; listIndex < cultures.Length; listIndex++)
+                            for (int listIndex = 0; listIndex < cultures.Length; listIndex++)
                             {
                                 dict[key].Add(false);
                             }
@@ -112,16 +112,16 @@ namespace ExternalUtilities
             }
 
             // show non complete cultures
-            var dictKeys = dict.Keys.ToList();
+            List<string> dictKeys = dict.Keys.ToList();
             dictKeys.Sort();
 
-            foreach (var key in dictKeys)
+            foreach (string key in dictKeys)
             {
                 if (dict[key].Contains(false))
                 {
-                    var item = dict[key];
+                    List<bool> item = dict[key];
                     _warnings.Append($"{key,-50}: ");
-                    for (var listIndex = 0; listIndex < cultures.Length; listIndex++)
+                    for (int listIndex = 0; listIndex < cultures.Length; listIndex++)
                     {
                         _warnings.Append(dict[key][listIndex] ? $"{"",-6} " : $"{cultures[listIndex],-6} ");
                     }
@@ -135,12 +135,12 @@ namespace ExternalUtilities
         void CreateReferenceLanguageList()
         {
             const string fileName = ResourcePath + "Strings.resx";
-            var elements = XDocument.Load(fileName).Root.Elements("data").ToList();
+            List<XElement> elements = XDocument.Load(fileName).Root.Elements("data").ToList();
             elements.Sort();
-            foreach (var elem in elements)
+            foreach (XElement elem in elements)
             {
-                var key = elem.Attribute("name").Value;
-                var value = elem.Element("value").Value.Replace("\n", "<NL>");
+                string key = elem.Attribute("name").Value;
+                string value = elem.Element("value").Value.Replace("\n", "<NL>");
 
                 if (!_referenceTranslations.ContainsKey(key))
                 {
@@ -157,16 +157,16 @@ namespace ExternalUtilities
         void CheckOtherLanguages()
         {
 
-            var cultures = new[] {"cs", "de", "el", "es", "fr", "nl", "pl", "pt-BR", "pt-BR", "ru", "sr-Latn-RS", "tr"};
-            foreach (var culture in cultures)
+            string[] cultures = new[] {"cs", "de", "el", "es", "fr", "nl", "pl", "pt-BR", "pt-BR", "ru", "sr-Latn-RS", "tr"};
+            foreach (string culture in cultures)
             {
-                var dict = new Dictionary<string, string>();
+                Dictionary<string, string> dict = new Dictionary<string, string>();
 
-                var fileName = ResourcePath + "Strings." + culture + ".resx";
-                foreach (var elem in XDocument.Load(fileName).Root.Elements("data"))
+                string fileName = ResourcePath + "Strings." + culture + ".resx";
+                foreach (XElement elem in XDocument.Load(fileName).Root.Elements("data"))
                 {
-                    var key = elem.Attribute("name").Value;
-                    var value = elem.Element("value").Value.Replace("\n", "<NL>");
+                    string key = elem.Attribute("name").Value;
+                    string value = elem.Element("value").Value.Replace("\n", "<NL>");
 
                     if (!dict.ContainsKey(key))
                     {
@@ -187,7 +187,7 @@ namespace ExternalUtilities
                 }    
 
                 // Check if all English words are translated in culture language.
-                foreach (var key in _referenceTranslations.Keys)
+                foreach (string key in _referenceTranslations.Keys)
                 {
                     if (!dict.Keys.Contains(key))
                     {

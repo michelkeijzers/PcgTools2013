@@ -54,7 +54,7 @@ namespace PcgTools.Songs
         {
             if (memory is IPcgMemory)
             {
-                foreach (var item in Items.Where(item => item.PcgMemory == memory))
+                foreach (OpenedPcgWindow item in Items.Where(item => item.PcgMemory == memory))
                 {
                     Items.Remove(item);
                 }

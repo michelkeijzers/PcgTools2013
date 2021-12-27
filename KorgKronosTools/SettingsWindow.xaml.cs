@@ -425,7 +425,7 @@ namespace PcgTools
         /// <param name="e"></param>
         private void buttonDefaultOutputDirectory_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new FolderBrowserDialog
+            FolderBrowserDialog dialog = new FolderBrowserDialog
             {
                 ShowNewFolderButton = true,
                 Description = Strings.SelectFolderForGeneratedFiles_settw,
@@ -451,7 +451,7 @@ namespace PcgTools
         /// <param name="e"></param>
         private void buttonDefaultOutputDirectoryForSequencerFiles_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new FolderBrowserDialog
+            FolderBrowserDialog dialog = new FolderBrowserDialog
             {
                 ShowNewFolderButton = true,
                 Description = Strings.SelectFolderForGeneratedFiles_settw,
@@ -477,7 +477,7 @@ namespace PcgTools
         /// <param name="e"></param>
         private void buttonDefaultManualPath_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog()
+            OpenFileDialog dialog = new OpenFileDialog()
             {
                 Title = Strings.SelectFolderOfManual_settw,
                 Filter = "PDF Files (*.pdf)|*.pdf",
@@ -878,7 +878,7 @@ namespace PcgTools
 
         private void RadioButtonProgramDuplication_checked(object sender, RoutedEventArgs e)
         {
-            var likeNamed = radioButtonLikeNamedPatches.IsReallyChecked();
+            bool likeNamed = radioButtonLikeNamedPatches.IsReallyChecked();
             labelIgnoreCharacters.IsEnabled = likeNamed;
             textBoxIgnoreCharacters.IsEnabled = likeNamed;
         }

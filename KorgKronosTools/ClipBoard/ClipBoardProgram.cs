@@ -34,7 +34,7 @@ namespace PcgTools.ClipBoard
             if ((program.Root is KronosPcgMemory memory) && (memory.PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16))
             // PRG2 content
             {
-                for (var parameter = 0; parameter < KronosProgramBanks.ParametersInPbk2Chunk; parameter++)
+                for (int parameter = 0; parameter < KronosProgramBanks.ParametersInPbk2Chunk; parameter++)
                 {
                     int patchParameterOffset =
                         ((KronosProgramBank)(program.Parent)).GetParameterOffsetInPbk2(program.Index, parameter);

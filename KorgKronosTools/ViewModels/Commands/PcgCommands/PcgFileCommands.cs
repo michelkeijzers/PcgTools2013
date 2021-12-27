@@ -23,8 +23,8 @@ namespace PcgTools.ViewModels.Commands
             _mainViewModel = mainViewModel;
 
             // Load file.
-            var korgFileReader = new KorgFileReader();
-            var memory = korgFileReader.Read(fileName); // Model type/file type only used when error
+            KorgFileReader korgFileReader = new KorgFileReader();
+            IMemory memory = korgFileReader.Read(fileName); // Model type/file type only used when error
             if (memory == null)
             {
                 _mainViewModel.ShowMessageBox(
@@ -45,8 +45,8 @@ namespace PcgTools.ViewModels.Commands
             MdiChild mdiChild;
             if (memory is IPcgMemory)
             {
-                var width = Settings.Default.UI_PcgWindowWidth == 0 ? 700 : Settings.Default.UI_PcgWindowWidth;
-                var height = Settings.Default.UI_PcgWindowHeight == 0 ? 500 : Settings.Default.UI_PcgWindowHeight;
+                int width = Settings.Default.UI_PcgWindowWidth == 0 ? 700 : Settings.Default.UI_PcgWindowWidth;
+                int height = Settings.Default.UI_PcgWindowHeight == 0 ? 500 : Settings.Default.UI_PcgWindowHeight;
                 mdiChild = _mainViewModel.CreateMdiChildWindow(fileName, MainViewModel.ChildWindowType.Pcg, memory, width, height);
                 ((PcgWindow)(mdiChild.Content)).ViewModel.SelectedMemory = memory;
                 _mainViewModel.CurrentChildViewModel = ((PcgWindow)(mdiChild.Content)).ViewModel;
@@ -54,8 +54,8 @@ namespace PcgTools.ViewModels.Commands
             }
             else if (memory is ISongMemory)
             {
-                var width = Settings.Default.UI_SongWindowWidth == 0 ? 700 : Settings.Default.UI_SongWindowWidth;
-                var height = Settings.Default.UI_SongWindowHeight == 0 ? 500 : Settings.Default.UI_SongWindowHeight;
+                int width = Settings.Default.UI_SongWindowWidth == 0 ? 700 : Settings.Default.UI_SongWindowWidth;
+                int height = Settings.Default.UI_SongWindowHeight == 0 ? 500 : Settings.Default.UI_SongWindowHeight;
                 mdiChild = _mainViewModel.CreateMdiChildWindow(fileName, MainViewModel.ChildWindowType.Song, memory, width, height);
                 _mainViewModel.CurrentChildViewModel = ((SongWindow)(mdiChild.Content)).ViewModel;
                 ((SongWindow)(mdiChild.Content)).ViewModel.SelectedMemory = memory;
@@ -77,7 +77,7 @@ namespace PcgTools.ViewModels.Commands
             if (checkAutoLoadMasterFileSetting)
             {
                 // Get master file name.
-                var masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(_mainViewModel.SelectedMemory.Model);
+                MasterFile masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(_mainViewModel.SelectedMemory.Model);
                 if ((masterFile != null) && (masterFile.FileState == MasterFile.EFileState.Unloaded))
                 {
                     switch ((MasterFiles.MasterFiles.AutoLoadMasterFiles)(Settings.Default.MasterFiles_AutoLoad))
@@ -92,7 +92,7 @@ namespace PcgTools.ViewModels.Commands
                         case MasterFiles.MasterFiles.AutoLoadMasterFiles.Ask:
                             if (masterFile.FileName != loadedPcgFileName)
                             {
-                                var result = _mainViewModel.ShowMessageBox(
+                                WindowUtils.EMessageBoxResult result = _mainViewModel.ShowMessageBox(
                                     string.Format(Strings.AskForMasterFile, masterFile.FileName),
                                     Strings.PcgTools, WindowUtils.EMessageBoxButton.YesNo,
                                     WindowUtils.EMessageBoxImage.Information,

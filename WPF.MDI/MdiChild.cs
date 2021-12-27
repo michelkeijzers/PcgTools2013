@@ -316,7 +316,7 @@ namespace WPF.MDI
             if (_closeButton != null)
                 _closeButton.Click += CloseButtonClick;
 
-            var dragThumb = (Thumb)Template.FindName("DragThumb", this);
+            Thumb dragThumb = (Thumb)Template.FindName("DragThumb", this);
 
             if (dragThumb != null)
             {
@@ -334,14 +334,14 @@ namespace WPF.MDI
                  */
             }
 
-            var resizeLeft = (Thumb)Template.FindName("ResizeLeft", this);
-            var resizeTopLeft = (Thumb)Template.FindName("ResizeTopLeft", this);
-            var resizeTop = (Thumb)Template.FindName("ResizeTop", this);
-            var resizeTopRight = (Thumb)Template.FindName("ResizeTopRight", this);
-            var resizeRight = (Thumb)Template.FindName("ResizeRight", this);
-            var resizeBottomRight = (Thumb)Template.FindName("ResizeBottomRight", this);
-            var resizeBottom = (Thumb)Template.FindName("ResizeBottom", this);
-            var resizeBottomLeft = (Thumb)Template.FindName("ResizeBottomLeft", this);
+            Thumb resizeLeft = (Thumb)Template.FindName("ResizeLeft", this);
+            Thumb resizeTopLeft = (Thumb)Template.FindName("ResizeTopLeft", this);
+            Thumb resizeTop = (Thumb)Template.FindName("ResizeTop", this);
+            Thumb resizeTopRight = (Thumb)Template.FindName("ResizeTopRight", this);
+            Thumb resizeRight = (Thumb)Template.FindName("ResizeRight", this);
+            Thumb resizeBottomRight = (Thumb)Template.FindName("ResizeBottomRight", this);
+            Thumb resizeBottom = (Thumb)Template.FindName("ResizeBottom", this);
+            Thumb resizeBottomLeft = (Thumb)Template.FindName("ResizeBottomLeft", this);
 
             if (resizeLeft != null)
             {
@@ -465,7 +465,7 @@ namespace WPF.MDI
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
-            var eventArgs = new ClosingEventArgs(ClosingEvent);
+            ClosingEventArgs eventArgs = new ClosingEventArgs(ClosingEvent);
             RaiseEvent(eventArgs);
 
             if (!eventArgs.Handled) //MK: Added for preventing closing
@@ -594,8 +594,8 @@ namespace WPF.MDI
             if ((bool)e.NewValue == (bool)e.OldValue)
                 return;
 
-            var mdiChild = (MdiChild)sender;
-            var focused = (bool)e.NewValue;
+            MdiChild mdiChild = (MdiChild)sender;
+            bool focused = (bool)e.NewValue;
 
             mdiChild.RaiseEvent(focused ? new RoutedEventArgs(GotFocusEvent, mdiChild) : new RoutedEventArgs(LostFocusEvent, mdiChild));
         }
@@ -607,12 +607,12 @@ namespace WPF.MDI
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void MinimizeBoxValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var mdiChild = (MdiChild)sender;
-            var visible = (bool)e.NewValue;
+            MdiChild mdiChild = (MdiChild)sender;
+            bool visible = (bool)e.NewValue;
 
             if (visible)
             {
-                var maximizeVisible = true;
+                bool maximizeVisible = true;
 
                 if (mdiChild._maximizeButton != null)
                     maximizeVisible = mdiChild._maximizeButton.Visibility == Visibility.Visible;
@@ -657,8 +657,8 @@ namespace WPF.MDI
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void MaximizeBoxValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var mdiChild = (MdiChild)sender;
-            var visible = (bool)e.NewValue;
+            MdiChild mdiChild = (MdiChild)sender;
+            bool visible = (bool)e.NewValue;
 
             if (visible)
             {
@@ -707,16 +707,16 @@ namespace WPF.MDI
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void WindowStateValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var mdiChild = (MdiChild)sender;
-            var previousWindowState = (WindowState)e.OldValue;
-            var windowState = (WindowState)e.NewValue;
+            MdiChild mdiChild = (MdiChild)sender;
+            WindowState previousWindowState = (WindowState)e.OldValue;
+            WindowState windowState = (WindowState)e.NewValue;
 
             if (mdiChild.Container == null)
                 return;
 
             if (previousWindowState == WindowState.Maximized)
             {
-                foreach (var pcgWindow in mdiChild.Container.Children)
+                foreach (MdiChild pcgWindow in mdiChild.Container.Children)
                 {
                     if (pcgWindow != mdiChild)
                         pcgWindow.IsEnabled = true;
@@ -743,7 +743,7 @@ namespace WPF.MDI
                             mdiChild._originalDimension = new Rect(
                                 Canvas.GetLeft(mdiChild), Canvas.GetTop(mdiChild), mdiChild.ActualWidth, mdiChild.ActualHeight);
 
-                        var minimizedWindows = mdiChild.Container.Children.Count(
+                        int minimizedWindows = mdiChild.Container.Children.Count(
                             t => !Equals(t, mdiChild) && t.WindowState == WindowState.Minimized);
 
                         Canvas.SetLeft(mdiChild, minimizedWindows * 160);
@@ -759,7 +759,7 @@ namespace WPF.MDI
                             mdiChild._originalDimension = new Rect(
                                 Canvas.GetLeft(mdiChild), Canvas.GetTop(mdiChild), mdiChild.ActualWidth, mdiChild.ActualHeight);
 
-                        foreach (var pcgWindow in mdiChild.Container.Children)
+                        foreach (MdiChild pcgWindow in mdiChild.Container.Children)
                         {
                             if (pcgWindow != mdiChild)
                                 pcgWindow.IsEnabled = false;

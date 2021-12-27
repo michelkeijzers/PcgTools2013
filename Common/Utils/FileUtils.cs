@@ -23,8 +23,8 @@ namespace Common.Utils
             /// <returns></returns>
             public int Compare(string file1, string file2)
             {
-                var timeStamp1 = new FileInfo(file1).CreationTime;
-                var timeStamp2 = new FileInfo(file2).CreationTime;
+                System.DateTime timeStamp1 = new FileInfo(file1).CreationTime;
+                System.DateTime timeStamp2 = new FileInfo(file2).CreationTime;
                 return timeStamp1.CompareTo(timeStamp2);
             }
         }

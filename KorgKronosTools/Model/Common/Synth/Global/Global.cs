@@ -88,8 +88,8 @@ namespace PcgTools.Model.Common.Synth.Global
         /// <returns></returns>
         public virtual string GetCategoryName(IPatch patch)
         {
-            var type = patch is IProgram ? ECategoryType.Program : ECategoryType.Combi;
-            var category = patch is IProgram 
+            ECategoryType type = patch is IProgram ? ECategoryType.Program : ECategoryType.Combi;
+            dynamic category = patch is IProgram 
                 ? ((IProgram) patch).GetParam(ParameterNames.ProgramParameterName.Category).Value 
                 : ((ICombi) patch).GetParam(ParameterNames.CombiParameterName.Category ).Value;
 
@@ -165,9 +165,9 @@ namespace PcgTools.Model.Common.Synth.Global
         /// <returns></returns>
         public virtual List<string> GetCategoryNames(ECategoryType type)
         {
-            var categories = new List<string>();
+            List<string> categories = new List<string>();
 
-            for (var category = 0; category < NrOfCategories; category++)
+            for (int category = 0; category < NrOfCategories; category++)
             {
                 categories.Add(
                     Util.GetChars(PcgMemory.Content, CalcCategoryNameOffset(type, category), CategoryNameLength));
@@ -185,8 +185,8 @@ namespace PcgTools.Model.Common.Synth.Global
         /// <returns></returns>
         public LinkedList<string> GetSubCategoryNames(ECategoryType type, int category)
         {
-            var categories = new LinkedList<string>();
-            for (var subCategory = 0; subCategory < NrOfSubCategories; subCategory++)
+            LinkedList<string> categories = new LinkedList<string>();
+            for (int subCategory = 0; subCategory < NrOfSubCategories; subCategory++)
             {
                 categories.AddLast(
                     Util.GetChars(PcgMemory.Content, CalcSubCategoryNameOffset(type, category, subCategory), CategoryNameLength));
@@ -205,7 +205,7 @@ namespace PcgTools.Model.Common.Synth.Global
         /// <returns></returns>
         protected virtual int CalcCategoryNameOffset(ECategoryType type, int index)
         {
-            var offset = ByteOffset + PcgOffsetCategories;
+            int offset = ByteOffset + PcgOffsetCategories;
             
             offset += (type == ECategoryType.Program) ? 0 : SizeOfProgramsCategoriesAndSubCategories;
             offset += index * CategoryNameLength;
@@ -222,8 +222,8 @@ namespace PcgTools.Model.Common.Synth.Global
         /// <returns></returns>
         protected virtual int CalcSubCategoryNameOffset(ECategoryType type, int index, int subIndex)
         {
-            var offset = ByteOffset + PcgOffsetCategories;
-            var typeSize = NrOfCategories * (CategoryNameLength + SubCategoriesSize);
+            int offset = ByteOffset + PcgOffsetCategories;
+            int typeSize = NrOfCategories * (CategoryNameLength + SubCategoriesSize);
 
             offset += (type == ECategoryType.Program) ? 0 : typeSize;
             offset += NrOfCategories * CategoryNameLength; // Categories size

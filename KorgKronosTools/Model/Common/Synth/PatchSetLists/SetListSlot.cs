@@ -73,14 +73,14 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// <returns></returns>
         public override int CalcByteDifferencesInNameAndDescription(IPatch otherPatch)
         {
-            var patchSize = ByteLength;
+            int patchSize = ByteLength;
             Debug.Assert(patchSize == ByteLength);
             Debug.Assert(otherPatch != null);
             Debug.Assert(MaxNameLength == otherPatch.MaxNameLength);
 
             // Add name differences.
-            var diffs = 0;
-            for (var index = 0; index < MaxDescriptionLength; index++)
+            int diffs = 0;
+            for (int index = 0; index < MaxDescriptionLength; index++)
             {
                 diffs += (PcgRoot.Content[ByteOffset + DescriptionPcgOffset + index] != 
                     otherPatch.PcgRoot.Content[otherPatch.ByteOffset + DescriptionPcgOffset + index]) ? 1 : 0;
@@ -95,7 +95,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// </summary>
         public override void SetNotifications()
         {
-            var masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(Root.Model);
+            MasterFiles.MasterFile masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(Root.Model);
             if ((masterFile != null) && !PcgRoot.FileName.IsEqualFileAs(masterFile.FileName))
             {
                 masterFile.PropertyChanged += OnMasterPcgFilePropertyChanged;
@@ -130,12 +130,12 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
                 switch (SelectedPatchType)
                 {
                 case PatchType.Program:
-                    var usedProgram = UsedPatch;
+                        IPatch usedProgram = UsedPatch;
                     fullPatchId = (usedProgram == null) ? "(Unknown)" : "Prg " + (usedProgram.Id);
                     break;
 
                 case PatchType.Combi:
-                    var usedCombi = UsedPatch;
+                        IPatch usedCombi = UsedPatch;
                     fullPatchId = (usedCombi == null) ? "Unknown)" : "Cmb " + (usedCombi.Id);
                     break;
 
@@ -264,12 +264,12 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         {
             get
             {
-                var isEmpty = ((Name == string.Empty) && (SelectedPatchType == PatchType.Program));
+                bool isEmpty = ((Name == string.Empty) && (SelectedPatchType == PatchType.Program));
                 if (isEmpty)
                 {
                     // Check further (Program is from bank 0, index 0.
-                    var usedProgram = (Program) UsedPatch;
-                    var usedProgramBank = ((ProgramBank) (usedProgram.Bank));
+                    Program usedProgram = (Program) UsedPatch;
+                    ProgramBank usedProgramBank = ((ProgramBank) (usedProgram.Bank));
                     isEmpty = ((((ProgramBanks) (usedProgramBank.Parent)).BankCollection.IndexOf(usedProgramBank)) == 0) &&
                               (usedProgram.Index == 0);
 
@@ -305,7 +305,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
                     return (((IBank)(UsedPatch.Parent)).IsLoaded || (((ProgramBank)UsedPatch.Parent).Type != BankType.EType.Gm));
                 }
 
-                var combi = UsedPatch as Combi;
+                Combi combi = UsedPatch as Combi;
                 if (combi != null)
                 {
                     return combi.IsCompleteInPcg;
@@ -437,7 +437,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         {
             get
             {
-                var builder = new StringBuilder();
+                StringBuilder builder = new StringBuilder();
                 if (IsEmptyOrInit)
                 {
                     builder.Append(Strings.EmptyOrInitPatchName);

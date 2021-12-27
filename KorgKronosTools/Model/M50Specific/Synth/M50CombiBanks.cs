@@ -28,7 +28,7 @@ namespace PcgTools.Model.M50Specific.Synth
         protected override void CreateBanks()
         {
             //                          0    1    2    3   
-            foreach (var id in new[] { "A", "B", "C", "D" })
+            foreach (string id in new[] { "A", "B", "C", "D" })
             {
                 Add(new M50CombiBank(this, BankType.EType.Int, id, -1));
             }

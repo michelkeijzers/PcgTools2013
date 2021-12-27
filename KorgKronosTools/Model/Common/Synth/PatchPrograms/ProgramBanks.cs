@@ -45,9 +45,9 @@ namespace PcgTools.Model.Common.Synth
         /// </summary>
         void FillPrograms()
         {
-            foreach (var bank in BankCollection)
+            foreach (IBank bank in BankCollection)
             {
-                for (var index = 0; index < bank.NrOfPatches; index++)
+                for (int index = 0; index < bank.NrOfPatches; index++)
                 {
                     bank.CreatePatch(index);
                 }
@@ -62,7 +62,7 @@ namespace PcgTools.Model.Common.Synth
         /// <returns></returns>
         public override IBank GetBankWithPcgId(int pcgId)
         {
-            var bank = base.GetBankWithPcgId(pcgId);
+            IBank bank = base.GetBankWithPcgId(pcgId);
 
             // GM variation bank selected, select GM bank (last).
             if (bank == null)
@@ -81,7 +81,7 @@ namespace PcgTools.Model.Common.Synth
 
         public void ChangeDrumKitReferences(Dictionary<IDrumKit, IDrumKit> changes)
         {
-            foreach (var program in BankCollection.Where(bank => bank.IsFilled)
+            foreach (IPatch program in BankCollection.Where(bank => bank.IsFilled)
                         .SelectMany(bank => bank.Patches)
                         .Where(program => program.IsLoaded))
             {
@@ -97,7 +97,7 @@ namespace PcgTools.Model.Common.Synth
 
         public void ChangeWaveSequenceReferences(Dictionary<IWaveSequence, IWaveSequence> changes)
         {
-            foreach (var program in BankCollection.Where(bank => bank.IsFilled && !((IProgramBank)bank).IsModeled)
+            foreach (IPatch program in BankCollection.Where(bank => bank.IsFilled && !((IProgramBank)bank).IsModeled)
                         .SelectMany(bank => bank.Patches)
                         .Where(program => program.IsLoaded))
             {

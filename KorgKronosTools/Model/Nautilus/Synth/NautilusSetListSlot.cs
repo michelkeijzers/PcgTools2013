@@ -205,7 +205,6 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         protected override IBank UsedProgramBank => PcgRoot.ProgramBanks.GetBankWithPcgId(Util.GetBits(PcgRoot.Content,
             DefaultBankOffset, 4, 0));
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -274,9 +273,9 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <param name="value"></param>
         private void SetUsedCombi(IPatch value)
         {
-            var combi = (NautilusCombi) value;
-            var combiBank = (NautilusCombiBank) (value.Parent);
-            var combiBanks = (NautilusCombiBanks) combiBank.Parent;
+            NautilusCombi combi = (NautilusCombi) value;
+            NautilusCombiBank combiBank = (NautilusCombiBank) (value.Parent);
+            NautilusCombiBanks combiBanks = (NautilusCombiBanks) combiBank.Parent;
 
             // Set bank.
             Util.SetInt(PcgRoot, PcgRoot.Content, DefaultBankOffset, 1, combiBanks.BankCollection.IndexOf(combiBank));
@@ -295,8 +294,8 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <param name="value"></param>
         private void SetUsedProgram(IPatch value)
         {
-            var program = (NautilusProgram) value;
-            var bank = (NautilusProgramBank) (value.Parent);
+            NautilusProgram program = (NautilusProgram) value;
+            NautilusProgramBank bank = (NautilusProgramBank) (value.Parent);
 
             SetUsedProgramBank(bank);
             SetUsedProgram(bank, program);
@@ -334,16 +333,16 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         {
             get
             {
-                var combiId = Util.GetInt(PcgRoot.Content, DefaultPatchOffset, 1);
+                int combiId = Util.GetInt(PcgRoot.Content, DefaultPatchOffset, 1);
 
-                var combi = UsedCombiBank[combiId];
+                IPatch combi = UsedCombiBank[combiId];
                 if (!((IBank) (combi.Parent)).IsWritable)
                 {
                     // Try to find it in the master file.
-                    var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                    IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                     if ((masterPcgMemory != null) && (masterPcgMemory.FileName != Root.FileName))
                     {
-                        var combiBank = masterPcgMemory.CombiBanks.BankCollection.FirstOrDefault(
+                        IBank combiBank = masterPcgMemory.CombiBanks.BankCollection.FirstOrDefault(
                             item => (item.Id == UsedCombiBank.Id) && item.IsFilled);
                         return combiBank == null ? null : combiBank[combiId] as Combi;
                     }
@@ -361,16 +360,16 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         {
             get
             {
-                var programId = Util.GetInt(PcgRoot.Content, DefaultPatchOffset, 1);
+                int programId = Util.GetInt(PcgRoot.Content, DefaultPatchOffset, 1);
 
-                var program = UsedProgramBank[programId];
+                IPatch program = UsedProgramBank[programId];
                 if (!((IBank) (program.Parent)).IsWritable && ((ProgramBank) (program.Parent)).Type != BankType.EType.Gm)
                 {
                     // Try to find it in the master file.
-                    var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                    IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                     if ((masterPcgMemory != null) && (masterPcgMemory.FileName != Root.FileName))
                     {
-                        var programBank = masterPcgMemory.ProgramBanks.BankCollection.FirstOrDefault(
+                        IBank programBank = masterPcgMemory.ProgramBanks.BankCollection.FirstOrDefault(
                             item => (item.PcgId == UsedProgramBank.PcgId) && item.IsFilled);
                         return programBank == null ? null : programBank[programId] as Program;
                     }
@@ -423,7 +422,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
             return diffs;
         }
 
@@ -437,10 +436,10 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IClipBoardPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var otherSetListSlot = otherPatch as ClipBoardSetListSlot;
+            ClipBoardSetListSlot otherSetListSlot = otherPatch as ClipBoardSetListSlot;
             Debug.Assert(otherSetListSlot != null);
 
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
             return diffs;
         }
     }

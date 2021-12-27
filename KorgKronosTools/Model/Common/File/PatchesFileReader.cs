@@ -50,12 +50,12 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         protected void SetNotifications()
         {
-            foreach (var patch in CurrentPcgMemory.ProgramBanks.BankCollection.SelectMany(bank => bank.Patches))
+            foreach (IPatch patch in CurrentPcgMemory.ProgramBanks.BankCollection.SelectMany(bank => bank.Patches))
             {
                 patch.SetNotifications();
             }
 
-            foreach (var patch in CurrentPcgMemory.CombiBanks.BankCollection.SelectMany(bank => bank.Patches))
+            foreach (IPatch patch in CurrentPcgMemory.CombiBanks.BankCollection.SelectMany(bank => bank.Patches))
             {
                 patch.SetNotifications();
             }

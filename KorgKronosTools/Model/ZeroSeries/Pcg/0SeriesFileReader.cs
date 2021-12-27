@@ -38,7 +38,7 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// <param name="modelType"></param>
         public override void ReadContent(Memory.FileType filetype, Models.EModelType modelType)
         {
-            var memory = SkipModeChange(filetype);
+            ISysExMemory memory = SkipModeChange(filetype);
 
             // Continue parsing.
             switch (filetype)
@@ -103,14 +103,14 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// <returns></returns>
         private ISysExMemory SkipModeChange(Memory.FileType filetype)
         {
-            var memory = (ISysExMemory) CurrentPcgMemory;
+            ISysExMemory memory = (ISysExMemory) CurrentPcgMemory;
             switch (filetype)
             {
                 case Memory.FileType.Syx:
                     if ((Util.GetChars(memory.Content, 0, 14) != "Sysex Manager-") &&
                         (Util.GetChars(memory.Content, 2, 8) != "OrigKorg"))
                     {
-                        var offset = SkipModeChanges();
+                        int offset = SkipModeChanges();
                         SysExStartOffset += offset;
                         ContentType = (PcgMemory.ContentType) memory.Content[offset + 4];
                     }
@@ -131,8 +131,8 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// </summary>
         int SkipModeChanges()
         {
-            var offset = 0;
-            var memory = (ISysExMemory)CurrentPcgMemory;
+            int offset = 0;
+            ISysExMemory memory = (ISysExMemory)CurrentPcgMemory;
 
             while ((memory.Content[offset] == 0xF0) && // MIDI SysEx
                    (memory.Content[offset + 1] == 0x42) && // Korg
@@ -151,14 +151,14 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// <param name="offset"></param>
         protected virtual void ReadSingleProgram(int offset)
         {
-            var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
+            IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
             bank.ByteOffset = 0;
             bank.BankSynthesisType = ProgramBank.SynthesisType.Ai2;
             bank.ByteLength = 172;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var program = bank[0];
+            Common.Synth.Meta.IPatch program = bank[0];
             program.ByteOffset = offset;
             program.ByteLength = bank.ByteLength;
             program.IsLoaded = true;
@@ -171,13 +171,13 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// <param name="offset"></param>
         private void ReadSingleCombi(int offset)
         {
-            var bank = CurrentPcgMemory.CombiBanks[0];
+            Common.Synth.Meta.IBank bank = CurrentPcgMemory.CombiBanks[0];
             bank.ByteOffset = 0;
             bank.ByteLength = 128;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var combi = bank[0];
+            Common.Synth.Meta.IPatch combi = bank[0];
             combi.ByteOffset = offset;
             combi.ByteLength = bank.ByteLength;
             combi.IsLoaded = true;
@@ -201,11 +201,11 @@ namespace PcgTools.Model.ZeroSeries.Pcg
             CurrentPcgMemory.Global = null;
             Index = 0x4800;
 
-            var combiBankIndex = 4; // Skip internal banks
-            var programBankIndex = 4; // Skip internal banks
+            int combiBankIndex = 4; // Skip internal banks
+            int programBankIndex = 4; // Skip internal banks
 
             // Read all 4 disk images.
-            for (var diskImage = 0; diskImage < 4; diskImage++)
+            for (int diskImage = 0; diskImage < 4; diskImage++)
             {
                 // Skip global etc.
                 Index += 0xA84;
@@ -248,14 +248,14 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// <returns></returns>
         private int ReadCombiData(int combiBankIndex)
         {
-            var combiBank = (ICombiBank) CurrentPcgMemory.CombiBanks[combiBankIndex];
+            ICombiBank combiBank = (ICombiBank) CurrentPcgMemory.CombiBanks[combiBankIndex];
 
             combiBank.ByteOffset = Index;
             combiBank.ByteLength = 128;
             combiBank.IsWritable = true;
             combiBank.IsLoaded = true;
 
-            foreach (var combi in combiBank.Patches)
+            foreach (Common.Synth.Meta.IPatch combi in combiBank.Patches)
             {
                 combi.ByteOffset = Index;
                 combi.ByteLength = combiBank.ByteLength;
@@ -277,7 +277,7 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// <returns></returns>
         private int ReadProgramData(int programBankIndex)
         {
-            var programBank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[programBankIndex]);
+            IProgramBank programBank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[programBankIndex]);
             programBank.ByteOffset = Index;
 
             programBank.BankSynthesisType = ProgramBank.SynthesisType.Ai;
@@ -286,7 +286,7 @@ namespace PcgTools.Model.ZeroSeries.Pcg
             programBank.IsWritable = true;
             programBank.IsLoaded = true;
 
-            foreach (var program in programBank.Patches)
+            foreach (Common.Synth.Meta.IPatch program in programBank.Patches)
             {
                 program.ByteOffset = Index;
                 program.ByteLength = programBank.ByteLength;

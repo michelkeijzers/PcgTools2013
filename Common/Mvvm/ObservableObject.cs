@@ -46,7 +46,7 @@ namespace Common.Mvvm
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
             {
-                var e = new PropertyChangedEventArgs(propertyName);
+                PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
                 handler(this, e);
             }
         }
@@ -68,7 +68,7 @@ namespace Common.Mvvm
             // public, instance property on this object.
             if (TypeDescriptor.GetProperties(this)[propertyName] == null)
             {
-                var msg = "Invalid property name: " + propertyName;
+                string msg = "Invalid property name: " + propertyName;
 
                 if (ThrowOnInvalidPropertyName)
                     throw new Exception(msg);

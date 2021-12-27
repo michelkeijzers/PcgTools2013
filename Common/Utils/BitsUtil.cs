@@ -41,10 +41,10 @@ namespace Common.Utils
             Debug.Assert(value >= 0);
             Debug.Assert(value < (2 << (highBit - lowBit + 1)));
 
-            var orgData = data[offset];
-            var highPart = (byte) (0xFF << (highBit + 1));
-            var lowPart = (byte) (0xFF >> (8 - lowBit));
-            var combined = highPart | lowPart;
+            byte orgData = data[offset];
+            byte highPart = (byte) (0xFF << (highBit + 1));
+            byte lowPart = (byte) (0xFF >> (8 - lowBit));
+            int combined = highPart | lowPart;
             data[offset] = (byte) (data[offset] & combined | (value << lowBit));
             return (orgData != data[offset]);
         }
@@ -66,9 +66,9 @@ namespace Common.Utils
             Debug.Assert(newValue >= 0);
             Debug.Assert(newValue < (2 << (highBit - lowBit + 1)));
 
-            var highPart = (byte) (0xFF << (highBit + 1));
-            var lowPart = (byte) (0xFF >> (8 - lowBit));
-            var combined = highPart | lowPart;
+            byte highPart = (byte) (0xFF << (highBit + 1));
+            byte lowPart = (byte) (0xFF >> (8 - lowBit));
+            int combined = highPart | lowPart;
             byte newByteValue = (byte) (byteValue & combined | (newValue << lowBit));
             return newByteValue;
         }
@@ -80,7 +80,7 @@ namespace Common.Utils
         /// <returns></returns>
         public static int BitsNeeded(int value)
         {
-            var bitsUsed = 0;
+            int bitsUsed = 0;
             do
             {
                 bitsUsed++;
@@ -115,7 +115,7 @@ namespace Common.Utils
             Debug.Assert(nrOfBits <= 32);
             Debug.Assert(BitsNeeded(value) <= nrOfBits);
 
-            var changed = false;
+            bool changed = false;
             while (nrOfBits > 0)
             {
                 changed |= SetBit(data, startByte, startBit, (value >> (nrOfBits - 1)) & 0x01); // Set MSB
@@ -188,7 +188,7 @@ namespace Common.Utils
             Debug.Assert(bit <= 7);
             Debug.Assert((bitValue == 0) || (bitValue == 1));
 
-            var orgData = data[offset];
+            byte orgData = data[offset];
             if (bitValue == 1)
             {
                 data[offset] |= (byte) (0x01 << bit);
@@ -251,7 +251,7 @@ namespace Common.Utils
             Debug.Assert(value < (1 << totalBits));
 
             // Calculate maximum value allowed for value (otherwise it is negative)
-            var maxValue = (1 << (totalBits - 1)) - 1;
+            int maxValue = (1 << (totalBits - 1)) - 1;
 
             // Substract min_value and remove signed bit if negative.
             return value >= maxValue ? -(maxValue + 1) + (value & maxValue) : value;

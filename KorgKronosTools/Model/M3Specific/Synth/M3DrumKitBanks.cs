@@ -29,7 +29,7 @@ namespace PcgTools.Model.M3Specific.Synth
         {
             Add(new M3DrumKitBank(this, BankType.EType.Int, "INT", -1)); // Unknown PCG Id
 
-            foreach (var id in new[] { "U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G" })
+            foreach (string id in new[] { "U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G" })
             {
                 Add(new M3DrumKitBank(this, BankType.EType.User, id, -1)); // Unknown PCG Id
             }

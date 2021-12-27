@@ -101,7 +101,7 @@ namespace PcgTools.MasterFiles
         {
             if ((e.PropertyName == "ChildWindows") || (e.PropertyName == "CurrentChildViewModel"))
             {
-                foreach (var child in MainViewModel.ChildWindows)
+                foreach (IChildWindow child in MainViewModel.ChildWindows)
                 {
                     if ((child.ViewModel is PcgViewModel))
                     {
@@ -123,7 +123,7 @@ namespace PcgTools.MasterFiles
         {
             if (e.PropertyName == "SelectedMemory")
             {
-                var memory = ((PcgViewModel)sender).SelectedPcgMemory;
+                IPcgMemory memory = ((PcgViewModel)sender).SelectedPcgMemory;
                 if (memory != null)
                 {
                     memory.PropertyChanged += OnSelectedPcgMemoryPropertyChanged;
@@ -153,7 +153,7 @@ namespace PcgTools.MasterFiles
         /// </summary>
         public void UpdateStates()
         {
-            foreach (var masterFile in this)
+            foreach (MasterFile masterFile in this)
             {
                 masterFile.UpdateState();
             }
@@ -167,7 +167,7 @@ namespace PcgTools.MasterFiles
         /// <param name="fileName"></param>
         public void SetPcgFileAsMasterFile(IModel model, string fileName)
         {
-            var masterFile = this.FirstOrDefault(file => (file.Model == model));
+            MasterFile masterFile = this.FirstOrDefault(file => (file.Model == model));
             Debug.Assert(masterFile != null);
             masterFile.SetModel(model, fileName);
         }
@@ -180,7 +180,7 @@ namespace PcgTools.MasterFiles
         /// <returns></returns>
         public IPcgMemory FindMasterPcg(IModel model)
         {
-            var viewModel = (from masterFile in this
+            IPcgViewModel viewModel = (from masterFile in this
                     where (masterFile.Model == model) && (masterFile.FileState == MasterFile.EFileState.Loaded) 
                     select MainViewModel.FindPcgViewModelWithName(masterFile.FileName)).FirstOrDefault();
 

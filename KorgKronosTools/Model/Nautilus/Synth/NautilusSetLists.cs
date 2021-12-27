@@ -32,7 +32,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// </summary>
         protected override void CreateSetLists()
         {
-            for (var n = 0; n < NrOfSetLists; n++)
+            for (int n = 0; n < NrOfSetLists; n++)
             {
                 Add(new NautilusSetList(this, n));
             }

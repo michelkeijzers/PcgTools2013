@@ -40,9 +40,9 @@ namespace PcgTools.Model.Common.Synth.PatchWaveSequences
         /// </summary>
         void FillWaveSequences()
         {
-            foreach (var bank in BankCollection)
+            foreach (IBank bank in BankCollection)
             {
-                for (var index = 0; index < bank.NrOfPatches; index++)
+                for (int index = 0; index < bank.NrOfPatches; index++)
                 {
                     bank.CreatePatch(index);
                 }

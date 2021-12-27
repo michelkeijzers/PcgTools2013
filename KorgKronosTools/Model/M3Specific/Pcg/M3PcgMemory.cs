@@ -41,9 +41,9 @@ namespace PcgTools.Model.M3Specific.Pcg
         protected override void FixChecksumValues(ChecksumType checksumType)
         {
             // Loop through all chunks and fix the checksum.
-            var checksumChunks = new List<string> {"PBK1", "MBK1", "CBK1", "SBK1", "GLB1"};
-            var mbkIndex = 0;
-            var cbkIndex = 0;
+            List<string> checksumChunks = new List<string> {"PBK1", "MBK1", "CBK1", "SBK1", "GLB1"};
+            int mbkIndex = 0;
+            int cbkIndex = 0;
 
             Chunks.Collection.Where(chunk => checksumChunks.Contains(chunk.Name)).Aggregate(
                 0, (current, chunk) => FixChecksumValue(chunk, current, ref mbkIndex, ref cbkIndex));
@@ -60,8 +60,8 @@ namespace PcgTools.Model.M3Specific.Pcg
         /// <returns></returns>
         private int FixChecksumValue(IChunk chunk, int pbkIndex, ref int mbkIndex, ref int cbkIndex)
         {
-            var checksum = 0;
-            for (var dataIndex = chunk.Offset + 12; dataIndex < chunk.Offset + chunk.Size + 12; dataIndex++)
+            int checksum = 0;
+            for (int dataIndex = chunk.Offset + 12; dataIndex < chunk.Offset + chunk.Size + 12; dataIndex++)
             {
                 checksum = (checksum + Content[dataIndex])%256;
                     // Since checksum is a byte it will be automatically moduloed by 256
@@ -116,10 +116,10 @@ namespace PcgTools.Model.M3Specific.Pcg
         int FindIni2Offset(string chunkNameInIni2, int index)
         {
             Debug.Assert(Chunks.Collection[1].Name == "INI2");
-            var ini2Start = Chunks.Collection[1].Offset; // Index 1 = INI2
+            int ini2Start = Chunks.Collection[1].Offset; // Index 1 = INI2
 
-            var offsetInIni = ini2Start + 16;
-            var occurence = 0;
+            int offsetInIni = ini2Start + 16;
+            int occurence = 0;
             while (true)
             {
                 if (Util.GetChars(Content, offsetInIni, 4) == chunkNameInIni2)

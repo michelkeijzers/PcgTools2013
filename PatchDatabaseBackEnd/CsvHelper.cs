@@ -20,15 +20,15 @@ namespace PatchDatabaseBackEnd
 
         public static PatchDataList ReadAsCsv()
         {
-            var patchDataList = new PatchDataList();
+            PatchDataList patchDataList = new PatchDataList();
 
-            var allText = File.ReadAllText(@"h:\patches.txt");
-            foreach (var line in allText.Split('\n'))
+            string allText = File.ReadAllText(@"h:\patches.txt");
+            foreach (string line in allText.Split('\n'))
             {
-                var columns = ReadColumns(line);
+                List<object> columns = ReadColumns(line);
                 if (columns.Count == 3)
                 {
-                    var patchData = new PatchData
+                    PatchData patchData = new PatchData
                     {
                         PatchName = (string) columns[0],
                         Author = (string) columns[1],
@@ -49,7 +49,7 @@ namespace PatchDatabaseBackEnd
         /// <returns></returns>
         private static List<object> ReadColumns(string line)
         {
-            var columns = new List<object>();
+            List<object> columns = new List<object>();
 
             object column;
             do

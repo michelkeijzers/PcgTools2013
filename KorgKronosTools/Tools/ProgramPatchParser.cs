@@ -54,7 +54,7 @@ namespace PcgTools.Tools
                 return null;
             }
 
-            var bank = ParseBank(part);
+            IProgramBank bank = ParseBank(part);
             if (bank == null)
             {
                 return null;
@@ -81,8 +81,8 @@ namespace PcgTools.Tools
                 endIndex = bank.Patches.Count - 1;
             }
 
-            var list = new List<IPatch>();
-            for (var index = startIndex; index <= endIndex; index++)
+            List<IPatch> list = new List<IPatch>();
+            for (int index = startIndex; index <= endIndex; index++)
             {
                 list.Add(bank[index]);
             }

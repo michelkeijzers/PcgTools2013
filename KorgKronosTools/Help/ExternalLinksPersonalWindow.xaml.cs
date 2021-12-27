@@ -21,7 +21,7 @@ namespace PcgTools.Help
         {
             InitializeComponent();
 
-            var externalItems = new List<ExternalItem>
+            List<ExternalItem> externalItems = new List<ExternalItem>
             {
                 new ExternalItem
                 {
@@ -67,7 +67,7 @@ namespace PcgTools.Help
                 },
             };
 
-            var linkButtons = new List<UserControlExternalLink>
+            List<UserControlExternalLink> linkButtons = new List<UserControlExternalLink>
             {
                 ButtonLink1,
                 ButtonLink2,
@@ -121,15 +121,15 @@ namespace PcgTools.Help
                 ButtonLink50
             };
 
-            for (var index = 0; index < externalItems.Count; index++)
+            for (int index = 0; index < externalItems.Count; index++)
             {
-                var userControl = linkButtons[index];
+                UserControlExternalLink userControl = linkButtons[index];
                 userControl.PreviewMouseLeftButtonUp += ButtonLinkOnPreviewMouseLeftButtonUp;
                 userControl.Tag = externalItems[index];
                 userControl.DataContext = externalItems[index];
             }
 
-            for (var index = externalItems.Count; index < linkButtons.Count; index++)
+            for (int index = externalItems.Count; index < linkButtons.Count; index++)
             {
                 linkButtons[index].Visibility = Visibility.Collapsed;
             }
@@ -138,10 +138,10 @@ namespace PcgTools.Help
 
         private void ButtonLinkOnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
-            var userControlExternalLink = sender as UserControlExternalLink;
+            UserControlExternalLink userControlExternalLink = sender as UserControlExternalLink;
             if (userControlExternalLink != null)
             {
-                var item = userControlExternalLink.Tag as ExternalItem;
+                ExternalItem item = userControlExternalLink.Tag as ExternalItem;
                 if ((item != null) && (item.Url != null))
                 {
                     ShowUrl(item.Url);

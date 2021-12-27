@@ -81,7 +81,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         /// <returns></returns>
         private static string GetKeyString(int value)
         {
-            var notes = new[] {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
+            string[] notes = new[] {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
             return $"{notes[value%12],-2}{value/12 - 1,2}";
         }
 

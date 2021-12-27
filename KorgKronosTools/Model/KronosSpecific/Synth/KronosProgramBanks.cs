@@ -136,11 +136,11 @@ namespace PcgTools.Model.KronosSpecific.Synth
 #pragma warning restore 1570
         protected override void CreateVirtualBanks()
         {
-            var bankNames = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+            List<char> bankNames = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
 
-            for (var bankGroupIndex = 0; bankGroupIndex < 8; bankGroupIndex++)
+            for (int bankGroupIndex = 0; bankGroupIndex < 8; bankGroupIndex++)
             {
-                for (var bankIndex = 0; bankIndex < bankNames.Count; bankIndex++)
+                for (int bankIndex = 0; bankIndex < bankNames.Count; bankIndex++)
                 {
                     Add(
                         new KronosProgramBank(
@@ -160,16 +160,16 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <param name="otherPatch"></param>
         public void SwapPbk2Content(IPatch patch, IPatch otherPatch)
         {
-            for (var parameter = 0; parameter < ParametersInPbk2Chunk; parameter++)
+            for (int parameter = 0; parameter < ParametersInPbk2Chunk; parameter++)
             {
                 // Swap bytes.
-                var patchParameterOffset =
+                int patchParameterOffset =
                     ((KronosProgramBank) (patch.Parent)).GetParameterOffsetInPbk2(patch.Index, parameter);
-                
-                var otherPatchParameterOffset =
+
+                int otherPatchParameterOffset =
                     ((KronosProgramBank)(otherPatch.Parent)).GetParameterOffsetInPbk2(otherPatch.Index, parameter);
 
-                var temp = Root.Content[patchParameterOffset];
+                byte temp = Root.Content[patchParameterOffset];
                 Debug.Assert(patchParameterOffset >= 4); // Don't overwrite KORG header
                 Root.Content[patchParameterOffset] = Root.Content[otherPatchParameterOffset];
                 Debug.Assert(otherPatchParameterOffset >= 4); // Don't overwrite KORG header
@@ -186,12 +186,12 @@ namespace PcgTools.Model.KronosSpecific.Synth
 // ReSharper disable once UnusedMember.Global
         public void CopyPbk2Content(IPatch patch, IPatch otherPatch)
         {
-            for (var parameter = 0; parameter < ParametersInPbk2Chunk; parameter++)
+            for (int parameter = 0; parameter < ParametersInPbk2Chunk; parameter++)
             {
                 // Swap bytes.
-                var patchParameterOffset =
+                int patchParameterOffset =
                     ((KronosProgramBank)(patch.Parent)).GetParameterOffsetInPbk2(patch.Index, parameter);
-                var otherPatchParameterOffset =
+                int otherPatchParameterOffset =
                     ((KronosProgramBank)(otherPatch.Parent)).GetParameterOffsetInPbk2(otherPatch.Index, parameter);
 
                 Debug.Assert(otherPatchParameterOffset >= 4); // Don't overwrite KORG header

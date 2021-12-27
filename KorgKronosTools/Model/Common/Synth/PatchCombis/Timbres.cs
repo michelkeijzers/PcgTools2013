@@ -76,9 +76,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         void FillTimbres()
         {
-            for (var i = 0; i < TimbresCollection.Count; i++)
+            for (int i = 0; i < TimbresCollection.Count; i++)
             {
-                for (var index = 0; index < TimbresPerCombi; index++)
+                for (int index = 0; index < TimbresPerCombi; index++)
                 {
                     TimbresCollection.Add(CreateNewTimbre(index));
                 }

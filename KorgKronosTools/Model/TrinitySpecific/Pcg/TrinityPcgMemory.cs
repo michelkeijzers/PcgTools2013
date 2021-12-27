@@ -59,14 +59,14 @@ namespace PcgTools.Model.TrinitySpecific.Pcg
         {
             get
             {
-                var numberOfSampledProgramBanks = 0;
-                var numberOfModeledBanks = ProgramBanks.BankCollection.Aggregate(
+                int numberOfSampledProgramBanks = 0;
+                int numberOfModeledBanks = ProgramBanks.BankCollection.Aggregate(
                     0, (current, bank1) => IsNeededProgramBankPresent(bank1, current, ref numberOfSampledProgramBanks));
 
                 // Either Prophecy or MOSS bank should be available. If the Prophecy/MOSS bank contains 64 programs,
                 // no memory extension is installed and two banks should be present (A and B Access bank, otherwise 
                 // there are 128 programs in the Propecy/MOSS bank and C and D Access banks should be present too.
-                var programsInModeledBank = ProgramsInModeledProgramBank;
+                int programsInModeledBank = ProgramsInModeledProgramBank;
 
                 return ((numberOfModeledBanks == 1) && 
                         (((programsInModeledBank == 64) && (numberOfSampledProgramBanks == 2)) ||
@@ -84,7 +84,7 @@ namespace PcgTools.Model.TrinitySpecific.Pcg
         /// <returns></returns>
         private static int IsNeededProgramBankPresent(IBank bank1, int numberOfModeledBanks, ref int numberOfSampledProgramBanks)
         {
-            var bank = (IProgramBank) bank1;
+            IProgramBank bank = (IProgramBank) bank1;
             if (bank.IsModeled)
             {
                 if (bank.ByteOffset != 0)
@@ -112,9 +112,9 @@ namespace PcgTools.Model.TrinitySpecific.Pcg
         {
             get
             {
-                var numberOfCombiBanks = 0;
+                int numberOfCombiBanks = 0;
 
-                foreach (var bank in CombiBanks.BankCollection)
+                foreach (IBank bank in CombiBanks.BankCollection)
                 {
                     {
                         if (bank.ByteOffset != 0)
@@ -127,7 +127,7 @@ namespace PcgTools.Model.TrinitySpecific.Pcg
                 // If the Prophecy/MOSS bank contains 64 programs, no memory extension is installed and two banks should be present 
                 // (A and B Combi bank, otherwise there are 128 programs in the Propecy/MOSS bank and C and D Combi banks should be 
                 // present too.
-                var programsInModeledBanks = ProgramsInModeledProgramBank;
+                int programsInModeledBanks = ProgramsInModeledProgramBank;
 
                 return  (((programsInModeledBanks == 64) && (numberOfCombiBanks == 2)) ||
                          ((programsInModeledBanks == 128) && (numberOfCombiBanks == 4)));

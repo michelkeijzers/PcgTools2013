@@ -24,7 +24,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// <param name="pcgViewModel"></param>
         public void Execute(IPcgViewModel pcgViewModel)
         {
-            var window = new DoubleToSingleKeyboardWindow(pcgViewModel.SelectedPcgMemory, this);
+            DoubleToSingleKeyboardWindow window = new DoubleToSingleKeyboardWindow(pcgViewModel.SelectedPcgMemory, this);
             window.ShowDialog();
         }
 
@@ -41,11 +41,11 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             Model.Common.Synth.PatchCombis.ICombiBank combiBankTarget, 
             int mainMidiChannel, int secondaryMidiChannel)
         {
-            var currentTargetSetListSlotIndex = 0;
-            var currentTargetCombiIndex = 0;
+            int currentTargetSetListSlotIndex = 0;
+            int currentTargetCombiIndex = 0;
 
-            var finishedPrematurely = false;
-            var errorText = string.Empty;
+            bool finishedPrematurely = false;
+            string errorText = string.Empty;
 
             if (!setListSource.IsLoaded)
             {
@@ -64,9 +64,9 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             }
             else
             { 
-                foreach (var patch in setListSource.Patches.Where(patch => !((ISetListSlot)patch).IsEmptyOrInit))
+                foreach (Model.Common.Synth.Meta.IPatch patch in setListSource.Patches.Where(patch => !((ISetListSlot)patch).IsEmptyOrInit))
                 {
-                    var sourceSetListSlot = (ISetListSlot)patch;
+                    ISetListSlot sourceSetListSlot = (ISetListSlot)patch;
                     if (currentTargetSetListSlotIndex >= setListTarget.Patches.Count)
                     {
                         finishedPrematurely = true;
@@ -77,7 +77,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                     // copy set list slot to target set list.
                     // change suffix sourcemidi 
                     sourceSetListSlot.PcgRoot.CopyPatch(sourceSetListSlot, setListTarget.Patches[currentTargetSetListSlotIndex]);
-                    var targetSetListSlot = setListTarget.Patches[currentTargetSetListSlotIndex];
+                    Model.Common.Synth.Meta.IPatch targetSetListSlot = setListTarget.Patches[currentTargetSetListSlotIndex];
                     targetSetListSlot.SetNameSuffix($"/MC{mainMidiChannel}");
                     currentTargetSetListSlotIndex++;
 
@@ -117,7 +117,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             int secondaryMidiChannel, ISetListSlot sourceSetListSlot, ref int currentTargetCombiIndex,
             ref bool finishedPrematurely, ref int currentTargetSetListSlotIndex)
         {
-            var sourceCombi = (ICombi) sourceSetListSlot.UsedPatch;
+            ICombi sourceCombi = (ICombi) sourceSetListSlot.UsedPatch;
             if (sourceCombi.UsesMidiChannel(secondaryMidiChannel))
             {
                 // Create second combi with changed name and MIDI channels switched.
@@ -127,7 +127,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                     return true;
                 }
                 sourceCombi.PcgRoot.CopyPatch(sourceCombi, combiBankTarget.Patches[currentTargetCombiIndex]);
-                var combi = (ICombi) combiBankTarget.Patches[currentTargetCombiIndex];
+                ICombi combi = (ICombi) combiBankTarget.Patches[currentTargetCombiIndex];
                 combi.SetNameSuffix($"/MC{secondaryMidiChannel}");
                 combi.SwitchMidiChannels(mainMidiChannel, secondaryMidiChannel);
                 currentTargetCombiIndex++;
@@ -140,7 +140,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 }
 
                 sourceSetListSlot.PcgRoot.CopyPatch(sourceSetListSlot, setListTarget.Patches[currentTargetSetListSlotIndex]);
-                var setListSlotSecondary = (ISetListSlot) setListTarget.Patches[currentTargetSetListSlotIndex];
+                ISetListSlot setListSlotSecondary = (ISetListSlot) setListTarget.Patches[currentTargetSetListSlotIndex];
                 setListSlotSecondary.SetNameSuffix($"/MC{secondaryMidiChannel}");
                 setListSlotSecondary.UsedPatch = combi;
                 currentTargetSetListSlotIndex++;

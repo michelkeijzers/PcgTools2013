@@ -19,7 +19,7 @@ namespace PcgTools.Model.Zero3Rw.Synth
             : base(combi)
         {
             TimbresCollection.Clear(); //IMPR: is clear really necessary here?
-            for (var n = 0; n < TimbresPerCombi; n++)
+            for (int n = 0; n < TimbresPerCombi; n++)
             {
                 TimbresCollection.Add(new Zero3RwTimbre(this, n));
             }

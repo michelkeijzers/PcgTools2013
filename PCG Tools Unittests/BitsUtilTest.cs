@@ -11,7 +11,7 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void TestSetBits1()
         {
-            var array = new byte[5];
+            byte[] array = new byte[5];
             array[3] = 0x99;
             BitsUtil.SetBits(array, 3, 4, 2, 0x02);
             Assert.AreEqual(array[3], 0x89);
@@ -22,7 +22,7 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void TestSetBits2()
         {
-            var array = new byte[5];
+            byte[] array = new byte[5];
             array[3] = 0x00;
             BitsUtil.SetBits(array, 3, 7, 0, 0x0E3);
             Assert.AreEqual(array[3], 0xE3);
@@ -33,7 +33,7 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void TestSetBit()
         {
-            var array = new byte[5];
+            byte[] array = new byte[5];
             array[3] = 0x77;
             BitsUtil.SetBit(array, 3, 4, 0);
             Assert.AreEqual(BitsUtil.GetBit(array, 3, 4), false);

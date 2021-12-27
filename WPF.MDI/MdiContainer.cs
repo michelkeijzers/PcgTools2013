@@ -183,7 +183,7 @@ namespace WPF.MDI
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        var mdiChild = Children[e.NewStartingIndex];
+                        MdiChild mdiChild = Children[e.NewStartingIndex];
 
                         Canvas.SetLeft(mdiChild, (_windowCanvas.Children.Count * 25) + 2);
                         Canvas.SetTop(mdiChild, (_windowCanvas.Children.Count * 25) + 2);
@@ -246,7 +246,7 @@ namespace WPF.MDI
         /// <param name="mdiChild">The MDI child.</param>
         internal void Focus(MdiChild mdiChild)
         {
-            for (var i = 0; i < _windowCanvas.Children.Count; i++)
+            for (int i = 0; i < _windowCanvas.Children.Count; i++)
             {
                 ((MdiChild) _windowCanvas.Children[i]).Focused =
                     (_windowCanvas.Children[i] == mdiChild && _windowCanvas.Children[i].GetType() == typeof (MdiChild));
@@ -262,13 +262,13 @@ namespace WPF.MDI
         /// </summary>
         internal void InvalidateSize()
         {
-            var largestPoint = new Point(0, 0);
+            Point largestPoint = new Point(0, 0);
 
             for (int i = 0; i < _windowCanvas.Children.Count; i++)
             {
-                var mdiChild = (MdiChild) _windowCanvas.Children[i];
+                MdiChild mdiChild = (MdiChild) _windowCanvas.Children[i];
 
-                var farPosition = new Point(Canvas.GetLeft(mdiChild) + mdiChild.ActualWidth, Canvas.GetTop(mdiChild) + mdiChild.ActualHeight);
+                Point farPosition = new Point(Canvas.GetLeft(mdiChild) + mdiChild.ActualWidth, Canvas.GetTop(mdiChild) + mdiChild.ActualHeight);
 
                 if (farPosition.X > largestPoint.X)
                     largestPoint.X = farPosition.X;
@@ -290,7 +290,7 @@ namespace WPF.MDI
         /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
         private static void ThemeValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var themeType = (ThemeType) e.NewValue;
+            ThemeType themeType = (ThemeType) e.NewValue;
 
             if (_currentResourceDictionary != null)
                 Application.Current.Resources.MergedDictionaries.Remove(_currentResourceDictionary);

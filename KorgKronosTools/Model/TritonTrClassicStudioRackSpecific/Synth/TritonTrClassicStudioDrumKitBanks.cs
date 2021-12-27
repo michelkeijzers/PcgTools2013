@@ -36,7 +36,7 @@ namespace PcgTools.Model.TritonTrClassicStudioRackSpecific.Synth
             // in the PCG are >=0x20000.
             // Sorry but I could not do better than this at the moment, the Triton Drumkit banks are very differently organized...
 
-            foreach (var id in new[] {"A/B", "H", "I", "J", "K", "L", "M", "N"})
+            foreach (string id in new[] {"A/B", "H", "I", "J", "K", "L", "M", "N"})
             {
                 Add(new TritonTrClassicDrumKitBank(this, BankType.EType.Int, id, -1));
             }

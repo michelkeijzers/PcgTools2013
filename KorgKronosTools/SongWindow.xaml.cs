@@ -117,7 +117,7 @@ namespace PcgTools
         /// <returns></returns>
         private bool ViewFilter(object sender)
         {
-            var window = (OpenedPcgWindow) sender;
+            OpenedPcgWindow window = (OpenedPcgWindow) sender;
             return (SongMemory.Model.ModelType == Models.EModelType.Kronos) &&
                 ModelCompatibility.AreModelsCompatible(window.PcgMemory.Model, SongMemory.Model);
         }
@@ -243,7 +243,7 @@ namespace PcgTools
         {
             {
                 // Check if already exists. If so, show the already opened window.
-                foreach (var child in from child in _mainWindow.Container.Children
+                foreach (MdiChild child in from child in _mainWindow.Container.Children
                     where (child.Content is SongTimbresWindow)
                     let sngTimbresIteration = child.Content as SongTimbresWindow
                     where sngTimbresIteration.SngTimbresViewModel.Song == SongViewModel.Song
@@ -252,10 +252,10 @@ namespace PcgTools
                     child.Focus();
                     return;
                 }
-                 
+
 
                 // Create combi window if not already present.
-                var mdiChild = new MdiChild
+                MdiChild mdiChild = new MdiChild
                 {
                     Title = GenerateSngTimbresWindowTitle(),
                     Content = new SongTimbresWindow(SongViewModel),
@@ -276,12 +276,12 @@ namespace PcgTools
 
         private void ExportToFile_Click(object sender, RoutedEventArgs e)
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.AppendLine(" #  Song Name");
             builder.AppendLine("--- ------------------------------------------------------------");
 
-            var index = 0;
-            foreach (var song in SongMemory.Songs.SongCollection)
+            int index = 0;
+            foreach (ISong song in SongMemory.Songs.SongCollection)
             {
                 index++;
                 builder.AppendLine($"{index,3} {song.Name}");
@@ -297,7 +297,7 @@ namespace PcgTools
             }
             catch (UnauthorizedAccessException ex)
             {
-                var stringCaption = $"{Strings.ErrorOccurred}: \n\n" + 
+                string stringCaption = $"{Strings.ErrorOccurred}: \n\n" + 
                     $"{Strings.Message}: {ex.Message}\n\n" +
                     $"{Strings.InnerExceptionMessage}: {ex.InnerException?.Message ?? string.Empty}\n\n" + 
                     $"{Strings.StackTrace}: {ex.StackTrace}";
@@ -316,14 +316,14 @@ namespace PcgTools
 
         private void SamplesExportToFile_Click(object sender, RoutedEventArgs e)
         {
-            
-            var builder = new StringBuilder();
+
+            StringBuilder builder = new StringBuilder();
             builder.AppendLine(" #  Sample Name                                                  Sample File Name");
             builder.AppendLine("--- ------------------------------------------------------------ ------------------------------------------------------------");
 
-            foreach (var region in SongMemory.Regions.RegionsCollection)
+            foreach (IRegion region in SongMemory.Regions.RegionsCollection)
             {
-                var sample = (Region) region;
+                Region sample = (Region) region;
                 builder.AppendLine($"{sample.Index, 3} {sample.Name,-60} {sample.SampleFileName,-60}");
             }
 
@@ -338,7 +338,7 @@ namespace PcgTools
             }
             catch (UnauthorizedAccessException ex)
             {
-                var stringCaption = $"{Strings.ErrorOccurred}: \n\n" +
+                string stringCaption = $"{Strings.ErrorOccurred}: \n\n" +
                     $"{Strings.Message}: {ex.Message}\n\n" +
                     $"{Strings.InnerExceptionMessage}: {ex.InnerException?.Message ?? string.Empty}\n\n" +
                     $"{Strings.StackTrace}: {ex.StackTrace}";

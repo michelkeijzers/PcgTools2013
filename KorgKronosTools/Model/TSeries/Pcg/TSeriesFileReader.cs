@@ -39,7 +39,7 @@ namespace PcgTools.Model.TSeries.Pcg
         /// <param name="modelType"></param>
         public override void ReadContent(Memory.FileType filetype, Models.EModelType modelType)
         {
-            var memory = SkipSysexModeChange(filetype);
+            SysExMemory memory = SkipSysexModeChange(filetype);
 
             // Continue parsing.
             switch (filetype)
@@ -89,14 +89,14 @@ namespace PcgTools.Model.TSeries.Pcg
         /// <returns></returns>
         private SysExMemory SkipSysexModeChange(Memory.FileType filetype)
         {
-            var memory = (SysExMemory) CurrentPcgMemory;
+            SysExMemory memory = (SysExMemory) CurrentPcgMemory;
             switch (filetype)
             {
                 case Memory.FileType.Syx:
                     if ((Util.GetChars(memory.Content, 0, 14) != "Sysex Manager-") &&
                         (Util.GetChars(memory.Content, 2, 8) != "OrigKorg"))
                     {
-                        var offset = SkipModeChanges();
+                        int offset = SkipModeChanges();
                         SysExStartOffset += offset;
                         ContentType = (PcgMemory.ContentType) memory.Content[offset + 4];
                     }
@@ -117,8 +117,8 @@ namespace PcgTools.Model.TSeries.Pcg
         /// </summary>
         int SkipModeChanges()
         {
-            var offset = 0;
-            var memory = (SysExMemory)CurrentPcgMemory;
+            int offset = 0;
+            SysExMemory memory = (SysExMemory)CurrentPcgMemory;
 
             while ((memory.Content[offset] == 0xF0) && // MIDI SysEx
                    (memory.Content[offset + 1] == 0x42) && // Korg
@@ -137,14 +137,14 @@ namespace PcgTools.Model.TSeries.Pcg
         /// <param name="offset"></param>
         private void ReadSingleProgram(int offset)
         {
-            var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
+            IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
             bank.ByteOffset = 0;
             bank.BankSynthesisType = ProgramBank.SynthesisType.AnalogModeling;
             bank.ByteLength = 160;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var program = (Program) bank[0];
+            Program program = (Program) bank[0];
             program.ByteOffset = offset;
             program.ByteLength = bank.ByteLength;
         }
@@ -156,13 +156,13 @@ namespace PcgTools.Model.TSeries.Pcg
         /// <param name="offset"></param>
         private void ReadSingleCombi(int offset)
         {
-            var bank = (ICombiBank)(CurrentPcgMemory.CombiBanks[0]);
+            ICombiBank bank = (ICombiBank)(CurrentPcgMemory.CombiBanks[0]);
             bank.ByteOffset = 0;
             bank.ByteLength = 240;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var combi = (ICombi)bank[0];
+            ICombi combi = (ICombi)bank[0];
             combi.ByteOffset = offset;
             combi.ByteLength = bank.ByteLength;
             combi.IsLoaded = true;

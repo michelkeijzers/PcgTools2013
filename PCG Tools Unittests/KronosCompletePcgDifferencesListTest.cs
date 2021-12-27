@@ -32,7 +32,7 @@ namespace PCG_Tools_Unittests
         [TestInitialize]
         public void SetDefaults()
         {
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgFileName);
             _lines = null;
         }
@@ -86,7 +86,7 @@ namespace PCG_Tools_Unittests
             _generator.SelectedProgramBanks.Add((IProgramBank)_pcgMemory.ProgramBanks[6]);
             _generator.SelectedProgramBanks.Add((IProgramBank)_pcgMemory.ProgramBanks[7]);
 
-            foreach (var item in _pcgMemory.CombiBanks.BankCollection)
+            foreach (IBank item in _pcgMemory.CombiBanks.BankCollection)
             {
                 _generator.SelectedCombiBanks.Add((ICombiBank) item);
             }
@@ -160,7 +160,7 @@ namespace PCG_Tools_Unittests
             };
 
             // Only 1 program bank and 2 combi banks to improve speed.
-            foreach (var bank in _pcgMemory.ProgramBanks.BankCollection)
+            foreach (IBank bank in _pcgMemory.ProgramBanks.BankCollection)
             {
                 if (bank.Id == "U-A")
                 {
@@ -168,7 +168,7 @@ namespace PCG_Tools_Unittests
                 }
             }
 
-            for (var index = 0; index < 2; index++)
+            for (int index = 0; index < 2; index++)
             {
                 _generator.SelectedCombiBanks.Add((ICombiBank)_pcgMemory.CombiBanks[index]);
             }
@@ -194,7 +194,7 @@ namespace PCG_Tools_Unittests
                 OutputFileName = $"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt"
             };
 
-            for (var index = 0; index < 3; index++) // Only 3 bank to improve performance.
+            for (int index = 0; index < 3; index++) // Only 3 bank to improve performance.
             {
                 _generator.SelectedCombiBanks.Add((CombiBank)_pcgMemory.CombiBanks[index]);
             }

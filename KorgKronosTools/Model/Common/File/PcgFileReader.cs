@@ -42,8 +42,8 @@ namespace PcgTools.Model.Common.File
             Index = Div1Offset;
             while (Index < CurrentPcgMemory.Content.Length)
             {
-                var chunkName = Util.GetChars(CurrentPcgMemory.Content, Index, 4);
-                var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+                string chunkName = Util.GetChars(CurrentPcgMemory.Content, Index, 4);
+                int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
                 // ReSharper disable LocalizableElement
                 Console.WriteLine("index = " + Index.ToString("X08") + ", Chunk name: " +
                                   chunkName + ", size of chunk: " + chunkSize.ToString("X08"));
@@ -82,7 +82,7 @@ namespace PcgTools.Model.Common.File
         /// <param name="chunkSize"></param>
         private void ReadChunk(string chunkName, int chunkSize)
         {
-            var map = new Dictionary<string, Function>
+            Dictionary<string, Function> map = new Dictionary<string, Function>
             {
                 {"INI2", ReadIni2Chunk},
                 {"INI3", ReadIni3Chunk},
@@ -144,7 +144,7 @@ namespace PcgTools.Model.Common.File
         private void ReadCmb1Chunk(int chunkSize)
         {
             Index += SizeBetweenCmb1AndCbk1 + 4;
-            var start = Index;
+            int start = Index;
             while (Index - start < chunkSize)
             {
                 ReadCbk1Chunk();
@@ -158,39 +158,39 @@ namespace PcgTools.Model.Common.File
         /// <returns></returns>
         private void ReadCbk1Chunk()
         {
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
             CurrentPcgMemory.Chunks.Collection.Add(new Chunk("CBK1", Index, chunkSize));
 
-            var startIndex = Index;
+            int startIndex = Index;
             Index += Cbk1NumberOfCombisOffset;
-            var numberOfCombisInBank = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int numberOfCombisInBank = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
             Index += 4;
-            var sizeOfACombi = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int sizeOfACombi = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
 // ReSharper disable RedundantStringFormatCall
             Console.WriteLine($" Size of a combi: {sizeOfACombi}");
 // ReSharper restore RedundantStringFormatCall
             Index += 4;
-            var bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
-            var bankIndex = CombiBankId2CombiIndex(bankId);
+            int bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int bankIndex = CombiBankId2CombiIndex(bankId);
             Index += 4;
 
-            var combiBank = (CombiBank) CurrentPcgMemory.CombiBanks[bankIndex];
+            CombiBank combiBank = (CombiBank) CurrentPcgMemory.CombiBanks[bankIndex];
             combiBank.ByteOffset = startIndex;
             combiBank.PatchSize = sizeOfACombi;
             combiBank.IsWritable = true;
             combiBank.IsLoaded = true;
 
-            for (var index = 0; index < numberOfCombisInBank; index++)
+            for (int index = 0; index < numberOfCombisInBank; index++)
             {
                 // Place in PcgMemory.
-                var combi = (Combi) combiBank[index];
+                Combi combi = (Combi) combiBank[index];
                 combi.ByteOffset = Index;
                 combi.ByteLength = sizeOfACombi;
                 combi.IsLoaded = true;
 
                 combi.Timbres.ByteOffset = combi.ByteOffset + TimbresByteOffset;
 
-                foreach (var timbre in combi.Timbres.TimbresCollection)
+                foreach (ITimbre timbre in combi.Timbres.TimbresCollection)
                 {
                     timbre.ByteOffset = combi.Timbres.ByteOffset + timbre.Index*timbre.TimbresSize;
                 }
@@ -214,13 +214,13 @@ namespace PcgTools.Model.Common.File
         {
             //CurrentPcgMemory.Chunks.Add(new Chunk("CMB1", Index, -1));
             Index += KronosCombi.SizeBetweenCmb2AndCbk2 + 4;
-            var start = Index;
-            var bankIndex = 0;
+            int start = Index;
+            int bankIndex = 0;
             while (Index - start < chunkSize)
             {
                 // Find combi bank with index of filled banks.
-                var writableBanks = CurrentPcgMemory.CombiBanks.BankCollection.Where(bank => bank.IsWritable);
-                var combiBank = (KronosCombiBank) writableBanks.ToArray()[bankIndex];
+                IEnumerable<Synth.Meta.IBank> writableBanks = CurrentPcgMemory.CombiBanks.BankCollection.Where(bank => bank.IsWritable);
+                KronosCombiBank combiBank = (KronosCombiBank) writableBanks.ToArray()[bankIndex];
 
                 // Set offset.
                 combiBank.Cbk2PcgOffset = Index + 16; // 12 = Chunk size, 8 zeros
@@ -235,7 +235,7 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         private void ReadCbk2Chunk()
         {
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
             Index += chunkSize + 12; // 12 = chunk size, 8 zeros
         }
 
@@ -290,7 +290,7 @@ namespace PcgTools.Model.Common.File
         private void ReadPrg1Chunk(int chunkSize)
         {
             Index += BetweenChunkGapSize; // Skip PRG1 + size + 4 other bytes
-            var start = Index;
+            int start = Index;
             while (Index - start < chunkSize)
             {
                 switch (Util.GetChars(CurrentPcgMemory.Content, Index, 4))
@@ -317,13 +317,13 @@ namespace PcgTools.Model.Common.File
         private void ReadPrg2Chunk(int chunkSize)
         {
             Index += KronosProgram.SizeBetweenPrg2AndPbk2 + 4;
-            var start = Index;
-            var bankIndex = 0;
+            int start = Index;
+            int bankIndex = 0;
             while (Index - start < chunkSize)
             {
                 // Find program bank with index of filled banks.
-                var writableBanks = CurrentPcgMemory.ProgramBanks.BankCollection.Where(bank => bank.IsWritable);
-                var programBank = writableBanks.ToArray()[bankIndex] as KronosProgramBank;
+                IEnumerable<Synth.Meta.IBank> writableBanks = CurrentPcgMemory.ProgramBanks.BankCollection.Where(bank => bank.IsWritable);
+                KronosProgramBank programBank = writableBanks.ToArray()[bankIndex] as KronosProgramBank;
 
                 // Set offset.
                 if (programBank != null) // It is null if it is a GM bank
@@ -341,7 +341,7 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         private void ReadPbk2Chunk()
         {
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
             Index += chunkSize + 12; // 12 = chunk size, 8 zeros
         }
 
@@ -358,31 +358,31 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         private void ReadMbk1Chunk()
         {
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
             CurrentPcgMemory.Chunks.Collection.Add(new Chunk("MBK1", Index, chunkSize));
-            var startIndex = Index;
+            int startIndex = Index;
             Index += GapSizeAfterMbk1ChunkName;
 
-            var numberOfProgramsInBank = Util.GetInt(CurrentPcgMemory.Content, Index + 8, 4);
-            var sizeOfAProgram = Util.GetInt(CurrentPcgMemory.Content, Index + 12, 4);
+            int numberOfProgramsInBank = Util.GetInt(CurrentPcgMemory.Content, Index + 8, 4);
+            int sizeOfAProgram = Util.GetInt(CurrentPcgMemory.Content, Index + 12, 4);
 // ReSharper disable RedundantStringFormatCall
             Console.WriteLine($" Size of a program: {sizeOfAProgram}");
-// ReSharper restore RedundantStringFormatCall
-            var bankId = Util.GetInt(CurrentPcgMemory.Content, Index + 16, 4);
-            var bankIndex = ProgramBankId2ProgramIndex(bankId);
+            // ReSharper restore RedundantStringFormatCall
+            int bankId = Util.GetInt(CurrentPcgMemory.Content, Index + 16, 4);
+            int bankIndex = ProgramBankId2ProgramIndex(bankId);
             Index += 5*4;
 
-            var programBank = (ProgramBank) CurrentPcgMemory.ProgramBanks[bankIndex];
+            ProgramBank programBank = (ProgramBank) CurrentPcgMemory.ProgramBanks[bankIndex];
             programBank.ByteOffset = startIndex;
             programBank.PatchSize = sizeOfAProgram;
             programBank.BankSynthesisType = programBank.DefaultModeledSynthesisType;
             programBank.IsWritable = true;
             programBank.IsLoaded = true;
 
-            for (var index = 0; index < numberOfProgramsInBank; index++)
+            for (int index = 0; index < numberOfProgramsInBank; index++)
             {
                 // Place in PcgMemory.
-                var program = (Program) programBank[index];
+                Program program = (Program) programBank[index];
                 program.ByteOffset = Index;
                 program.ByteLength = sizeOfAProgram;
                 program.IsLoaded = true;
@@ -399,33 +399,33 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         private void ReadPbk1Chunk()
         {
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
             CurrentPcgMemory.Chunks.Collection.Add(new Chunk("PBK1", Index, chunkSize));
 
-            var startIndex = Index;
+            int startIndex = Index;
             Index += Pbk1NumberOfProgramsOffset;
-            var numberOfProgramsInBank = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int numberOfProgramsInBank = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
             Index += 4;
-            var sizeOfAProgram = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int sizeOfAProgram = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
 // ReSharper disable RedundantStringFormatCall
             Console.WriteLine($" Size of a program: {sizeOfAProgram}");
 // ReSharper restore RedundantStringFormatCall
             Index += 4;
-            var bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
-            var bankIndex = ProgramBankId2ProgramIndex(bankId);
+            int bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int bankIndex = ProgramBankId2ProgramIndex(bankId);
             Index += 4;
 
-            var programBank = (ProgramBank) CurrentPcgMemory.ProgramBanks[bankIndex];
+            ProgramBank programBank = (ProgramBank) CurrentPcgMemory.ProgramBanks[bankIndex];
             programBank.ByteOffset = startIndex;
             programBank.PatchSize = sizeOfAProgram;
             programBank.BankSynthesisType = programBank.DefaultSampledSynthesisType;
             programBank.IsWritable = true;
             programBank.IsLoaded = true;
 
-            for (var index = 0; index < numberOfProgramsInBank; index++)
+            for (int index = 0; index < numberOfProgramsInBank; index++)
             {
                 // Place in PcgMemory.
-                var program = (Program) programBank[index];
+                Program program = (Program) programBank[index];
                 program.ByteOffset = Index;
                 program.ByteLength = sizeOfAProgram;
                 program.IsLoaded = true;
@@ -500,25 +500,25 @@ namespace PcgTools.Model.Common.File
         private void ReadSetList()
         {
             // Add SBK1 chunk.
-            var name = Util.GetChars(CurrentPcgMemory.Content, Index, 4);
-            var chunkStartIndex = Index;
+            string name = Util.GetChars(CurrentPcgMemory.Content, Index, 4);
+            int chunkStartIndex = Index;
             Debug.Assert(name == "SBK1");
             Index += 4;
-            var sbk1ChunkSize = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int sbk1ChunkSize = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
             CurrentPcgMemory.Chunks.Collection.Add(new Chunk(name, chunkStartIndex, sbk1ChunkSize));
             Index += 8;
 
             // Parse set lists.
-            var numberOfSetLists = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int numberOfSetLists = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
             Index += 4;
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
-            var sizeOfASetListSlot = chunkSize/numberOfSetLists;
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int sizeOfASetListSlot = chunkSize/numberOfSetLists;
             Index += 8; // Skip 8 other bytes
 
-            for (var setListIndex = 0; setListIndex < numberOfSetLists; setListIndex++)
+            for (int setListIndex = 0; setListIndex < numberOfSetLists; setListIndex++)
             {
                 // Place in PcgMemory.
-                var setList = (SetList) CurrentPcgMemory.SetLists[setListIndex];
+                SetList setList = (SetList) CurrentPcgMemory.SetLists[setListIndex];
                 setList.ByteOffset = Index;
                 setList.PatchSize = sizeOfASetListSlot;
                 setList.Name = Util.GetChars(CurrentPcgMemory.Content, Index, 24);
@@ -526,10 +526,10 @@ namespace PcgTools.Model.Common.File
                 setList.IsLoaded = true;
                 Index += 24;
 
-                for (var slotIndex = 0; slotIndex < 128; slotIndex++)
+                for (int slotIndex = 0; slotIndex < 128; slotIndex++)
                 {
-                    var setList2 = (SetList) CurrentPcgMemory.SetLists[setListIndex];
-                    var slot = (SetListSlot) setList2[slotIndex];
+                    SetList setList2 = (SetList) CurrentPcgMemory.SetLists[setListIndex];
+                    SetListSlot slot = (SetListSlot) setList2[slotIndex];
                     slot.ByteOffset = Index;
                     slot.ByteLength = sizeOfASetListSlot;
                     slot.IsLoaded = true;
@@ -549,7 +549,7 @@ namespace PcgTools.Model.Common.File
         private void ReadWsq1Chunk(int chunkSize)
         {
             Index += BetweenChunkGapSize;
-            var start = Index;
+            int start = Index;
             while (Index - start < chunkSize)
             {
                 ReadWbk1Chunk();
@@ -562,32 +562,32 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         private void ReadWbk1Chunk()
         {
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
             CurrentPcgMemory.Chunks.Collection.Add(new Chunk("WBK1", Index, chunkSize));
 
-            var startIndex = Index;
+            int startIndex = Index;
             Index += 12; // LV? Wbk1NumberOfWaveSequencesOffset; override for various synths?
-            var numberOfWaveSeqsInBank = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int numberOfWaveSeqsInBank = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
             Index += 4;
-            var sizeOfAWaveSeq = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int sizeOfAWaveSeq = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
             // ReSharper disable RedundantStringFormatCall
             Console.WriteLine($" Size of a waveseq: {sizeOfAWaveSeq}");
             // ReSharper restore RedundantStringFormatCall
             Index += 4;
-            var bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
-            var bankIndex = WaveSequenceBankId2WaveSequenceIndex(bankId);
+            int bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int bankIndex = WaveSequenceBankId2WaveSequenceIndex(bankId);
             Index += 4;
 
-            var waveSeqBank = (WaveSequenceBank) CurrentPcgMemory.WaveSequenceBanks[bankIndex];
+            WaveSequenceBank waveSeqBank = (WaveSequenceBank) CurrentPcgMemory.WaveSequenceBanks[bankIndex];
             waveSeqBank.ByteOffset = startIndex;
             waveSeqBank.PatchSize = sizeOfAWaveSeq;
             waveSeqBank.IsWritable = true;
             waveSeqBank.IsLoaded = true;
 
-            for (var index = 0; index < numberOfWaveSeqsInBank; index++)
+            for (int index = 0; index < numberOfWaveSeqsInBank; index++)
             {
                 // Place in PcgMemory.
-                var waveSeq = (WaveSequence) waveSeqBank[index];
+                WaveSequence waveSeq = (WaveSequence) waveSeqBank[index];
                 waveSeq.ByteOffset = Index;
                 waveSeq.ByteLength = sizeOfAWaveSeq;
                 waveSeq.IsLoaded = true;
@@ -621,7 +621,7 @@ namespace PcgTools.Model.Common.File
         private void ReadDkt1Chunk(int chunkSize)
         {
             Index += BetweenChunkGapSize;
-            var start = Index;
+            int start = Index;
             while (Index - start < chunkSize)
             {
                 ReadDbk1Chunk();
@@ -634,32 +634,32 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         private void ReadDbk1Chunk()
         {
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
             CurrentPcgMemory.Chunks.Collection.Add(new Chunk("DBK1", Index, chunkSize));
 
-            var startIndex = Index;
+            int startIndex = Index;
             Index += Dbk1NumberOfDrumKitsOffset;
-            var numberOfDrumKitsInBank = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int numberOfDrumKitsInBank = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
             Index += 4;
-            var sizeOfADrumKit = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int sizeOfADrumKit = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
 // ReSharper disable RedundantStringFormatCall
             Console.WriteLine($" Size of a drumkit: {sizeOfADrumKit}");
 // ReSharper restore RedundantStringFormatCall
             Index += 4;
-            var bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
-            var bankIndex = DrumKitBankId2DrumKitIndex(bankId);
+            int bankId = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int bankIndex = DrumKitBankId2DrumKitIndex(bankId);
             Index += 4;
 
-            var drumKitBank = (DrumKitBank) CurrentPcgMemory.DrumKitBanks[bankIndex];
+            DrumKitBank drumKitBank = (DrumKitBank) CurrentPcgMemory.DrumKitBanks[bankIndex];
             drumKitBank.ByteOffset = startIndex;
             drumKitBank.PatchSize = sizeOfADrumKit;
             drumKitBank.IsWritable = true;
             drumKitBank.IsLoaded = true;
 
-            for (var index = 0; index < numberOfDrumKitsInBank; index++)
+            for (int index = 0; index < numberOfDrumKitsInBank; index++)
             {
                 // Place in PcgMemory.
-                var drumKit = (DrumKit) drumKitBank[index];
+                DrumKit drumKit = (DrumKit) drumKitBank[index];
                 drumKit.ByteOffset = Index;
                 drumKit.ByteLength = sizeOfADrumKit;
                 drumKit.IsLoaded = true;
@@ -694,7 +694,7 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         protected virtual void ReadGlb1Chunk(int chunkSizeNotUsed)
         {
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
             Index += 12; // Skip 'GLB1", chunk size and 4 other/unknown bytes.
             //CurrentPcgMemory.Chunks.Add(new Chunk("GLB1", Index, chunkSize));
             CurrentPcgMemory.Global.ByteOffset = Index;
@@ -729,30 +729,30 @@ namespace PcgTools.Model.Common.File
 
             Debug.Assert(Util.GetChars(CurrentPcgMemory.Content, Index, 4) == "DPD1");
             Index += 4;
-            var dpd1ChunkSize = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
+            int dpd1ChunkSize = Util.GetInt(CurrentPcgMemory.Content, Index, 4);
             Index += 8; // Skip DPD1 header
 
-            var sizeOfADrumPattern = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
-            var numberOfDrumPatternsInBank = dpd1ChunkSize / sizeOfADrumPattern;
+            int sizeOfADrumPattern = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int numberOfDrumPatternsInBank = dpd1ChunkSize / sizeOfADrumPattern;
             Debug.Assert(Util.GetInt(CurrentPcgMemory.Content, Index, 4) == numberOfDrumPatternsInBank);
             // ReSharper disable RedundantStringFormatCall
             Console.WriteLine($" Size of a drumpattern: {sizeOfADrumPattern}");
             // ReSharper restore RedundantStringFormatCall
-            var bankId = 1; // User bank
-            var bankIndex = DrumPatternBankId2DrumPatternIndex(bankId);
+            int bankId = 1; // User bank
+            int bankIndex = DrumPatternBankId2DrumPatternIndex(bankId);
 
-            var drumPatternBank = (DrumPatternBank) CurrentPcgMemory.DrumPatternBanks[bankIndex];
+            DrumPatternBank drumPatternBank = (DrumPatternBank) CurrentPcgMemory.DrumPatternBanks[bankIndex];
             drumPatternBank.ByteOffset = Index + 12; 
             drumPatternBank.PatchSize = sizeOfADrumPattern;
             drumPatternBank.IsWritable = true;
             drumPatternBank.IsLoaded = true;
 
             Index += 12; // Goto first pattern data
-            var index = 0;
+            int index = 0;
             for (index = 0; index < numberOfDrumPatternsInBank; index++)
             {
                 // Place in PcgMemory.
-                var drumPattern = (DrumPattern) drumPatternBank[index];
+                DrumPattern drumPattern = (DrumPattern) drumPatternBank[index];
                 drumPattern.ByteOffset = Index;
                 drumPattern.ByteLength = sizeOfADrumPattern;
                 drumPattern.IsLoaded = true;

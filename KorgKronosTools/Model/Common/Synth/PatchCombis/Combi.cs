@@ -42,7 +42,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         public override void SetNotifications()
         {
-            var masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(Root.Model);
+            MasterFiles.MasterFile masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(Root.Model);
             if ((masterFile != null) && !PcgRoot.FileName.IsEqualFileAs(masterFile.FileName))
             {
                 masterFile.PropertyChanged += OnMasterPcgFilePropertyChanged;
@@ -50,7 +50,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
 
             PcgRoot.PropertyChanged += OnPatchPropertyChanged;
 
-            foreach (var timbre in Timbres.TimbresCollection)
+            foreach (ITimbre timbre in Timbres.TimbresCollection)
             {
                 timbre.SetNotifications();
             }
@@ -70,7 +70,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <param name="secondaryMidiChannel"></param>
         public void SwitchMidiChannels(int mainMidiChannel, int secondaryMidiChannel)
         {
-            foreach (var timbre in Timbres.TimbresCollection.Where(
+            foreach (ITimbre timbre in Timbres.TimbresCollection.Where(
                 timbre => new List<string> {"Int", "On", "Both"}.Contains(timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value)))
             {
                 if (timbre.GetParam(ParameterNames.TimbreParameterName.MidiChannel).Value == mainMidiChannel - 1)
@@ -99,18 +99,18 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         public void InitAsMpe()
         {
-            var timbre0 = Timbres.TimbresCollection[0];
-            var midiChannel = 0;
+            ITimbre timbre0 = Timbres.TimbresCollection[0];
+            int midiChannel = 0;
             timbre0.GetParam(ParameterNames.TimbreParameterName.MidiChannel).Value = midiChannel++; // MIDI channel 1 (value 0)
 
-            foreach (var timbre in Timbres.TimbresCollection.Where(timbre => timbre != timbre0))
+            foreach (ITimbre timbre in Timbres.TimbresCollection.Where(timbre => timbre != timbre0))
             {
                 timbre.GetParam(ParameterNames.TimbreParameterName.MidiChannel).Value = midiChannel++; // MIDI channel same as timbre number
 
                 timbre.UsedProgram = timbre0.UsedProgram;
 
 
-                var parameterNames = new ParameterNames.TimbreParameterName[]
+                ParameterNames.TimbreParameterName[] parameterNames = new ParameterNames.TimbreParameterName[]
                 {
                     ParameterNames.TimbreParameterName.Status, 
                     ParameterNames.TimbreParameterName.Mute,
@@ -124,9 +124,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                     // "Transpose", "Detune", "Portamento", "Bend Range" are not set since parameters with negative values cannot be set.
                 };
 
-                var timbreToChange = timbre;
+                ITimbre timbreToChange = timbre;
                 foreach (
-                    var parameterName in
+                    ParameterNames.TimbreParameterName parameterName in
                         parameterNames.Where(parameterName => timbreToChange.GetParam(parameterName) != null))
                 {
                     try
@@ -207,12 +207,12 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             get
             {
-                var numberOfReferences = 0;
+                int numberOfReferences = 0;
 
                 if (PcgRoot.SetLists != null)
                 {
                     // ReSharper disable once UnusedVariable
-                    foreach (var patch in from bank in PcgRoot.SetLists.BankCollection
+                    foreach (ISetListSlot patch in from bank in PcgRoot.SetLists.BankCollection
                         where bank.IsLoaded
                         from ISetListSlot patch in bank.Patches
                         where !patch.IsEmptyOrInit
@@ -241,7 +241,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                 }
 
                 // Use the global setting, if not available, check the Master PCG file, else use just the number.
-                var global = FindGlobal();
+                Global.IGlobal global = FindGlobal();
 
                 // Return either the value if no global/Master file pressent otherwise the name.
                 return (global == null)
@@ -265,7 +265,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                 }
 
                 // Use the global setting, if not available, check the Master PCG file, else use just the number.
-                var global = FindGlobal();
+                Global.IGlobal global = FindGlobal();
 
                 // Return either the value if no global/Master file pressent otherwise the name.
                 return (global == null)
@@ -292,7 +292,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                 GetParam(ParameterNames.CombiParameterName.SubCategory).Value = 0;
             }
 
-            foreach (var timbre in Timbres.TimbresCollection)
+            foreach (ITimbre timbre in Timbres.TimbresCollection)
             {
                 timbre.Clear();
             }
@@ -384,13 +384,13 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         public override void ChangeReferences(IPatch newPatch)
         {
             IPcgMemory pcgMemory = ((IPcgMemory) Parent.Parent.Parent);
-            var setLists = pcgMemory.SetLists == null ? null : pcgMemory.SetLists.BankCollection;
+            IObservableBankCollection<IBank> setLists = pcgMemory.SetLists == null ? null : pcgMemory.SetLists.BankCollection;
             if (setLists == null)
             {
                 return;
             }
 
-            foreach (var setListSlot in
+            foreach (ISetListSlot setListSlot in
                 from setList in setLists
                 where setList.IsLoaded
                 from ISetListSlot setListSlot in setList.Patches
@@ -416,7 +416,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             get
             {
-                var builder = new StringBuilder();
+                StringBuilder builder = new StringBuilder();
                 if (IsEmptyOrInit)
                 {
                     builder.Append(Strings.EmptyOrInitPatchName);
@@ -446,13 +446,13 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
             {
                 List<IDrumPattern> patterns = new List<IDrumPattern>();
 
-                var paramBank = GetParam(ParameterNames.CombiParameterName.DrumTrackCommonPatternBank);
+                IParameter paramBank = GetParam(ParameterNames.CombiParameterName.DrumTrackCommonPatternBank);
                 if (paramBank != null)
                 {
                     IDrumPatternBank bank =
                         (IDrumPatternBank) (PcgRoot.DrumPatternBanks.GetBankWithPcgId((int) paramBank.Value));
 
-                    var paramNumber = GetParam(ParameterNames.CombiParameterName.DrumTrackCommonPatternNumber);
+                    IParameter paramNumber = GetParam(ParameterNames.CombiParameterName.DrumTrackCommonPatternNumber);
                     if (paramNumber != null)
                     {
                         patterns.Add(bank.Patches[paramNumber.Value]);
@@ -472,7 +472,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             int minVolume = 127;
 
-            foreach (var timbre in this.Timbres.TimbresCollection)
+            foreach (ITimbre timbre in this.Timbres.TimbresCollection)
             {
                 if ((timbre.GetParam(ParameterNames.TimbreParameterName.Mute) == null) ||
                      (!timbre.GetParam(ParameterNames.TimbreParameterName.Mute).Value) &&
@@ -494,7 +494,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             int maxVolume = 0;
 
-            foreach (var timbre in this.Timbres.TimbresCollection)
+            foreach (ITimbre timbre in this.Timbres.TimbresCollection)
             {
                 if ((timbre.GetParam(ParameterNames.TimbreParameterName.Mute) == null) ||
                      (!timbre.GetParam(ParameterNames.TimbreParameterName.Mute).Value) &&
@@ -516,9 +516,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <param name="maximumVolume"></param>
         public void ChangeVolume(ChangeVolumeParameters parameters, int minimumVolume, int maximumVolume)
         {
-            foreach (var timbre in this.Timbres.TimbresCollection)
+            foreach (ITimbre timbre in this.Timbres.TimbresCollection)
             {
-                var currentVolumeParameter = timbre.GetParam(ParameterNames.TimbreParameterName.Volume);
+                IParameter currentVolumeParameter = timbre.GetParam(ParameterNames.TimbreParameterName.Volume);
                 
                 switch (parameters.ChangeType)
                 {

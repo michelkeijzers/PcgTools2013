@@ -28,9 +28,9 @@ namespace PcgTools.Model.Common.Synth.PatchDrumPatterns
 
         void FillDrumPatterns()
         {
-            foreach (var bank in BankCollection)
+            foreach (IBank bank in BankCollection)
             {
-                for (var index = 0; index < bank.NrOfPatches; index++)
+                for (int index = 0; index < bank.NrOfPatches; index++)
                 {
                     bank.CreatePatch(index);
                 }
@@ -63,7 +63,7 @@ namespace PcgTools.Model.Common.Synth.PatchDrumPatterns
                 return null;
             }
 
-            foreach (var bank in BankCollection)
+            foreach (IBank bank in BankCollection)
             {
                 if (!bank.IsLoaded && !bank.IsFromMasterFile)
                 {
@@ -89,21 +89,21 @@ namespace PcgTools.Model.Common.Synth.PatchDrumPatterns
         /// <returns></returns>
         public int FindIndexOf(IDrumPattern drumPattern)
         {
-            var foundIndex = 0;
+            int foundIndex = 0;
 
             if (BankCollection == null)
             {
                 return -1;
             }
 
-            foreach (var bank in BankCollection)
+            foreach (IBank bank in BankCollection)
             {
                 if (!bank.IsLoaded && !bank.IsFromMasterFile)
                 {
                     return -1;
                 }
 
-                foreach (var drumPatternInBank in bank.Patches)
+                foreach (IPatch drumPatternInBank in bank.Patches)
                 {
                     if (drumPatternInBank == drumPattern)
                     {

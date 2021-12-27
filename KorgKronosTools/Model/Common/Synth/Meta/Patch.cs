@@ -287,7 +287,7 @@ namespace PcgTools.Model.Common.Synth.Meta
             bool filterDescription)
         {
             // Check ignore.
-            var usePatch = (!ignoreInit || !IsEmptyOrInit);
+            bool usePatch = (!ignoreInit || !IsEmptyOrInit);
 
             // Check text filtering.
             usePatch &= FilterOnText(filterOnText, filterText, caseSensitive, filterDescription);
@@ -306,10 +306,10 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <returns></returns>
         private bool CheckFavorite(ListGenerator.ListGenerator.FilterOnFavorites useFavorites, bool usePatch)
         {
-            var areFavoritesSupported = PcgRoot.AreFavoritesSupported;
+            bool areFavoritesSupported = PcgRoot.AreFavoritesSupported;
             if (areFavoritesSupported)
             {
-                var favoriteParameter =
+                IParameter favoriteParameter =
                     (this is IProgram)
                         ? ((IProgram) this).GetParam(ParameterNames.ProgramParameterName.Favorite)
                         : (this is ICombi)
@@ -351,13 +351,13 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <returns></returns>
         public virtual int CalcByteDifferences(IPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var patchSize = ByteLength;
+            int patchSize = ByteLength;
             Debug.Assert(patchSize == otherPatch.ByteLength);
             Debug.Assert(otherPatch != null);
 
-            var diffs = 0;
-            var startIndex = includingName ? 0 : MaxNameLength;
-            for (var index = startIndex; index < patchSize; index++)
+            int diffs = 0;
+            int startIndex = includingName ? 0 : MaxNameLength;
+            for (int index = startIndex; index < patchSize; index++)
             {
                 if (UseIndexForDifferencing(index))
                 {
@@ -386,12 +386,12 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <returns></returns>
         public virtual int CalcByteDifferences(IClipBoardPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var patchSize = ByteLength;
+            int patchSize = ByteLength;
             Debug.Assert(patchSize == otherPatch.Data.Length);
 
-            var diffs = 0;
-            var startIndex = includingName ? 0 : MaxNameLength;
-            for (var index = startIndex; index < patchSize; index++)
+            int diffs = 0;
+            int startIndex = includingName ? 0 : MaxNameLength;
+            for (int index = startIndex; index < patchSize; index++)
             {
                 if (UseIndexForDifferencing(index))
                 {
@@ -429,14 +429,14 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <returns></returns>
         public virtual int CalcByteDifferencesInNameAndDescription(IPatch otherPatch)
         {
-            var patchSize = ByteLength;
+            int patchSize = ByteLength;
             Debug.Assert(patchSize == ByteLength);
             Debug.Assert(otherPatch != null);
             Debug.Assert(MaxNameLength == otherPatch.MaxNameLength);
 
             // Add name differences.
-            var diffs = 0;
-            for (var index = 0; index < MaxNameLength; index++)
+            int diffs = 0;
+            for (int index = 0; index < MaxNameLength; index++)
             {
                 diffs += (PcgRoot.Content[ByteOffset + index] != otherPatch.Root.Content[otherPatch.ByteOffset + index]) ? 1 : 0;
             }
@@ -451,8 +451,8 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <returns></returns>
         public int CalcCrc(bool includingName)
         {
-            var value = 0; // Skip name (assuming name starts at byte 0)
-            for (var index = (includingName ? 0 : MaxNameLength); index < ByteLength; index++)
+            int value = 0; // Skip name (assuming name starts at byte 0)
+            for (int index = (includingName ? 0 : MaxNameLength); index < ByteLength; index++)
             {
                 value += PcgRoot.Content[ByteOffset + index];
             }
@@ -468,11 +468,11 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <returns></returns>
         protected IGlobal FindGlobal()
         {
-            var global = (PcgRoot.Content == null) ? null : PcgRoot.Global;
+            IGlobal global = (PcgRoot.Content == null) ? null : PcgRoot.Global;
             if (global == null)
             {
                 // Find master PCG memory (except when file is master file itself).
-                var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                 if ((masterPcgMemory != null) && (masterPcgMemory.FileName != Root.FileName))
                 {
                     global = masterPcgMemory.Global;
@@ -489,7 +489,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         {
             get
             {
-                var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                 return (masterPcgMemory == PcgRoot);
             }
         }
@@ -577,10 +577,10 @@ namespace PcgTools.Model.Common.Synth.Meta
             switch (e.PropertyName)
             {
                 case "Name":
-                    var memory = PcgRoot;
+                    IPcgMemory memory = PcgRoot;
                     if ((memory.HasOnlyOnePatch && Settings.Default.Edit_RenameFileWhenPatchNameChanges))
                     {
-                        var directoryName = Path.GetDirectoryName(memory.OriginalFileName);
+                        string directoryName = Path.GetDirectoryName(memory.OriginalFileName);
                         PcgRoot.FileName =  directoryName + memory.NameOfOnlyPatch;
                     }
                     break;

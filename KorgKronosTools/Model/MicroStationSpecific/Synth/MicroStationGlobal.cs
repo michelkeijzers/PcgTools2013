@@ -57,7 +57,7 @@ namespace PcgTools.Model.MicroStationSpecific.Synth
         /// <returns></returns>
         public override string GetCategoryName(IPatch patch)
         {
-            var category = -1;
+            int category = -1;
             if (patch is IProgram)
             {
                 category = ((IProgram)patch).GetParam(ParameterNames.ProgramParameterName.Category).Value;
@@ -68,7 +68,7 @@ namespace PcgTools.Model.MicroStationSpecific.Synth
             }
 
             //var list = new List<String>();
-            var categories = new[]
+            string[] categories = new[]
             {
                 "All", "Keyboard", "Strings/Brass/Woodwind", "Guitar", "Bass&Bass Split", "Synth", "Lead&Solo Split",
                 "Drum/Mallet/Hits", "User"
@@ -100,8 +100,8 @@ namespace PcgTools.Model.MicroStationSpecific.Synth
         /// <returns></returns>
         protected override int CalcSubCategoryNameOffset(ECategoryType type, int index, int subIndex)
         {
-            var offset = ByteOffset + PcgOffsetCategories;
-            var typeSize = PcgMemory.HasSubCategories ? NrOfCategories * NrOfSubCategories * CategoryNameLength : 0;
+            int offset = ByteOffset + PcgOffsetCategories;
+            int typeSize = PcgMemory.HasSubCategories ? NrOfCategories * NrOfSubCategories * CategoryNameLength : 0;
 
             offset += (type == ECategoryType.Program) ? 0 : typeSize;
             //offset += NrOfCategories*CategoryNameLength; // Categories size

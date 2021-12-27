@@ -27,16 +27,9 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// </summary>
         protected override void CreateBanks()
         {
-            Add(new NautilusDrumKitBank(this, BankType.EType.Int, "INT", -1));
-
-            foreach (var id in new[] { "U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G" })
+            foreach (string id in new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O" })
             {
-                Add(new NautilusDrumKitBank(this, BankType.EType.User, id, -1));
-            }
-
-            foreach (var id in new[] { "U-AA", "U-BB", "U-CC", "U-DD", "U-EE", "U-FF", "U-GG" })
-            {
-                Add(new NautilusDrumKitBank(this, BankType.EType.User, id, -1));
+                Add(new NautilusDrumKitBank(this, BankType.EType.Int, id, -1));
             }
 
             // LV: GM Drumkit bank. For the patches, probably use a separate subclass KronosGmDrumKit (similar to KronosGmProgram)?

@@ -169,14 +169,14 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             else if (AllPatchesSelected)
             {
                 // Copy programs.
-                foreach (var program in Patches.Where(patch => patch.IsSelected && (patch is IProgram)))
+                foreach (IPatch program in Patches.Where(patch => patch.IsSelected && (patch is IProgram)))
                 {
                     // Always copy programs.
                     PcgClipBoard.CopyProgramToClipBoard(program as IProgram, cutPasteAction);
                 }
 
                 // Copy combis.
-                foreach (var combi in Patches.Where(
+                foreach (IPatch combi in Patches.Where(
                     patch => patch.IsSelected && (patch is ICombi)).Where(
                         combi =>
                             cutPasteAction || Settings.Default.CopyPaste_CopyIncompleteCombis || ((ICombi) combi).IsCompleteInPcg))
@@ -185,7 +185,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 }
 
                 // Copy set list slots.
-                foreach (var setListSlot in Patches.Where(patch => patch.IsSelected && (patch is ISetListSlot)).Where(
+                foreach (IPatch setListSlot in Patches.Where(patch => patch.IsSelected && (patch is ISetListSlot)).Where(
                     (setListSlot => cutPasteAction ||
                                     Settings.Default.CopyPaste_CopyIncompleteSetListSlots ||
                                     ((ISetListSlot) setListSlot).IsCompleteInPcg)))
@@ -193,21 +193,21 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                     PcgClipBoard.CopySetListSlotToClipBoard(setListSlot as ISetListSlot, cutPasteAction);
                 }
                 // Copy drum kits.
-                foreach (var drumKit in Patches.Where(patch => patch.IsSelected && (patch is IDrumKit)))
+                foreach (IPatch drumKit in Patches.Where(patch => patch.IsSelected && (patch is IDrumKit)))
                 {
                     // Always copy drum kits.
                     PcgClipBoard.CopyDrumKitToClipBoard(drumKit as IDrumKit, cutPasteAction);
                 }
                 
                 // Copy drum patterns.
-                foreach (var drumPattern in Patches.Where(patch => patch.IsSelected && (patch is IDrumPattern)))
+                foreach (IPatch drumPattern in Patches.Where(patch => patch.IsSelected && (patch is IDrumPattern)))
                 {
                     // Always copy patterns.
                     PcgClipBoard.CopyDrumPatternToClipBoard(drumPattern as IDrumPattern, cutPasteAction);
                 }
                 
                 // Copy wave sequences.
-                foreach (var waveSequence in Patches.Where(patch => patch.IsSelected && (patch is IWaveSequence)))
+                foreach (IPatch waveSequence in Patches.Where(patch => patch.IsSelected && (patch is IWaveSequence)))
                 {
                     // Always copy wave sequences.
                     PcgClipBoard.CopyWaveSequenceToClipBoard(waveSequence as IWaveSequence, cutPasteAction);
@@ -242,7 +242,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         {
             if (SelectedScopeSet == PcgViewModel.ScopeSet.Banks)
             {
-                foreach (var program in from IProgramBank bank in Banks.Where(bank => bank.IsSelected)
+                foreach (IProgram program in from IProgramBank bank in Banks.Where(bank => bank.IsSelected)
                     where bank.Type != BankType.EType.Gm
                     from IProgram program in bank.Patches
                     where bank.IsLoaded
@@ -255,7 +255,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             }
             else
             {
-                foreach (var program in Patches.Where(patch => patch.IsSelected).Cast<IProgram>())
+                foreach (IProgram program in Patches.Where(patch => patch.IsSelected).Cast<IProgram>())
                 {
                     // Always copy programs.
                     PcgClipBoard.CopyProgramToClipBoard(program, cutPasteAction);
@@ -272,7 +272,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         {
             if (SelectedScopeSet == PcgViewModel.ScopeSet.Banks)
             {
-                foreach (var combi in (from ICombiBank bank in Banks.Where(bank => bank.IsSelected)
+                foreach (ICombi combi in (from ICombiBank bank in Banks.Where(bank => bank.IsSelected)
                     from ICombi combi in bank.Patches
                     where bank.IsLoaded
                     select combi).Where(combi => cutPasteAction ||
@@ -283,7 +283,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             }
             else
             {
-                foreach (var combi in Patches.Where(
+                foreach (ICombi combi in Patches.Where(
                     patch => patch.IsSelected).Cast<ICombi>().Where(
                         combi => cutPasteAction || Settings.Default.CopyPaste_CopyIncompleteCombis || combi.IsCompleteInPcg))
                 {
@@ -301,7 +301,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         {
             if (SelectedScopeSet == PcgViewModel.ScopeSet.Banks)
             {
-                foreach (var setListSlot in (from ISetList setList in Banks.Where(bank => bank.IsSelected)
+                foreach (ISetListSlot setListSlot in (from ISetList setList in Banks.Where(bank => bank.IsSelected)
                     from ISetListSlot setListSlot in setList.Patches
                     where setList.IsLoaded
                     select setListSlot).Where(setListSlot => cutPasteAction ||
@@ -313,7 +313,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             }
             else
             {
-                foreach (var setListSlot in Patches.Where(patch => patch.IsSelected).Cast<ISetListSlot>().Where(
+                foreach (ISetListSlot setListSlot in Patches.Where(patch => patch.IsSelected).Cast<ISetListSlot>().Where(
                     (setListSlot => cutPasteAction ||
                                     Settings.Default.CopyPaste_CopyIncompleteSetListSlots ||
                                     setListSlot.IsCompleteInPcg)))
@@ -332,7 +332,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         {
             if (SelectedScopeSet == PcgViewModel.ScopeSet.Banks)
             {
-                foreach (var drumKit in from IDrumKitBank bank in Banks.Where(bank => bank.IsSelected)
+                foreach (IDrumKit drumKit in from IDrumKitBank bank in Banks.Where(bank => bank.IsSelected)
                                         where bank.Type != BankType.EType.Gm
                                         from IDrumKit drumKit in bank.Patches
                                         where bank.IsLoaded
@@ -345,7 +345,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             }
             else
             {
-                foreach (var drumKit in Patches.Where(patch => patch.IsSelected).Cast<IDrumKit>())
+                foreach (IDrumKit drumKit in Patches.Where(patch => patch.IsSelected).Cast<IDrumKit>())
                 {
                     // Always copy drum kits.
                     PcgClipBoard.CopyDrumKitToClipBoard(drumKit, cutPasteAction);
@@ -362,7 +362,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         {
             if (SelectedScopeSet == PcgViewModel.ScopeSet.Banks)
             {
-                foreach (var drumPattern in from IDrumPatternBank bank in Banks.Where(bank => bank.IsSelected)
+                foreach (IDrumPattern drumPattern in from IDrumPatternBank bank in Banks.Where(bank => bank.IsSelected)
                                         where bank.Type != BankType.EType.Gm
                                         from IDrumPattern drumPattern in bank.Patches
                                         where bank.IsLoaded
@@ -375,7 +375,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             }
             else
             {
-                foreach (var drumPattern in Patches.Where(patch => patch.IsSelected).Cast<IDrumPattern>())
+                foreach (IDrumPattern drumPattern in Patches.Where(patch => patch.IsSelected).Cast<IDrumPattern>())
                 {
                     // Always copy drum patterns.
                     PcgClipBoard.CopyDrumPatternToClipBoard(drumPattern, cutPasteAction);
@@ -392,7 +392,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         {
             if (SelectedScopeSet == PcgViewModel.ScopeSet.Banks)
             {
-                foreach (var waveSequence in from IWaveSequenceBank bank in Banks.Where(bank => bank.IsSelected)
+                foreach (IWaveSequence waveSequence in from IWaveSequenceBank bank in Banks.Where(bank => bank.IsSelected)
                                         where bank.Type != BankType.EType.Gm
                                         from IWaveSequence waveSequence in bank.Patches
                                         where bank.IsLoaded
@@ -405,7 +405,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             }
             else
             {
-                foreach (var waveSequence in Patches.Where(patch => patch.IsSelected).Cast<IWaveSequence>())
+                foreach (IWaveSequence waveSequence in Patches.Where(patch => patch.IsSelected).Cast<IWaveSequence>())
                 {
                     // Always copy wave sequences.
                     PcgClipBoard.CopyWaveSequenceToClipBoard(waveSequence, cutPasteAction);
@@ -451,7 +451,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             
             PasteDuplicates();
 
-            var infoText = PastePatches();
+            string infoText = PastePatches();
 
             if (!PcgClipBoard.CutPasteSelected)
             {
@@ -507,7 +507,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 ((PcgClipBoard.CopyFileName == SelectedPcgMemory.FileName) &&
                  (PcgClipBoard.SelectedCopyType != ClipBoard.PcgClipBoard.CopyType.Programs)))
             {
-                for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+                for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
                 {
                     FindDuplicatesOfType(PcgClipBoard.Programs[index].CopiedPatches, SelectedPcgMemory.ProgramBanks);
                 }
@@ -590,8 +590,8 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// </summary>
         private void PastingFinished()
         {
-            var count = 0;
-            for (var index = 0; index < (int)ProgramBank.SynthesisType.Last; index++)
+            int count = 0;
+            for (int index = 0; index < (int)ProgramBank.SynthesisType.Last; index++)
             {
                 count += PcgClipBoard.Programs[index].CopiedPatches.Count;
             }
@@ -615,9 +615,9 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// <param name="banks"></param>
         void FindDuplicatesOfType(ObservableCollection<IClipBoardPatch> clipBoardPatches, IBanks banks)
         {
-            foreach (var clipBoardPatch in clipBoardPatches)
+            foreach (IClipBoardPatch clipBoardPatch in clipBoardPatches)
             {
-                foreach (var bank in banks.BankCollection)
+                foreach (IBank bank in banks.BankCollection)
                 {
                     if (ShouldBankBeSearched(clipBoardPatches, bank)) 
                     {
@@ -722,7 +722,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// <returns></returns>
         private bool SearchByteWiseEqualPatchFirstOccurence(IClipBoardPatch clipBoardPatch, IBank bank)
         {
-            foreach (var patch in bank.Patches.Where(patch => patch.CalcByteDifferences(clipBoardPatch, true, 1) == 0))
+            foreach (IPatch patch in bank.Patches.Where(patch => patch.CalcByteDifferences(clipBoardPatch, true, 1) == 0))
             {
                 clipBoardPatch.PasteDestination = patch;
                 PcgClipBoard.ProtectedPatches.Add(patch);
@@ -754,7 +754,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 }
 
                 // 2b. Search for an identical name patch, on first occurence.
-                foreach (var patch in bank.Patches.Where(
+                foreach (IPatch patch in bank.Patches.Where(
                     patch => patch.Name.Trim() == clipBoardPatch.OriginalLocation.Name.Trim()))
                 {
                     clipBoardPatch.PasteDestination = patch;
@@ -788,7 +788,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 }
 
                 // 2b. Search for an identical name patch, on first occurence.
-                foreach (var patch in bank.Patches.Where(
+                foreach (IPatch patch in bank.Patches.Where(
                     patch => patch.IsNameLike(clipBoardPatch.OriginalLocation.Name)))
                 {
                     clipBoardPatch.PasteDestination = patch;
@@ -815,7 +815,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             }
 
             // Get same index.
-            var index = clipBoardPatch.OriginalLocation.Index;
+            int index = clipBoardPatch.OriginalLocation.Index;
 
             return bank.Patches.Count > index ? bank[index] : null;
         }
@@ -862,7 +862,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         private void PastePatchesNotFromBank(bool[] atLeastOnePatchIsPasted)
         {
             // ReSharper disable once UnusedVariable
-            foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(
+            foreach (IPatch patch in Patches.Where(patch => patch.IsSelected).Where(
                 patch => !PasteToSelectedPatch(patch, ref atLeastOnePatchIsPasted[0])))
             {
                 // ReSharper disable once RedundantJumpStatement
@@ -873,7 +873,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             if (Settings.Default.CopyPaste_AutoExtendedSinglePatchSelectionPaste &&
                 (Patches.Count(patch => patch.IsSelected) == 1))
             {
-                for (var index = Patches.IndexOf(Patches.First(patch => patch.IsSelected)); index < Patches.Count; index++)
+                for (int index = Patches.IndexOf(Patches.First(patch => patch.IsSelected)); index < Patches.Count; index++)
                 {
                     if (!PasteToSelectedPatch(Patches.ToArray()[index], ref atLeastOnePatchIsPasted[0]))
                     {
@@ -884,7 +884,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             else
             {
                 // ReSharper disable once UnusedVariable
-                foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(
+                foreach (IPatch patch in Patches.Where(patch => patch.IsSelected).Where(
                     patch => !PasteToSelectedPatch(patch, ref atLeastOnePatchIsPasted[0])))
                 {
                     // ReSharper disable once RedundantJumpStatement
@@ -914,12 +914,12 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             }
 
             // Copy clip board patches to selected patches.
-            foreach (var bank in Banks.Where(bank => bank.IsSelected))
+            foreach (IBank bank in Banks.Where(bank => bank.IsSelected))
             {
                 // ReSharper disable ConditionIsAlwaysTrueOrFalse, needed for preventing modified closure warning
-                var pasted = atLeastOnePatchIsPasted[0];
+                bool pasted = atLeastOnePatchIsPasted[0];
                 // ReSharper restore ConditionIsAlwaysTrueOrFalse
-                var cont = bank.Patches.All(patch => PasteToSelectedPatch(patch, ref pasted));
+                bool cont = bank.Patches.All(patch => PasteToSelectedPatch(patch, ref pasted));
                 atLeastOnePatchIsPasted[0] = pasted;
                 if (!cont)
                 {
@@ -944,7 +944,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 !PcgClipBoard.ProtectedPatches.Contains(patch))
             {
                 IClipBoardPatches clipBoardPatches = null;
-                var overwriteAllowed = CheckOverwriteallowedForPatches(patch, ref clipBoardPatches);
+                bool overwriteAllowed = CheckOverwriteallowedForPatches(patch, ref clipBoardPatches);
 
                 IClipBoardPatch clipBoardPatchToPaste = null;
                 if (clipBoardPatches != null) // Can happen when not allowed to overwrite
@@ -980,7 +980,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         {
             bool overwriteAllowed;
 
-            var patch1 = patch as IProgram;
+            IProgram patch1 = patch as IProgram;
             if (patch1 != null)
             {
                 overwriteAllowed = CheckOverwriteAllowedForPrograms(out clipBoardPatches, patch1, false);
@@ -1027,7 +1027,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
             if (((IBank)(patch1.Parent)).IsWritable &&
                 (Settings.Default.CopyPaste_OverwriteFilledPrograms || patch1.IsEmptyOrInit))
             {
-                var program = patch1;
+                IProgram program = patch1;
                 clipBoardPatches = PcgClipBoard.Programs[(int) (((IProgramBank) (program.Parent)).BankSynthesisType)];
                 overwriteAllowed = true;
             }

@@ -89,7 +89,7 @@ namespace PcgTools.Model.Common.Synth.PatchWaveSequences
         {
             get
             {
-                var builder = new StringBuilder();
+                StringBuilder builder = new StringBuilder();
                 if (IsEmptyOrInit)
                 {
                     builder.Append(Strings.EmptyOrInitPatchName);

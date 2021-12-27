@@ -110,7 +110,7 @@ namespace PcgTools.ListGenerator
         /// <returns></returns>
         protected override string RunAfterFilteringBanks(bool useFileWriter = true)
         {
-            using (var writer = File.CreateText(OutputFileName))
+            using (StreamWriter writer = File.CreateText(OutputFileName))
             {
                 // Init diff list.
                 FindPrograms();
@@ -153,9 +153,9 @@ namespace PcgTools.ListGenerator
         {
             _diffPrograms = new Dictionary<IProgram, Dictionary<int, LinkedList<IProgram>>>();
 
-            foreach (var bank in SelectedProgramBanks)
+            foreach (IProgramBank bank in SelectedProgramBanks)
             {
-                foreach (var patch in bank.Patches)
+                foreach (IPatch patch in bank.Patches)
                 {
                     FindProgram((IProgram) patch);
                 }
@@ -178,8 +178,8 @@ namespace PcgTools.ListGenerator
                 return;
             }
 
-            var dict = new Dictionary<int, LinkedList<IProgram>>();
-            for (var diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
+            Dictionary<int, LinkedList<IProgram>> dict = new Dictionary<int, LinkedList<IProgram>>();
+            for (int diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
             {
                 dict[diffs] = new LinkedList<IProgram>();
             }
@@ -196,7 +196,7 @@ namespace PcgTools.ListGenerator
         void CreateProgramsList()
         {
             // Compare with all other selected programs.
-            foreach (var bank in SelectedProgramBanks.Where(bank => bank.Type != BankType.EType.Gm))
+            foreach (IProgramBank bank in SelectedProgramBanks.Where(bank => bank.Type != BankType.EType.Gm))
             {
                 CreateProgramList(bank);
             }
@@ -209,9 +209,9 @@ namespace PcgTools.ListGenerator
         /// <param name="bank"></param>
         private void CreateProgramList(IProgramBank bank)
         {
-            for (var index = 0; index < bank.Patches.Count; index++)
+            for (int index = 0; index < bank.Patches.Count; index++)
             {
-                var patch = (IProgram) bank[index];
+                IProgram patch = (IProgram) bank[index];
 
                 if (!bank.IsLoaded ||
                     !patch.UseInList(IgnoreInitPrograms, FilterOnText, FilterText, FilterCaseSensitive, 
@@ -220,8 +220,8 @@ namespace PcgTools.ListGenerator
                     continue;
                 }
 
-                var bank1 = bank;
-                foreach (var bank2 in SelectedProgramBanks.Where(
+                IProgramBank bank1 = bank;
+                foreach (IProgramBank bank2 in SelectedProgramBanks.Where(
                     bank2 => (bank1.BankSynthesisType == bank2.BankSynthesisType) &&
                              (bank2.Type != BankType.EType.Gm)))
                 {
@@ -242,8 +242,8 @@ namespace PcgTools.ListGenerator
         {
             if (SearchBothDirections || (string.Compare(bank.Id, bank2.Id, StringComparison.Ordinal) <= 0))
             {
-                var startIndex = SearchBothDirections ? 0 : (bank == bank2 ? programIndex + 1 : 0);
-                for (var patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
+                int startIndex = SearchBothDirections ? 0 : (bank == bank2 ? programIndex + 1 : 0);
+                for (int patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
                 {
                     AnalyzeProgram(bank2, patch, patch2Index);
                 }
@@ -259,7 +259,7 @@ namespace PcgTools.ListGenerator
         /// <param name="patch2Index"></param>
         private void AnalyzeProgram(IBank bank2, IProgram patch, int patch2Index)
         {
-            var patch2 = (IProgram) bank2[patch2Index];
+            IProgram patch2 = (IProgram) bank2[patch2Index];
             if ((patch == patch2) || !bank2.IsLoaded ||
                 !patch2.UseInList(IgnoreInitPrograms, FilterOnText, FilterText, FilterCaseSensitive,
                     ListFilterOnFavorites, false))
@@ -267,7 +267,7 @@ namespace PcgTools.ListGenerator
                 return;
             }
 
-            var diffs = CalculateDiffs(patch, patch2);
+            int diffs = CalculateDiffs(patch, patch2);
             if (diffs <= MaxDiffs)
             {
                 _diffPrograms[patch][diffs].AddLast(patch2);
@@ -282,9 +282,9 @@ namespace PcgTools.ListGenerator
         {
             _diffCombis = new Dictionary<ICombi, Dictionary<int, LinkedList<ICombi>>>();
 
-            foreach (var bank in SelectedCombiBanks)
+            foreach (ICombiBank bank in SelectedCombiBanks)
             {
-                foreach (var patch in bank.Patches)
+                foreach (IPatch patch in bank.Patches)
                 {
                     FindCombi((ICombi)patch);
                 }
@@ -307,8 +307,8 @@ namespace PcgTools.ListGenerator
                 return;
             }
 
-            var dict = new Dictionary<int, LinkedList<ICombi>>();
-            for (var diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
+            Dictionary<int, LinkedList<ICombi>> dict = new Dictionary<int, LinkedList<ICombi>>();
+            for (int diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
             {
                 dict[diffs] = new LinkedList<ICombi>();
             }
@@ -325,7 +325,7 @@ namespace PcgTools.ListGenerator
         void CreateCombisList()
         {
             // Compare with all other selected Combis.
-            foreach (var bank in SelectedCombiBanks.Where(bank => bank.Type != BankType.EType.Gm))
+            foreach (ICombiBank bank in SelectedCombiBanks.Where(bank => bank.Type != BankType.EType.Gm))
             {
                 CreateCombiList(bank);
             }
@@ -338,9 +338,9 @@ namespace PcgTools.ListGenerator
         /// <param name="bank"></param>
         private void CreateCombiList(ICombiBank bank)
         {
-            for (var index = 0; index < bank.Patches.Count; index++)
+            for (int index = 0; index < bank.Patches.Count; index++)
             {
-                var patch = (ICombi)bank[index];
+                ICombi patch = (ICombi)bank[index];
 
                 if (!bank.IsLoaded ||
                     !patch.UseInList(IgnoreInitCombis, FilterOnText, FilterText, FilterCaseSensitive,
@@ -349,7 +349,7 @@ namespace PcgTools.ListGenerator
                     continue;
                 }
 
-                foreach (var bank2 in SelectedCombiBanks)
+                foreach (ICombiBank bank2 in SelectedCombiBanks)
                 {
                     AnalyzeCombis(bank, bank2, index, patch);
                 }
@@ -368,8 +368,8 @@ namespace PcgTools.ListGenerator
         {
             if (SearchBothDirections || (string.Compare(bank.Id, bank2.Id, StringComparison.Ordinal) <= 0))
             {
-                var startIndex = SearchBothDirections ? 0 : (bank == bank2 ? CombiIndex + 1 : 0);
-                for (var patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
+                int startIndex = SearchBothDirections ? 0 : (bank == bank2 ? CombiIndex + 1 : 0);
+                for (int patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
                 {
                     AnalyzeCombi(bank2, patch, patch2Index);
                 }
@@ -385,7 +385,7 @@ namespace PcgTools.ListGenerator
         /// <param name="patch2Index"></param>
         private void AnalyzeCombi(IBank bank2, ICombi patch, int patch2Index)
         {
-            var patch2 = (ICombi)bank2[patch2Index];
+            ICombi patch2 = (ICombi)bank2[patch2Index];
             if ((patch == patch2) || !bank2.IsLoaded ||
                 !patch2.UseInList(IgnoreInitCombis, FilterOnText, FilterText, FilterCaseSensitive,
                     ListFilterOnFavorites, false))
@@ -393,7 +393,7 @@ namespace PcgTools.ListGenerator
                 return;
             }
 
-            var diffs = CalculateDiffs(patch, patch2);
+            int diffs = CalculateDiffs(patch, patch2);
             if (diffs <= MaxDiffs)
             {
                 _diffCombis[patch][diffs].AddLast(patch2);
@@ -410,10 +410,10 @@ namespace PcgTools.ListGenerator
 
             if (SetListsEnabled)
             {
-                for (var setListIndex = SetListsRangeFrom; setListIndex <= SetListsRangeTo; setListIndex++)
+                for (int setListIndex = SetListsRangeFrom; setListIndex <= SetListsRangeTo; setListIndex++)
                 {
-                    var setList = (ISetList) PcgMemory.SetLists[setListIndex];
-                    for (var setListSlotIndex = 0; setListSlotIndex < setList.NrOfPatches; setListSlotIndex++)
+                    ISetList setList = (ISetList) PcgMemory.SetLists[setListIndex];
+                    for (int setListSlotIndex = 0; setListSlotIndex < setList.NrOfPatches; setListSlotIndex++)
                     {
                         FindSetListSlot((ISetListSlot) setList[setListSlotIndex]);
                     }
@@ -428,8 +428,8 @@ namespace PcgTools.ListGenerator
         /// <param name="setListSlot"></param>
         private void FindSetListSlot(ISetListSlot setListSlot)
         {
-            var dict = new Dictionary<int, LinkedList<ISetListSlot>>();
-            for (var diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
+            Dictionary<int, LinkedList<ISetListSlot>> dict = new Dictionary<int, LinkedList<ISetListSlot>>();
+            for (int diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
             {
                 dict[diffs] = new LinkedList<ISetListSlot>();
             }
@@ -447,9 +447,9 @@ namespace PcgTools.ListGenerator
             if (SetListsEnabled)
             {
                 // Compare with all other selected set list slots.
-                for (var setListIndex = SetListsRangeFrom; setListIndex < SetListsRangeTo + 1; setListIndex++)
+                for (int setListIndex = SetListsRangeFrom; setListIndex < SetListsRangeTo + 1; setListIndex++)
                 {
-                    var setList = (ISetList) PcgMemory.SetLists[setListIndex];
+                    ISetList setList = (ISetList) PcgMemory.SetLists[setListIndex];
                     CreateSetListSlotList(setList);
                 }
             }
@@ -462,9 +462,9 @@ namespace PcgTools.ListGenerator
         /// <param name="setList"></param>
         private void CreateSetListSlotList(ISetList setList)
         {
-            for (var setListSlotIndex = 0; setListSlotIndex < setList.Patches.Count; setListSlotIndex++)
+            for (int setListSlotIndex = 0; setListSlotIndex < setList.Patches.Count; setListSlotIndex++)
             {
-                var setListSlot = (ISetListSlot) setList[setListSlotIndex];
+                ISetListSlot setListSlot = (ISetListSlot) setList[setListSlotIndex];
 
                 if (!setList.IsLoaded ||
                     !setListSlot.UseInList(IgnoreInitSetListSlots, FilterOnText, FilterText, FilterCaseSensitive,
@@ -473,10 +473,10 @@ namespace PcgTools.ListGenerator
                     continue;
                 }
 
-                var setList1 = setList;
-                for (var setListIndex2 = 0; setListIndex2 < SetListsRangeTo + 1; setListIndex2++)
+                ISetList setList1 = setList;
+                for (int setListIndex2 = 0; setListIndex2 < SetListsRangeTo + 1; setListIndex2++)
                 {
-                    var setList2 = PcgMemory.SetLists[setListIndex2] as ISetList;
+                    ISetList setList2 = PcgMemory.SetLists[setListIndex2] as ISetList;
                     if (SearchBothDirections || (setList1.Index <= setList2.Index))
                     {
                         AnalyzeCheckListSlots(setList, setList2, setListSlotIndex, setListSlot);
@@ -498,8 +498,8 @@ namespace PcgTools.ListGenerator
         {
             if (SearchBothDirections || (setList.Index <= setList2.IndexOffset))
             {
-                var startIndex = SearchBothDirections ? 0 : (setList == setList2 ? setListSlotIndex + 1 : 0);
-                for (var setListSlot2Index = startIndex; setListSlot2Index < setList2.Patches.Count; 
+                int startIndex = SearchBothDirections ? 0 : (setList == setList2 ? setListSlotIndex + 1 : 0);
+                for (int setListSlot2Index = startIndex; setListSlot2Index < setList2.Patches.Count; 
                     setListSlot2Index++)
                 {
                     AnalyzeSetListSlot(setList2, setListSlot, setListSlot2Index);
@@ -516,7 +516,7 @@ namespace PcgTools.ListGenerator
         /// <param name="setListSlot2Index"></param>
         private void AnalyzeSetListSlot(IBank setList2, ISetListSlot setListSlot, int setListSlot2Index)
         {
-            var setListSlot2 = (ISetListSlot)setList2[setListSlot2Index];
+            ISetListSlot setListSlot2 = (ISetListSlot)setList2[setListSlot2Index];
             if ((setListSlot == setListSlot2) || !setList2.IsLoaded ||
                 !setListSlot2.UseInList(IgnoreInitPrograms, FilterOnText, FilterText, FilterCaseSensitive,
                     FilterOnFavorites.All, FilterSetListSlotDescription))
@@ -524,7 +524,7 @@ namespace PcgTools.ListGenerator
                 return;
             }
 
-            var diffs = CalculateDiffs(setListSlot, setListSlot2);
+            int diffs = CalculateDiffs(setListSlot, setListSlot2);
             if (diffs <= MaxDiffs)
             {
                 _diffSetListSlots[setListSlot][diffs].AddLast(setListSlot2);
@@ -539,9 +539,9 @@ namespace PcgTools.ListGenerator
         {
             _diffDrumKits = new Dictionary<IDrumKit, Dictionary<int, LinkedList<IDrumKit>>>();
 
-            foreach (var bank in SelectedDrumKitBanks)
+            foreach (IDrumKitBank bank in SelectedDrumKitBanks)
             {
-                foreach (var patch in bank.Patches)
+                foreach (IPatch patch in bank.Patches)
                 {
                     FindDrumKit((IDrumKit)patch);
                 }
@@ -557,8 +557,8 @@ namespace PcgTools.ListGenerator
         {
             // Assumed filtering on favorites is not needed.
 
-            var dict = new Dictionary<int, LinkedList<IDrumKit>>();
-            for (var diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
+            Dictionary<int, LinkedList<IDrumKit>> dict = new Dictionary<int, LinkedList<IDrumKit>>();
+            for (int diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
             {
                 dict[diffs] = new LinkedList<IDrumKit>();
             }
@@ -575,7 +575,7 @@ namespace PcgTools.ListGenerator
         void CreateDrumKitsList()
         {
             // Compare with all other selected DrumKits.
-            foreach (var bank in SelectedDrumKitBanks.Where(bank => bank.Type != BankType.EType.Gm))
+            foreach (IDrumKitBank bank in SelectedDrumKitBanks.Where(bank => bank.Type != BankType.EType.Gm))
             {
                 CreateDrumKitList(bank);
             }
@@ -588,9 +588,9 @@ namespace PcgTools.ListGenerator
         /// <param name="bank"></param>
         private void CreateDrumKitList(IDrumKitBank bank)
         {
-            for (var index = 0; index < bank.Patches.Count; index++)
+            for (int index = 0; index < bank.Patches.Count; index++)
             {
-                var patch = (IDrumKit)bank[index];
+                IDrumKit patch = (IDrumKit)bank[index];
 
                 if (!bank.IsLoaded ||
                     !patch.UseInList(IgnoreInitDrumKits, FilterOnText, FilterText, FilterCaseSensitive, 
@@ -599,7 +599,7 @@ namespace PcgTools.ListGenerator
                     continue;
                 }
 
-                foreach (var bank2 in SelectedDrumKitBanks)
+                foreach (IDrumKitBank bank2 in SelectedDrumKitBanks)
                 {
                     AnalyzeDrumKits(bank, bank2, index, patch);
                 }
@@ -618,8 +618,8 @@ namespace PcgTools.ListGenerator
         {
             if (SearchBothDirections || (string.Compare(bank.Id, bank2.Id, StringComparison.Ordinal) <= 0))
             {
-                var startIndex = SearchBothDirections ? 0 : (bank == bank2 ? DrumKitIndex + 1 : 0);
-                for (var patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
+                int startIndex = SearchBothDirections ? 0 : (bank == bank2 ? DrumKitIndex + 1 : 0);
+                for (int patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
                 {
                     AnalyzeDrumKit(bank2, patch, patch2Index);
                 }
@@ -635,7 +635,7 @@ namespace PcgTools.ListGenerator
         /// <param name="patch2Index"></param>
         private void AnalyzeDrumKit(IBank bank2, IDrumKit patch, int patch2Index)
         {
-            var patch2 = (IDrumKit)bank2[patch2Index];
+            IDrumKit patch2 = (IDrumKit)bank2[patch2Index];
             if ((patch == patch2) || !bank2.IsLoaded ||
                 !patch2.UseInList(IgnoreInitDrumKits, FilterOnText, FilterText, FilterCaseSensitive,
                     ListFilterOnFavorites, false))
@@ -643,7 +643,7 @@ namespace PcgTools.ListGenerator
                 return;
             }
 
-            var diffs = CalculateDiffs(patch, patch2);
+            int diffs = CalculateDiffs(patch, patch2);
             if (diffs <= MaxDiffs)
             {
                 _diffDrumKits[patch][diffs].AddLast(patch2);
@@ -659,9 +659,9 @@ namespace PcgTools.ListGenerator
         {
             _diffDrumPatterns = new Dictionary<IDrumPattern, Dictionary<int, LinkedList<IDrumPattern>>>();
 
-            foreach (var bank in SelectedDrumPatternBanks)
+            foreach (IDrumPatternBank bank in SelectedDrumPatternBanks)
             {
-                foreach (var patch in bank.Patches)
+                foreach (IPatch patch in bank.Patches)
                 {
                     FindDrumPattern((IDrumPattern)patch);
                 }
@@ -677,8 +677,8 @@ namespace PcgTools.ListGenerator
         {
             // Assumed filtering on favorites is not needed.
 
-            var dict = new Dictionary<int, LinkedList<IDrumPattern>>();
-            for (var diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
+            Dictionary<int, LinkedList<IDrumPattern>> dict = new Dictionary<int, LinkedList<IDrumPattern>>();
+            for (int diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
             {
                 dict[diffs] = new LinkedList<IDrumPattern>();
             }
@@ -695,7 +695,7 @@ namespace PcgTools.ListGenerator
         void CreateDrumPatternsList()
         {
             // Compare with all other selected DrumPatterns.
-            foreach (var bank in SelectedDrumPatternBanks.Where(bank => bank.Type != BankType.EType.Gm))
+            foreach (IDrumPatternBank bank in SelectedDrumPatternBanks.Where(bank => bank.Type != BankType.EType.Gm))
             {
                 CreateDrumPatternList(bank);
             }
@@ -708,9 +708,9 @@ namespace PcgTools.ListGenerator
         /// <param name="bank"></param>
         private void CreateDrumPatternList(IDrumPatternBank bank)
         {
-            for (var index = 0; index < bank.Patches.Count; index++)
+            for (int index = 0; index < bank.Patches.Count; index++)
             {
-                var patch = (IDrumPattern)bank[index];
+                IDrumPattern patch = (IDrumPattern)bank[index];
 
                 if (!bank.IsLoaded ||
                     !patch.UseInList(IgnoreInitDrumPatterns, FilterOnText, FilterText, FilterCaseSensitive, 
@@ -719,7 +719,7 @@ namespace PcgTools.ListGenerator
                     continue;
                 }
 
-                foreach (var bank2 in SelectedDrumPatternBanks)
+                foreach (IDrumPatternBank bank2 in SelectedDrumPatternBanks)
                 {
                     AnalyzeDrumPatterns(bank, bank2, index, patch);
                 }
@@ -739,8 +739,8 @@ namespace PcgTools.ListGenerator
         {
             if (SearchBothDirections || (string.Compare(bank.Id, bank2.Id, StringComparison.Ordinal) <= 0))
             {
-                var startIndex = SearchBothDirections ? 0 : (bank == bank2 ? DrumPatternIndex + 1 : 0);
-                for (var patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
+                int startIndex = SearchBothDirections ? 0 : (bank == bank2 ? DrumPatternIndex + 1 : 0);
+                for (int patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
                 {
                     AnalyzeDrumPattern(bank2, patch, patch2Index);
                 }
@@ -756,7 +756,7 @@ namespace PcgTools.ListGenerator
         /// <param name="patch2Index"></param>
         private void AnalyzeDrumPattern(IBank bank2, IDrumPattern patch, int patch2Index)
         {
-            var patch2 = (IDrumPattern)bank2[patch2Index];
+            IDrumPattern patch2 = (IDrumPattern)bank2[patch2Index];
             if ((patch == patch2) || !bank2.IsLoaded ||
                 !patch2.UseInList(IgnoreInitDrumPatterns, FilterOnText, FilterText, FilterCaseSensitive,
                     ListFilterOnFavorites, false))
@@ -764,7 +764,7 @@ namespace PcgTools.ListGenerator
                 return;
             }
 
-            var diffs = CalculateDiffs(patch, patch2);
+            int diffs = CalculateDiffs(patch, patch2);
             if (diffs <= MaxDiffs)
             {
                 _diffDrumPatterns[patch][diffs].AddLast(patch2);
@@ -779,9 +779,9 @@ namespace PcgTools.ListGenerator
         {
             _diffWaveSequences = new Dictionary<IWaveSequence, Dictionary<int, LinkedList<IWaveSequence>>>();
 
-            foreach (var bank in SelectedWaveSequenceBanks)
+            foreach (IWaveSequenceBank bank in SelectedWaveSequenceBanks)
             {
-                foreach (var patch in bank.Patches)
+                foreach (IPatch patch in bank.Patches)
                 {
                     FindWaveSequence((IWaveSequence)patch);
                 }
@@ -797,8 +797,8 @@ namespace PcgTools.ListGenerator
         {
             // Assumed filtering on favorites is not needed.
 
-            var dict = new Dictionary<int, LinkedList<IWaveSequence>>();
-            for (var diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
+            Dictionary<int, LinkedList<IWaveSequence>> dict = new Dictionary<int, LinkedList<IWaveSequence>>();
+            for (int diffs = 0; diffs <= MaxDiffs; diffs++) // Including end range
             {
                 dict[diffs] = new LinkedList<IWaveSequence>();
             }
@@ -815,7 +815,7 @@ namespace PcgTools.ListGenerator
         void CreateWaveSequencesList()
         {
             // Compare with all other selected WaveSequences.
-            foreach (var bank in SelectedWaveSequenceBanks.Where(bank => bank.Type != BankType.EType.Gm))
+            foreach (IWaveSequenceBank bank in SelectedWaveSequenceBanks.Where(bank => bank.Type != BankType.EType.Gm))
             {
                 CreateWaveSequenceList(bank);
             }
@@ -828,9 +828,9 @@ namespace PcgTools.ListGenerator
         /// <param name="bank"></param>
         private void CreateWaveSequenceList(IWaveSequenceBank bank)
         {
-            for (var index = 0; index < bank.Patches.Count; index++)
+            for (int index = 0; index < bank.Patches.Count; index++)
             {
-                var patch = (IWaveSequence)bank[index];
+                IWaveSequence patch = (IWaveSequence)bank[index];
 
                 if (!bank.IsLoaded ||
                     !patch.UseInList(IgnoreInitWaveSequences, FilterOnText, FilterText, FilterCaseSensitive, 
@@ -839,7 +839,7 @@ namespace PcgTools.ListGenerator
                     continue;
                 }
 
-                foreach (var bank2 in SelectedWaveSequenceBanks)
+                foreach (IWaveSequenceBank bank2 in SelectedWaveSequenceBanks)
                 {
                     AnalyzeWaveSequences(bank, bank2, index, patch);
                 }
@@ -859,8 +859,8 @@ namespace PcgTools.ListGenerator
         {
             if (SearchBothDirections || (string.Compare(bank.Id, bank2.Id, StringComparison.Ordinal) <= 0))
             {
-                var startIndex = SearchBothDirections ? 0 : (bank == bank2 ? WaveSequenceIndex + 1 : 0);
-                for (var patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
+                int startIndex = SearchBothDirections ? 0 : (bank == bank2 ? WaveSequenceIndex + 1 : 0);
+                for (int patch2Index = startIndex; patch2Index < bank2.Patches.Count; patch2Index++)
                 {
                     AnalyzeWaveSequence(bank2, patch, patch2Index);
                 }
@@ -876,7 +876,7 @@ namespace PcgTools.ListGenerator
         /// <param name="patch2Index"></param>
         private void AnalyzeWaveSequence(IBank bank2, IWaveSequence patch, int patch2Index)
         {
-            var patch2 = (IWaveSequence)bank2[patch2Index];
+            IWaveSequence patch2 = (IWaveSequence)bank2[patch2Index];
             if ((patch == patch2) || !bank2.IsLoaded ||
                 !patch2.UseInList(IgnoreInitWaveSequences, FilterOnText, FilterText, FilterCaseSensitive,
                     ListFilterOnFavorites, false))
@@ -884,7 +884,7 @@ namespace PcgTools.ListGenerator
                 return;
             }
 
-            var diffs = CalculateDiffs(patch, patch2);
+            int diffs = CalculateDiffs(patch, patch2);
             if (diffs <= MaxDiffs)
             {
                 _diffWaveSequences[patch][diffs].AddLast(patch2);
@@ -911,7 +911,7 @@ namespace PcgTools.ListGenerator
             }
 
             // Add all byte differences (including PBK2, SBK2 and SLS2 differences).
-            var diffs = patch1.CalcByteDifferences(patch2, !IgnorePatchNames, MaxDiffs); 
+            int diffs = patch1.CalcByteDifferences(patch2, !IgnorePatchNames, MaxDiffs); 
 
             Debug.Assert(diffs >= 0);
             return diffs;
@@ -991,7 +991,7 @@ namespace PcgTools.ListGenerator
         {
             // ReSharper disable RedundantStringFormatCall
 
-            var max = _diffPrograms.Where(
+            int max = _diffPrograms.Where(
                 diffListPair => diffListPair.Value.Any(
                     differencesPair =>
                     differencesPair.Value.Count > 0)).
@@ -1009,7 +1009,7 @@ namespace PcgTools.ListGenerator
 
             const string titleName = "Programs Differences List";
             const int patchIdLength = 9;
-            var lineLength = Math.Max("|Diffs||".Length + max*patchIdLength, "||".Length + titleName.Length);
+            int lineLength = Math.Max("|Diffs||".Length + max*patchIdLength, "||".Length + titleName.Length);
             lineLength = Math.Max(lineLength, "|Program|".Length + patchIdLength + ":".Length +
                 24 + "|".Length); // 24 = max patch name length
             writer.WriteLine($"+{new string('-', lineLength - "++".Length)}+");
@@ -1018,15 +1018,15 @@ namespace PcgTools.ListGenerator
             writer.WriteLine($"+-----+-+{new string('-', lineLength - "+-----+-++".Length)}+");
 
             // ReSharper disable FormatStringProblem
-            foreach (var diffListPair in _diffPrograms.Where(
+            foreach (KeyValuePair<IProgram, Dictionary<int, LinkedList<IProgram>>> diffListPair in _diffPrograms.Where(
                 diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
             {
-                var patchText = diffListPair.Key.Id;
+                string patchText = diffListPair.Key.Id;
                 if (ListSubType == SubType.IncludingPatchName)
                 {
                     patchText += ":" + diffListPair.Key.Name;
                 }
-                var patchTextLength = patchText.Length;
+                int patchTextLength = patchText.Length;
                 // ReSharper disable FormatStringProblem
                 writer.WriteLine(string.Format(
                         "|Program|{0," + patchTextLength + "}{1}|", patchText,
@@ -1037,11 +1037,11 @@ namespace PcgTools.ListGenerator
                 writer.WriteLine($"+-----+{new string('-', lineLength - "+-----++".Length)}+");
 
                 foreach (
-                    var differencesPair in diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
+                    KeyValuePair<int, LinkedList<IProgram>> differencesPair in diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                 {
                     writer.Write($"|{differencesPair.Key,5}|");
 
-                    foreach (var patch in differencesPair.Value)
+                    foreach (IProgram patch in differencesPair.Value)
                     {
                         writer.Write(
                             "{0," + (patchIdLength - 1).ToString(CultureInfo.InvariantCulture) + "} ", patch.Id);
@@ -1066,7 +1066,7 @@ namespace PcgTools.ListGenerator
         void OutputCombisToAsciiTable(TextWriter writer)
         {
             // ReSharper disable RedundantStringFormatCall
-            var max = _diffCombis.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
+            int max = _diffCombis.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
                 differencesPair.Value.Count > 0)).Aggregate(0, (current1, diffListPair) => diffListPair.Value.Where(
                     differencesPair =>
                     differencesPair.Value.Count > 0).Aggregate(current1, (current, differencesPair) =>
@@ -1075,22 +1075,22 @@ namespace PcgTools.ListGenerator
 
             const string titleName = "Combis Differences List";
             const int patchIdLength = 9;
-            var lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
+            int lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
             lineLength = Math.Max(lineLength, "|Combi|".Length + patchIdLength + ":".Length + 24 + "|".Length); 
                         // 24 = max patch name length
             writer.WriteLine($"+{new string('-', lineLength - "++".Length)}+");
             writer.WriteLine($"|{titleName}{new string(' ', lineLength - titleName.Length - "||".Length)}|");
             writer.WriteLine($"+-----+{new string('-', lineLength - "+-----++".Length)}+");
 
-            foreach (var diffListPair in _diffCombis.Where(
+            foreach (KeyValuePair<ICombi, Dictionary<int, LinkedList<ICombi>>> diffListPair in _diffCombis.Where(
                 diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
             {
-                var patchText = diffListPair.Key.Id;
+                string patchText = diffListPair.Key.Id;
                 if (ListSubType == SubType.IncludingPatchName)
                 {
                     patchText += ":" + diffListPair.Key.Name;
                 }
-                var patchTextLength = patchText.Length;
+                int patchTextLength = patchText.Length;
 
                 // ReSharper disable once FormatStringProblem
                 writer.WriteLine(string.Format(
@@ -1100,11 +1100,11 @@ namespace PcgTools.ListGenerator
                 writer.WriteLine($"|Diffs|Combi IDs{new string(' ', lineLength - "|Diffs|Combi IDs|".Length)}|");
                 writer.WriteLine($"+-----+{new string('-', lineLength - "+-----++".Length)}+");
 
-                foreach (var differencesPair in diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
+                foreach (KeyValuePair<int, LinkedList<ICombi>> differencesPair in diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                 {
                     writer.Write($"|{differencesPair.Key,5}|");
 
-                    foreach (var patch in differencesPair.Value)
+                    foreach (ICombi patch in differencesPair.Value)
                     {
                         // ReSharper disable once FormatStringProblem
                         writer.Write("{0," + (patchIdLength - 1).ToString(CultureInfo.InvariantCulture) + "} ", patch.Id);
@@ -1127,7 +1127,7 @@ namespace PcgTools.ListGenerator
         {
             // ReSharper disable RedundantStringFormatCall
 
-            var max = _diffSetListSlots.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
+            int max = _diffSetListSlots.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
                 differencesPair.Value.Count > 0)).Aggregate(0, (current1, diffListPair) => diffListPair.Value.Where(
                     differencesPair =>
                     differencesPair.Value.Count > 0).Aggregate(current1, (current, differencesPair) =>
@@ -1136,22 +1136,22 @@ namespace PcgTools.ListGenerator
 
             const string titleName = "Set List Slots Differences List";
             const int patchIdLength = 8;
-            var lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
+            int lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
             lineLength = Math.Max(lineLength, "|Set List Slot|".Length + 
                 patchIdLength + ":".Length + 24 + "|".Length); // 24 = max patch name length
             writer.WriteLine($"+{new string('-', lineLength - "++".Length)}+");
             writer.WriteLine($"|{titleName}{new string(' ', lineLength - titleName.Length - "||".Length)}|");
             writer.WriteLine($"+-----+-------+{new string('-', lineLength - "+-----+-------++".Length)}+");
 
-            foreach (var diffListPair in _diffSetListSlots.Where(
+            foreach (KeyValuePair<ISetListSlot, Dictionary<int, LinkedList<ISetListSlot>>> diffListPair in _diffSetListSlots.Where(
                 diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
             {
-                var patchText = diffListPair.Key.Id;
+                string patchText = diffListPair.Key.Id;
                 if (ListSubType == SubType.IncludingPatchName)
                 {
                     patchText += ":" + diffListPair.Key.Name;
                 }
-                var patchTextLength = patchText.Length;
+                int patchTextLength = patchText.Length;
 
                 // ReSharper disable once FormatStringProblem
                 writer.WriteLine("|Set List Slot|{0," + patchTextLength + "}{1}|", patchText,
@@ -1162,12 +1162,12 @@ namespace PcgTools.ListGenerator
                                                                                  "|Diffs|Set List Slot IDs|".Length));
                 writer.WriteLine("+-----+{0}+", new string('-', lineLength - "+-----++".Length));
 
-                foreach (var differencesPair in diffListPair.Value.Where(differencesPair => 
+                foreach (KeyValuePair<int, LinkedList<ISetListSlot>> differencesPair in diffListPair.Value.Where(differencesPair => 
                     differencesPair.Value.Count > 0))
                 {
                     writer.Write("|{0,5}|", differencesPair.Key);
 
-                    foreach (var patch in differencesPair.Value)
+                    foreach (ISetListSlot patch in differencesPair.Value)
                     {
                         // ReSharper once FormatStringProblem
                         writer.Write("{0," + (patchIdLength - 1).ToString(CultureInfo.InvariantCulture) + "} ", 
@@ -1189,7 +1189,7 @@ namespace PcgTools.ListGenerator
         {
             // ReSharper disable RedundantStringFormatCall
 
-            var max = _diffDrumKits.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
+            int max = _diffDrumKits.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
                 differencesPair.Value.Count > 0)).Aggregate(0, (current1, diffListPair) => diffListPair.Value.Where(
                     differencesPair =>
                     differencesPair.Value.Count > 0).Aggregate(current1, (current, differencesPair) =>
@@ -1198,22 +1198,22 @@ namespace PcgTools.ListGenerator
 
             const string titleName = "DrumKits Differences List";
             const int patchIdLength = 9; // is variable, ut max is e.g. U-INT035 = 8, plus space
-            var lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
+            int lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
             lineLength = Math.Max(lineLength, "|Drum Kit|".Length + patchIdLength + ":".Length +
                 24 + "|".Length); // 24 = max patch name length
             writer.WriteLine("+{0}+", new string('-', lineLength - "++".Length));
             writer.WriteLine("|{0}{1}|", titleName, new string(' ', lineLength - titleName.Length - "||".Length));
             writer.WriteLine("+-----+--+{0}+", new string('-', lineLength - "+-----+--++".Length));
 
-            foreach (var diffListPair in _diffDrumKits.Where(
+            foreach (KeyValuePair<IDrumKit, Dictionary<int, LinkedList<IDrumKit>>> diffListPair in _diffDrumKits.Where(
                 diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
             {
-                var patchText = diffListPair.Key.Id;
+                string patchText = diffListPair.Key.Id;
                 if (ListSubType == SubType.IncludingPatchName)
                 {
                     patchText += ":" + diffListPair.Key.Name;
                 }
-                var patchTextLength = patchText.Length;
+                int patchTextLength = patchText.Length;
 
                 // ReSharper disable FormatStringProblem
                 writer.WriteLine(
@@ -1224,12 +1224,12 @@ namespace PcgTools.ListGenerator
                                                                            "|Diffs|DrumKit IDs|".Length));
                 writer.WriteLine("+-----+{0}+", new string('-', lineLength - "+-----++".Length));
 
-                foreach (var differencesPair in diffListPair.Value.Where(differencesPair => differencesPair.Value.Count >
+                foreach (KeyValuePair<int, LinkedList<IDrumKit>> differencesPair in diffListPair.Value.Where(differencesPair => differencesPair.Value.Count >
                     0))
                 {
                     writer.Write("|{0,5}|", differencesPair.Key);
 
-                    foreach (var patch in differencesPair.Value)
+                    foreach (IDrumKit patch in differencesPair.Value)
                     {
                         // ReSharper disable once FormatStringProblem
                         { writer.Write("{0," + (patchIdLength - 1).ToString(CultureInfo.InvariantCulture) + "} ", 
@@ -1254,7 +1254,7 @@ namespace PcgTools.ListGenerator
         {
             // ReSharper disable RedundantStringFormatCall
 
-            var max = _diffDrumPatterns.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
+            int max = _diffDrumPatterns.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
                 differencesPair.Value.Count > 0)).Aggregate(0, (current1, diffListPair) => diffListPair.Value.Where(
                     differencesPair =>
                     differencesPair.Value.Count > 0).Aggregate(current1, (current, differencesPair) =>
@@ -1263,22 +1263,22 @@ namespace PcgTools.ListGenerator
 
             const string titleName = "DrumPatterns Differences List";
             const int patchIdLength = 9; // is variable, ut max is e.g. U-INT035 = 8, plus space
-            var lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
+            int lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
             lineLength = Math.Max(lineLength, "|Drum Pattern|".Length + patchIdLength + ":".Length +
                 24 + "|".Length); // 24 = max patch name length
             writer.WriteLine("+{0}+", new string('-', lineLength - "++".Length));
             writer.WriteLine("|{0}{1}|", titleName, new string(' ', lineLength - titleName.Length - "||".Length));
             writer.WriteLine("+-----+--+{0}+", new string('-', lineLength - "+-----+--++".Length));
 
-            foreach (var diffListPair in _diffDrumPatterns.Where(
+            foreach (KeyValuePair<IDrumPattern, Dictionary<int, LinkedList<IDrumPattern>>> diffListPair in _diffDrumPatterns.Where(
                 diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
             {
-                var patchText = diffListPair.Key.Id;
+                string patchText = diffListPair.Key.Id;
                 if (ListSubType == SubType.IncludingPatchName)
                 {
                     patchText += ":" + diffListPair.Key.Name;
                 }
-                var patchTextLength = patchText.Length;
+                int patchTextLength = patchText.Length;
 
                 // ReSharper disable FormatStringProblem
                 writer.WriteLine(
@@ -1289,12 +1289,12 @@ namespace PcgTools.ListGenerator
                                                                            "|Diffs|DrumPattern IDs|".Length));
                 writer.WriteLine("+-----+{0}+", new string('-', lineLength - "+-----++".Length));
 
-                foreach (var differencesPair in diffListPair.Value.Where(differencesPair => 
+                foreach (KeyValuePair<int, LinkedList<IDrumPattern>> differencesPair in diffListPair.Value.Where(differencesPair => 
                     differencesPair.Value.Count > 0))
                 {
                     writer.Write("|{0,5}|", differencesPair.Key);
 
-                    foreach (var patch in differencesPair.Value)
+                    foreach (IDrumPattern patch in differencesPair.Value)
                     {
                         // ReSharper disable once FormatStringProblem
                         { writer.Write("{0," + (patchIdLength - 1).ToString(CultureInfo.InvariantCulture) + "} ",
@@ -1319,7 +1319,7 @@ namespace PcgTools.ListGenerator
         {
             // ReSharper disable RedundantStringFormatCall
 
-            var max = _diffWaveSequences.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
+            int max = _diffWaveSequences.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
                 differencesPair.Value.Count > 0)).Aggregate(0, (current1, diffListPair) => 
                     diffListPair.Value.Where(differencesPair =>
                     differencesPair.Value.Count > 0).Aggregate(current1, (current, differencesPair) =>
@@ -1328,22 +1328,22 @@ namespace PcgTools.ListGenerator
 
             const string titleName = "WaveSequences Differences List";
             const int patchIdLength = 7;
-            var lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
+            int lineLength = Math.Max("|Diffs||".Length + max * patchIdLength, "||".Length + titleName.Length);
             lineLength = Math.Max(lineLength, "|Wave Sequence|".Length + patchIdLength + ":".Length + 
                 24 + "|".Length); // 24 = max patch name length
             writer.WriteLine($"+{new string('-', lineLength - "++".Length)}+");
             writer.WriteLine($"|{titleName}{new string(' ', lineLength - titleName.Length - "||".Length)}|");
             writer.WriteLine($"+-----+-------+{new string('-', lineLength - "+-----+-------++".Length)}+");
 
-            foreach (var diffListPair in _diffWaveSequences.Where(
+            foreach (KeyValuePair<IWaveSequence, Dictionary<int, LinkedList<IWaveSequence>>> diffListPair in _diffWaveSequences.Where(
                 diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
             {
-                var patchText = diffListPair.Key.Id;
+                string patchText = diffListPair.Key.Id;
                 if (ListSubType == SubType.IncludingPatchName)
                 {
                     patchText += ":" + diffListPair.Key.Name;
                 }
-                var patchTextLength = patchText.Length;
+                int patchTextLength = patchText.Length;
 
                 // ReSharper disable FormatStringProblem
                 writer.WriteLine(
@@ -1354,12 +1354,12 @@ namespace PcgTools.ListGenerator
                     $"|Diffs|Wave Sequence IDs{new string(' ', lineLength - "|Diffs|Wave Sequence IDs|".Length)}|");
                 writer.WriteLine($"+-----+{new string('-', lineLength - "+-----++".Length)}+");
 
-                foreach (var differencesPair in diffListPair.Value.Where(differencesPair => 
+                foreach (KeyValuePair<int, LinkedList<IWaveSequence>> differencesPair in diffListPair.Value.Where(differencesPair => 
                     differencesPair.Value.Count > 0))
                 {
                     writer.Write($"|{differencesPair.Key,5}|");
 
-                    foreach (var patch in differencesPair.Value)
+                    foreach (IWaveSequence patch in differencesPair.Value)
                     {
                         // ReSharper disable once FormatStringProblem
                         writer.Write("{0," + (patchIdLength - 1).ToString(CultureInfo.InvariantCulture) + "} ",
@@ -1395,20 +1395,20 @@ namespace PcgTools.ListGenerator
         /// <param name="writer"></param>
         private void OutputProgramBanksToText(TextWriter writer)
         {
-            foreach (var diffListPair in _diffPrograms.Where(
+            foreach (KeyValuePair<IProgram, Dictionary<int, LinkedList<IProgram>>> diffListPair in _diffPrograms.Where(
                 diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
             {
-                var patchName = (ListSubType == SubType.ExcludingPatchName 
+                string patchName = (ListSubType == SubType.ExcludingPatchName 
                     ? string.Empty : (":" + diffListPair.Key.Name));
                 writer.WriteLine($"Program {diffListPair.Key.Id}{patchName}");
 
                 foreach (
-                    var differencesPair in diffListPair.Value.Where(differencesPair =>
+                    KeyValuePair<int, LinkedList<IProgram>> differencesPair in diffListPair.Value.Where(differencesPair =>
                         differencesPair.Value.Count > 0))
                 {
                     writer.Write($" {differencesPair.Key} Diffs: ");
 
-                    foreach (var patch in differencesPair.Value)
+                    foreach (IProgram patch in differencesPair.Value)
                     {
                         writer.Write("{0} ", patch.Id);
                     }
@@ -1427,20 +1427,20 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.CombiBanks != null)
             {
-                foreach (var diffListPair in _diffCombis.Where(
+                foreach (KeyValuePair<ICombi, Dictionary<int, LinkedList<ICombi>>> diffListPair in _diffCombis.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
-                    var patchName = (ListSubType == SubType.ExcludingPatchName 
+                    string patchName = (ListSubType == SubType.ExcludingPatchName 
                         ? string.Empty : (":" + diffListPair.Key.Name));
                     writer.WriteLine($"Combi {diffListPair.Key.Id}{patchName}");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<ICombi>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.Write($" {differencesPair.Key} Diffs: ");
 
-                        foreach (var patch in differencesPair.Value)
+                        foreach (ICombi patch in differencesPair.Value)
                         {
                             writer.Write("{0} ", patch.Id);
                         }
@@ -1460,20 +1460,20 @@ namespace PcgTools.ListGenerator
         {
             if ((PcgMemory.SetLists != null) && SetListsEnabled)
             {
-                foreach (var diffListPair in  _diffSetListSlots.Where(
+                foreach (KeyValuePair<ISetListSlot, Dictionary<int, LinkedList<ISetListSlot>>> diffListPair in  _diffSetListSlots.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
-                    var patchName = (ListSubType == SubType.ExcludingPatchName
+                    string patchName = (ListSubType == SubType.ExcludingPatchName
                         ? string.Empty : (":" + diffListPair.Key.Name));
                     writer.WriteLine($"Set List Slot {diffListPair.Key.Id}{patchName}");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<ISetListSlot>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.Write($" {differencesPair.Key} Diffs: ");
 
-                        foreach (var patch in differencesPair.Value)
+                        foreach (ISetListSlot patch in differencesPair.Value)
                         {
                             writer.Write("{0} ", patch.Id);
                         }
@@ -1492,20 +1492,20 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.DrumKitBanks != null)
             {
-                foreach (var diffListPair in _diffDrumKits.Where(
+                foreach (KeyValuePair<IDrumKit, Dictionary<int, LinkedList<IDrumKit>>> diffListPair in _diffDrumKits.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
-                    var patchName = (ListSubType == SubType.ExcludingPatchName
+                    string patchName = (ListSubType == SubType.ExcludingPatchName
                         ? string.Empty : (":" + diffListPair.Key.Name));
                     writer.WriteLine($"DrumKit {diffListPair.Key.Id}{patchName}");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<IDrumKit>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.Write($" {differencesPair.Key} Diffs: ");
 
-                        foreach (var patch in differencesPair.Value)
+                        foreach (IDrumKit patch in differencesPair.Value)
                         {
                             writer.Write("{0} ", patch.Id);
                         }
@@ -1524,20 +1524,20 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.DrumPatternBanks != null)
             {
-                foreach (var diffListPair in _diffDrumPatterns.Where(
+                foreach (KeyValuePair<IDrumPattern, Dictionary<int, LinkedList<IDrumPattern>>> diffListPair in _diffDrumPatterns.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
-                    var patchName = (ListSubType == SubType.ExcludingPatchName 
+                    string patchName = (ListSubType == SubType.ExcludingPatchName 
                         ? string.Empty : (":" + diffListPair.Key.Name));
                     writer.WriteLine($"DrumPattern {diffListPair.Key.Id}{patchName}");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<IDrumPattern>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.Write($" {differencesPair.Key} Diffs: ");
 
-                        foreach (var patch in differencesPair.Value)
+                        foreach (IDrumPattern patch in differencesPair.Value)
                         {
                             writer.Write("{0} ", patch.Id);
                         }
@@ -1556,20 +1556,20 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.WaveSequenceBanks != null)
             {
-                foreach (var diffListPair in _diffWaveSequences.Where(
+                foreach (KeyValuePair<IWaveSequence, Dictionary<int, LinkedList<IWaveSequence>>> diffListPair in _diffWaveSequences.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
-                    var patchName = (ListSubType == SubType.ExcludingPatchName 
+                    string patchName = (ListSubType == SubType.ExcludingPatchName 
                         ? string.Empty : (":" + diffListPair.Key.Name));
                     writer.WriteLine($"Wave Sequence {diffListPair.Key.Id}{patchName}");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<IWaveSequence>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.Write($" {differencesPair.Key} Diffs: ");
 
-                        foreach (var patch in differencesPair.Value)
+                        foreach (IWaveSequence patch in differencesPair.Value)
                         {
                             writer.Write("{0} ", patch.Id);
                         }
@@ -1601,14 +1601,14 @@ namespace PcgTools.ListGenerator
         /// <param name="writer"></param>
         private void OutputProgramBanksToCsv(TextWriter writer)
         {
-            foreach (var diffListPair in _diffPrograms.Where(
+            foreach (KeyValuePair<IProgram, Dictionary<int, LinkedList<IProgram>>> diffListPair in _diffPrograms.Where(
                 diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
             {
                 foreach (
-                    var differencesPair in diffListPair.Value.Where(differencesPair => 
+                    KeyValuePair<int, LinkedList<IProgram>> differencesPair in diffListPair.Value.Where(differencesPair => 
                         differencesPair.Value.Count > 0))
                 {
-                    foreach (var patch in differencesPair.Value)
+                    foreach (IProgram patch in differencesPair.Value)
                     {
                         if (ListSubType == SubType.ExcludingPatchName)
                         {
@@ -1634,14 +1634,14 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.CombiBanks != null)
             {
-                foreach (var diffListPair in _diffCombis.Where(
+                foreach (KeyValuePair<ICombi, Dictionary<int, LinkedList<ICombi>>> diffListPair in _diffCombis.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<ICombi>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
-                        foreach (var patch in differencesPair.Value)
+                        foreach (ICombi patch in differencesPair.Value)
                         {
                             if (ListSubType == SubType.ExcludingPatchName)
                             {
@@ -1668,14 +1668,14 @@ namespace PcgTools.ListGenerator
         {
             if ((PcgMemory.SetLists) != null && SetListsEnabled)
             {
-                foreach (var diffListPair in _diffSetListSlots.Where(
+                foreach (KeyValuePair<ISetListSlot, Dictionary<int, LinkedList<ISetListSlot>>> diffListPair in _diffSetListSlots.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<ISetListSlot>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
-                        foreach (var patch in differencesPair.Value)
+                        foreach (ISetListSlot patch in differencesPair.Value)
                         {
                             if (ListSubType == SubType.ExcludingPatchName)
                             {
@@ -1702,14 +1702,14 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.DrumKitBanks != null)
             {
-                foreach (var diffListPair in _diffDrumKits.Where(
+                foreach (KeyValuePair<IDrumKit, Dictionary<int, LinkedList<IDrumKit>>> diffListPair in _diffDrumKits.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<IDrumKit>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
-                        foreach (var patch in differencesPair.Value)
+                        foreach (IDrumKit patch in differencesPair.Value)
                         {
                             if (ListSubType == SubType.ExcludingPatchName)
                             {
@@ -1736,14 +1736,14 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.DrumPatternBanks != null)
             {
-                foreach (var diffListPair in _diffDrumPatterns.Where(
+                foreach (KeyValuePair<IDrumPattern, Dictionary<int, LinkedList<IDrumPattern>>> diffListPair in _diffDrumPatterns.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<IDrumPattern>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
-                        foreach (var patch in differencesPair.Value)
+                        foreach (IDrumPattern patch in differencesPair.Value)
                         {
                             if (ListSubType == SubType.ExcludingPatchName)
                             {
@@ -1770,14 +1770,14 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.WaveSequenceBanks != null)
             {
-                foreach (var diffListPair in _diffWaveSequences.Where(
+                foreach (KeyValuePair<IWaveSequence, Dictionary<int, LinkedList<IWaveSequence>>> diffListPair in _diffWaveSequences.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<IWaveSequence>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
-                        foreach (var patch in differencesPair.Value)
+                        foreach (IWaveSequence patch in differencesPair.Value)
                         {
                             if (ListSubType == SubType.ExcludingPatchName)
                             {
@@ -1822,20 +1822,20 @@ namespace PcgTools.ListGenerator
         /// <param name="writer"></param>
         private void OutputProgramBanksToXml(TextWriter writer)
         {
-            foreach (var diffListPair in _diffPrograms.Where(
+            foreach (KeyValuePair<IProgram, Dictionary<int, LinkedList<IProgram>>> diffListPair in _diffPrograms.Where(
                 diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
             {
                 writer.WriteLine("  <patch>");
                 writer.WriteLine($"    <id>{diffListPair.Key.Id}</id>");
 
                 foreach (
-                    var differencesPair in diffListPair.Value.Where(differencesPair => 
+                    KeyValuePair<int, LinkedList<IProgram>> differencesPair in diffListPair.Value.Where(differencesPair => 
                         differencesPair.Value.Count > 0))
                 {
                     writer.WriteLine("    <diffs>");
                     writer.WriteLine($"      <amount>{differencesPair.Key}</amount>");
                     writer.WriteLine("      <list>");
-                    foreach (var patch in differencesPair.Value)
+                    foreach (IProgram patch in differencesPair.Value)
                     {
                         writer.WriteLine($"        <patch>{patch.Id}</patch>");
                     }
@@ -1855,20 +1855,20 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.CombiBanks != null)
             {
-                foreach (var diffListPair in _diffCombis.Where(
+                foreach (KeyValuePair<ICombi, Dictionary<int, LinkedList<ICombi>>> diffListPair in _diffCombis.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     writer.WriteLine("  <combi>");
                     writer.WriteLine($"    <id>{diffListPair.Key.Id}</id>");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<ICombi>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.WriteLine("    <diffs>");
                         writer.WriteLine($"      <amount>{differencesPair.Key}</amount>");
                         writer.WriteLine("      <list>");
-                        foreach (var patch in differencesPair.Value)
+                        foreach (ICombi patch in differencesPair.Value)
                         {
                             writer.WriteLine($"        <combi>{patch.Id}</combi>");
                         }
@@ -1889,20 +1889,20 @@ namespace PcgTools.ListGenerator
         {
             if ((PcgMemory.SetLists != null) && SetListsEnabled)
             {
-                foreach (var diffListPair in _diffSetListSlots.Where(
+                foreach (KeyValuePair<ISetListSlot, Dictionary<int, LinkedList<ISetListSlot>>> diffListPair in _diffSetListSlots.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     writer.WriteLine("  <setlistslot>");
                     writer.WriteLine($"    <id>{diffListPair.Key.Id}</id>");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<ISetListSlot>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.WriteLine("    <diffs>");
                         writer.WriteLine($"      <amount>{differencesPair.Key}</amount>");
                         writer.WriteLine("      <list>");
-                        foreach (var patch in differencesPair.Value)
+                        foreach (ISetListSlot patch in differencesPair.Value)
                         {
                             writer.WriteLine($"        <setlistslot>{patch.Id}</setlistslot>");
                         }
@@ -1923,20 +1923,20 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.DrumKitBanks != null)
             {
-                foreach (var diffListPair in _diffDrumKits.Where(
+                foreach (KeyValuePair<IDrumKit, Dictionary<int, LinkedList<IDrumKit>>> diffListPair in _diffDrumKits.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     writer.WriteLine("  <drumkit>");
                     writer.WriteLine($"    <id>{diffListPair.Key.Id}</id>");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<IDrumKit>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.WriteLine("    <diffs>");
                         writer.WriteLine($"      <amount>{differencesPair.Key}</amount>");
                         writer.WriteLine("      <list>");
-                        foreach (var patch in differencesPair.Value)
+                        foreach (IDrumKit patch in differencesPair.Value)
                         {
                             writer.WriteLine($"        <drumkit>{patch.Id}</drumkit>");
                         }
@@ -1957,20 +1957,20 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.DrumPatternBanks != null)
             {
-                foreach (var diffListPair in _diffDrumPatterns.Where(
+                foreach (KeyValuePair<IDrumPattern, Dictionary<int, LinkedList<IDrumPattern>>> diffListPair in _diffDrumPatterns.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     writer.WriteLine("  <drumpattern>");
                     writer.WriteLine($"    <id>{diffListPair.Key.Id}</id>");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<IDrumPattern>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.WriteLine("    <diffs>");
                         writer.WriteLine($"      <amount>{differencesPair.Key}</amount>");
                         writer.WriteLine("      <list>");
-                        foreach (var patch in differencesPair.Value)
+                        foreach (IDrumPattern patch in differencesPair.Value)
                         {
                             writer.WriteLine($"        <drumpattern>{patch.Id}</drumpattern>");
                         }
@@ -1991,20 +1991,20 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.WaveSequenceBanks != null)
             {
-                foreach (var diffListPair in _diffWaveSequences.Where(
+                foreach (KeyValuePair<IWaveSequence, Dictionary<int, LinkedList<IWaveSequence>>> diffListPair in _diffWaveSequences.Where(
                     diffListPair => diffListPair.Value.Any(differencesPair => differencesPair.Value.Count > 0)))
                 {
                     writer.WriteLine("  <wavesequence>");
                     writer.WriteLine($"    <id>{diffListPair.Key.Id}</id>");
 
                     foreach (
-                        var differencesPair in
+                        KeyValuePair<int, LinkedList<IWaveSequence>> differencesPair in
                             diffListPair.Value.Where(differencesPair => differencesPair.Value.Count > 0))
                     {
                         writer.WriteLine("    <diffs>");
                         writer.WriteLine($"      <amount>{differencesPair.Key}</amount>");
                         writer.WriteLine("      <list>");
-                        foreach (var patch in differencesPair.Value)
+                        foreach (IWaveSequence patch in differencesPair.Value)
                         {
                             writer.WriteLine($"        <wavesequence>{patch.Id}</wavesequence>");
                         }
@@ -2023,7 +2023,7 @@ namespace PcgTools.ListGenerator
         /// </summary>
         void WriteXslFile()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             //IMPR; not a simple table
 
             File.WriteAllText(Path.ChangeExtension(OutputFileName, "xsl"), builder.ToString());

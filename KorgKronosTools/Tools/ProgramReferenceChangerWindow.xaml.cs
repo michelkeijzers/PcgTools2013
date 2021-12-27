@@ -40,7 +40,7 @@ namespace PcgTools.Tools
         /// <param name="e"></param>
         private void FromFileButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog()
+            OpenFileDialog dialog = new OpenFileDialog()
             {
                 Title = Strings.SelectFileToRead,
                 Filter = "Text Files (*.txt)|*.txt",
@@ -104,9 +104,9 @@ namespace PcgTools.Tools
         /// <param name="e"></param>
         private void DoWork_ChangeReferences(object sender, DoWorkEventArgs e)
         {
-            var rules = ((object[]) (e.Argument))[0] as string;
+            string rules = ((object[]) (e.Argument))[0] as string;
 
-            var referenceChanger = new ReferenceChanger(_memory);
+            ReferenceChanger referenceChanger = new ReferenceChanger(_memory);
             _ruleParser = new RuleParser(_memory);
             referenceChanger.OnProgressHandler += OnProgress;
             referenceChanger.ParseRules(_ruleParser, rules);

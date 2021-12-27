@@ -17,13 +17,13 @@ namespace ExternalUtilities
 
         private void ButtonShowLanguageCrossReferenceList_Click(object sender, RoutedEventArgs e)
         {
-            var window = new LanguageCrossReferenceWindow();
+            LanguageCrossReferenceWindow window = new LanguageCrossReferenceWindow();
             window.ShowDialog();
         }
 
         private void ButtonShowNumberOfCodeLines_Click(object sender, RoutedEventArgs e)
         {
-            var window = new NumberOfCodeLinesWindow();
+            NumberOfCodeLinesWindow window = new NumberOfCodeLinesWindow();
             window.ShowDialog();
         }
 

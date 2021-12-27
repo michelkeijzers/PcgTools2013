@@ -46,8 +46,8 @@ namespace PcgTools
             {
                 ShowEditDialog = () =>
                 {
-                    var window = new WindowEditSingleCombi(CombiViewModel.Combi);
-                    var result = window.ShowDialog();
+                    WindowEditSingleCombi window = new WindowEditSingleCombi(CombiViewModel.Combi);
+                    bool? result = window.ShowDialog();
                     return (result.HasValue && result.Value);
                 },
 
@@ -80,7 +80,7 @@ namespace PcgTools
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             listViewTimbres.ItemsSource = CombiViewModel.Combi.Timbres.TimbresCollection;
-            var view = CollectionViewSource.GetDefaultView(listViewTimbres.ItemsSource);
+            System.ComponentModel.ICollectionView view = CollectionViewSource.GetDefaultView(listViewTimbres.ItemsSource);
             view.Filter = bank => true;
         }
 

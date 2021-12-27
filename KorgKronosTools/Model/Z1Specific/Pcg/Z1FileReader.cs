@@ -39,7 +39,7 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// <param name="modelType"></param>
         public override void ReadContent(Memory.FileType filetype, Models.EModelType modelType)
         {
-            var memory = SkipModeChange(filetype);
+            ISysExMemory memory = SkipModeChange(filetype);
 
             Index = SysExStartOffset;
 
@@ -96,9 +96,9 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// <param name="memory"></param>
         private void ReadPrograms(IMemoryInit memory)
         {
-            var unit = Util.GetBits(memory.Content, SysExStartOffset - 3, 5, 4); // 00:Prog/01:Bank/10:All (start with 0), Bank:
-            var bankStart = Util.GetBits(memory.Content, SysExStartOffset - 3, 0, 0); // 0:A/1:B
-            var programNo = memory.Content[SysExStartOffset - 2]; // Ignored when Bank or All dump
+            int unit = Util.GetBits(memory.Content, SysExStartOffset - 3, 5, 4); // 00:Prog/01:Bank/10:All (start with 0), Bank:
+            int bankStart = Util.GetBits(memory.Content, SysExStartOffset - 3, 0, 0); // 0:A/1:B
+            byte programNo = memory.Content[SysExStartOffset - 2]; // Ignored when Bank or All dump
 
             switch (unit)
             {
@@ -127,14 +127,14 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// <returns></returns>
         private ISysExMemory SkipModeChange(Memory.FileType filetype)
         {
-            var memory = (ISysExMemory) CurrentPcgMemory;
+            ISysExMemory memory = (ISysExMemory) CurrentPcgMemory;
             switch (filetype)
             {
                 case Memory.FileType.Syx:
                     if ((Util.GetChars(memory.Content, 0, 14) != "Sysex Manager-") &&
                         (Util.GetChars(memory.Content, 2, 8) != "OrigKorg"))
                     {
-                        var offset = SkipModeChanges();
+                        int offset = SkipModeChanges();
                         SysExStartOffset += offset;
                         ContentType = (PcgMemory.ContentType) memory.Content[offset + 4];
                     }
@@ -155,8 +155,8 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// </summary>
         int SkipModeChanges()
         {
-            var offset = 0;
-            var memory = (ISysExMemory)CurrentPcgMemory;
+            int offset = 0;
+            ISysExMemory memory = (ISysExMemory)CurrentPcgMemory;
 
             while ((memory.Content[offset] == 0xF0) && // MIDI SysEx
                    (memory.Content[offset + 1] == 0x42) && // Korg
@@ -177,14 +177,14 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// <param name="programNo"></param>
         private void ReadSingleProgram(int offset, int bankStart = 0, int programNo = 0)
         {
-            var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankStart]);
+            IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankStart]);
             bank.ByteOffset = 0;
             bank.BankSynthesisType = ProgramBank.SynthesisType.AnalogModeling;
             bank.ByteLength = 75;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var program = (IProgram) bank[programNo];
+            IProgram program = (IProgram) bank[programNo];
             program.ByteOffset = offset;
             program.ByteLength = bank.ByteLength;
             program.IsLoaded = true;
@@ -197,13 +197,13 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// <param name="offset"></param>
         private void ReadSingleCombi(int offset)
         {
-            var bank = CurrentPcgMemory.CombiBanks[0];
+            Common.Synth.Meta.IBank bank = CurrentPcgMemory.CombiBanks[0];
             bank.ByteOffset = 0;
             bank.ByteLength = 126;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var combi = bank[0];
+            Common.Synth.Meta.IPatch combi = bank[0];
             combi.ByteOffset = offset;
             combi.ByteLength = bank.ByteLength;
             combi.IsLoaded = true;
@@ -243,25 +243,25 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// </summary>
         private void ReadCombiData(int bankStart, int numberOfBanks)
         {
-            for (var bankIndex = bankStart; bankIndex < numberOfBanks; bankIndex++)
+            for (int bankIndex = bankStart; bankIndex < numberOfBanks; bankIndex++)
             {
-                var bank = CurrentPcgMemory.CombiBanks[bankIndex];
+                Common.Synth.Meta.IBank bank = CurrentPcgMemory.CombiBanks[bankIndex];
                 bank.ByteOffset = Index;
                 bank.ByteLength = 208;
                 bank.IsWritable = true;
                 bank.IsLoaded = true;
 
-                for (var index = 0; index < bank.Patches.Count; index++)
+                for (int index = 0; index < bank.Patches.Count; index++)
                 {
                     // Place in PcgMemory.
-                    var combi = (ICombi) bank[index];
+                    ICombi combi = (ICombi) bank[index];
                     combi.ByteOffset = Index;
                     combi.ByteLength = bank.ByteLength;
                     combi.IsLoaded = true;
 
                     combi.Timbres.ByteOffset = combi.ByteOffset + TimbresByteOffset;
 
-                    foreach (var timbre in combi.Timbres.TimbresCollection)
+                    foreach (ITimbre timbre in combi.Timbres.TimbresCollection)
                     {
                         timbre.ByteOffset = combi.Timbres.ByteOffset + timbre.Index * timbre.ByteLength;
                     }
@@ -280,9 +280,9 @@ namespace PcgTools.Model.Z1Specific.Pcg
         /// </summary>
         private void ReadProgramData(int bankStart, int numberOfBanks)
         {
-            for (var bankIndex = bankStart; bankIndex < numberOfBanks; bankIndex++)
+            for (int bankIndex = bankStart; bankIndex < numberOfBanks; bankIndex++)
             {
-                var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
+                IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
                 bank.ByteOffset = Index;
 
                 bank.BankSynthesisType = ProgramBank.SynthesisType.MossZ1;
@@ -290,10 +290,10 @@ namespace PcgTools.Model.Z1Specific.Pcg
                 bank.IsWritable = true;
                 bank.IsLoaded = true;
 
-                for (var index = 0; index < bank.Patches.Count; index++)
+                for (int index = 0; index < bank.Patches.Count; index++)
                 {
                     // Place in PcgMemory.
-                    var program = (IProgram) bank[index];
+                    IProgram program = (IProgram) bank[index];
                     program.ByteOffset = Index;
                     program.ByteLength = bank.ByteLength;
                     program.IsLoaded = true;

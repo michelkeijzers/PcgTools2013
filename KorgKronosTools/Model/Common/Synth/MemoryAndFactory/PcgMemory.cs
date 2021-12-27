@@ -107,7 +107,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
             }
 
             ProgramBanks.Fill();
-            var firstProgramBank = (IProgramBank) ProgramBanks[0];
+            IProgramBank firstProgramBank = (IProgramBank) ProgramBanks[0];
 
             AssignedClearProgram = (IProgram) (firstProgramBank[0]);
 
@@ -478,7 +478,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
                 }
                 else
                 {
-                    var slot = patch as KronosSetListSlot;
+                    KronosSetListSlot slot = patch as KronosSetListSlot;
                     if (slot != null)
                     {
                         slot.SwapOs1516Data((KronosSetListSlot) otherPatch);
@@ -577,14 +577,14 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             if ((SetLists != null) && (Sdb1Index != 0)) // If there is no SLS1 chuck there are no set lists present
             {
-                foreach (var setList in SetLists.BankCollection)
+                foreach (IBank setList in SetLists.BankCollection)
                 {
                     // Update set list name.
-                    var sdb1Base = Sdb1Index + 20 + Convert.ToInt16(setList.Id)*0xE1C;
+                    int sdb1Base = Sdb1Index + 20 + Convert.ToInt16(setList.Id)*0xE1C;
                     Util.SetChars(PcgRoot, Root.Content, sdb1Base, setList.MaxNameLength, setList.Name);
 
                     // Update set list slot names.
-                    foreach (var slot in setList.Patches)
+                    foreach (IPatch slot in setList.Patches)
                     {
                         Util.SetChars(
                             PcgRoot, Root.Content, sdb1Base + 28 + 28*slot.Index, slot.MaxNameLength, slot.Name);
@@ -623,8 +623,8 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             get
             {
-                var programs = ProgramBanks == null ? 0 : ProgramBanks.CountWritablePatches;
-                var combis = CombiBanks == null ? 0 : CombiBanks.CountWritablePatches;
+                int programs = ProgramBanks == null ? 0 : ProgramBanks.CountWritablePatches;
+                int combis = CombiBanks == null ? 0 : CombiBanks.CountWritablePatches;
 
                 return (programs + combis == 1);
             }
@@ -640,7 +640,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
             {
                 //Debug.Assert(HasOnlyOnePatch);
 
-                var foundPatch = FindOnlyPatch(ProgramBanks) ?? FindOnlyPatch(CombiBanks);
+                IPatch foundPatch = FindOnlyPatch(ProgramBanks) ?? FindOnlyPatch(CombiBanks);
                 Debug.Assert(foundPatch != null, "No patch found");
                 return foundPatch.Name;
             }
@@ -670,10 +670,10 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// </summary>
         public void SynchronizeProgramName()
         {
-            var firstProgram = (Program) ((ProgramBank) ProgramBanks[0])[0];
+            Program firstProgram = (Program) ((ProgramBank) ProgramBanks[0])[0];
             if (firstProgram.Name == string.Empty)
             {
-                var fileName = Path.GetFileNameWithoutExtension(FileName);
+                string fileName = Path.GetFileNameWithoutExtension(FileName);
                 if (fileName != null)
                 {
                     firstProgram.Name = fileName.Substring(0, Math.Min(fileName.Length, firstProgram.MaxNameLength));
@@ -688,10 +688,10 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// </summary>
         public void SynchronizeCombiName()
         {
-            var firstCombi = (Combi) ((CombiBank) CombiBanks[0])[0];
+            Combi firstCombi = (Combi) ((CombiBank) CombiBanks[0])[0];
             if (firstCombi.Name == string.Empty)
             {
-                var fileName = Path.GetFileNameWithoutExtension(FileName);
+                string fileName = Path.GetFileNameWithoutExtension(FileName);
                 if (fileName != null)
                 {
                     firstCombi.Name = fileName.Substring(0, Math.Min(fileName.Length, firstCombi.MaxNameLength));
@@ -722,7 +722,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             if (banks != null)
             {
-                foreach (var bank in banks.BankCollection)
+                foreach (IBank bank in banks.BankCollection)
                 {
                     bank.SetParameters();
                 }
@@ -807,7 +807,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <param name="banks"></param>
         private void SelectFirstIfLoaded(IEnumerable<IBank> banks)
         {
-            var firstLoaded = banks.FirstOrDefault(bank => bank.IsLoaded);
+            IBank firstLoaded = banks.FirstOrDefault(bank => bank.IsLoaded);
             if (firstLoaded != null)
             {
                 firstLoaded.IsSelected = true;

@@ -32,7 +32,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// </summary>
         protected override void CreateSetLists()
         {
-            for (var n = 0; n < NrOfSetLists; n++)
+            for (int n = 0; n < NrOfSetLists; n++)
             {
                 Add(new KronosSetList(this, n));
             }

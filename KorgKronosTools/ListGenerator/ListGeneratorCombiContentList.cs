@@ -27,12 +27,12 @@ namespace PcgTools.ListGenerator
         /// <returns></returns>
         protected override string RunAfterFilteringBanks(bool useFileWriter = true)
         {
-            var textFileName = OutputFileName;
+            string textFileName = OutputFileName;
 
             //var stream = new MemoryStream();
             //var writer = new StreamWriter(stream);
-            var stream = useFileWriter ? null : new MemoryStream();
-            using (var writer = useFileWriter ? File.CreateText(textFileName) : new StreamWriter(stream))
+            MemoryStream stream = useFileWriter ? null : new MemoryStream();
+            using (StreamWriter writer = useFileWriter ? File.CreateText(textFileName) : new StreamWriter(stream))
             {
                 // Write to file.
                 WriteToFile(writer);
@@ -102,9 +102,9 @@ namespace PcgTools.ListGenerator
                 case OutputFormat.AsciiTable:
 // ReSharper disable RedundantStringFormatCall
                     writer.WriteLine($"+------+{new string('-', maxTimbresPerCombi*8 - 1)}+");
-// ReSharper restore RedundantStringFormatCall
+                    // ReSharper restore RedundantStringFormatCall
 
-                    var columnText = "Used Program IDs";
+                    string columnText = "Used Program IDs";
                     if (ListSubType == SubType.Compact)
                     {
                         columnText += " (sorted by bank/index and duplicates removed)";
@@ -145,14 +145,14 @@ namespace PcgTools.ListGenerator
         private void WriteOtherTypeOfListLineToFile(TextWriter writer, int maxTimbresPerCombi)
         {
 // Print lines.
-            foreach (var combi in from combiBank in SelectedCombiBanks
+            foreach (IPatch combi in from combiBank in SelectedCombiBanks
                 from combi in combiBank.Patches
                 where combiBank.IsLoaded &&
                       combi.UseInList(IgnoreInitCombis, FilterOnText, FilterText, FilterCaseSensitive,
                           ListFilterOnFavorites, false)
                 select combi)
             {
-                var programIds = new LinkedList<string>();
+                LinkedList<string> programIds = new LinkedList<string>();
 
                 // For the compact list, sort and make IDs unique.
                 if (ListSubType == SubType.Compact)
@@ -161,10 +161,10 @@ namespace PcgTools.ListGenerator
                 }
                 else
                 {
-                    var usedPrograms = ((Combi) combi).Timbres.TimbresCollection.Select(
+                    List<IProgram> usedPrograms = ((Combi) combi).Timbres.TimbresCollection.Select(
                         timbre => ShowTimbre(timbre) ? timbre.UsedProgram : null).ToList();
 
-                    foreach (var program in usedPrograms)
+                    foreach (IProgram program in usedPrograms)
                     {
                         if ((program == null) || !SelectedProgramBanks.Contains(program.Parent))
                         {
@@ -189,18 +189,18 @@ namespace PcgTools.ListGenerator
         /// <param name="programIds"></param>
         private void WriteOtherTypeOfCompactListLineToFile(IPatch combi, LinkedList<string> programIds)
         {
-            var usedPrograms = from timbre in ((Combi) combi).Timbres.TimbresCollection
+            IEnumerable<IProgram> usedPrograms = from timbre in ((Combi) combi).Timbres.TimbresCollection
                 where ShowTimbre(timbre)
                 select timbre.UsedProgram;
 
-            var unorderedProgramIds =
+            List<string> unorderedProgramIds =
                 (from program in usedPrograms
                     where ((program != null) &&
                            SelectedProgramBanks.Contains(program.Parent))
                     select program.Id).ToList();
             unorderedProgramIds.Sort();
 
-            for (var n = 0; n < unorderedProgramIds.Count; n++)
+            for (int n = 0; n < unorderedProgramIds.Count; n++)
             {
                 if (n == 0)
                 {
@@ -302,13 +302,13 @@ namespace PcgTools.ListGenerator
             int maxTimbresPerCombi)
         {
             writer.Write("|{0,-6}", combi.Id);
-            var enumerable = programIds as IList<string> ?? programIds.ToList();
-            foreach (var programId in enumerable)
+            IList<string> enumerable = programIds as IList<string> ?? programIds.ToList();
+            foreach (string programId in enumerable)
             {
                 writer.Write("|{0,-7}", programId);
             }
 
-            for (var n = enumerable.Count(); n < maxTimbresPerCombi; n++)
+            for (int n = enumerable.Count(); n < maxTimbresPerCombi; n++)
             {
                 writer.Write("|       ");
             }
@@ -325,7 +325,7 @@ namespace PcgTools.ListGenerator
         private static void WriteLineToTextFile(TextWriter writer, IPatch combi, IEnumerable<string> programIds)
         {
             writer.Write("{0,-6}: ", combi.Id);
-            foreach (var programId in programIds)
+            foreach (string programId in programIds)
             {
                 writer.Write("{0,-7} ", programId);
             }
@@ -342,7 +342,7 @@ namespace PcgTools.ListGenerator
         private static void WriteLineToCsvFile(TextWriter writer, IPatch combi, IEnumerable<string> programIds)
         {
             writer.Write("{0},", combi.Id);
-            foreach (var programId in programIds)
+            foreach (string programId in programIds)
             {
                 writer.Write("{0},", programId);
             }
@@ -361,7 +361,7 @@ namespace PcgTools.ListGenerator
             writer.WriteLine("  <combi>");
             writer.WriteLine("    <id>{0}</id>", combi.Id);
             writer.WriteLine("    <timbres>");
-            foreach (var programId in programIds)
+            foreach (string programId in programIds)
             {
                 writer.WriteLine("      <program>");
                 writer.WriteLine("        <id>{0}</id>", programId);
@@ -377,7 +377,7 @@ namespace PcgTools.ListGenerator
         /// </summary>
         void WriteXslFile()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.AppendLine("<?xml version=\"1.0\"?>");
             builder.AppendLine(" <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
             builder.AppendLine(" <xsl:template match=\"/\">");
@@ -416,23 +416,23 @@ namespace PcgTools.ListGenerator
         /// <param name="writer"></param>
         void WriteLongListToFile(TextWriter writer)
         {
-            foreach (var patch in from combiBank in SelectedCombiBanks
+            foreach (IPatch patch in from combiBank in SelectedCombiBanks
               from combi in combiBank.Patches
                                     where combiBank.IsLoaded && 
                                     combi.UseInList(IgnoreInitCombis, FilterOnText, FilterText, FilterCaseSensitive,
                                     ListFilterOnFavorites, false)
               select combi)
             {
-                var combi = (ICombi) patch;
+                ICombi combi = (ICombi) patch;
                 // Gather info for header.
-                var categoryString = combi.CategoryAsName;
+                string categoryString = combi.CategoryAsName;
 
                 //var subCategory = combi.GetParam("SubCategory");
-                var subCategoryString = combi.SubCategoryAsName;
-                var favorite = combi.PcgRoot.AreFavoritesSupported ? combi.GetParam(ParameterNames.CombiParameterName.Favorite) : null;
-                var favoriteString = (favorite == null) ? "-" : (favorite.Value) ? "Yes" : "No";
-                var paramTempo = combi.GetParam(ParameterNames.CombiParameterName.Tempo);
-                var tempo = paramTempo == null ? "-" : string.Format("{0,6:0.00}", paramTempo.Value);
+                string subCategoryString = combi.SubCategoryAsName;
+                IParameter favorite = combi.PcgRoot.AreFavoritesSupported ? combi.GetParam(ParameterNames.CombiParameterName.Favorite) : null;
+                string favoriteString = (favorite == null) ? "-" : (favorite.Value) ? "Yes" : "No";
+                IParameter paramTempo = combi.GetParam(ParameterNames.CombiParameterName.Tempo);
+                dynamic tempo = paramTempo == null ? "-" : string.Format("{0,6:0.00}", paramTempo.Value);
 
                 // Print header.
                 writer.WriteLine("+------------+-----------------------------+----------------------------+--------------------------------+------------+-------+---------------------------------+");
@@ -449,7 +449,7 @@ namespace PcgTools.ListGenerator
                 writer.WriteLine("+---+----------+------------------------+------------------------+------------------------+---+---+----+----+----+---------+-------+----+----+---+-----+---+----+");
 
                 // Print timbres.);
-                for (var index = 0; index < combi.Timbres.TimbresCollection.Count; index++)
+                for (int index = 0; index < combi.Timbres.TimbresCollection.Count; index++)
                 {
                     PrintTimbre(writer, combi, index);
                 }
@@ -468,61 +468,61 @@ namespace PcgTools.ListGenerator
         /// <param name="index"></param>
         private void PrintTimbre(TextWriter writer, ICombi combi, int index)
         {
-            var timbre = combi.Timbres.TimbresCollection[index];
-            var status = timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value;
-            var muteParam = timbre.GetParam(ParameterNames.TimbreParameterName.Mute);
-            var mute = muteParam != null && (bool) muteParam.Value;
-            var muteString = mute.ToYesNo();
+            ITimbre timbre = combi.Timbres.TimbresCollection[index];
+            dynamic status = timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value;
+            IParameter muteParam = timbre.GetParam(ParameterNames.TimbreParameterName.Mute);
+            bool mute = muteParam != null && (bool) muteParam.Value;
+            string muteString = mute.ToYesNo();
 
             if (!ShowTimbre(timbre))
             {
                 return;
             }
 
-            var usedProgram = timbre.UsedProgram;
-            var timbreId = (usedProgram == null) ? "???" : timbre.ColumnProgramId;
+            IProgram usedProgram = timbre.UsedProgram;
+            string timbreId = (usedProgram == null) ? "???" : timbre.ColumnProgramId;
 
-            var isGmProgram = (usedProgram != null) && ((ProgramBank) (timbre.UsedProgram.Parent)).Type == BankType.EType.Gm;
-            var byteOffset = (usedProgram == null) ? 0 : timbre.UsedProgram.ByteOffset;
-            var name = isGmProgram ? "-" : (byteOffset == 0) ? "???" : timbre.ColumnProgramName;
-            var category = isGmProgram ? "-" : (byteOffset == 0) ? "???" : timbre.UsedProgram.CategoryAsName;
-            var subCategory = isGmProgram ? "-" : ((byteOffset == 0) ? "???" : timbre.UsedProgram.SubCategoryAsName);
-            var volume = (string) (timbre.GetParam(ParameterNames.TimbreParameterName.Volume).Value.ToString());
-            var priority = timbre.GetParam(ParameterNames.TimbreParameterName.Priority);
-            var priorityString = (isGmProgram || (priority == null))
+            bool isGmProgram = (usedProgram != null) && ((ProgramBank) (timbre.UsedProgram.Parent)).Type == BankType.EType.Gm;
+            int byteOffset = (usedProgram == null) ? 0 : timbre.UsedProgram.ByteOffset;
+            string name = isGmProgram ? "-" : (byteOffset == 0) ? "???" : timbre.ColumnProgramName;
+            string category = isGmProgram ? "-" : (byteOffset == 0) ? "???" : timbre.UsedProgram.CategoryAsName;
+            string subCategory = isGmProgram ? "-" : ((byteOffset == 0) ? "???" : timbre.UsedProgram.SubCategoryAsName);
+            string volume = (string) (timbre.GetParam(ParameterNames.TimbreParameterName.Volume).Value.ToString());
+            IParameter priority = timbre.GetParam(ParameterNames.TimbreParameterName.Priority);
+            string priorityString = (isGmProgram || (priority == null))
                 ? "No"
                 : ((byteOffset == 0) ? "???" : ((bool) priority.Value).ToYesNo());
 
-            var midiChannelString = ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.MidiChannel, 
+            string midiChannelString = ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.MidiChannel, 
                 (int) timbre.GetParam(ParameterNames.TimbreParameterName.MidiChannel).Value);
 
-            var bottomKey = (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.BottomKey, 
+            string bottomKey = (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.BottomKey, 
                 timbre.GetParam(ParameterNames.TimbreParameterName.BottomKey).Value);
 
-            var topKey = (string)ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.TopKey, 
+            string topKey = (string)ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.TopKey, 
                 timbre.GetParam(ParameterNames.TimbreParameterName.TopKey).Value);
 
-            var bottomVelocity = (string) timbre.GetParam(ParameterNames.TimbreParameterName.BottomVelocity).Value.ToString();
-            var topVelocity = (string) timbre.GetParam(ParameterNames.TimbreParameterName.TopVelocity).Value.ToString();
+            string bottomVelocity = (string) timbre.GetParam(ParameterNames.TimbreParameterName.BottomVelocity).Value.ToString();
+            string topVelocity = (string) timbre.GetParam(ParameterNames.TimbreParameterName.TopVelocity).Value.ToString();
 
-            var paramOscMode = timbre.GetParam(ParameterNames.TimbreParameterName.OscMode);
-            var oscMode = (paramOscMode == null) ? "-" : (string) paramOscMode.Value;
+            IParameter paramOscMode = timbre.GetParam(ParameterNames.TimbreParameterName.OscMode);
+            string oscMode = (paramOscMode == null) ? "-" : (string) paramOscMode.Value;
 
-            var paramOscSelect = timbre.GetParam(ParameterNames.TimbreParameterName.OscSelect);
-            var oscSelect = (paramOscSelect == null) ? "-" : (string) paramOscSelect.Value;
+            IParameter paramOscSelect = timbre.GetParam(ParameterNames.TimbreParameterName.OscSelect);
+            string oscSelect = (paramOscSelect == null) ? "-" : (string) paramOscSelect.Value;
 
-            var transpose = (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Transpose, 
+            string transpose = (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Transpose, 
                 timbre.GetParam(ParameterNames.TimbreParameterName.Transpose).Value);
 
-            var paramDetune = timbre.GetParam(ParameterNames.TimbreParameterName.Detune);
-            var detune = (paramDetune == null) ? "-" : (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Detune, paramDetune.Value);
+            IParameter paramDetune = timbre.GetParam(ParameterNames.TimbreParameterName.Detune);
+            string detune = (paramDetune == null) ? "-" : (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Detune, paramDetune.Value);
 
-            var paramPortamento = timbre.GetParam(ParameterNames.TimbreParameterName.Portamento);
-            var portamento = (paramPortamento == null)
+            IParameter paramPortamento = timbre.GetParam(ParameterNames.TimbreParameterName.Portamento);
+            string portamento = (paramPortamento == null)
                 ? "-"
                 : (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Portamento, paramPortamento.Value);
 
-            var bendRange = (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.BendRange,
+            string bendRange = (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.BendRange,
                 timbre.GetParam(ParameterNames.TimbreParameterName.BendRange).Value);
 
             writer.Write(

@@ -49,7 +49,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <returns></returns>
         public static string ModelTypeAsString(Models.EModelType modelType)
         {
-            var map = new Dictionary<Models.EModelType, string>
+            Dictionary<Models.EModelType, string> map = new Dictionary<Models.EModelType, string>
             {
                 {Models.EModelType.Nautilus, Strings.EModelTypeNautilus},
                 {Models.EModelType.Kronos, Strings.EModelTypeKronos},

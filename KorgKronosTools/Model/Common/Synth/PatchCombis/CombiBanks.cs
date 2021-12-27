@@ -43,9 +43,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         void FillCombis()
         {
-            foreach (var bank in BankCollection)
+            foreach (IBank bank in BankCollection)
             {
-                for (var index = 0; index < bank.NrOfPatches; index++)
+                for (int index = 0; index < bank.NrOfPatches; index++)
                 {
                     bank.CreatePatch(index);
                 }
@@ -60,7 +60,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <param name="pcgMemory">PCG Memory of changes</param>
         public void ChangeTimbreReferences(Dictionary<IProgram, IProgram> changes, IPcgMemory pcgMemory)
         {
-            foreach (var timbre in from bank in BankCollection
+            foreach (ITimbre timbre in from bank in BankCollection
                                    where bank.IsFilled
                                    from combi in bank.Patches
                                    from timbre in ((Combi)combi).Timbres.TimbresCollection

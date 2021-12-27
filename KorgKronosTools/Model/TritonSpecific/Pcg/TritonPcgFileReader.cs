@@ -81,7 +81,7 @@ namespace PcgTools.Model.TritonSpecific.Pcg
         /// </summary>
         protected override void ReadGlb1Chunk(int chunkSizeNotUsed)
         {
-            var chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
+            int chunkSize = Util.GetInt(CurrentPcgMemory.Content, Index + 4, 4);
             Index += 12; // Skip 'GLB1", chunk size and 4 other/unknown bytes.
             //CurrentPcgMemory.Chunks.Add(new Chunk("GLB1", Index, chunkSize));
             CurrentPcgMemory.Global.ByteOffset = Index;

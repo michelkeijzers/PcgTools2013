@@ -162,7 +162,7 @@ namespace PcgTools
 
                 ShowPasteWindow = () =>
                 {
-                    var window = new SettingsWindow {Owner = _mainWindow};
+                    SettingsWindow window = new SettingsWindow {Owner = _mainWindow};
                     window.ShowDialog();
                 },
 
@@ -177,7 +177,7 @@ namespace PcgTools
 
                 ShowListGenerator = () =>
                 {
-                    var window = new ListGeneratorWindow((PcgMemory) ViewModel.SelectedMemory)
+                    ListGeneratorWindow window = new ListGeneratorWindow((PcgMemory) ViewModel.SelectedMemory)
                     {
                         Owner = _mainWindow
                     };
@@ -194,7 +194,7 @@ namespace PcgTools
 
                 ShowProgramReferencesChanger = () =>
                 {
-                    var window = new ProgramReferenceChangerWindow((PcgMemory) ViewModel.SelectedMemory)
+                    ProgramReferenceChangerWindow window = new ProgramReferenceChangerWindow((PcgMemory) ViewModel.SelectedMemory)
                     {
                         Owner = _mainWindow
                     };
@@ -212,7 +212,7 @@ namespace PcgTools
                 ShowTimbresWindow = (combi, width, height) =>
                 {
                     // Check if already exists. If so, show the already opened window.
-                    foreach (var child in from child in _mainWindow.Container.Children
+                    foreach (MdiChild child in from child in _mainWindow.Container.Children
                         where (child.Content is CombiWindow)
                         let combiWindowIteration = child.Content as CombiWindow
                         where combiWindowIteration.CombiViewModel.Combi == combi
@@ -223,7 +223,7 @@ namespace PcgTools
                     }
 
                     // Create combi window if not already present.
-                    var mdiChild = new MdiChild
+                    MdiChild mdiChild = new MdiChild
                     {
                         Title = GenerateCombiWindowTitle(combi),
                         Content = new CombiWindow(PcgViewModel, combi),
@@ -243,18 +243,18 @@ namespace PcgTools
 
                 EditParameterWindow = patches =>
                 {
-                    var window = new WindowEditParameter(patches);
+                    WindowEditParameter window = new WindowEditParameter(patches);
                     window.ShowDialog();
                 },
 
                 UpdateTimbresWindows = () =>
                 {
                     // Update every timbre window.
-                    foreach (var child in from child in _mainWindow.Container.Children
+                    foreach (MdiChild child in from child in _mainWindow.Container.Children
                         where (child.Content is CombiWindow)
                         select child)
                     {
-                        var viewModel = ((CombiWindow) (child.Content)).CombiViewModel;
+                        ICombiViewModel viewModel = ((CombiWindow) (child.Content)).CombiViewModel;
                         viewModel.UpdateUiContent();
                         child.Title = GenerateCombiWindowTitle(viewModel.Combi);
                     }
@@ -339,8 +339,8 @@ namespace PcgTools
             {
                 return;
             }
-            
-            var columns = ((GridView) listViewBanks.View).Columns;
+
+            GridViewColumnCollection columns = ((GridView) listViewBanks.View).Columns;
 
             columns[0].Width = 50;
             columns[1].Width = 120;
@@ -395,7 +395,7 @@ namespace PcgTools
                 return;
             }
 
-            var columns = ((GridView)listViewBanks.View).Columns;
+            GridViewColumnCollection columns = ((GridView)listViewBanks.View).Columns;
 
             columns[0].Width = 50;
             columns[1].Width = 0;
@@ -450,7 +450,7 @@ namespace PcgTools
                 return;
             }
 
-            var columns = ((GridView)listViewBanks.View).Columns;
+            GridViewColumnCollection columns = ((GridView)listViewBanks.View).Columns;
 
             columns[0].Width = 50;
             columns[1].Width = 180;
@@ -491,7 +491,7 @@ namespace PcgTools
                 return;
             }
 
-            var columns = ((GridView)listViewBanks.View).Columns;
+            GridViewColumnCollection columns = ((GridView)listViewBanks.View).Columns;
 
             columns[0].Width = 60;
             columns[1].Width = 0;
@@ -528,7 +528,7 @@ namespace PcgTools
                 return;
             }
 
-            var columns = ((GridView)listViewBanks.View).Columns;
+            GridViewColumnCollection columns = ((GridView)listViewBanks.View).Columns;
 
             columns[0].Width = 60;
             columns[1].Width = 0;
@@ -565,7 +565,7 @@ namespace PcgTools
                 return;
             }
 
-            var columns = ((GridView)listViewBanks.View).Columns;
+            GridViewColumnCollection columns = ((GridView)listViewBanks.View).Columns;
 
             columns[0].Width = 60;
             columns[1].Width = 0;
@@ -587,7 +587,7 @@ namespace PcgTools
 
             HideAllGridViewPatchesColumns();
 
-            SetGridViewPatchesColumn(Strings.ID, 70.0);
+            SetGridViewPatchesColumn(Strings.ID, 80.0);
             SetGridViewPatchesColumn(Strings.Name, 175.0);
         }
 
@@ -644,9 +644,9 @@ namespace PcgTools
         /// <param name="width"></param>
         private void SetGridViewPatchesColumn(string columnName, double width)
         {
-            var columns = ((GridView)listViewPatches.View).Columns;
+            GridViewColumnCollection columns = ((GridView)listViewPatches.View).Columns;
             // There should be always one, but El Kar has a crash about a null pointer exception, so First -> FirstOrDefault.
-            var columnWithName = columns.FirstOrDefault(column => column.Header.ToString() == columnName);
+            GridViewColumn columnWithName = columns.FirstOrDefault(column => column.Header.ToString() == columnName);
             if (columnWithName != null)
             {
                 columnWithName.Width = width;
@@ -659,8 +659,8 @@ namespace PcgTools
         /// </summary>
         private void HideAllGridViewPatchesColumns()
         {
-            var columns = ((GridView)listViewPatches.View).Columns;
-            foreach (var column in columns)
+            GridViewColumnCollection columns = ((GridView)listViewPatches.View).Columns;
+            foreach (GridViewColumn column in columns)
             {
                 column.Width = 0.0;
             }
@@ -738,12 +738,12 @@ namespace PcgTools
             
             if (e.RemovedItems.Count > 0)
             {
-                var selectedBanks = PcgViewModel.Banks.Where(item => item.IsSelected &&
+                int selectedBanks = PcgViewModel.Banks.Where(item => item.IsSelected &&
                  item.Parent == ((IBank)(e.RemovedItems[0])).Parent).ToList().Count;
 
                 if (selectedBanks != e.RemovedItems.Count)
                 {
-                    foreach (var bank in PcgViewModel.Banks.Where(item => item.IsSelected && (e.RemovedItems.Contains(item))))
+                    foreach (IBank bank in PcgViewModel.Banks.Where(item => item.IsSelected && (e.RemovedItems.Contains(item))))
                     {
                         bank.IsSelected = false;
                     }
@@ -769,7 +769,7 @@ namespace PcgTools
             }
             PcgViewModel.EditSelectedItemCommand.CanExecute(null);
 
-            var selectedPatches = listViewPatches.SelectedItems.Count;
+            int selectedPatches = listViewPatches.SelectedItems.Count;
             if ((selectedPatches == 1) && (listViewPatches.SelectedItem is IProgram) ||
                 listViewPatches.SelectedItem is ICombi)
             {
@@ -830,7 +830,7 @@ namespace PcgTools
         void CloseWindow()
         {
             MdiChild.Close();
-            foreach (var child in GetChilds())
+            foreach (MdiChild child in GetChilds())
             {
                 _mainWindow.Container.Children.Remove(child);
             }
@@ -1029,7 +1029,7 @@ namespace PcgTools
         /// </summary>
         private void Patches()
         {
-            var firstSelected = PcgViewModel.Patches.FirstOrDefault(patch => patch.IsSelected);
+            IPatch firstSelected = PcgViewModel.Patches.FirstOrDefault(patch => patch.IsSelected);
             if (firstSelected != null)
             {
                 listViewPatches.ScrollIntoView(firstSelected);

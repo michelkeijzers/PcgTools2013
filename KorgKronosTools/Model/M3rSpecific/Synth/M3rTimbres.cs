@@ -24,7 +24,7 @@ namespace PcgTools.Model.M3rSpecific.Synth
         public M3RTimbres(ICombi combi)
             : base(combi, TimbresOffsetConstant)
         {
-            for (var n = 0; n < TimbresPerCombi; n++)
+            for (int n = 0; n < TimbresPerCombi; n++)
             {
                 TimbresCollection.Add(new M3RTimbre(this, n));
             }

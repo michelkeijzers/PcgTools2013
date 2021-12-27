@@ -41,21 +41,21 @@ namespace PcgTools.Model.KronosSpecific.Pcg
         {
             // Loop through all chunks and fix the checksum in the INI2 and INI3 (in OS update 1.5/1.6) chunk.
             // LV: Add "WSQ1" and "DKT1" if WaveSequenceBanks and DrumKits become editable?
-            var checksumChunks = new List<string> {"PBK1", "MBK1", "CBK1", "SBK1", "GLB1", "WBK1", "DBK1"};
-            var pbkIndex = 0;
-            var mbkIndex = 0;
-            var cbkIndex = 0;
-            var wsqIndex = 0;
-            var dbkIndex = 0;
+            List<string> checksumChunks = new List<string> {"PBK1", "MBK1", "CBK1", "SBK1", "GLB1", "WBK1", "DBK1"};
+            int pbkIndex = 0;
+            int mbkIndex = 0;
+            int cbkIndex = 0;
+            int wsqIndex = 0;
+            int dbkIndex = 0;
 
-            var startIndex = checksumType == ChecksumType.Kronos1516 ? 3 : 0; // For OS1.5/1.6, skip DIV1 and INI2/3.
-            for (var index = startIndex; index < Chunks.Collection.Count; index++)
+            int startIndex = checksumType == ChecksumType.Kronos1516 ? 3 : 0; // For OS1.5/1.6, skip DIV1 and INI2/3.
+            for (int index = startIndex; index < Chunks.Collection.Count; index++)
             {
-                var chunk = Chunks.Collection[index];
+                IChunk chunk = Chunks.Collection[index];
                 if (checksumChunks.Contains(chunk.Name))
                 {
-                    var checksum = 0;
-                    for (var dataIndex = chunk.Offset + 12; dataIndex < chunk.Offset + chunk.Size + 12; dataIndex++)
+                    int checksum = 0;
+                    for (int dataIndex = chunk.Offset + 12; dataIndex < chunk.Offset + chunk.Size + 12; dataIndex++)
                     {
                         // Since checksum is a byte it will be automatically moduloed by 256.
                         checksum = (checksum + Content[dataIndex]) % 256; 
@@ -146,10 +146,10 @@ namespace PcgTools.Model.KronosSpecific.Pcg
         int FindIni2Or3Offset(string chunkNameInIni2, int index)
         {
             Debug.Assert(Chunks.Collection[1].Name == "INI2");
-            var ini2Start = Chunks.Collection[1].Offset; // Index 1 = INI2
+            int ini2Start = Chunks.Collection[1].Offset; // Index 1 = INI2
 
-            var offsetInIni = ini2Start + 16;
-            var occurence = 0;
+            int offsetInIni = ini2Start + 16;
+            int occurence = 0;
             while (true)
             {
                 if (Util.GetChars(Content, offsetInIni, 4) == chunkNameInIni2)
@@ -206,10 +206,10 @@ namespace PcgTools.Model.KronosSpecific.Pcg
                 if (patch is KronosProgram)
                 {
                     // Copy PRG2 content.
-                    var programToPaste = (ClipBoardProgram) patchToPaste;
-                    for (var parameter = 0; parameter < programToPaste.KronosOs1516Content.Length; parameter++)
+                    ClipBoardProgram programToPaste = (ClipBoardProgram) patchToPaste;
+                    for (int parameter = 0; parameter < programToPaste.KronosOs1516Content.Length; parameter++)
                     {
-                        var patchParameterOffset = ((KronosProgramBank) (patch.Parent)).GetParameterOffsetInPbk2(
+                        int patchParameterOffset = ((KronosProgramBank) (patch.Parent)).GetParameterOffsetInPbk2(
                             patch.Index, parameter);
                         Debug.Assert(patchParameterOffset >= 4); // Don't overwrite KORG header
                         Root.Content[patchParameterOffset] = programToPaste.KronosOs1516Content[parameter];
@@ -218,24 +218,24 @@ namespace PcgTools.Model.KronosSpecific.Pcg
                 else if (patch is KronosCombi)
                 {
                     // Copy CBK2 content.
-                    var combiToPaste = (ClipBoardCombi) patchToPaste;
+                    ClipBoardCombi combiToPaste = (ClipBoardCombi) patchToPaste;
 
-                    for (var parameter = 0; parameter < KronosCombiBanks.ParametersInCbk2Chunk; parameter++)
+                    for (int parameter = 0; parameter < KronosCombiBanks.ParametersInCbk2Chunk; parameter++)
                     {
-                        for (var timbre = 0; timbre < KronosTimbres.TimbresPerCombiConstant; timbre++)
+                        for (int timbre = 0; timbre < KronosTimbres.TimbresPerCombiConstant; timbre++)
                         {
-                            var patchParameterOffset = ((KronosCombiBank) (patch.Parent)).GetParameterOffsetInCbk2(
+                            int patchParameterOffset = ((KronosCombiBank) (patch.Parent)).GetParameterOffsetInCbk2(
                                 patch.Index, timbre, parameter);
                             Debug.Assert(patchParameterOffset >= 4); // Don't overwrite KORG header
                             Root.Content[patchParameterOffset] = combiToPaste.KronosOs1516Content[
-                                parameter + timbre * KronosCombiBanks.ParametersInCbk2Chunk];
+                                parameter + (timbre * KronosCombiBanks.ParametersInCbk2Chunk)];
                         }
                     }
                     
                 }
                 else
                 {
-                    var slot = patch as KronosSetListSlot;
+                    KronosSetListSlot slot = patch as KronosSetListSlot;
                     if (slot != null)
                     {
                         Util.SetInt(this, Content, slot.Stl2BankOffset, 1,
@@ -265,10 +265,10 @@ namespace PcgTools.Model.KronosSpecific.Pcg
                 if (patch is KronosProgram)
                 {
                     // Copy PRG2 content.
-                    var programToPaste = (ClipBoardProgram)patchToPaste;
-                    for (var parameter = 0; parameter < programToPaste.KronosOs1516Content.Length; parameter++)
+                    ClipBoardProgram programToPaste = (ClipBoardProgram)patchToPaste;
+                    for (int parameter = 0; parameter < programToPaste.KronosOs1516Content.Length; parameter++)
                     {
-                        var patchParameterOffset = 
+                        int patchParameterOffset = 
                             ((KronosProgramBank)(patch.Parent)).GetParameterOffsetInPbk2(patch.Index, parameter);
                         Debug.Assert(patchParameterOffset >= 4); // Don't overwrite KORG header
                         Root.Content[patchParameterOffset] = programToPaste.KronosOs1516Content[parameter];
@@ -277,24 +277,24 @@ namespace PcgTools.Model.KronosSpecific.Pcg
                 else if (patch is KronosCombi)
                 {
                     // Copy CBK2 content.
-                    var combiToPaste = (ClipBoardCombi)patchToPaste;
+                    ClipBoardCombi combiToPaste = (ClipBoardCombi)patchToPaste;
 
-                    for (var parameter = 0; parameter < KronosCombiBanks.ParametersInCbk2Chunk; parameter++)
+                    for (int parameter = 0; parameter < KronosCombiBanks.ParametersInCbk2Chunk; parameter++)
                     {
-                        for (var timbre = 0; timbre < KronosTimbres.TimbresPerCombiConstant; timbre++)
+                        for (int timbre = 0; timbre < KronosTimbres.TimbresPerCombiConstant; timbre++)
                         {
-                            var patchParameterOffset = ((KronosCombiBank)(patch.Parent)).GetParameterOffsetInCbk2(
+                            int patchParameterOffset = ((KronosCombiBank)(patch.Parent)).GetParameterOffsetInCbk2(
                                 patch.Index, timbre, parameter);
                             Debug.Assert(patchParameterOffset >= 4); // Don't overwrite KORG header
                             Root.Content[patchParameterOffset] = combiToPaste.KronosOs1516Content[
-                                parameter + timbre * KronosCombiBanks.ParametersInCbk2Chunk];
+                                parameter + (timbre * KronosCombiBanks.ParametersInCbk2Chunk)];
                         }
                     }
 
                 }
                 else
                 {
-                    var slot = patch as KronosSetListSlot;
+                    KronosSetListSlot slot = patch as KronosSetListSlot;
                     if (slot != null)
                     {
                         Util.SetInt(this, Content, slot.Stl2BankOffset, 1,
@@ -320,9 +320,9 @@ namespace PcgTools.Model.KronosSpecific.Pcg
             int programRawIndex)
         {
             // check if program bank is loaded, if so, return, else, null.
-            var programBank = ProgramBanks.BankCollection.FirstOrDefault(
+            IBank programBank = ProgramBanks.BankCollection.FirstOrDefault(
                 bank => (bank.PcgId == programRawBankIndex) && bank.IsLoaded);
-            return programBank == null ? null : ((IProgramBank) programBank)[programRawIndex] as IProgram;
+            return programBank == null ? null : ((IProgramBank)programBank)[programRawIndex] as IProgram;
 
         }
     }

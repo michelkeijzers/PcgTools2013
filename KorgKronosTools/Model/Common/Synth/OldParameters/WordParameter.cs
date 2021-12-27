@@ -72,7 +72,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
             set
             {
                 Debug.Assert(PcgData != null);
-                var val = (int) (value * _multiplication);
+                int val = (int) (value * _multiplication);
 
                 if (_reverseOrder)
                 {

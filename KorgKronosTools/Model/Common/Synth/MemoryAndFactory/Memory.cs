@@ -44,7 +44,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <returns></returns>
         public static string FileTypeAsString(FileType fileType)
         {
-            var map = new Dictionary<FileType, string>
+            Dictionary<FileType, string> map = new Dictionary<FileType, string>
             {
                 {FileType.Bnk, Strings.EFileTypeBnk},
                 {FileType.Exl, Strings.EFileTypeExl},
@@ -205,7 +205,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// </summary>
         public void BackupFile()
         {
-            var backupFileName = MainViewModel.PcgToolsApplicationDataDir + @"\" +
+            string backupFileName = MainViewModel.PcgToolsApplicationDataDir + @"\" +
                                  Path.GetFileNameWithoutExtension(FileName) +
                                  "_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") +
                                  Path.GetExtension(FileName);

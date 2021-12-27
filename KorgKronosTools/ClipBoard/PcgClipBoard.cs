@@ -181,7 +181,7 @@ namespace PcgTools.ClipBoard
             Programs = new List<IClipBoardPatches>();
             MemoryPrograms = new List<IClipBoardPatches>();
 
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
                 Programs.Add(new ClipBoardPatches());
                 MemoryPrograms.Add(new ClipBoardPatches());
@@ -204,7 +204,7 @@ namespace PcgTools.ClipBoard
         {
             get
             {
-                for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+                for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
                 {
                     if (Programs[index].CopiedPatches.Count != Programs[index].CopiedPatches.Count(
                         patch => patch.PasteDestination != null))
@@ -238,8 +238,8 @@ namespace PcgTools.ClipBoard
         /// <returns></returns>
         public int CountUncopiedSampledPrograms()
         {
-            var uncopied = 0;
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            int uncopied = 0;
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
                 if (!Program.IsModeled((ProgramBank.SynthesisType) (index)))
                 {
@@ -257,8 +257,8 @@ namespace PcgTools.ClipBoard
         /// <returns></returns>
         public int CountUncopiedModeledPrograms()
         {
-            var uncopied = 0;
-            for (var index = 0; index < (int)ProgramBank.SynthesisType.Last; index++)
+            int uncopied = 0;
+            for (int index = 0; index < (int)ProgramBank.SynthesisType.Last; index++)
             {
                 if (Program.IsModeled((ProgramBank.SynthesisType)(index)))
                 {
@@ -281,7 +281,7 @@ namespace PcgTools.ClipBoard
         /// </summary>
         public void Clear()
         {
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
                 Programs[index].CopiedPatches.Clear();
             }
@@ -305,9 +305,9 @@ namespace PcgTools.ClipBoard
         /// <returns></returns>
         IClipBoardPatch FindProgram(IPatch programToFind)
         {
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
-                var program = FindProgram(Programs[index].CopiedPatches, programToFind);
+                IClipBoardPatch program = FindProgram(Programs[index].CopiedPatches, programToFind);
                 if (program != null)
                 {
                     return program;
@@ -327,7 +327,7 @@ namespace PcgTools.ClipBoard
         static IClipBoardPatch FindProgram(IEnumerable<IClipBoardPatch> programs, IPatch programToFind)
         {
             IClipBoardPatch patch = null;
-            foreach (var program in programs)
+            foreach (IClipBoardPatch program in programs)
             {
                 Debug.Assert(programToFind.ByteLength == program.Data.Length);
                 if (Util.ByteCompareEqual(
@@ -362,7 +362,7 @@ namespace PcgTools.ClipBoard
         static IClipBoardDrumKit FindDrumKit(IEnumerable<IClipBoardPatch> drumKits, IPatch drumKitToFind)
         {
             IClipBoardPatch patch = null;
-            foreach (var drumKit in drumKits)
+            foreach (IClipBoardPatch drumKit in drumKits)
             {
                 Debug.Assert(drumKitToFind.ByteLength == drumKit.Data.Length);
                 if (Util.ByteCompareEqual(
@@ -398,7 +398,7 @@ namespace PcgTools.ClipBoard
             IPatch drumPatternToFind)
         {
             IClipBoardPatch patch = null;
-            foreach (var drumPattern in drumPatterns)
+            foreach (IClipBoardPatch drumPattern in drumPatterns)
             {
                 Debug.Assert(drumPatternToFind.ByteLength == drumPattern.Data.Length);
                 if (Util.ByteCompareEqual(
@@ -427,7 +427,7 @@ namespace PcgTools.ClipBoard
                 return null;
             }
 
-            var clipBoardProgram = new ClipBoardProgram(program);
+            ClipBoardProgram clipBoardProgram = new ClipBoardProgram(program);
             Programs[((int)((IProgramBank)(program.Parent)).BankSynthesisType)].CopiedPatches.Add(clipBoardProgram);
 
             if (clearAfterCopy)
@@ -438,7 +438,7 @@ namespace PcgTools.ClipBoard
             // Copy used drum kits.
             if (!CutPasteSelected)
             {
-                foreach (var drumKit in program.UsedDrumKits)
+                foreach (IDrumKit drumKit in program.UsedDrumKits)
                 {
                     CopyDrumKitOfProgramToClipBoard(drumKit, clipBoardProgram);
                 }
@@ -480,7 +480,7 @@ namespace PcgTools.ClipBoard
                 // Copy references (timbres).
                 if (!CutPasteSelected)
                 {
-                    foreach (var timbre in combi.Timbres.TimbresCollection)
+                    foreach (ITimbre timbre in combi.Timbres.TimbresCollection)
                     {
                         CopyTimbreOfCombiToClipboard(timbre, clipBoardCombi);
                     }
@@ -499,8 +499,8 @@ namespace PcgTools.ClipBoard
         private void CopyTimbreOfCombiToClipboard(ITimbre timbre, IClipBoardCombi clipBoardCombi)
         {
             IClipBoardProgram clipBoardProgramToAdd = null;
-            var usedProgramBank = timbre.UsedProgramBank;
-            var usedProgram = (usedProgramBank == null) ? null : timbre.UsedProgram;
+            IProgramBank usedProgramBank = timbre.UsedProgramBank;
+            IProgram usedProgram = (usedProgramBank == null) ? null : timbre.UsedProgram;
             
             if (ShouldTimbreBeCopied(timbre, usedProgramBank, usedProgram))
             {
@@ -522,7 +522,7 @@ namespace PcgTools.ClipBoard
         private bool ShouldTimbreBeCopied(ITimbre timbre, IBank usedProgramBank, IProgram usedProgram)
         {
             // Only copy programs which are audible.
-            var copy = !timbre.GetParam(ParameterNames.TimbreParameterName.Status).ToString().Equals("Off");
+            bool copy = !timbre.GetParam(ParameterNames.TimbreParameterName.Status).ToString().Equals("Off");
 
             // Only copy programs which have a valid reference.
             copy &= (usedProgram != null);
@@ -558,7 +558,7 @@ namespace PcgTools.ClipBoard
             // Copy set list slot.
             if (setListSlot.PcgRoot.Content != null)
             {
-                var clipBoardSetListSlot = new ClipBoardSetListSlot(setListSlot);
+                ClipBoardSetListSlot clipBoardSetListSlot = new ClipBoardSetListSlot(setListSlot);
                 SetListSlots.CopiedPatches.Add(clipBoardSetListSlot);
 
                 if (clearAfterCopy)
@@ -569,13 +569,13 @@ namespace PcgTools.ClipBoard
                 // Copy program of combi (do not copy song).
                 if (!CutPasteSelected)
                 {
-                    var usedPatch = setListSlot.UsedPatch;
+                    IPatch usedPatch = setListSlot.UsedPatch;
                     if ((usedPatch != null) &&
                         (Settings.Default.CopyPaste_CopyPatchesFromMasterFile || !usedPatch.IsFromMasterFile))
                     {
                         if (setListSlot.UsedPatch is IProgram)
                         {
-                            var program = (IProgram) usedPatch;
+                            IProgram program = (IProgram) usedPatch;
                             if (((IProgramBank)(program.Parent)).Type != BankType.EType.Gm)
                             {
                                 clipBoardSetListSlot.Reference = CopyProgramToClipBoard(program, false);
@@ -583,7 +583,7 @@ namespace PcgTools.ClipBoard
                         }
                         else if (setListSlot.UsedPatch is ICombi)
                         {
-                            var combi = (ICombi) usedPatch;
+                            ICombi combi = (ICombi) usedPatch;
                             clipBoardSetListSlot.Reference = CopyCombiToClipBoard(combi, false);
                         }
                     }
@@ -604,7 +604,7 @@ namespace PcgTools.ClipBoard
                 return null;
             }
 
-            var clipBoardDrumKit = new ClipBoardDrumKit(drumKit);
+            ClipBoardDrumKit clipBoardDrumKit = new ClipBoardDrumKit(drumKit);
             DrumKits.CopiedPatches.Add(clipBoardDrumKit);
 
             if (clearAfterCopy)
@@ -642,7 +642,7 @@ namespace PcgTools.ClipBoard
                 return null;
             }
 
-            var clipBoardDrumPattern = new ClipBoardDrumPattern(drumPattern);
+            ClipBoardDrumPattern clipBoardDrumPattern = new ClipBoardDrumPattern(drumPattern);
             DrumPatterns.CopiedPatches.Add(clipBoardDrumPattern);
 
             if (clearAfterCopy)
@@ -678,7 +678,7 @@ namespace PcgTools.ClipBoard
             // Copy wave sequence.
             if (waveSequence.PcgRoot.Content != null)
             {
-                var clipBoardWaveSequence = new ClipBoardWaveSequence(waveSequence);
+                ClipBoardWaveSequence clipBoardWaveSequence = new ClipBoardWaveSequence(waveSequence);
                 WaveSequences.CopiedPatches.Add(clipBoardWaveSequence);
 
                 if (clearAfterCopy)
@@ -714,28 +714,28 @@ namespace PcgTools.ClipBoard
 
             if (CutPasteSelected)
             {
-                var program = patch as IProgram;
+                IProgram program = patch as IProgram;
                 if (program != null)
                 {
                     FixReferencesToProgram(patchToPaste, program);
                 }
                 else
                 {
-                    var combi = patch as ICombi;
+                    ICombi combi = patch as ICombi;
                     if (combi != null)
                     {
                         FixReferencesToCombi(patchToPaste, combi);
                     }
                     else
                     {
-                        var drumKit = patch as IDrumKit;
+                        IDrumKit drumKit = patch as IDrumKit;
                         if (drumKit != null)
                         {
                             FixReferencesToDrumKit(patchToPaste, drumKit);
                         }
                         else
                         {
-                            var drumPattern = patch as IDrumPattern;
+                            IDrumPattern drumPattern = patch as IDrumPattern;
                             if (drumPattern != null)
                             {
                                 FixReferencesToDrumPattern(patchToPaste, drumPattern);
@@ -756,7 +756,7 @@ namespace PcgTools.ClipBoard
         /// <param name="program"></param>
         static void FixReferencesToProgram(IClipBoardPatch patch, IProgram program)
         {
-            var memory = patch.OriginalLocation.Root as IPcgMemory;
+            IPcgMemory memory = patch.OriginalLocation.Root as IPcgMemory;
             Debug.Assert(memory != null);
 
             FixProgramReferencesToCombi(patch, program, memory);
@@ -775,7 +775,7 @@ namespace PcgTools.ClipBoard
             // Change set list slots (only which are present in the current file).
             if (memory.SetLists != null)
             {
-                foreach (var slot in memory.SetLists.BankCollection.Where(
+                foreach (ISetListSlot slot in memory.SetLists.BankCollection.Where(
                     bank => bank.IsWritable && !bank.IsFromMasterFile).
                     SelectMany(list => list.Patches, (list, patch1) => (ISetListSlot) patch1).
                     Where(slot => (slot.SelectedPatchType == SetListSlot.PatchType.Program) &&
@@ -798,7 +798,7 @@ namespace PcgTools.ClipBoard
             // Change combis (only which are present in the current file).
             if (memory.CombiBanks != null)
             {
-                foreach (var timbre in from bank in memory.CombiBanks.BankCollection.Where(
+                foreach (ITimbre timbre in from bank in memory.CombiBanks.BankCollection.Where(
                     bank => bank.IsWritable && !bank.IsFromMasterFile)
                     from patch1 in bank.Patches
                     select (ICombi) patch1
@@ -821,13 +821,13 @@ namespace PcgTools.ClipBoard
         /// <param name="combi"></param>
         static void FixReferencesToCombi(IClipBoardPatch patch, ICombi combi)
         {
-            var memory = patch.OriginalLocation.Root as IPcgMemory;
+            IPcgMemory memory = patch.OriginalLocation.Root as IPcgMemory;
             Debug.Assert(memory != null);
 
             // Change set list slots (if present and not from master file).
             if (memory.SetLists != null)
             {
-                foreach (var slot in memory.SetLists.BankCollection.Where(
+                foreach (ISetListSlot slot in memory.SetLists.BankCollection.Where(
                     bank => bank.IsWritable && !bank.IsFromMasterFile).SelectMany(
                         list => list.Patches, (list, patch1) => (ISetListSlot) patch1).Where(
                             slot => (slot.SelectedPatchType == SetListSlot.PatchType.Combi) &&
@@ -847,18 +847,18 @@ namespace PcgTools.ClipBoard
         /// <param name="drumKit"></param>
         private static void FixReferencesToDrumKit(IClipBoardPatch patchToPaste, IDrumKit drumKit)
         {
-            var memory = patchToPaste.OriginalLocation.Root as IPcgMemory;
+            IPcgMemory memory = patchToPaste.OriginalLocation.Root as IPcgMemory;
             Debug.Assert(memory != null);
 
             // Change programs (if present and not from master file).
             if (memory.ProgramBanks != null)
             {
-                foreach (var programBank in memory.ProgramBanks.BankCollection.Where(
+                foreach (IBank programBank in memory.ProgramBanks.BankCollection.Where(
                     bank => bank.IsWritable && !bank.IsFromMasterFile))
                 {
-                    foreach (var program in programBank.Patches)
+                    foreach (IPatch program in programBank.Patches)
                     {
-                        var changes = new Dictionary<IDrumKit, IDrumKit>
+                        Dictionary<IDrumKit, IDrumKit> changes = new Dictionary<IDrumKit, IDrumKit>
                         {
                             {(IDrumKit) (patchToPaste.OriginalLocation), drumKit}
                         };
@@ -877,18 +877,18 @@ namespace PcgTools.ClipBoard
         /// <param name="drumPattern"></param>
         private static void FixReferencesToDrumPattern(IClipBoardPatch patchToPaste, IDrumPattern drumPattern)
         {
-            var memory = patchToPaste.OriginalLocation.Root as IPcgMemory;
+            IPcgMemory memory = patchToPaste.OriginalLocation.Root as IPcgMemory;
             Debug.Assert(memory != null);
 
             // Change programs (if present and not from master file).
             if (memory.ProgramBanks != null)
             {
-                foreach (var programBank in memory.ProgramBanks.BankCollection.Where(
+                foreach (IBank programBank in memory.ProgramBanks.BankCollection.Where(
                     bank => bank.IsWritable && !bank.IsFromMasterFile))
                 {
-                    foreach (var program in programBank.Patches)
+                    foreach (IPatch program in programBank.Patches)
                     {
-                        var changes = new Dictionary<IDrumPattern, IDrumPattern>
+                        Dictionary<IDrumPattern, IDrumPattern> changes = new Dictionary<IDrumPattern, IDrumPattern>
                         {
                             {(IDrumPattern) (patchToPaste.OriginalLocation), drumPattern}
                         };
@@ -909,17 +909,17 @@ namespace PcgTools.ClipBoard
         public void FixPasteReferencesAfterCopyPaste()
         {
             // Cut/Copy/paste.
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
                 FixPasteProgramReferencesInCombis(Programs[index].CopiedPatches);
             }
 
-            foreach (var drumKit in DrumKits.CopiedPatches)
+            foreach (IClipBoardPatch drumKit in DrumKits.CopiedPatches)
             {
                 FixPasteDrumKitReferencesInPrograms(drumKit);
             }
 
-            foreach (var drumPattern in DrumPatterns.CopiedPatches)
+            foreach (IClipBoardPatch drumPattern in DrumPatterns.CopiedPatches)
             {
                 FixPasteDrumPatternReferencesInPrograms(drumPattern);
             }
@@ -934,14 +934,14 @@ namespace PcgTools.ClipBoard
         /// <param name="clipBoardPatches"></param>
         private void FixPasteProgramReferencesInCombis(IEnumerable<IClipBoardPatch> clipBoardPatches)
         {
-            foreach (var program in clipBoardPatches)
+            foreach (IClipBoardPatch program in clipBoardPatches)
             {
-                foreach (var clipBoardPatch in Combis.CopiedPatches)
+                foreach (IClipBoardPatch clipBoardPatch in Combis.CopiedPatches)
                 {
-                    var combi = (IClipBoardCombi) clipBoardPatch;
-                    for (var timbreIndex = 0; timbreIndex < combi.References.CopiedPatches.Count; timbreIndex++)
+                    IClipBoardCombi combi = (IClipBoardCombi) clipBoardPatch;
+                    for (int timbreIndex = 0; timbreIndex < combi.References.CopiedPatches.Count; timbreIndex++)
                     {
-                        var timbre = combi.References.CopiedPatches[timbreIndex];
+                        IClipBoardPatch timbre = combi.References.CopiedPatches[timbreIndex];
                         if (timbre != program)
                         {
                             continue;
@@ -972,15 +972,15 @@ namespace PcgTools.ClipBoard
         /// <param name="drumKit"></param>
         private void FixPasteDrumKitReferencesInPrograms(IClipBoardPatch drumKit)
         {
-            for (var index = 0; index < (int)ProgramBank.SynthesisType.Last; index++)
+            for (int index = 0; index < (int)ProgramBank.SynthesisType.Last; index++)
             {
-                foreach (var clipBoardPatch in Programs[index].CopiedPatches)
+                foreach (IClipBoardPatch clipBoardPatch in Programs[index].CopiedPatches)
                 {
-                    var program = (IClipBoardProgram) clipBoardPatch;
-                    for (var drumKitIndex = 0; drumKitIndex < program.ReferencedDrumKits.CopiedPatches.Count;
+                    IClipBoardProgram program = (IClipBoardProgram) clipBoardPatch;
+                    for (int drumKitIndex = 0; drumKitIndex < program.ReferencedDrumKits.CopiedPatches.Count;
                         drumKitIndex++)
                     {
-                        var usedDrumKit = program.ReferencedDrumKits.CopiedPatches[drumKitIndex];
+                        IClipBoardPatch usedDrumKit = program.ReferencedDrumKits.CopiedPatches[drumKitIndex];
                         if (usedDrumKit != drumKit)
                         {
                             continue;
@@ -994,7 +994,7 @@ namespace PcgTools.ClipBoard
                             // so it will be changed unnecessarily.
                             if (drumKit.OriginalLocation.Root != PastePcgMemory)
                             {
-                                var changes = new Dictionary<IDrumKit, IDrumKit>
+                                Dictionary<IDrumKit, IDrumKit> changes = new Dictionary<IDrumKit, IDrumKit>
                                 {
                                     {
                                         ((IProgram) (program.PasteDestination)).UsedDrumKits[drumKitIndex],
@@ -1124,14 +1124,14 @@ namespace PcgTools.ClipBoard
         /// </summary>
         void FixPastePatchInSetListSlotsReferences()
         {
-            foreach (var clipBoardPatch in SetListSlots.CopiedPatches)
+            foreach (IClipBoardPatch clipBoardPatch in SetListSlots.CopiedPatches)
             {
-                var clipBoardSetListSlot = (IClipBoardSetListSlot) clipBoardPatch;
-                var setListSlot = (ISetListSlot)(clipBoardSetListSlot.PasteDestination);
+                IClipBoardSetListSlot clipBoardSetListSlot = (IClipBoardSetListSlot) clipBoardPatch;
+                ISetListSlot setListSlot = (ISetListSlot)(clipBoardSetListSlot.PasteDestination);
                 if ((setListSlot != null) && (clipBoardSetListSlot.Reference != null)) 
                 {
                     // Fix reference to program/combi.
-                    var clipBoardReference  = clipBoardSetListSlot.Reference;
+                    IClipBoardPatch clipBoardReference  = clipBoardSetListSlot.Reference;
                     
                     // When pasting to the same file (second condition below), then it is not wanted to fix references,
                     // because a duplicate program/combi can exist before the original reference so it will be changed 
@@ -1141,12 +1141,12 @@ namespace PcgTools.ClipBoard
                     {
                         if (clipBoardReference.PasteDestination is IProgram)
                         {
-                            var program = (IProgram) (clipBoardReference.PasteDestination);
+                            IProgram program = (IProgram) (clipBoardReference.PasteDestination);
                             setListSlot.UsedPatch = program;
                         }
                         else if (clipBoardReference.PasteDestination is ICombi)
                         {
-                            var combi = (ICombi) (clipBoardReference.PasteDestination);
+                            ICombi combi = (ICombi) (clipBoardReference.PasteDestination);
                             setListSlot.UsedPatch = combi;
                         }
                         else
@@ -1168,7 +1168,7 @@ namespace PcgTools.ClipBoard
         {
             get
             {
-                for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+                for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
                 {
                     if (Programs[index].CountUncopied > 0)
                     {
@@ -1192,42 +1192,42 @@ namespace PcgTools.ClipBoard
         {
             MemoryPrograms = new List<IClipBoardPatches>();
 
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
                 MemoryPrograms.Add(new ClipBoardPatches());
                 MemoryPrograms[index] = new ClipBoardPatches();
-                foreach (var patch in Programs[index].CopiedPatches)
+                foreach (IClipBoardPatch patch in Programs[index].CopiedPatches)
                 {
                     MemoryPrograms[index].CopiedPatches.Add(patch);
                 }
             }
 
             MemoryCombis = new ClipBoardPatches();
-            foreach (var patch in Combis.CopiedPatches)
+            foreach (IClipBoardPatch patch in Combis.CopiedPatches)
             {
                 MemoryCombis.CopiedPatches.Add(patch);
             }
 
             MemorySetListSlots = new ClipBoardPatches();
-            foreach (var patch in SetListSlots.CopiedPatches)
+            foreach (IClipBoardPatch patch in SetListSlots.CopiedPatches)
             {
                 MemorySetListSlots.CopiedPatches.Add(patch);
             }
             
             MemoryDrumKits = new ClipBoardPatches();
-            foreach (var patch in DrumKits.CopiedPatches)
+            foreach (IClipBoardPatch patch in DrumKits.CopiedPatches)
             {
                 MemoryDrumKits.CopiedPatches.Add(patch);
             }
 
             MemoryDrumPatterns = new ClipBoardPatches();
-            foreach (var patch in DrumPatterns.CopiedPatches)
+            foreach (IClipBoardPatch patch in DrumPatterns.CopiedPatches)
             {
                 MemoryDrumPatterns.CopiedPatches.Add(patch);
             }
 
             MemoryWaveSequences = new ClipBoardPatches();
-            foreach (var patch in WaveSequences.CopiedPatches)
+            foreach (IClipBoardPatch patch in WaveSequences.CopiedPatches)
             {
                 MemoryWaveSequences.CopiedPatches.Add(patch);
             }
@@ -1258,12 +1258,12 @@ namespace PcgTools.ClipBoard
         /// </summary>
         private void RecallPrograms()
         {
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
                 Programs[index] = new ClipBoardPatches();
                 if (MemoryPrograms != null)
                 {
-                    foreach (var patch in MemoryPrograms[index].CopiedPatches)
+                    foreach (IClipBoardPatch patch in MemoryPrograms[index].CopiedPatches)
                     {
                         Programs[index].CopiedPatches.Add(patch);
                         patch.OriginalLocation = patch.PasteDestination;
@@ -1282,7 +1282,7 @@ namespace PcgTools.ClipBoard
             Combis = new ClipBoardPatches();
             if (MemoryCombis != null)
             {
-                foreach (var patch in MemoryCombis.CopiedPatches)
+                foreach (IClipBoardPatch patch in MemoryCombis.CopiedPatches)
                 {
                     Combis.CopiedPatches.Add(patch);
                     patch.OriginalLocation = patch.PasteDestination;
@@ -1300,7 +1300,7 @@ namespace PcgTools.ClipBoard
             SetListSlots = new ClipBoardPatches();
             if (MemorySetListSlots != null)
             {
-                foreach (var patch in MemorySetListSlots.CopiedPatches)
+                foreach (IClipBoardPatch patch in MemorySetListSlots.CopiedPatches)
                 {
                     SetListSlots.CopiedPatches.Add(patch);
                     patch.OriginalLocation = patch.PasteDestination;
@@ -1318,7 +1318,7 @@ namespace PcgTools.ClipBoard
             DrumKits = new ClipBoardPatches();
             if (MemoryDrumKits != null)
             {
-                foreach (var patch in MemoryDrumKits.CopiedPatches)
+                foreach (IClipBoardPatch patch in MemoryDrumKits.CopiedPatches)
                 {
                     DrumKits.CopiedPatches.Add(patch);
                     patch.OriginalLocation = patch.PasteDestination;
@@ -1336,7 +1336,7 @@ namespace PcgTools.ClipBoard
             DrumPatterns = new ClipBoardPatches();
             if (MemoryDrumPatterns != null)
             {
-                foreach (var patch in MemoryDrumPatterns.CopiedPatches)
+                foreach (IClipBoardPatch patch in MemoryDrumPatterns.CopiedPatches)
                 {
                     DrumPatterns.CopiedPatches.Add(patch);
                     patch.OriginalLocation = patch.PasteDestination;
@@ -1353,7 +1353,7 @@ namespace PcgTools.ClipBoard
             WaveSequences = new ClipBoardPatches();
             if (MemoryWaveSequences != null)
             {
-                foreach (var patch in MemoryWaveSequences.CopiedPatches)
+                foreach (IClipBoardPatch patch in MemoryWaveSequences.CopiedPatches)
                 {
                     WaveSequences.CopiedPatches.Add(patch);
                     patch.OriginalLocation = patch.PasteDestination;
@@ -1369,7 +1369,7 @@ namespace PcgTools.ClipBoard
         {
             get
             {
-                for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+                for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
                 {
                     if ((MemoryPrograms[index] != null) && (MemoryPrograms.Count != 0))
                     {

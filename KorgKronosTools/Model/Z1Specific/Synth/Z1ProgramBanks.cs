@@ -29,8 +29,8 @@ namespace PcgTools.Model.Z1Specific.Synth
         protected override void CreateBanks()
         {
             // Add internal banks.
-            var bankId = 0;
-            foreach (var id in new[] {"A", "B"})
+            int bankId = 0;
+            foreach (string id in new[] {"A", "B"})
             {
                 Add(
                     new Z1ProgramBank(
@@ -40,7 +40,7 @@ namespace PcgTools.Model.Z1Specific.Synth
             }
 
             // Add Card banks.
-            foreach (var id in new[] {"CARD-A", "CARD-B"})
+            foreach (string id in new[] {"CARD-A", "CARD-B"})
             {
                 Add(
                     new Z1ProgramBank(

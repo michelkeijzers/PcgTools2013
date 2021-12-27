@@ -19,7 +19,7 @@ namespace Common.Extensions
         /// <returns></returns>
         public static string ConvertToXml(this string str)
         {
-            var newString = str.Aggregate("", (current, ch) => current + (ch < 32 ? ' ' : ch));
+            string newString = str.Aggregate("", (current, ch) => current + (ch < 32 ? ' ' : ch));
 
             return newString.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").
                 Replace("'", "&apos;").Replace("\"", "&quot;").Replace((char) 0x00, ' ');
@@ -35,8 +35,8 @@ namespace Common.Extensions
         /// <returns></returns>
         public static int CountDiffs(this string str1, string str2)
         {
-            var diffs = 0; // Math.Abs(str.Length - str2.Length);
-            for (var index = 0; index < Math.Min(str1.Length, str2.Length); index++)
+            int diffs = 0; // Math.Abs(str.Length - str2.Length);
+            for (int index = 0; index < Math.Min(str1.Length, str2.Length); index++)
             {
                 diffs += (str1[index] != str2[index]) ? 1 : 0;
             }
@@ -69,10 +69,10 @@ namespace Common.Extensions
         /// <returns></returns>
         public static int CountCharsAroundIndex(this string text, int startIndex, char selectedChar)
         {
-            var charsFound = 0;
+            int charsFound = 0;
 
             // Search backwards.
-            for (var index = startIndex - 1; index >= 0; index--)
+            for (int index = startIndex - 1; index >= 0; index--)
             {
                 if (text[index] == selectedChar)
                 {
@@ -85,7 +85,7 @@ namespace Common.Extensions
             }
 
             // Search forwards.
-            for (var index = startIndex + 1; index < text.Length; index++)
+            for (int index = startIndex + 1; index < text.Length; index++)
             {
                 if (text[index] == selectedChar)
                 {
@@ -110,11 +110,11 @@ namespace Common.Extensions
         {
             text = text.Trim();
 
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
 
-            for (var index = 0; index < text.Length; index++)
+            for (int index = 0; index < text.Length; index++)
             {
-                var character = text[index];
+                char character = text[index];
                 if ((index > 0) && (text[index - 1] != ' ') && (character >= 'A') && (character <= 'Z'))
                 {
                     builder.Append(' ');
@@ -136,10 +136,10 @@ namespace Common.Extensions
         /// <returns></returns>
         public static string Shrink(this string text, int shrinkAmount)
         {
-            var result = text.Trim();
+            string result = text.Trim();
 
-            var shrinked = 0;
-            for (var index = result.Length; index >= 0; index++)
+            int shrinked = 0;
+            for (int index = result.Length; index >= 0; index++)
             {
                 if (result[index] == ' ')
                 {

@@ -35,12 +35,12 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// </summary>
         protected override void CreateBanks()
         {
-            foreach (var id in new[] {"I-A", "I-B", "I-C", "I-D", "I-E", "I-F", "I-G"})
+            foreach (string id in new[] {"I-A", "I-B", "I-C", "I-D", "I-E", "I-F", "I-G"})
             {
                 Add(new KronosCombiBank(this, BankType.EType.Int, id, -1));
             }
 
-            foreach (var id in new[] {"U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G"})
+            foreach (string id in new[] {"U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G"})
             {
                 Add(new KronosCombiBank(this, BankType.EType.User, id, -1));
             }
@@ -69,11 +69,11 @@ namespace PcgTools.Model.KronosSpecific.Synth
 #pragma warning restore 1570
         protected override void CreateVirtualBanks()
         {
-            var bankNames = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+            List<char> bankNames = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
 
-            for (var bankGroupIndex = 0; bankGroupIndex < 8; bankGroupIndex++)
+            for (int bankGroupIndex = 0; bankGroupIndex < 8; bankGroupIndex++)
             {
-                foreach (var bankName in bankNames)
+                foreach (char bankName in bankNames)
                 {
                     Add(
                         new KronosCombiBank(
@@ -91,15 +91,15 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <param name="otherPatch"></param>
         public void SwapCbk2Content(IPatch patch, IPatch otherPatch)
         {
-            for (var parameter = 0; parameter < ParametersInCbk2Chunk; parameter++)
+            for (int parameter = 0; parameter < ParametersInCbk2Chunk; parameter++)
             {
-                for (var timbre = 0; timbre < KronosTimbres.TimbresPerCombiConstant; timbre++)
+                for (int timbre = 0; timbre < KronosTimbres.TimbresPerCombiConstant; timbre++)
                 {
                     // Swap bytes.
-                    var patchParameterOffset = ((KronosCombiBank)(patch.Parent)).GetParameterOffsetInCbk2(patch.Index, timbre, parameter);
-                    var otherPatchParameterOffset = ((KronosCombiBank)(otherPatch.Parent)).GetParameterOffsetInCbk2(otherPatch.Index, timbre, parameter);
+                    int patchParameterOffset = ((KronosCombiBank)(patch.Parent)).GetParameterOffsetInCbk2(patch.Index, timbre, parameter);
+                    int otherPatchParameterOffset = ((KronosCombiBank)(otherPatch.Parent)).GetParameterOffsetInCbk2(otherPatch.Index, timbre, parameter);
 
-                    var temp = Root.Content[patchParameterOffset];
+                    byte temp = Root.Content[patchParameterOffset];
                     Debug.Assert(patchParameterOffset >= 4); // Don't overwrite KORG header
                     Root.Content[patchParameterOffset] = Root.Content[otherPatchParameterOffset];
                     Debug.Assert(otherPatchParameterOffset >= 4); // Don't overwrite KORG header

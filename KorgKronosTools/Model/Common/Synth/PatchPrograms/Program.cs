@@ -55,7 +55,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// </summary>
         public override void SetNotifications()
         {
-            var masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(Root.Model);
+            MasterFiles.MasterFile masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(Root.Model);
             if ((masterFile != null) && !PcgRoot.FileName.IsEqualFileAs(masterFile.FileName))
             {
                 masterFile.PropertyChanged += OnMasterPcgFilePropertyChanged;
@@ -70,13 +70,13 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         public override void Clear()
         {
             Name = string.Empty;
-            var category = GetParam(ParameterNames.ProgramParameterName.Category);
+            IParameter category = GetParam(ParameterNames.ProgramParameterName.Category);
             if (category != null)
             {
                 category.Value = 0;
                 if (PcgRoot.HasSubCategories)
                 {
-                    var subCategory = GetParam(ParameterNames.ProgramParameterName.SubCategory);
+                    IParameter subCategory = GetParam(ParameterNames.ProgramParameterName.SubCategory);
                     if (subCategory != null)
                     {
                         subCategory.Value = 0;
@@ -123,12 +123,12 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         {
             get
             {
-                var numberOfReferences = 0;
+                int numberOfReferences = 0;
 
                 if (PcgRoot.CombiBanks != null)
                 {
 // ReSharper disable once UnusedVariable
-                    foreach (var timbre in from bank in PcgRoot.CombiBanks.BankCollection
+                    foreach (ITimbre timbre in from bank in PcgRoot.CombiBanks.BankCollection
                         where bank.IsLoaded
                         from patch in bank.Patches.Cast<ICombi>()
                         where !patch.IsEmptyOrInit
@@ -142,7 +142,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
                     if (PcgRoot.SetLists != null)
                     {
 // ReSharper disable once UnusedVariable
-                        foreach (var patch in from bank in PcgRoot.SetLists.BankCollection
+                        foreach (ISetListSlot patch in from bank in PcgRoot.SetLists.BankCollection
                             where bank.IsLoaded
                             from ISetListSlot patch in bank.Patches
                             where !patch.IsEmptyOrInit
@@ -171,15 +171,15 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
                     return string.Empty;
                 }
 
-                var categoryAsName = string.Empty;
+                string categoryAsName = string.Empty;
                 // Use the global setting, if not available, check the Master PCG file, else use just the number.
-                var global = FindGlobal();
+                Global.IGlobal global = FindGlobal();
 
                 // Return either the value if no global/Master file pressent otherwise the name.
 
                 if (global == null)
                 {
-                    var param = GetParam(ParameterNames.ProgramParameterName.Category);
+                    IParameter param = GetParam(ParameterNames.ProgramParameterName.Category);
                     if (param != null)
                     {
                         categoryAsName = GetParam((ParameterNames.ProgramParameterName.Category)).Value.ToString();
@@ -216,14 +216,14 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
                 }
 
                 // Use the global setting, if not available, check the Master PCG file, else use just the number.
-                var global = FindGlobal();
+                Global.IGlobal global = FindGlobal();
 
                 // Return either the value if no global/Master file pressent otherwise the name.
-                var subCategoryAsName = string.Empty;
+                string subCategoryAsName = string.Empty;
 
                 if (global == null)
                 {
-                    var param = GetParam((ParameterNames.ProgramParameterName.SubCategory));
+                    IParameter param = GetParam((ParameterNames.ProgramParameterName.SubCategory));
                     if (param != null)
                     {
                         subCategoryAsName = GetParam((ParameterNames.ProgramParameterName.SubCategory)).Value.ToString();
@@ -267,13 +267,13 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <param name="changes"></param>
         public virtual void ReplaceWaveSequence(Dictionary<IWaveSequence, IWaveSequence> changes)
         {
-            for (var osc = 0; osc < 2; osc++)
+            for (int osc = 0; osc < 2; osc++)
             {
-                for (var zone = 0; zone < NumberOfZones; zone++)
+                for (int zone = 0; zone < NumberOfZones; zone++)
                 {
-                    var osc1 = osc;
-                    var zone1 = zone;
-                    foreach (var change in changes.Where(change => GetUsedWaveSequence(osc1, zone1) == change.Key))
+                    int osc1 = osc;
+                    int zone1 = zone;
+                    foreach (KeyValuePair<IWaveSequence, IWaveSequence> change in changes.Where(change => GetUsedWaveSequence(osc1, zone1) == change.Key))
                     {
                         SetWaveSequence(osc, zone, change.Value);
                         break; // If one change made, skip other changes (otherwise it reverts back)
@@ -447,13 +447,13 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <param name="newPatch"></param>
         private void ChangeReferencesFromCombis(IProgram newPatch)
         {
-            var combiBanks = (((IPcgMemory) Parent.Parent.Parent).CombiBanks.BankCollection);
+            IObservableBankCollection<IBank> combiBanks = (((IPcgMemory) Parent.Parent.Parent).CombiBanks.BankCollection);
             if (combiBanks == null)
             {
                 return;
             }
 
-            foreach (var timbre in from combiBank in combiBanks
+            foreach (ITimbre timbre in from combiBank in combiBanks
                 where combiBank.IsLoaded
                 from patch in combiBank.Patches
                 select (ICombi) patch
@@ -475,13 +475,13 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <param name="newPatch"></param>
         private void ChangeReferencesFromSetLists(IPatch newPatch)
         {
-            var setLists = (((IPcgMemory) Parent.Parent.Parent).SetLists.BankCollection);
+            IObservableBankCollection<IBank> setLists = (((IPcgMemory) Parent.Parent.Parent).SetLists.BankCollection);
             if (setLists == null)
             {
                 return;
             }
 
-            foreach (var setListSlot in
+            foreach (ISetListSlot setListSlot in
                 from setList in setLists
                 where setList.IsLoaded
                 from ISetListSlot setListSlot in setList.Patches
@@ -507,7 +507,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         {
             get
             {
-                var builder = new StringBuilder();
+                StringBuilder builder = new StringBuilder();
 
                 if (IsEmptyOrInit)
                 {
@@ -515,13 +515,13 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
                 }
                 else
                 {
-                    var usedDrumKits = UsedDrumKits.Where(drumKit => drumKit != null);
+                    IEnumerable<IDrumKit> usedDrumKits = UsedDrumKits.Where(drumKit => drumKit != null);
                     if (usedDrumKits.Any())
                     {
                         builder.AppendLine("Used Drumkits:");
                     }
 
-                    foreach (var drumKit in usedDrumKits)
+                    foreach (IDrumKit drumKit in usedDrumKits)
                     {
                         builder.AppendLine(drumKit.Id + ": " + drumKit.Name);
                     }
@@ -537,14 +537,14 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
                         builder.Append(String.Join(", ", patternIds));
                         builder.Append("\n");
                     }
-                
-                    var usedWaveSequences = UsedWaveSequences.Where(WaveSequence => WaveSequence != null);
+
+                    IEnumerable<IWaveSequence> usedWaveSequences = UsedWaveSequences.Where(WaveSequence => WaveSequence != null);
                     if (usedWaveSequences.Any())
                     {
                         builder.AppendLine("Used Wave Sequences:");
                     }
 
-                    foreach (var waveSequence in usedWaveSequences)
+                    foreach (IWaveSequence waveSequence in usedWaveSequences)
                     {
                         builder.AppendLine(waveSequence.Id + ": " + waveSequence.Name);
                     }
@@ -564,11 +564,11 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
             {
                 IProgram program = null;
 
-                var paramBank = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramBank);
+                IParameter paramBank = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramBank);
                 if (paramBank != null)
                 {
-                    var bank = (IProgramBank) PcgRoot.ProgramBanks.GetBankWithPcgId((int) (paramBank.Value));
-                    var paramNumber = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramNumber);
+                    IProgramBank bank = (IProgramBank) PcgRoot.ProgramBanks.GetBankWithPcgId((int) (paramBank.Value));
+                    IParameter paramNumber = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramNumber);
                     if (paramNumber != null)
                     {
                         program = bank.Patches[paramNumber.Value];
@@ -580,12 +580,12 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
 
             set
             {
-                var paramBank = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramBank);
+                IParameter paramBank = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramBank);
                 if (paramBank != null)
                 {
                     paramBank.Value = ((IProgramBank) value.Parent).PcgId;
 
-                    var paramNumber = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramNumber);
+                    IParameter paramNumber = GetParam(ParameterNames.ProgramParameterName.DrumTrackProgramNumber);
                     if (paramNumber != null)
                     {
                         paramNumber.Value = value.Index;
@@ -604,12 +604,12 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
             {
                 List<IDrumPattern> patterns = new List<IDrumPattern>();
 
-                var paramBank = GetParam(ParameterNames.ProgramParameterName.DrumTrackCommonPatternBank);
+                IParameter paramBank = GetParam(ParameterNames.ProgramParameterName.DrumTrackCommonPatternBank);
                 if (paramBank != null)
                 {
-                    var bank = (IDrumPatternBank) PcgRoot.DrumPatternBanks.GetBankWithPcgId((int) (paramBank.Value));
+                    IDrumPatternBank bank = (IDrumPatternBank) PcgRoot.DrumPatternBanks.GetBankWithPcgId((int) (paramBank.Value));
 
-                    var paramNumber = GetParam(ParameterNames.ProgramParameterName.DrumTrackCommonPatternNumber);
+                    IParameter paramNumber = GetParam(ParameterNames.ProgramParameterName.DrumTrackCommonPatternNumber);
                     if (paramNumber != null)
                     {
                         patterns.Add(bank.Patches[paramNumber.Value]);

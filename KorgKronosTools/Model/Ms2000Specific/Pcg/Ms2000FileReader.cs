@@ -51,8 +51,8 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
                 case Memory.FileType.Bnk: // Fall through
                 case Memory.FileType.Exl: // Fall through
                 case Memory.FileType.Syx: // Fall through
-                case Memory.FileType.Mid: 
-                    var memory = (SysExMemory) CurrentPcgMemory;
+                case Memory.FileType.Mid:
+                    SysExMemory memory = (SysExMemory) CurrentPcgMemory;
 
                     memory.Convert7To8Bits();
 
@@ -88,14 +88,14 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
         /// <param name="offset"></param>
         private void ReadSingleProgram(int offset)
         {
-            var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
+            IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
             bank.ByteOffset = 0;
             bank.BankSynthesisType = ProgramBank.SynthesisType.AnalogModeling;
             bank.ByteLength = 254;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var program = (Program) bank[0];
+            Program program = (Program) bank[0];
             program.ByteOffset = offset;
             program.ByteLength = bank.ByteLength;
             program.IsLoaded = true;
@@ -109,22 +109,22 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
         {
             Index = SysExStartOffset;
 
-            var programBank = (IProgramBank) CurrentPcgMemory.ProgramBanks[0];
+            IProgramBank programBank = (IProgramBank) CurrentPcgMemory.ProgramBanks[0];
 
             const int numberOfProgramsInBank = 16;
-            for (var bankIndex = 0; bankIndex < CurrentPcgMemory.ProgramBanks.BankCollection.Count; bankIndex++)
+            for (int bankIndex = 0; bankIndex < CurrentPcgMemory.ProgramBanks.BankCollection.Count; bankIndex++)
             {
-                var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
+                IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
                 bank.ByteOffset = Index;
                 bank.BankSynthesisType = ProgramBank.SynthesisType.AnalogModeling;
                 bank.ByteLength = 254;
                 bank.IsWritable = true;
                 bank.IsLoaded = true;
 
-                for (var index = 0; index < numberOfProgramsInBank; index++)
+                for (int index = 0; index < numberOfProgramsInBank; index++)
                 {
                     // Place in PcgMemory.
-                    var program = (Program) bank[index];
+                    Program program = (Program) bank[index];
                     program.ByteOffset = Index;
                     program.ByteLength = programBank.ByteLength;
                     program.IsLoaded = true;
@@ -146,7 +146,7 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
         /// </summary>
         private void ReadMkP0Data()
         {
-            var content = CurrentPcgMemory.Content;
+            byte[] content = CurrentPcgMemory.Content;
 
             if ((Util.GetInt(content, 0x4, 4) != 0) ||
                 (Util.GetInt(content, 0x8, 4) != 0x8414) || // Length
@@ -157,13 +157,13 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
 
             Index = 0x120;
 
-            var programBank = (IProgramBank) CurrentPcgMemory.ProgramBanks[0];
+            IProgramBank programBank = (IProgramBank) CurrentPcgMemory.ProgramBanks[0];
 
             const int numberOfProgramsInBank = 16;
 
-            var patchSize = Util.GetInt(content, Index, 8);
+            int patchSize = Util.GetInt(content, Index, 8);
 
-            for (var bankIndex = 0; bankIndex < CurrentPcgMemory.ProgramBanks.BankCollection.Count; bankIndex++)
+            for (int bankIndex = 0; bankIndex < CurrentPcgMemory.ProgramBanks.BankCollection.Count; bankIndex++)
             {
                 if (ReadMkp0Bank(content, patchSize, bankIndex, numberOfProgramsInBank, programBank))
                 {
@@ -190,19 +190,19 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
                 throw new ApplicationException("Illegal length");
             }
 
-            var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
+            IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
             bank.ByteOffset = Index;
             bank.BankSynthesisType = ProgramBank.SynthesisType.AnalogModeling;
             bank.ByteLength = patchSize;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            for (var index = 0; index < numberOfProgramsInBank; index++)
+            for (int index = 0; index < numberOfProgramsInBank; index++)
             {
                 Index += 8; // Skip patch size
 
                 // Place in PcgMemory.
-                var program = (Program) bank[index];
+                Program program = (Program) bank[index];
                 program.ByteOffset = Index;
                 program.ByteLength = programBank.ByteLength;
                 program.IsLoaded = true;
@@ -251,9 +251,9 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
         /// </summary>
         private void ReadLibData()
         {
-            var content = CurrentPcgMemory.Content;
+            byte[] content = CurrentPcgMemory.Content;
             Index = 4; // Skip MROF
-            var mrofSize = ReadLength(); // Ignore MROF chunk size.
+            int mrofSize = ReadLength(); // Ignore MROF chunk size.
 
             if (Util.GetChars(content, Index, 4) != "BLSS")
             {
@@ -261,22 +261,22 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
             }
             Index += 4;
 
-            var bankIndex = 0;
-            var bank = (IProgramBank) CurrentPcgMemory.ProgramBanks[bankIndex];
+            int bankIndex = 0;
+            IProgramBank bank = (IProgramBank) CurrentPcgMemory.ProgramBanks[bankIndex];
             bank.ByteOffset = Index;
             bank.ByteLength = 0xFE;
             bank.BankSynthesisType = ProgramBank.SynthesisType.AnalogModeling;
 
-            var programIndex = 0;
+            int programIndex = 0;
             const int numberOfProgramsInBank = 16;
-            var skip = 1;
-            var createBank = false;
+            int skip = 1;
+            bool createBank = false;
             while (Index < mrofSize)
             {
                 // Only handle TNEL chunks, containing one program each.
-                var chunkName = Util.GetChars(content, Index, 4);
+                string chunkName = Util.GetChars(content, Index, 4);
                 Index += 4;
-                var chunkLength = ReadLength();
+                int chunkLength = ReadLength();
 
                 // Chunk length of 0xEB is global, some unknown is 0x28, others seem to be 0x112 - 0x118.
                 if ((chunkName == "TNEL") && (chunkLength >= 0x100))
@@ -317,7 +317,7 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
         /// <returns></returns>
         private int PlaceInPcgMemory(IBank bank, int programIndex)
         {
-            var program = (IProgram) (bank[programIndex]);
+            IProgram program = (IProgram) (bank[programIndex]);
             program.ByteOffset = Index + 0x0E; // Program starts after 0x0E bytes from start of chunk
             program.ByteLength = bank.ByteLength;
             program.IsLoaded = true;
@@ -334,7 +334,7 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
         /// <returns></returns>
         private IProgramBank CreateProgramBank(int bankIndex)
         {
-            var bank = (IProgramBank) CurrentPcgMemory.ProgramBanks[bankIndex];
+            IProgramBank bank = (IProgramBank) CurrentPcgMemory.ProgramBanks[bankIndex];
             bank.ByteOffset = Index;
             bank.ByteLength = 0xFE;
             bank.BankSynthesisType = ProgramBank.SynthesisType.AnalogModeling;
@@ -351,8 +351,8 @@ namespace PcgTools.Model.Ms2000Specific.Pcg
         /// <returns></returns>
         private int ReadLength()
         {
-            var content = CurrentPcgMemory.Content;
-            var value = Util.GetInt(content, Index + 3, 1)*256*256*256 +
+            byte[] content = CurrentPcgMemory.Content;
+            int value = Util.GetInt(content, Index + 3, 1)*256*256*256 +
                         Util.GetInt(content, Index + 2, 1) * 256 * 256 +
                         Util.GetInt(content, Index + 1, 1) * 256 +
                         Util.GetInt(content, Index + 0, 1);

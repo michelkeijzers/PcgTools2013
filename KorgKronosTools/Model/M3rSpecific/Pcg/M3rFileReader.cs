@@ -37,7 +37,7 @@ namespace PcgTools.Model.M3rSpecific.Pcg
         /// <param name="modelType"></param>
         public override void ReadContent(Memory.FileType filetype, Models.EModelType modelType)
         {
-            var memory = SkipModeChange(filetype);
+            ISysExMemory memory = SkipModeChange(filetype);
 
             // Continue parsing.
             switch (filetype)
@@ -87,14 +87,14 @@ namespace PcgTools.Model.M3rSpecific.Pcg
         /// <returns></returns>
         private ISysExMemory SkipModeChange(Memory.FileType filetype)
         {
-            var memory = (ISysExMemory) CurrentPcgMemory;
+            ISysExMemory memory = (ISysExMemory) CurrentPcgMemory;
             switch (filetype)
             {
                 case Memory.FileType.Syx:
                     if ((Util.GetChars(memory.Content, 0, 14) != "Sysex Manager-") &&
                         (Util.GetChars(memory.Content, 2, 8) != "OrigKorg"))
                     {
-                        var offset = SkipModeChanges();
+                        int offset = SkipModeChanges();
                         SysExStartOffset += offset;
                         ContentType = (PcgMemory.ContentType) memory.Content[offset + 4];
                         memory.ContentTypeType = ContentType;
@@ -114,8 +114,8 @@ namespace PcgTools.Model.M3rSpecific.Pcg
         /// </summary>
         int SkipModeChanges()
         {
-            var offset = 0;
-            var memory = (SysExMemory)CurrentPcgMemory;
+            int offset = 0;
+            SysExMemory memory = (SysExMemory)CurrentPcgMemory;
 
             while ((memory.Content[offset] == 0xF0) && // MIDI SysEx
                    (memory.Content[offset + 1] == 0x42) && // Korg
@@ -134,14 +134,14 @@ namespace PcgTools.Model.M3rSpecific.Pcg
         /// <param name="offset"></param>
         private void ReadSingleProgram(int offset)
         {
-            var bank = (ProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
+            ProgramBank bank = (ProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
             bank.ByteOffset = 0;
             bank.BankSynthesisType = ProgramBank.SynthesisType.AnalogModeling;
             bank.PatchSize = 75;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var program = (Program) bank[0];
+            Program program = (Program) bank[0];
             program.ByteOffset = offset;
             program.ByteLength = bank.PatchSize;
             program.IsLoaded = true;
@@ -154,13 +154,13 @@ namespace PcgTools.Model.M3rSpecific.Pcg
         /// <param name="offset"></param>
         private void ReadSingleCombi(int offset)
         {
-            var bank = (CombiBank)(CurrentPcgMemory.CombiBanks[0]);
+            CombiBank bank = (CombiBank)(CurrentPcgMemory.CombiBanks[0]);
             bank.ByteOffset = 0;
             bank.PatchSize = 126;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var combi = (Combi)bank[0];
+            Combi combi = (Combi)bank[0];
             combi.ByteOffset = offset;
             combi.ByteLength = bank.PatchSize;
             combi.IsLoaded = true;
@@ -173,7 +173,7 @@ namespace PcgTools.Model.M3rSpecific.Pcg
         private void ReadAllData()
         {
             Index = SysExStartOffset;
-            var bankIndex = Util.GetBits(CurrentPcgMemory.Content, Index - 3, 0, 0); // Internal: 0, Card: 1
+            int bankIndex = Util.GetBits(CurrentPcgMemory.Content, Index - 3, 0, 0); // Internal: 0, Card: 1
 
             // Read global data.
             CurrentPcgMemory.Global.ByteOffset = Index;
@@ -200,16 +200,16 @@ namespace PcgTools.Model.M3rSpecific.Pcg
                 (ContentType == PcgMemory.ContentType.AllCombis))
             {
                 // Read combi data.
-                var bank = (CombiBank) (CurrentPcgMemory.CombiBanks[bankIndex]);
+                CombiBank bank = (CombiBank) (CurrentPcgMemory.CombiBanks[bankIndex]);
                 bank.ByteOffset = Index;
                 bank.PatchSize = 126;
                 bank.IsWritable = true;
                 bank.IsLoaded = true;
 
-                for (var index = 0; index < bank.Patches.Count; index++)
+                for (int index = 0; index < bank.Patches.Count; index++)
                 {
                     // Place in PcgMemory.
-                    var combi = (Combi) bank[index];
+                    Combi combi = (Combi) bank[index];
                     combi.ByteOffset = Index;
                     combi.ByteLength = bank.PatchSize;
                     combi.IsLoaded = true;
@@ -234,7 +234,7 @@ namespace PcgTools.Model.M3rSpecific.Pcg
             {
                 // Read program data.
 
-                var bank = (ProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
+                ProgramBank bank = (ProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
                 bank.ByteOffset = Index;
 
                 bank.BankSynthesisType = ProgramBank.SynthesisType.Ai;
@@ -242,10 +242,10 @@ namespace PcgTools.Model.M3rSpecific.Pcg
                 bank.IsWritable = true;
                 bank.IsLoaded = true;
 
-                for (var index = 0; index < bank.Patches.Count; index++)
+                for (int index = 0; index < bank.Patches.Count; index++)
                 {
                     // Place in PcgMemory.
-                    var program = (Program) bank[index];
+                    Program program = (Program) bank[index];
                     program.ByteOffset = Index;
                     program.ByteLength = bank.PatchSize;
                     program.IsLoaded = true;

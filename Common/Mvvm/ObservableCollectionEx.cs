@@ -28,7 +28,7 @@ namespace Common.Mvvm
         /// </summary>
         protected override void ClearItems()
         {
-            foreach (var element in this)
+            foreach (T element in this)
                 element.PropertyChanged -= ContainedElementChanged;
             base.ClearItems();
         }

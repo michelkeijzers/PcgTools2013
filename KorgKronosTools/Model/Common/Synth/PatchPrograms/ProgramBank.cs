@@ -56,7 +56,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// <returns></returns>
         public static string SynthesisTypeAsString(SynthesisType synthesisType)
         {
-            var map = new Dictionary<SynthesisType, string>
+            Dictionary<SynthesisType, string> map = new Dictionary<SynthesisType, string>
             {
                 {SynthesisType.Ai, Strings.ESynthesisTypeAi},
                 {SynthesisType.Ai2, Strings.ESynthesisTypeAi2},

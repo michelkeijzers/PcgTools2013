@@ -86,11 +86,11 @@ namespace PcgTools.Edit
         /// </summary>
         private void FillCategories()
         {
-            var global = _patch.PcgRoot.Global;
+            IGlobal global = _patch.PcgRoot.Global;
 
             if (global == null)
             {
-                var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(_patch.Root.Model);
+                Model.Common.Synth.MemoryAndFactory.IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(_patch.Root.Model);
                 if (masterPcgMemory == null)
                 {
                     // Only number is shown, therefore disable it.
@@ -110,7 +110,7 @@ namespace PcgTools.Edit
                 }
                 else
                 {
-                    var masterGlobal = masterPcgMemory.Global;
+                    IGlobal masterGlobal = masterPcgMemory.Global;
                     FillCategoryComboboxes(masterGlobal);
                 }
             }
@@ -139,7 +139,7 @@ namespace PcgTools.Edit
         {
             Debug.Assert(global != null);
 
-            foreach (var categoryName in global.GetCategoryNames(Global.ECategoryType.Program))
+            foreach (string categoryName in global.GetCategoryNames(Global.ECategoryType.Program))
             {
                 comboBoxCategory.Items.Add(categoryName);
             }
@@ -161,7 +161,7 @@ namespace PcgTools.Edit
         void FillSubcategoryCombobox(IGlobal global)
         {
             comboBoxSubCategory.Items.Clear();
-            foreach (var subCategoryName in global.GetSubCategoryNames(
+            foreach (string subCategoryName in global.GetSubCategoryNames(
              Global.ECategoryType.Program, comboBoxCategory.SelectedIndex))
             {
                 comboBoxSubCategory.Items.Add(subCategoryName);
@@ -187,7 +187,7 @@ namespace PcgTools.Edit
         /// </summary>
         private void Check()
         {
-            var usedSize = textBoxName.Text.Length;
+            int usedSize = textBoxName.Text.Length;
 
             labelNameLength.Text = string.Format('(' + Strings.XOfYCharacters_editw + ')', usedSize, 
                 _patch.MaxNameLength);
@@ -213,10 +213,10 @@ namespace PcgTools.Edit
                 _patch.Name = textBoxName.Text;
 
                 // Set category.
-                var memory = _patch.PcgRoot;
+                Model.Common.Synth.MemoryAndFactory.IPcgMemory memory = _patch.PcgRoot;
                 if ((memory.AreCategoriesEditable) && (comboBoxCategory.IsEnabled))
                 {
-                    var param = _patch.GetParam(ParameterNames.ProgramParameterName.Category);
+                    IParameter param = _patch.GetParam(ParameterNames.ProgramParameterName.Category);
                     if (param != null)
                     {
                         param.Value = comboBoxCategory.SelectedIndex;
@@ -266,10 +266,10 @@ namespace PcgTools.Edit
             {
                 if (_patch.PcgRoot.Global == null)
                 {
-                    var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(_patch.Root.Model);
+                    Model.Common.Synth.MemoryAndFactory.IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(_patch.Root.Model);
                     if (masterPcgMemory != null)
                     {
-                        var masterGlobal = masterPcgMemory.Global;
+                        IGlobal masterGlobal = masterPcgMemory.Global;
                         FillSubcategoryCombobox(masterGlobal);
                     }
                 }

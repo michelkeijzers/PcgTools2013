@@ -1,6 +1,4 @@
-﻿
-
-// (c) 2011 Michel Keijzers
+﻿// (c) 2011 Michel Keijzers
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
 using PcgTools.Model.Common.Synth.Meta;
 using PcgTools.Model.Common.Synth.PatchDrumKits;
@@ -31,7 +29,7 @@ namespace PcgTools.Model.Kross2Specific.Synth
 
             // 00(INT)..31(INT)
             //32(USER)..47(USER)
-            foreach (var id in new[] { "INT", "USER" })
+            foreach (string id in new[] { "INT", "USER" })
             {
                 Add(new Kross2DrumKitBank(this, BankType.EType.User, id, -1));
             }

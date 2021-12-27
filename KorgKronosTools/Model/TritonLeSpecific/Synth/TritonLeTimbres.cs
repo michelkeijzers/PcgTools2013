@@ -24,7 +24,7 @@ namespace PcgTools.Model.TritonLeSpecific.Synth
         public TritonLeTimbres(ICombi combi)
             : base(combi, TimbresOffsetConstant)
         {
-            for (var n = 0; n < TimbresPerCombi; n++)
+            for (int n = 0; n < TimbresPerCombi; n++)
             {
                 TimbresCollection.Add(new TritonLeTimbre(this, n));
             }

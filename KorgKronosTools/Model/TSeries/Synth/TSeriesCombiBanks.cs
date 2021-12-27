@@ -29,7 +29,7 @@ namespace PcgTools.Model.TSeries.Synth
         protected override void CreateBanks()
         {
             //                          0 
-            foreach (var id in new[] { "C" })
+            foreach (string id in new[] { "C" })
             {
                 Add(new TSeriesCombiBank(this, BankType.EType.Int, id, -1));
             }

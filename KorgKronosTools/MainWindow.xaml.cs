@@ -60,7 +60,7 @@ namespace PcgTools
             try
             {
 #endif
-            var splashWindow = new SplashWindow {WindowStartupLocation = WindowStartupLocation.CenterScreen};
+            SplashWindow splashWindow = new SplashWindow {WindowStartupLocation = WindowStartupLocation.CenterScreen};
             splashWindow.Show();
 #if !DEBUG
                 Thread.Sleep(5000);
@@ -69,7 +69,7 @@ namespace PcgTools
             // Set culture info ... check list at: http://techmantium.com/culture-codes/
             try
             {
-                var culture = new CultureInfo(Settings.Default.UI_Language);
+                CultureInfo culture = new CultureInfo(Settings.Default.UI_Language);
                 System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
                 System.Threading.Thread.CurrentThread.CurrentCulture = culture;
 
@@ -84,7 +84,7 @@ namespace PcgTools
             LoadWindowProperties();
 
             // Set UI language.
-            foreach (var item in menuItemUiLanguages.Items.Cast<MenuItem>().Where(
+            foreach (MenuItem item in menuItemUiLanguages.Items.Cast<MenuItem>().Where(
                 item => item.Tag.ToString().Equals(CultureInfo.CurrentUICulture.Name)))
             {
                 item.IsChecked = true;
@@ -104,7 +104,7 @@ namespace PcgTools
 
             ViewModel.OpenFileDialog = (title, filter, filterIndex, multiSelect) =>
             {
-                var dlg = new OpenFileDialog
+                OpenFileDialog dlg = new OpenFileDialog
                 {
                     Title = title,
                     Filter = filter,
@@ -113,7 +113,7 @@ namespace PcgTools
                 };
 
                 dynamic result = new ExpandoObject();
-                var showDialog = dlg.ShowDialog();
+                bool? showDialog = dlg.ShowDialog();
                 if (showDialog != null && showDialog.Value)
                 {
                     result.Success = true;
@@ -131,7 +131,7 @@ namespace PcgTools
 
             ViewModel.SaveFileDialog = (title, filter, fileName) =>
             {
-                var dlg = new SaveFileDialog
+                SaveFileDialog dlg = new SaveFileDialog
                 {
                     Title = title,
                     Filter = filter,
@@ -140,7 +140,7 @@ namespace PcgTools
                 };
 
                 dynamic result = new ExpandoObject();
-                var showDialog = dlg.ShowDialog();
+                bool? showDialog = dlg.ShowDialog();
                 if (showDialog != null && showDialog.Value)
                 {
                     result.Success = true;
@@ -221,7 +221,7 @@ namespace PcgTools
 
             ViewModel.GotoNextWindow = () =>
             {
-                var nrChildren = Container.Children.Count;
+                int nrChildren = Container.Children.Count;
 
                 int index;
                 for (index = 0; index < nrChildren; index++)
@@ -241,7 +241,7 @@ namespace PcgTools
 
             ViewModel.GotoPreviousWindow = () =>
             {
-                var nrChildren = Container.Children.Count;
+                int nrChildren = Container.Children.Count;
 
                 int index;
                 for (index = 0; index < nrChildren; index++)
@@ -281,7 +281,7 @@ namespace PcgTools
                         throw new ApplicationException("Illegal window type");
                 }
 
-                var mdiChild = new MdiChild
+                MdiChild mdiChild = new MdiChild
                 {
                     Title = fileName,
                     Content = uiElement,
@@ -361,7 +361,7 @@ namespace PcgTools
 
             // Start timer.
             //  DispatcherTimer setup
-            var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(OnTimerTick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 15);
             dispatcherTimer.Start();
@@ -390,7 +390,7 @@ namespace PcgTools
         void OnMdiContainerChanged(object o, NotifyCollectionChangedEventArgs args)
         {
             ViewModel.ChildWindows.Clear();
-            foreach (var child in Container.Children)
+            foreach (MdiChild child in Container.Children)
             {
                 ViewModel.ChildWindows.Add((IChildWindow) (child.Content));
             }
@@ -410,7 +410,7 @@ namespace PcgTools
             }
             else
             {
-                var window = FocusedWindow as PcgWindow;
+                PcgWindow window = FocusedWindow as PcgWindow;
                 if (window != null)
                 {
                     ViewModel.SelectedMemory = window.PcgMemory;
@@ -418,14 +418,14 @@ namespace PcgTools
                 }
                 else
                 {
-                    var songWindow = FocusedWindow as SongWindow;
+                    SongWindow songWindow = FocusedWindow as SongWindow;
                     if (songWindow != null)
                     {
                         ViewModel.SelectedMemory = songWindow.SongMemory;
                     }
                     else
                     {
-                        var combiWindow = FocusedWindow as CombiWindow;
+                        CombiWindow combiWindow = FocusedWindow as CombiWindow;
                         if (combiWindow != null)
                         {
                             ViewModel.SelectedMemory = combiWindow.CombiViewModel.Combi.PcgRoot;
@@ -433,7 +433,7 @@ namespace PcgTools
                         }
                         else
                         {
-                            var songTimbresWindow = FocusedWindow as SongTimbresWindow;
+                            SongTimbresWindow songTimbresWindow = FocusedWindow as SongTimbresWindow;
                             if (songTimbresWindow != null)
                             {
                                 ViewModel.SelectedMemory = songTimbresWindow.SngTimbresViewModel.Song.Memory;
@@ -441,7 +441,7 @@ namespace PcgTools
                             }
                             else
                             {
-                                var filesWindow = FocusedWindow as MasterFilesWindow;
+                                MasterFilesWindow filesWindow = FocusedWindow as MasterFilesWindow;
                                 if (filesWindow != null)
                                 {
                                     ViewModel.SelectedMemory = null;
@@ -484,7 +484,7 @@ namespace PcgTools
         /// <param name="args"></param>
         public void MdiClosing(object obj, RoutedEventArgs args)
         {
-            var content = ((IChildWindow) (((MdiChild) obj).Content));
+            IChildWindow content = ((IChildWindow) (((MdiChild) obj).Content));
             args.Handled = !content.ViewModel.Close(false);
 
             if (content is PcgWindow)
@@ -494,7 +494,7 @@ namespace PcgTools
 
             // Set child windows of children.
             ViewModel.ChildWindows.Clear();
-            foreach (var child in Container.Children)
+            foreach (MdiChild child in Container.Children)
             {
                 ViewModel.ChildWindows.Add((IChildWindow)(child.Content));
             }
@@ -502,7 +502,7 @@ namespace PcgTools
             // Set current child view model.
             if (Container.Children.Count > 0)
             {
-                var lastContent = Container.Children[Container.Children.Count - 1].Content;
+                UIElement lastContent = Container.Children[Container.Children.Count - 1].Content;
                 if (lastContent is PcgWindow)
                 {
                     ViewModel.CurrentChildViewModel = (lastContent as PcgWindow).ViewModel;
@@ -518,9 +518,9 @@ namespace PcgTools
         /// <param name="e"></param>
         private void MainWindowClosing(object sender, CancelEventArgs e)
         {
-            var closeApp = true;
+            bool closeApp = true;
 
-            for (var index = Container.Children.Count - 1; index >= 0; index--)
+            for (int index = Container.Children.Count - 1; index >= 0; index--)
             {
                 if (CloseChild(index))
                 {
@@ -551,7 +551,7 @@ namespace PcgTools
         /// <returns></returns>
         private bool CloseChild(int index)
         {
-            var child = Container.Children[index];
+            MdiChild child = Container.Children[index];
             if (child.Content is PcgWindow)
             {
                 if (((PcgWindow) (child.Content)).ViewModel.Close(true))
@@ -666,7 +666,7 @@ namespace PcgTools
             switch (args.PropertyName)
             {
             case "SelectedTheme":
-                var enumConverter = new Dictionary<MainViewModel.Theme, MdiContainer.ThemeType>
+                    Dictionary<MainViewModel.Theme, MdiContainer.ThemeType> enumConverter = new Dictionary<MainViewModel.Theme, MdiContainer.ThemeType>
                 {
                     {MainViewModel.Theme.Generic, MdiContainer.ThemeType.Generic},
                     {MainViewModel.Theme.Luna, MdiContainer.ThemeType.Luna},
@@ -696,7 +696,7 @@ namespace PcgTools
             }
 
             // Check and set selected menu item/language.
-            var mi = sender as MenuItem;
+            MenuItem mi = sender as MenuItem;
             if (mi != null)
             {
                 mi.IsChecked = true;

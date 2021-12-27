@@ -186,10 +186,10 @@ namespace PcgTools.MasterFiles
             }
             else
             {
-                var masterFiles = MasterFiles.Instances;
+                MasterFiles masterFiles = MasterFiles.Instances;
                 if (masterFiles != null)
                 {
-                    var pcgWindow = masterFiles.MainViewModel.FindPcgViewModelWithName(FileName);
+                    ViewModels.IPcgViewModel pcgWindow = masterFiles.MainViewModel.FindPcgViewModelWithName(FileName);
                     if (pcgWindow == null)
                     {
                         FileState = System.IO.File.Exists(FileName) ? EFileState.Unloaded : EFileState.NotPresent;

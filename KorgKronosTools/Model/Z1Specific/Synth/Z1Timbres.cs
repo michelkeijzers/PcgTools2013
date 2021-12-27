@@ -29,7 +29,7 @@ namespace PcgTools.Model.Z1Specific.Synth
         public Z1Timbres(ICombi combi)
             : base(combi, TimbresPerCombiConstant, TimbresOffsetConstant)
         {
-            for (var n = 0; n < TimbresPerCombi; n++)
+            for (int n = 0; n < TimbresPerCombi; n++)
             {
                 TimbresCollection.Add(new Z1Timbre(this, n));
             }

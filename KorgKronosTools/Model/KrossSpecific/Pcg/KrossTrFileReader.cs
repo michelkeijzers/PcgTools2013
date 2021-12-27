@@ -55,7 +55,7 @@ namespace PcgTools.Model.KrossSpecific.Pcg
         public override void ReadContent(Memory.FileType filetype, Models.EModelType modelType)
             // Continue parsing.
         {
-            var memory = (KrossPcgMemory) CurrentPcgMemory;
+            KrossPcgMemory memory = (KrossPcgMemory) CurrentPcgMemory;
 
             const int headerSize = 32; // bytes
             switch (_contentType)
@@ -75,9 +75,9 @@ namespace PcgTools.Model.KrossSpecific.Pcg
 
                 case PcgMemory.ContentType.ProgramBank:
                 {
-                    var firstBank = (ProgramBank) (memory.ProgramBanks[0]);
-                    var offset = headerSize;
-                    foreach (var program in firstBank.Patches)
+                        ProgramBank firstBank = (ProgramBank) (memory.ProgramBanks[0]);
+                        int offset = headerSize;
+                    foreach (IPatch program in firstBank.Patches)
                     {
                         ReadSingleProgram(offset);
                         offset += firstBank.PatchSize;
@@ -96,9 +96,9 @@ namespace PcgTools.Model.KrossSpecific.Pcg
 
                 case PcgMemory.ContentType.CombiBank:
                 {
-                    var firstBank = memory.CombiBanks[0];
-                    var offset = headerSize;
-                    foreach (var combi in firstBank.Patches)
+                        IBank firstBank = memory.CombiBanks[0];
+                        int offset = headerSize;
+                    foreach (IPatch combi in firstBank.Patches)
                     {
                         ReadSingleCombi(offset);
                         offset += firstBank.ByteLength;
@@ -147,7 +147,7 @@ namespace PcgTools.Model.KrossSpecific.Pcg
             _bank = 0;
             _patchIndex = 0;
 
-            foreach (var bank in memory.ProgramBanks.BankCollection.Where(
+            foreach (IBank bank in memory.ProgramBanks.BankCollection.Where(
                                      bank => bank.Type != BankType.EType.Gm))
             {
                 ReadSingleProgram(offset);
@@ -166,7 +166,7 @@ namespace PcgTools.Model.KrossSpecific.Pcg
             _bank = 0;
             _patchIndex = 0;
 
-            foreach (var bank in memory.CombiBanks.BankCollection)
+            foreach (IBank bank in memory.CombiBanks.BankCollection)
             {
                 ReadSingleCombi(offset);
                 offset += bank.ByteLength;
@@ -186,8 +186,8 @@ namespace PcgTools.Model.KrossSpecific.Pcg
 
             const int drumKitsInAllFile = 48; // Only this many drum kits in a .KRSall file.
 
-            var drumKits = 0;
-            foreach (var bank in memory.DrumKitBanks.BankCollection)
+            int drumKits = 0;
+            foreach (IBank bank in memory.DrumKitBanks.BankCollection)
             {
                 ReadSingleDrumKit(offset);
                 offset += bank.ByteLength;
@@ -208,14 +208,14 @@ namespace PcgTools.Model.KrossSpecific.Pcg
         /// <param name="offset"></param>
         private void ReadSingleProgram(int offset)
         {
-            var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[_bank]);
+            IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[_bank]);
             bank.ByteOffset = 0;
             bank.BankSynthesisType = ProgramBank.SynthesisType.Edsx;
             bank.ByteLength = 0x85c;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var program = (IProgram) bank[_patchIndex];
+            IProgram program = (IProgram) bank[_patchIndex];
             program.ByteOffset = offset;
             program.ByteLength = bank.ByteLength;
             program.IsLoaded = true;
@@ -241,13 +241,13 @@ namespace PcgTools.Model.KrossSpecific.Pcg
 
         private void ReadSingleCombi(int offset)
         {
-            var bank = (ICombiBank)(CurrentPcgMemory.CombiBanks[_bank]);
+            ICombiBank bank = (ICombiBank)(CurrentPcgMemory.CombiBanks[_bank]);
             bank.ByteOffset = 0;
             bank.ByteLength = 0x7bc;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var combi = (ICombi)bank[_patchIndex];
+            ICombi combi = (ICombi)bank[_patchIndex];
             combi.ByteOffset = offset;
             combi.ByteLength = bank.ByteLength;
             combi.IsLoaded = true;
@@ -277,13 +277,13 @@ namespace PcgTools.Model.KrossSpecific.Pcg
         /// <param name="offset"></param>
         private void ReadSingleDrumKit(int offset)
         {
-            var bank = (DrumKitBank)(CurrentPcgMemory.DrumKitBanks[_bank]);
+            DrumKitBank bank = (DrumKitBank)(CurrentPcgMemory.DrumKitBanks[_bank]);
             bank.ByteOffset = 0;
             bank.PatchSize = 0x2218;
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var drumKit = (DrumKit)bank[_patchIndex];
+            DrumKit drumKit = (DrumKit)bank[_patchIndex];
             drumKit.ByteOffset = offset;
             drumKit.ByteLength = bank.PatchSize;
             drumKit.IsLoaded = true;

@@ -24,7 +24,7 @@ namespace PCG_Tools_Unittests
 
         private void SetUp()
         {
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgOs2 = (PcgMemory) korgFileReader.Read(PcgDirectory + @"\Kronos\all.PCG");
             _pcgOs3 = (PcgMemory) korgFileReader.Read(PcgDirectory + @"\Kronos2\PRELOAD_V3_2016-10-01-20-23-33.PCG");
 
@@ -104,24 +104,24 @@ namespace PCG_Tools_Unittests
             Settings.Default.CopyPaste_PatchDuplicationName = (int)patchNameSetting;
             Settings.Default.CopyPaste_IgnoreCharactersForPatchDuplication = ignoreFragments;
 
-            var program2 = ((ProgramBank)_pcgOs2.ProgramBanks["I-A"])[sourceIndex]; // I-A000 Kronos grand.
-            var commands2 = new CopyPasteCommands();
-            var patches = new ObservableCollectionEx<IPatch> { program2 };
+            IPatch program2 = ((ProgramBank)_pcgOs2.ProgramBanks["I-A"])[sourceIndex]; // I-A000 Kronos grand.
+            CopyPasteCommands commands2 = new CopyPasteCommands();
+            ObservableCollectionEx<IPatch> patches = new ObservableCollectionEx<IPatch> { program2 };
 
-            var clipBoard = new PcgClipBoard();
+            PcgClipBoard clipBoard = new PcgClipBoard();
             program2.IsSelected = true;
             commands2.CopyPasteCopy(clipBoard, _pcgOs2, PcgViewModel.ScopeSet.Patches, true,
                 false, false, false, false, false, false,
                 null, patches, false);
 
-            var icBank = (ProgramBank)_pcgOs3.ProgramBanks["I-C"];
+            ProgramBank icBank = (ProgramBank)_pcgOs3.ProgramBanks["I-C"];
             if (patchNamesEqual)
             {
                 Assert.AreEqual(program2.Name, icBank[destinationCompareIndex].Name);
             }
 
-            var program3 = icBank[destinationIndex];
-            var patches3 = new ObservableCollectionEx<IPatch> { program3 };
+            IPatch program3 = icBank[destinationIndex];
+            ObservableCollectionEx<IPatch> patches3 = new ObservableCollectionEx<IPatch> { program3 };
 
             program3.Clear();
             program3.IsSelected = true;

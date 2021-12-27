@@ -37,7 +37,7 @@ namespace PcgTools.ListGenerator
         /// <returns></returns>
         protected override string RunAfterFilteringBanks(bool useFileWriter = true)
         {
-            using (var writer = File.CreateText(OutputFileName))
+            using (StreamWriter writer = File.CreateText(OutputFileName))
             {
                 _list = new LinkedList<IBank>();
                 CreateFileContentList();
@@ -74,7 +74,7 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.ProgramBanks != null)
             {
-                foreach (var bank in PcgMemory.ProgramBanks.BankCollection.Where(
+                foreach (IBank bank in PcgMemory.ProgramBanks.BankCollection.Where(
                     programBank => programBank.IsWritable))
                 {
                     _list.AddLast(bank);
@@ -90,7 +90,7 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.CombiBanks != null)
             {
-                foreach (var bank in PcgMemory.CombiBanks.BankCollection.Where(
+                foreach (IBank bank in PcgMemory.CombiBanks.BankCollection.Where(
                     combiBank => combiBank.IsWritable))
                 {
                     _list.AddLast(bank);
@@ -126,7 +126,7 @@ namespace PcgTools.ListGenerator
             if (PcgMemory.WaveSequenceBanks != null)
             {
                 foreach (
-                    var bank in PcgMemory.WaveSequenceBanks.BankCollection.Where(
+                    IBank bank in PcgMemory.WaveSequenceBanks.BankCollection.Where(
                     waveSeqBank => waveSeqBank.IsWritable))
                 {
                     _list.AddLast(bank);
@@ -142,7 +142,7 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.DrumKitBanks != null)
             {
-                foreach (var bank in PcgMemory.DrumKitBanks.BankCollection.Where(
+                foreach (IBank bank in PcgMemory.DrumKitBanks.BankCollection.Where(
                     drumKitBank => drumKitBank.IsWritable))
                 {
                     _list.AddLast(bank);
@@ -159,7 +159,7 @@ namespace PcgTools.ListGenerator
         {
             if (PcgMemory.DrumPatternBanks != null)
             {
-                foreach (var bank in PcgMemory.DrumPatternBanks.BankCollection.Where(
+                foreach (IBank bank in PcgMemory.DrumPatternBanks.BankCollection.Where(
                     drumPatternBank => drumPatternBank.IsWritable))
                 {
                     _list.AddLast(bank);
@@ -173,7 +173,7 @@ namespace PcgTools.ListGenerator
         /// <param name="writer"></param>
         private void WriteToFile(TextWriter writer)
         {
-            var lines = new List<string>();
+            List<string> lines = new List<string>();
                 // Only used for asci tables. First add all lines. Then find out the longest line and create
             // right table vertical line.
 
@@ -210,7 +210,7 @@ namespace PcgTools.ListGenerator
 
                     CreateVerticalRightLine(lines);
                     // Write all lines.
-                    foreach (var line in lines)
+                    foreach (string line in lines)
                     {
                         writer.WriteLine(line);
                     }
@@ -234,20 +234,20 @@ namespace PcgTools.ListGenerator
         /// <param name="lines"></param>
         private void ParseItems(TextWriter writer, List<string> lines)
         {
-            foreach (var bank in _list)
+            foreach (IBank bank in _list)
             {
-                var bankType = string.Empty;
-                var contentType = string.Empty;
-                var bankId = string.Empty;
-                var writablePatches = 0;
-                var filledPatches = 0;
-                var emptyPatches = 0;
-                var filledPatchList = new List<IPatch>();
+                string bankType = string.Empty;
+                string contentType = string.Empty;
+                string bankId = string.Empty;
+                int writablePatches = 0;
+                int filledPatches = 0;
+                int emptyPatches = 0;
+                List<IPatch> filledPatchList = new List<IPatch>();
 
-                var bank1 = bank as ProgramBank;
+                ProgramBank bank1 = bank as ProgramBank;
                 if (bank1 != null)
                 {
-                    var programBank = bank1;
+                    ProgramBank programBank = bank1;
 
                     bankType = "ProgramBank";
                     bankId = programBank.Id;
@@ -262,10 +262,10 @@ namespace PcgTools.ListGenerator
                 }
                 else
                 {
-                    var combiBank1 = bank as CombiBank;
+                    CombiBank combiBank1 = bank as CombiBank;
                     if (combiBank1 != null)
                     {
-                        var combiBank = combiBank1;
+                        CombiBank combiBank = combiBank1;
 
                         bankType = "CombiBank";
                         bankId = combiBank.Id;
@@ -274,15 +274,15 @@ namespace PcgTools.ListGenerator
                         filledPatches = combiBank.CountFilledPatches;
                         emptyPatches = writablePatches - filledPatches;
 
-                        var filledCombis = combiBank.Patches.Where(combi => combiBank.IsLoaded && !combi.IsEmptyOrInit);
+                        IEnumerable<IPatch> filledCombis = combiBank.Patches.Where(combi => combiBank.IsLoaded && !combi.IsEmptyOrInit);
                         filledPatchList.AddRange(filledCombis);
                     }
                     else
                     {
-                        var list = bank as SetList;
+                        SetList list = bank as SetList;
                         if (list != null)
                         {
-                            var setList = list;
+                            SetList setList = list;
 
                             bankType = "SetList";
                             bankId = setList.Id;
@@ -296,10 +296,10 @@ namespace PcgTools.ListGenerator
                         }
                         else
                         {
-                            var seqBank = bank as WaveSequenceBank;
+                            WaveSequenceBank seqBank = bank as WaveSequenceBank;
                             if (seqBank != null)
                             {
-                                var waveSeqBank = seqBank;
+                                WaveSequenceBank waveSeqBank = seqBank;
 
                                 bankType = "WaveSeqBank";
                                 bankId = waveSeqBank.Id;
@@ -313,10 +313,10 @@ namespace PcgTools.ListGenerator
                             }
                             else
                             {
-                                var kitBank = bank as DrumKitBank;
+                                DrumKitBank kitBank = bank as DrumKitBank;
                                 if (kitBank != null)
                                 {
-                                    var drumKitBank = kitBank;
+                                    DrumKitBank drumKitBank = kitBank;
 
                                     bankType = "DrumKitBank";
                                     bankId = drumKitBank.Id;
@@ -330,10 +330,10 @@ namespace PcgTools.ListGenerator
                                 }
                                 else
                                 {
-                                    var patternBank = bank as DrumPatternBank;
+                                    DrumPatternBank patternBank = bank as DrumPatternBank;
                                     if (patternBank != null)
                                     {
-                                        var drumPatternBank = patternBank;
+                                        DrumPatternBank drumPatternBank = patternBank;
 
                                         bankType = "DrumPatternBank";
                                         bankId = drumPatternBank.Id;
@@ -420,13 +420,13 @@ namespace PcgTools.ListGenerator
         /// <param name="lines"></param>
         private void CreateVerticalRightLine(List<string> lines)
         {
-            var maxLength = lines.Max(line => line.Length) + 1; // +1 for right line |
+            int maxLength = lines.Max(line => line.Length) + 1; // +1 for right line |
 
             lines[0] += new string('-', maxLength - lines[0].Length) + '+';
             lines[1] += new string(' ', maxLength - lines[1].Length) + '|';
             lines[2] += new string('-', maxLength - lines[2].Length) + '+';
 
-            for (var index = 3; index < lines.Count - 1; index++)
+            for (int index = 3; index < lines.Count - 1; index++)
             {
                 lines[index] += new string(' ', maxLength - lines[index].Length) + '|';
             }
@@ -440,7 +440,7 @@ namespace PcgTools.ListGenerator
         /// </summary>
         private void WriteXslFile()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.AppendLine("<?xml version=\"1.0\"?>");
             builder.AppendLine(" <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
             builder.AppendLine(string.Empty);
@@ -489,7 +489,7 @@ namespace PcgTools.ListGenerator
         /// <param name="writer"></param>
         private void TestPatchIdsString(TextWriter writer)
         {
-            var tests = new Dictionary<string, List<IPatch>>
+            Dictionary<string, List<IPatch>> tests = new Dictionary<string, List<IPatch>>
             {
                 {
                     "Empty list",
@@ -593,7 +593,7 @@ namespace PcgTools.ListGenerator
             };
 
             writer.WriteLine("BEGIN TEST");
-            foreach (var test in tests)
+            foreach (KeyValuePair<string, List<IPatch>> test in tests)
             {
                 writer.WriteLine("    {0,-30}: {1}", test.Key, Util.GetPatchIdsString(test.Value));
             }

@@ -234,7 +234,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         {
             get
             {
-                var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                 return (masterPcgMemory == Root);
             }
         }
@@ -246,7 +246,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// <param name="name"></param>
         public void Update(string name)
         {
-            foreach (var item in Patches)
+            foreach (IPatch item in Patches)
             {
                 item.Update(name);
             }
@@ -258,7 +258,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// </summary>
         public virtual void SetParameters()
         {
-            foreach (var patch in Patches)
+            foreach (IPatch patch in Patches)
             {
                 patch.SetParameters();
             }

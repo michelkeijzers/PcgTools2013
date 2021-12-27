@@ -62,7 +62,7 @@ namespace PcgTools.Edit
         /// </summary>
         private void Check()
         {
-            var usedSize = textBoxName.Text.Length;
+            int usedSize = textBoxName.Text.Length;
 
             labelNameLength.Text = string.Format('(' + Strings.XOfYCharacters_editw + ')', usedSize, 
                 _setList.MaxNameLength);

@@ -24,7 +24,7 @@ namespace PcgTools.Model.KromeSpecific.Synth
         public KromeTimbres(Combi combi)
             : base(combi, TimbresOffsetConstant)
         {
-            for (var n = 0; n < TimbresPerCombi; n++)
+            for (int n = 0; n < TimbresPerCombi; n++)
             {
                 TimbresCollection.Add(new KromeTimbre(this, n));
             }

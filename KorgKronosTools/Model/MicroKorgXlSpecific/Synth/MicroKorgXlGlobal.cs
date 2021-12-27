@@ -56,7 +56,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
         /// <returns></returns>
         public override string GetCategoryName(IPatch patch)
         {
-            var category = -1;
+            int category = -1;
             if (patch is IProgram)
             {
                 category = ((IProgram)patch).GetParam(ParameterNames.ProgramParameterName.Category).Value;
@@ -66,7 +66,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
                 category = ((ICombi)patch).GetParam(ParameterNames.CombiParameterName.Category).Value;
             }
 
-            var genres = new List<string>
+            List<string> genres = new List<string>
             {
                 "Vintage",
                 "Rock/Pop",
@@ -77,7 +77,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
                 "D'N'B/Break",
                 "Favorite"
             };
-            var name = genres[category];
+            string name = genres[category];
 
             return name;
         }
@@ -90,7 +90,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
         /// <returns></returns>
         public override string GetSubCategoryName(IPatch patch)
         {
-            var subCategory = -1;
+            int subCategory = -1;
             if (patch is IProgram)
             {
                 subCategory = ((IProgram)patch).GetParam(ParameterNames.ProgramParameterName.Category).Value;
@@ -100,7 +100,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
                 subCategory = ((ICombi)patch).GetParam(ParameterNames.CombiParameterName.Category).Value;
             }
 
-            var categories = new List<string>
+            List<string> categories = new List<string>
             {
                 "Poly Synth",
                 "Bass",
@@ -111,7 +111,7 @@ namespace PcgTools.Model.MicroKorgXlSpecific.Synth
                 "S.E./Hit",
                 "Vocoder"
             };
-            var name = categories[subCategory];
+            string name = categories[subCategory];
             return name;
         }
 

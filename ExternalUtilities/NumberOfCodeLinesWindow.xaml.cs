@@ -38,24 +38,24 @@ namespace ExternalUtilities
         private int IterateThroughFolder(string folder, int level, int numberOfLines)
         {
             // Read all files.
-            var files = Directory.GetFiles(folder);
-            var indentation = new string(' ', level * 3);
-            var numberOfLinesInFolder = 0;
+            string[] files = Directory.GetFiles(folder);
+            string indentation = new string(' ', level * 3);
+            int numberOfLinesInFolder = 0;
 
             output.AppendFormat("\n\n{0}Folder: {1}\n", indentation, folder.Remove(0, ProjectFolder.Length));
-            foreach (var file in files)
+            foreach (string file in files)
             {
                 if (HandleFile(file))
                 {
-                    var lineCount = ReadLineCount(file);
+                    int lineCount = ReadLineCount(file);
                     numberOfLinesInFolder += lineCount;
                     output.AppendFormat("{0}{1,-120}{2,8}\n", indentation, file.Remove(0, ProjectFolder.Length + 1), lineCount);
                 }
             }
 
             // Raed all folders.
-            var subFolders = Directory.GetDirectories(folder);
-            foreach (var subFolder in subFolders)
+            string[] subFolders = Directory.GetDirectories(folder);
+            foreach (string subFolder in subFolders)
             {
                 if (HandleFolder(subFolder))
                 {

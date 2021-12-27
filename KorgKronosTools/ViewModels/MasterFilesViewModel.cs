@@ -28,7 +28,7 @@ namespace PcgTools.ViewModels
             _mainViewModel = mainViewModel;
 
             // Select first if none selected.
-            var masterFiles = MasterFiles.MasterFiles.Instances;
+            MasterFiles.MasterFiles masterFiles = MasterFiles.MasterFiles.Instances;
             if ((masterFiles.Count > 0) && (masterFiles.Count(item => item.IsSelected) == 0))
             {
                 masterFiles[0].IsSelected = true;

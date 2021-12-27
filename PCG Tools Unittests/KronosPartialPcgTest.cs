@@ -102,7 +102,7 @@ namespace PCG_Tools_Unittests
         public void TestPatchList()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\pipes.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -124,7 +124,7 @@ namespace PCG_Tools_Unittests
         public void TestProgramUsageList()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\pipes.PCG");
 
             _generator = new ListGeneratorProgramUsageList();
@@ -140,7 +140,7 @@ namespace PCG_Tools_Unittests
         public void TestPhaseoPadPcg()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\PhasoPad.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -161,7 +161,7 @@ namespace PCG_Tools_Unittests
         public void TestDfRhodesJimKnopfPcg()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\DF Rhodes.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -182,7 +182,7 @@ namespace PCG_Tools_Unittests
         public void TestAronPatchBankPcg()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\aron patch bank.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -203,7 +203,7 @@ namespace PCG_Tools_Unittests
         public void TestBeschKeysPcg()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\BuschKeys.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -224,7 +224,7 @@ namespace PCG_Tools_Unittests
         public void TestResidentEvilPcg()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\ResidentEvil.PCG");
 
             _generator = new ListGeneratorPatchList();

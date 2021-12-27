@@ -44,13 +44,13 @@ namespace PcgTools.Model.Common.File
         public virtual void ReadChunks()
         {
             _index = 32; // Sng1Offset;
-            var headerSize = Util.GetInt(SongMemory.Content, _index, 4);
+            int headerSize = Util.GetInt(SongMemory.Content, _index, 4);
             _index += 4 + headerSize;
 
             while (_index < SongMemory.Content.Length)
             {
-                var chunkName = Util.GetChars(SongMemory.Content, _index, 4);
-                var chunkSize = Util.GetInt(SongMemory.Content, _index + 4, 4);
+                string chunkName = Util.GetChars(SongMemory.Content, _index, 4);
+                int chunkSize = Util.GetInt(SongMemory.Content, _index + 4, 4);
                 //Console.WriteLine("index = " + Index.ToString("X08") + ", Chunk name: " + chunkName + ", size of chunk: " +
                 //    chunkSize.ToString("X08"));
                 //_songMemory.Chunks.Add(new Chunk(chunkName, Index, sng1ChunkSize));
@@ -89,8 +89,8 @@ namespace PcgTools.Model.Common.File
         {
             while (_index < SongMemory.Content.Length)
             {
-                var chunkName = Util.GetChars(SongMemory.Content, _index, 4);
-                var chunkSize = Util.GetInt(SongMemory.Content, _index + 4, 4);
+                string chunkName = Util.GetChars(SongMemory.Content, _index, 4);
+                int chunkSize = Util.GetInt(SongMemory.Content, _index + 4, 4);
                 //Console.WriteLine("index = " + Index.ToString("X08") + ", Chunk name: " + chunkName + ", size of chunk: " +
                 //    chunkSize.ToString("X08"));
                 //_songMemory.Chunks.Add(new Chunk(chunkName, Index, sng1ChunkSize));
@@ -140,16 +140,16 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         void ReadSdk1Chunk()
         {
-            var amountOfSongs = Util.GetInt(SongMemory.Content, _index, 4);
+            int amountOfSongs = Util.GetInt(SongMemory.Content, _index, 4);
             _index += 4;
-            var songSize = Util.GetInt(SongMemory.Content, _index, 4);
+            int songSize = Util.GetInt(SongMemory.Content, _index, 4);
             _index += 8;
 
             // Read through song names in SDK1.
 
-            for (var itemIndex = 0; itemIndex < amountOfSongs; itemIndex++)
+            for (int itemIndex = 0; itemIndex < amountOfSongs; itemIndex++)
             {
-                var song = new Song(this, itemIndex, SongMemory, Util.GetChars(SongMemory.Content, _index, 24)); // Song name size
+                Song song = new Song(this, itemIndex, SongMemory, Util.GetChars(SongMemory.Content, _index, 24)); // Song name size
                 SongMemory.Songs.SongCollection.Add(song);
 
                 // Details will be filled while reading SDT1 chunk.
@@ -203,15 +203,15 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         void ReadRgn1Chunk(int chunkSize)
         {
-            var amount = Util.GetInt(SongMemory.Content, _index, 4);
-            var startIndex = _index;
+            int amount = Util.GetInt(SongMemory.Content, _index, 4);
+            int startIndex = _index;
             _index += 12; // Skip until first region
 
             const int maxRegionNameSize = 24;
             const int maxRegionSampleFileNameSize = 84;
-            for (var itemIndex = 0; itemIndex < amount; itemIndex++)
+            for (int itemIndex = 0; itemIndex < amount; itemIndex++)
             {
-                var region = new Region(itemIndex, Util.GetChars(SongMemory.Content, _index, maxRegionNameSize),
+                Region region = new Region(itemIndex, Util.GetChars(SongMemory.Content, _index, maxRegionNameSize),
                     Util.GetChars(SongMemory.Content, _index + maxRegionNameSize, maxRegionSampleFileNameSize));
 
                 SongMemory.Regions.RegionsCollection.Add(region);
@@ -228,7 +228,7 @@ namespace PcgTools.Model.Common.File
         /// <param name="chunkSize"></param>
         void ReadSgs1Chunk(int chunkSize)
         {
-            foreach (var song in SongMemory.Songs.SongCollection)
+            foreach (ISong song in SongMemory.Songs.SongCollection)
             {
                 // Read SDT1
                 ReadSdt1Chunk(song);
@@ -245,14 +245,14 @@ namespace PcgTools.Model.Common.File
         void ReadSdt1Chunk(ISong song)
         {
             // var sdt1ChunkName = Util.GetChars(SongMemory.Content, Index, 4);
-            var sdt1ChunkSize = Util.GetInt(SongMemory.Content, _index + 4, 4);
+            int sdt1ChunkSize = Util.GetInt(SongMemory.Content, _index + 4, 4);
             _index += 12;
-            var endOfChunk = _index + sdt1ChunkSize;
+            int endOfChunk = _index + sdt1ChunkSize;
 
             while (_index < endOfChunk)
             {
-                var chunkName = Util.GetChars(SongMemory.Content, _index, 4);
-                var chunkSize = Util.GetInt(SongMemory.Content, _index + 4, 4);
+                string chunkName = Util.GetChars(SongMemory.Content, _index, 4);
+                int chunkSize = Util.GetInt(SongMemory.Content, _index + 4, 4);
                 _index += 12;
 
                 switch (chunkName)
@@ -329,9 +329,9 @@ namespace PcgTools.Model.Common.File
         {
             song.ByteOffset = _index + 0x12C2 + 12;
 
-            for (var timbre = 0; timbre < NumberOfSongTracks; timbre++)
+            for (int timbre = 0; timbre < NumberOfSongTracks; timbre++)
             {
-                var track = song.Timbres.TimbresCollection[timbre];
+                ITimbre track = song.Timbres.TimbresCollection[timbre];
                 track.ByteOffset = song.ByteOffset + timbre * SongTrackByteLength;
             }
 

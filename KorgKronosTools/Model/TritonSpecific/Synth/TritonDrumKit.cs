@@ -22,9 +22,9 @@ namespace PcgTools.Model.TritonSpecific.Synth
         protected TritonDrumKit(IBank drumKitBank, int index)
             : base(drumKitBank, index) 
         {
-            var drumKitBankIndex = PcgRoot.DrumKitBanks.BankCollection.IndexOf(drumKitBank);
+            int drumKitBankIndex = PcgRoot.DrumKitBanks.BankCollection.IndexOf(drumKitBank);
             Debug.Assert(drumKitBankIndex >= 0);
-            var indexInId = index;
+            int indexInId = index;
             if (drumKitBankIndex > 0)
             {
                 // INT and USER Drumkit banks have same size for Tritons, so no use in checking bank types here.

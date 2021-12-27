@@ -67,7 +67,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
 
             if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
-                var tempProgram = UsedProgram;
+                IProgram tempProgram = UsedProgram;
                 UsedProgram = otherTimbre.UsedProgram;
                 otherTimbre.UsedProgram = tempProgram;
             }
@@ -84,7 +84,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
                 int bankOffset;
                 if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
                 {
-                    var cmb2PcgOffset = ((KronosCombiBank)(Combi.Parent)).Cbk2PcgOffset;
+                    int cmb2PcgOffset = ((KronosCombiBank)(Combi.Parent)).Cbk2PcgOffset;
                     if (cmb2PcgOffset == 0)
                     {
                         bankOffset = TimbresOffset + 1;
@@ -110,7 +110,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         {
             get
             {
-                var pcgData = Combi.PcgRoot.Content;
+                byte[] pcgData = Combi.PcgRoot.Content;
                 return pcgData == null ? null : (IProgramBank) PcgRoot.ProgramBanks.GetBankWithPcgId(UsedProgramBankId);
             }
             protected set
@@ -125,8 +125,8 @@ namespace PcgTools.Model.KronosSpecific.Synth
                 if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
                 {
                     // Set item in CBK2.
-                    var cmb2PcgOffset = ((KronosCombiBank) (Combi.Parent)).Cbk2PcgOffset;
-                    var bankOffset = cmb2PcgOffset + Combi.Index * ((Timbres) Parent).TimbresPerCombi + Index;
+                    int cmb2PcgOffset = ((KronosCombiBank) (Combi.Parent)).Cbk2PcgOffset;
+                    int bankOffset = cmb2PcgOffset + Combi.Index * ((Timbres) Parent).TimbresPerCombi + Index;
                     Combi.PcgRoot.Content[bankOffset] = (byte)(value.PcgId);
                 }
                 RefillColumns();
@@ -161,7 +161,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             {
                 if (Parent is ISongTimbres)
                 {
-                    var connectedPcgMemory = ((ISongMemory) Root).ConnectedPcgMemory;
+                    IPcgMemory connectedPcgMemory = ((ISongMemory) Root).ConnectedPcgMemory;
                     if (connectedPcgMemory != null)
                     {
                         return connectedPcgMemory.GetPatchByRawIndices(ProgramRawBankIndex, ProgramRawIndex);
@@ -191,8 +191,8 @@ namespace PcgTools.Model.KronosSpecific.Synth
                 if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
                 {
                     // Set item in CBK2.
-                    var cmb2PcgOffset = ((KronosCombiBank) (Combi.Parent)).Cbk2PcgOffset;
-                    var programOffset = cmb2PcgOffset + ((CombiBank) (Combi.Parent)).NrOfPatches * ((Timbres) Parent).TimbresPerCombi +
+                    int cmb2PcgOffset = ((KronosCombiBank) (Combi.Parent)).Cbk2PcgOffset;
+                    int programOffset = cmb2PcgOffset + ((CombiBank) (Combi.Parent)).NrOfPatches * ((Timbres) Parent).TimbresPerCombi +
                         ((Combi) Parent.Parent).Index * ((Timbres) Parent).TimbresPerCombi + Index;
                     Combi.PcgRoot.Content[programOffset] = (byte)value.Index;
                 }
@@ -213,7 +213,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             int programOffset;
             if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
-                var cmb2PcgOffset = ((KronosCombiBank)(Combi.Parent)).Cbk2PcgOffset;
+                int cmb2PcgOffset = ((KronosCombiBank)(Combi.Parent)).Cbk2PcgOffset;
                 if (cmb2PcgOffset == 0)
                 {
                     programOffset = TimbresOffset;

@@ -16,8 +16,8 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void NoRules()
         {
-            var pcg = CreatePcg();
-            var ruleParser = new RuleParser(pcg);
+            IPcgMemory pcg = CreatePcg();
+            RuleParser ruleParser = new RuleParser(pcg);
             ruleParser.Parse("");
             Debug.Assert(ruleParser.HasParsedOk);
             Debug.Assert(ruleParser.ParsedRules.Count == 0);
@@ -30,13 +30,13 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void SingleRule()
         {
-            var pcg = CreatePcg();
-            var ruleParser = new RuleParser(pcg);
+            IPcgMemory pcg = CreatePcg();
+            RuleParser ruleParser = new RuleParser(pcg);
             ruleParser.Parse("I-A000->I-B000");
             Debug.Assert(ruleParser.HasParsedOk);
             
             Debug.Assert(ruleParser.ParsedRules.Count == 1);
-            var rule = ruleParser.ParsedRules[pcg.ProgramBanks[0][0]]; // I-A000
+            PcgTools.Model.Common.Synth.Meta.IPatch rule = ruleParser.ParsedRules[pcg.ProgramBanks[0][0]]; // I-A000
             Debug.Assert(rule == pcg.ProgramBanks[1][0]); // I-B000
         }
 
@@ -47,14 +47,14 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void TwoRules()
         {
-            var pcg = CreatePcg();
+            IPcgMemory pcg = CreatePcg();
             pcg.Content = new byte[10000];
-            var ruleParser = new RuleParser(pcg);
+            RuleParser ruleParser = new RuleParser(pcg);
             ruleParser.Parse("I-A000->I-B000\nI-A001->I-B001");
             Debug.Assert(ruleParser.HasParsedOk);
 
             Debug.Assert(ruleParser.ParsedRules.Count == 2);
-            var rule = ruleParser.ParsedRules[pcg.ProgramBanks[0][0]]; // I-A000
+            PcgTools.Model.Common.Synth.Meta.IPatch rule = ruleParser.ParsedRules[pcg.ProgramBanks[0][0]]; // I-A000
             Debug.Assert(rule == pcg.ProgramBanks[1][0]); // I-B000
             rule = ruleParser.ParsedRules[pcg.ProgramBanks[0][1]]; // I-A001
             Debug.Assert(rule == pcg.ProgramBanks[1][1]); // I-B001
@@ -67,13 +67,13 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void RangeRule()
         {
-            var pcg = CreatePcg();
-            var ruleParser = new RuleParser(pcg);
+            IPcgMemory pcg = CreatePcg();
+            RuleParser ruleParser = new RuleParser(pcg);
             ruleParser.Parse("I-A000..010->I-B000..010");
             Debug.Assert(ruleParser.HasParsedOk);
 
             Debug.Assert(ruleParser.ParsedRules.Count == 11);
-            var rule = ruleParser.ParsedRules[pcg.ProgramBanks[0][10]]; // I-A010
+            PcgTools.Model.Common.Synth.Meta.IPatch rule = ruleParser.ParsedRules[pcg.ProgramBanks[0][10]]; // I-A010
             Debug.Assert(rule == pcg.ProgramBanks[1][10]); // I-B010
         }
 
@@ -84,13 +84,13 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void BankRule()
         {
-            var pcg = CreatePcg();
-            var ruleParser = new RuleParser(pcg);
+            IPcgMemory pcg = CreatePcg();
+            RuleParser ruleParser = new RuleParser(pcg);
             ruleParser.Parse("I-A->I-B");
             Debug.Assert(ruleParser.HasParsedOk);
 
             Debug.Assert(ruleParser.ParsedRules.Count == pcg.ProgramBanks[0].CountPatches);
-            var rule = ruleParser.ParsedRules[pcg.ProgramBanks[0][127]]; // I-A127
+            PcgTools.Model.Common.Synth.Meta.IPatch rule = ruleParser.ParsedRules[pcg.ProgramBanks[0][127]]; // I-A127
             Debug.Assert(rule == pcg.ProgramBanks[1][127]); // I-B127
         }
 

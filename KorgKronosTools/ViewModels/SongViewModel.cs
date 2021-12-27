@@ -55,7 +55,7 @@ namespace PcgTools.ViewModels
                 {
                     // If file is selected which is closed, deselect it.
                     foreach (
-                        var item in
+                        OpenedPcgWindow item in
                             e.OldItems.Cast<OpenedPcgWindow>()
                                 .Where(item => SelectedPcgFileName == item.PcgMemory.FileName))
                     {

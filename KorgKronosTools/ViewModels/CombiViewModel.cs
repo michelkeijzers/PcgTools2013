@@ -93,9 +93,9 @@ namespace PcgTools.ViewModels
         /// </summary>
         void MoveUp()
         {
-            foreach (var timbre in Combi.Timbres.TimbresCollection.Where(item => item.IsSelected))
+            foreach (ITimbre timbre in Combi.Timbres.TimbresCollection.Where(item => item.IsSelected))
             {
-                var otherTimbre = ((ICombi)(timbre.Parent.Parent)).Timbres.TimbresCollection[timbre.Index - 1];
+                ITimbre otherTimbre = ((ICombi)(timbre.Parent.Parent)).Timbres.TimbresCollection[timbre.Index - 1];
                 timbre.Swap(otherTimbre);
 
                 timbre.IsSelected = false;
@@ -144,12 +144,12 @@ namespace PcgTools.ViewModels
         /// </summary>
         void MoveDown()
         {
-            for (var timbreIndex = Combi.Timbres.TimbresCollection.Count - 1; timbreIndex >= 0; timbreIndex--)
+            for (int timbreIndex = Combi.Timbres.TimbresCollection.Count - 1; timbreIndex >= 0; timbreIndex--)
             {
-                var timbre = Combi.Timbres.TimbresCollection[timbreIndex];
+                ITimbre timbre = Combi.Timbres.TimbresCollection[timbreIndex];
                 if (Combi.Timbres.TimbresCollection.Where(item => item.IsSelected).Contains(timbre))
                 {
-                    var otherTimbre = ((ICombi)(timbre.Parent.Parent)).Timbres.TimbresCollection[timbre.Index + 1];
+                    ITimbre otherTimbre = ((ICombi)(timbre.Parent.Parent)).Timbres.TimbresCollection[timbre.Index + 1];
                     otherTimbre.IsSelected = true;
                     timbre.IsSelected = false;
 
@@ -196,7 +196,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         void Clear()
         {
-            foreach (var timbre in Combi.Timbres.TimbresCollection.Where(item => item.IsSelected))
+            foreach (ITimbre timbre in Combi.Timbres.TimbresCollection.Where(item => item.IsSelected))
             {
                 timbre.Clear();
             }
@@ -288,8 +288,8 @@ namespace PcgTools.ViewModels
         /// </summary>
         void ReassignClearProgram()
         {
-            var root = Combi.PcgRoot;
-            var assignedClearProgram = root.AssignedClearProgram ?? root.ProgramBanks[0][0];
+            Model.Common.Synth.MemoryAndFactory.IPcgMemory root = Combi.PcgRoot;
+            Model.Common.Synth.Meta.IPatch assignedClearProgram = root.AssignedClearProgram ?? root.ProgramBanks[0][0];
             AssignedClearProgram = $"{assignedClearProgram.Id} {assignedClearProgram.Name}";
         }
 

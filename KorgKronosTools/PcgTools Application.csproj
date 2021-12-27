@@ -1474,6 +1474,7 @@
     <Resource Include="Help\External Links\DanStesco.png" />
     <Resource Include="Help\External Links\Synthesaurus.png" />
     <Resource Include="Help\External Links\Audora.png" />
+    <Resource Include="Help\External Links\narfsounds.png" />
     <Content Include="Paper.dll" />
     <Resource Include="Gui\Tool Bar Icons\cut.png" />
     <Resource Include="Help\External Links\Kronoscopie.jpg" />

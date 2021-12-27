@@ -76,10 +76,10 @@ namespace Common.Mvvm.ViewModel
         {
             VerifyPropertyName(propertyName);
 
-            var handler = PropertyChanged;
+            PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
             {
-                var e = new PropertyChangedEventArgs(propertyName);
+                PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
                 handler(this, e);
             }
         }

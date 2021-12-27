@@ -28,7 +28,7 @@ namespace PCG_Tools_Unittests
         [TestInitialize]
         public void SetDefaults()
         {
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory) korgFileReader.Read(PcgFileName);
 
             _generator = new ListGeneratorPatchList
@@ -65,12 +65,12 @@ namespace PCG_Tools_Unittests
 
             if (_pcgMemory != null)
             {
-                foreach (var item in _pcgMemory.ProgramBanks.BankCollection)
+                foreach (IBank item in _pcgMemory.ProgramBanks.BankCollection)
                 {
                     _generator.SelectedProgramBanks.Add((IProgramBank) item);
                 }
 
-                foreach (var item in _pcgMemory.CombiBanks.BankCollection)
+                foreach (IBank item in _pcgMemory.CombiBanks.BankCollection)
                 {
                     _generator.SelectedCombiBanks.Add((ICombiBank) item);
                 }
@@ -159,7 +159,7 @@ namespace PCG_Tools_Unittests
             _generator.FilterText = "Synth";
             Run();
 
-            var lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
+            string[] lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
             Assert.AreEqual(58, lines.Length);
         }
 
@@ -173,7 +173,7 @@ namespace PCG_Tools_Unittests
             _generator.FilterCaseSensitive = true;
             Run();
 
-            var lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
+            string[] lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
             Assert.AreEqual(56, lines.Length);
         }
 
@@ -187,7 +187,7 @@ namespace PCG_Tools_Unittests
             _generator.FilterSetListSlotDescription = false;
             Run();
 
-            var lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
+            string[] lines = File.ReadAllLines($"{Path.GetFileNameWithoutExtension(_pcgMemory.FileName)}_output.txt");
             Assert.AreEqual(54, lines.Length);
         }
 
@@ -196,7 +196,7 @@ namespace PCG_Tools_Unittests
         public void TestSelectedProgramBanks()
         {
             // Set non defaults and run.
-            var selection = new ObservableBankCollection<IProgramBank>
+            ObservableBankCollection<IProgramBank> selection = new ObservableBankCollection<IProgramBank>
             {
                 (IProgramBank)_pcgMemory.ProgramBanks[0], 
                 (IProgramBank)_pcgMemory.ProgramBanks[1]
@@ -230,7 +230,7 @@ namespace PCG_Tools_Unittests
         public void TestSelectedCombiBanks()
         {
             // Set non defaults and run.
-            var selection = new ObservableBankCollection<ICombiBank>
+            ObservableBankCollection<ICombiBank> selection = new ObservableBankCollection<ICombiBank>
             {
                 (ICombiBank)_pcgMemory.CombiBanks[0], 
                 (ICombiBank)_pcgMemory.CombiBanks[1]

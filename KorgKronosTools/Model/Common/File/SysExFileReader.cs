@@ -88,12 +88,12 @@ namespace PcgTools.Model.Common.File
                 (ContentType == PcgMemory.ContentType.AllCombis))
             {
                 // Read combi data.
-                var combiBank = (CombiBank) CurrentPcgMemory.CombiBanks[0];
+                CombiBank combiBank = (CombiBank) CurrentPcgMemory.CombiBanks[0];
 
-                for (var bankIndex = startCombiBank; bankIndex < CurrentPcgMemory.CombiBanks.BankCollection.Count; 
+                for (int bankIndex = startCombiBank; bankIndex < CurrentPcgMemory.CombiBanks.BankCollection.Count; 
                     bankIndex++)
                 {
-                    var bank = (ICombiBank) (CurrentPcgMemory.CombiBanks[bankIndex]);
+                    ICombiBank bank = (ICombiBank) (CurrentPcgMemory.CombiBanks[bankIndex]);
                     if (bank.Type != BankType.EType.Virtual)
                     {
                         bank.ByteOffset = Index;
@@ -129,7 +129,7 @@ namespace PcgTools.Model.Common.File
                 (ContentType == PcgMemory.ContentType.AllPrograms))
             {
                 // Read program data.
-                for (var bankIndex = startProgramBank;
+                for (int bankIndex = startProgramBank;
                     bankIndex < CurrentPcgMemory.ProgramBanks.BankCollection.Count;
                     bankIndex++)
                 {
@@ -146,7 +146,7 @@ namespace PcgTools.Model.Common.File
         /// <param name="bankIndex"></param>
         private void ReadProgram(int programPatchSize, int bankIndex)
         {
-            var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
+            IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
             if ((bank.Type != BankType.EType.Virtual) && (bank.Type != BankType.EType.Gm))
             {
                 bank.ByteOffset = Index;
@@ -154,7 +154,7 @@ namespace PcgTools.Model.Common.File
                 bank.IsWritable = true;
                 bank.IsLoaded = true;
 
-                foreach (var program in bank.Patches)
+                foreach (IPatch program in bank.Patches)
                 {
                     program.ByteOffset = Index;
                     Debug.Assert(program.ByteOffset > 0);

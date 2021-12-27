@@ -26,7 +26,7 @@ namespace PCG_Tools_Unittests
 
         private void SetUp()
         {
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgOs2 = (PcgMemory) korgFileReader.Read(PcgDirectory + @"\Kronos\all.PCG");
             _pcgOs3 = (PcgMemory) korgFileReader.Read(PcgDirectory + @"\Kronos2\PRELOAD_V3_2016-10-01-20-23-33.PCG");
 
@@ -55,20 +55,20 @@ namespace PCG_Tools_Unittests
         {
             SetUp();
 
-            var program2 = ((ProgramBank) _pcgOs2.ProgramBanks[0])[0];
-            var commands2 = new CopyPasteCommands();
-            var banks = new ObservableCollectionEx<IBank>();
-            var patches = new ObservableCollectionEx<IPatch> {program2};
+            IPatch program2 = ((ProgramBank) _pcgOs2.ProgramBanks[0])[0];
+            CopyPasteCommands commands2 = new CopyPasteCommands();
+            ObservableCollectionEx<IBank> banks = new ObservableCollectionEx<IBank>();
+            ObservableCollectionEx<IPatch> patches = new ObservableCollectionEx<IPatch> {program2};
 
-            var clipBoard = new PcgClipBoard();
+            PcgClipBoard clipBoard = new PcgClipBoard();
             program2.IsSelected = true;
             commands2.CopyPasteCopy(clipBoard, _pcgOs2, PcgViewModel.ScopeSet.Patches, true, 
                 false, false, false, false, false, false,
                 null, patches, false);
 
-            var commands3 = new CopyPasteCommands();
-            var program3 = _pcgOs3.ProgramBanks[0][0];
-            var patches3 = new ObservableCollectionEx<IPatch>() { program3 };
+            CopyPasteCommands commands3 = new CopyPasteCommands();
+            IPatch program3 = _pcgOs3.ProgramBanks[0][0];
+            ObservableCollectionEx<IPatch> patches3 = new ObservableCollectionEx<IPatch>() { program3 };
             banks.Add(program3.Parent as IBank);
 
             program3.Clear();

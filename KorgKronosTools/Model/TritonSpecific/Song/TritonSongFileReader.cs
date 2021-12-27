@@ -28,11 +28,11 @@ namespace PcgTools.Model.TritonSpecific.Song
         /// </summary>
         public override void ReadChunks()
         {
-            var end = Util.GetInt(SongMemory.Content, 0x414, 4);
+            int end = Util.GetInt(SongMemory.Content, 0x414, 4);
 
             const int songNameLength = 16;
-            var songIndex = 0;
-            for (var index = 0x428; index <= end; index += songNameLength)
+            int songIndex = 0;
+            for (int index = 0x428; index <= end; index += songNameLength)
             {
                 SongMemory.Songs.SongCollection.Add(
                     new Common.Synth.SongsRelated.Song(

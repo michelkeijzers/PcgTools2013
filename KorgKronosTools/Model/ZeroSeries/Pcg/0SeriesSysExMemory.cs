@@ -109,7 +109,7 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         private void DuplicatePatchNames(int source, int destination, bool copyPrograms)
         {
             // 100 = patches in a bank
-            for (var patchIndex = 0; patchIndex < 100; patchIndex++)
+            for (int patchIndex = 0; patchIndex < 100; patchIndex++)
             {
                 // 172 and 128 are program/combi patch size.
                 Util.CopyBytes(this, source + patchIndex*(copyPrograms ? 172 : 128), destination + patchIndex*10, 10);

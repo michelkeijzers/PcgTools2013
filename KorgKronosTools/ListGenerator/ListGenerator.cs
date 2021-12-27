@@ -411,9 +411,9 @@ namespace PcgTools.ListGenerator
         {
             if (FilterProgramBankNames != null)
             {
-                for (var index = SelectedProgramBanks.Count - 1; index >= 0; index--)
+                for (int index = SelectedProgramBanks.Count - 1; index >= 0; index--)
                 {
-                    var bank = SelectedProgramBanks[index];
+                    IProgramBank bank = SelectedProgramBanks[index];
 
                     if (!FilterProgramBankNames.Contains(bank.Id))
                     {
@@ -424,9 +424,9 @@ namespace PcgTools.ListGenerator
 
             if (FilterCombiBankNames != null)
             {
-                for (var index = SelectedCombiBanks.Count - 1; index >= 0; index--)
+                for (int index = SelectedCombiBanks.Count - 1; index >= 0; index--)
                 {
-                    var bank = SelectedCombiBanks[index];
+                    ICombiBank bank = SelectedCombiBanks[index];
                     if (!FilterCombiBankNames.Contains(bank.Id))
                     {
                         SelectedCombiBanks.Remove(bank);

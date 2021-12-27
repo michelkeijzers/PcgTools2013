@@ -12,6 +12,8 @@ namespace PcgTools.Gui
         public Logos()
         {
             // In same order as docs google page.
+            Add(new Logo("narfsounds", "narfsounds.png", "http://www.narfsounds.com", 10000));
+
             Add(new Logo("Steve Baker", string.Empty, string.Empty, 375));
             Add(new Logo("Adrian", "imprezariat.png", "http://www.imprezariat.pl", 500));
             Add(new Logo("Yuma", string.Empty, string.Empty, 1000));
@@ -62,16 +64,16 @@ namespace PcgTools.Gui
         /// <returns></returns>
         public Logo GetRandomLogo()
         {
-            var randomValue = new Random().Next(this.Sum(logo => logo.DonatedMoney));
+            int randomValue = new Random().Next(this.Sum(logo => logo.DonatedMoney));
             Thread.Sleep(10); // For the next random value (wait 10 ms, 100 ms is enough, 10 needs to be tested if needed)
 
             // Iterate through logos until found.
-            var logoIndex = -1;
-            var visitedValue = 0;
+            int logoIndex = -1;
+            int visitedValue = 0;
 
             while (true)
             {
-                var logo = this[++logoIndex];
+                Logo logo = this[++logoIndex];
                 if (visitedValue + logo.DonatedMoney > randomValue)
                 {
                     break;

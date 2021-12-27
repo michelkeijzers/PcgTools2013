@@ -33,8 +33,8 @@ namespace PcgTools.Common
         /// <returns></returns>
         public static string GetDescription(this Enum value)
         {
-            var fieldInfo = value.GetType().GetField(value.GetName());
-            var descriptionAttribute = fieldInfo.GetCustomAttributes(
+            System.Reflection.FieldInfo fieldInfo = value.GetType().GetField(value.GetName());
+            DescriptionAttribute descriptionAttribute = fieldInfo.GetCustomAttributes(
                 typeof (DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
             return descriptionAttribute == null
                 ? value.GetName()

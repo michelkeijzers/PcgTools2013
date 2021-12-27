@@ -61,17 +61,17 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
 
             // Take CBK2 differences into account.
             if (((KronosCombiBank)(Parent)).Cbk2PcgOffset != 0)
             {
-                for (var parameterIndex = 0; parameterIndex < KronosCombiBanks.ParametersInCbk2Chunk; parameterIndex++)
+                for (int parameterIndex = 0; parameterIndex < KronosCombiBanks.ParametersInCbk2Chunk; parameterIndex++)
                 {
-                    for (var timbre = 0; timbre < Timbres.TimbresCollection.Count; timbre++)
+                    for (int timbre = 0; timbre < Timbres.TimbresCollection.Count; timbre++)
                     {
-                        var patchIndex = ((KronosCombiBank) Parent).GetParameterOffsetInCbk2(Index, timbre, parameterIndex);
-                        var otherPatchIndex = ((KronosCombiBank) otherPatch.Parent).GetParameterOffsetInCbk2(Index, timbre, parameterIndex);
+                        int patchIndex = ((KronosCombiBank) Parent).GetParameterOffsetInCbk2(Index, timbre, parameterIndex);
+                        int otherPatchIndex = ((KronosCombiBank) otherPatch.Parent).GetParameterOffsetInCbk2(Index, timbre, parameterIndex);
 
                         diffs += (Util.GetInt(PcgRoot.Content, patchIndex, 1) != Util.GetInt(
                             otherPatch.PcgRoot.Content, otherPatchIndex, 1)) ? 1 : 0;
@@ -91,19 +91,19 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IClipBoardPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var otherCombi = otherPatch as ClipBoardCombi;
+            ClipBoardCombi otherCombi = otherPatch as ClipBoardCombi;
             Debug.Assert(otherCombi != null);
 
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
 
             // Take CBK2 differences into account.
             if (((KronosCombiBank)(Parent)).Cbk2PcgOffset != 0)
             {
-                for (var parameterIndex = 0; parameterIndex < KronosCombiBanks.ParametersInCbk2Chunk; parameterIndex++)
+                for (int parameterIndex = 0; parameterIndex < KronosCombiBanks.ParametersInCbk2Chunk; parameterIndex++)
                 {
-                    for (var timbre = 0; timbre < Timbres.TimbresCollection.Count; timbre++)
+                    for (int timbre = 0; timbre < Timbres.TimbresCollection.Count; timbre++)
                     {
-                        var patchIndex = ((KronosCombiBank)Parent).GetParameterOffsetInCbk2(Index, timbre, parameterIndex);
+                        int patchIndex = ((KronosCombiBank)Parent).GetParameterOffsetInCbk2(Index, timbre, parameterIndex);
                         diffs += (Util.GetInt(PcgRoot.Content, patchIndex, 1) != otherCombi.KronosOs1516Content[parameterIndex]) ? 1 : 0;
                     }
                 }

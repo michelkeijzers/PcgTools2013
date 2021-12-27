@@ -28,7 +28,7 @@ namespace PcgTools.Model.XSeries.Synth
         protected override void CreateBanks()
         {
             //                          0 
-            foreach (var id in new[] { "C" })
+            foreach (string id in new[] { "C" })
             {
                 Add(new XSeriesCombiBank(this, BankType.EType.Int, id, -1));
             }

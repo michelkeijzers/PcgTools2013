@@ -51,12 +51,12 @@ namespace PcgTools.Model.Common
             Debug.Assert(start >= 4); // Do not overwrite KORG header.
             Debug.Assert(text.Length <= maxLength);
 
-            var dirty = false;
+            bool dirty = false;
 
             int index;
             for (index = 0; index < text.Length; index++)
             {
-                var orgData = data[start + index];
+                byte orgData = data[start + index];
                 data[start + index] = (byte) (text[index]);
                 //Console.WriteLine(String.Format("SetChars: Write {0} to {1} ", (byte) (text[index]), start + index));
                 dirty |= (orgData != data[start + index]);
@@ -78,8 +78,8 @@ namespace PcgTools.Model.Common
         {
             Debug.Assert(data != null);
 
-            var output = 0;
-            for (var index = 0; index < amount; index++)
+            int output = 0;
+            for (int index = 0; index < amount; index++)
             {
                 output += data[start + index]*(int) (Math.Pow(256, (amount - index - 1)));
             }
@@ -103,7 +103,7 @@ namespace PcgTools.Model.Common
             Debug.Assert(pcgMemory != null);
             Debug.Assert(data != null);
 
-            var dirty = false;
+            bool dirty = false;
 
             switch (amount)
             {
@@ -154,16 +154,16 @@ namespace PcgTools.Model.Common
             Debug.Assert(pcgMemory != null);
             Debug.Assert(sourceData != null);
 
-            var dirty = false;
+            bool dirty = false;
 
-            for (var index = 0; index < amount; index++)
+            for (int index = 0; index < amount; index++)
             {
                 dirty |= (sourceData[sourceOffset + index] != destinationData[destinationOffset + index]);
 
                 Debug.Assert(destinationOffset + index >= 4); // Korg header
                 Debug.Assert(sourceOffset + index >= 4); // Korg header
 
-                var temp = destinationData[destinationOffset + index];
+                byte temp = destinationData[destinationOffset + index];
                 //Console.WriteLine(String.Format("SwapBytes: Write {0} to {1}", sourceData[sourceOffset + index], destinationOffset + index));
                 destinationData[destinationOffset + index] = sourceData[sourceOffset + index];
                 //Console.WriteLine(String.Format("SwapBytes: Write {0} to {1}", temp, sourceOffset + index));
@@ -179,7 +179,7 @@ namespace PcgTools.Model.Common
             Debug.Assert(data1 != null);
             Debug.Assert(data2 != null);
 
-            for (var index = 0; index < length; index++)
+            for (int index = 0; index < length; index++)
             {
                 if (data1[index + data1Offset] != data2[index])
                 {
@@ -203,10 +203,10 @@ namespace PcgTools.Model.Common
         {
             Debug.Assert(pcgMemory != null);
 
-            var dirty = false;
+            bool dirty = false;
 
             Debug.Assert(offset >= 4); // Korg header
-            for (var index = 0; index < size; index++)
+            for (int index = 0; index < size; index++)
             {
                 dirty |= (source[index] != (destination[offset + index]));
                 //Console.WriteLine(String.Format("CopyBytes: Write {0} to {1}", source[index], offset + index));
@@ -229,10 +229,10 @@ namespace PcgTools.Model.Common
         {
             Debug.Assert(pcgMemory != null);
 
-            var dirty = false;
+            bool dirty = false;
 
             Debug.Assert(destinationOffset >= 4); // Korg header
-            for (var index = 0; index < size; index++)
+            for (int index = 0; index < size; index++)
             {
                 dirty |= (destination[sourceOffset + index] != (destination[destinationOffset + index]));
                 //Console.WriteLine(String.Format("CopyBytes: Write {0} to {1}", source[index], offset + index));
@@ -253,15 +253,15 @@ namespace PcgTools.Model.Common
         public static void CopyBytes(PcgMemory pcgMemory, int from, int to, int size)
         {
             Debug.Assert(pcgMemory != null);
-            
-            var content = pcgMemory.Content;
+
+            byte[] content = pcgMemory.Content;
 
             Debug.Assert(from + size < content.Length);
             Debug.Assert(to + size <content.Length);
 
-            var dirty = false;
+            bool dirty = false;
 
-            for (var index = 0; index < size; index++)
+            for (int index = 0; index < size; index++)
             {
                 dirty |= (content[from + index] != (content[to + index]));
                 content[to + index] = content[from + index];
@@ -278,27 +278,27 @@ namespace PcgTools.Model.Common
 // ReSharper restore UnusedMember.Global
         {
             if (bytes == null) return "<null>";
-            var bytesLength = bytes.Length;
+            int bytesLength = bytes.Length;
 
-            var hexChars = "0123456789ABCDEF".ToCharArray();
+            char[] hexChars = "0123456789ABCDEF".ToCharArray();
 
             const int firstHexColumn = 8 // 8 characters for the address
                                        + 3; // 3 spaces
 
-            var firstCharColumn = firstHexColumn
+            int firstCharColumn = firstHexColumn
                                   + bytesPerLine*3 // - 2 digit for the hexadecimal value and 1 space
                                   + (bytesPerLine - 1)/8 // - 1 extra space every 8 characters from the 9th
                                   + 2; // 2 spaces 
 
-            var lineLength = firstCharColumn
+            int lineLength = firstCharColumn
                              + bytesPerLine // - characters to show the ascii value
                              + Environment.NewLine.Length; // Carriage return and line feed (should normally be 2)
 
             char[] line = (new string(' ', lineLength - 2) + Environment.NewLine).ToCharArray();
             int expectedLines = (bytesLength + bytesPerLine - 1)/bytesPerLine;
-            var result = new StringBuilder(expectedLines*lineLength);
+            StringBuilder result = new StringBuilder(expectedLines*lineLength);
 
-            for (var i = 0; i < bytesLength; i += bytesPerLine)
+            for (int i = 0; i < bytesLength; i += bytesPerLine)
             {
                 line[0] = hexChars[(i >> 28) & 0xF];
                 line[1] = hexChars[(i >> 24) & 0xF];
@@ -309,8 +309,8 @@ namespace PcgTools.Model.Common
                 line[6] = hexChars[(i >> 4) & 0xF];
                 line[7] = hexChars[(i >> 0) & 0xF];
 
-                var hexColumn = firstHexColumn;
-                var charColumn = firstCharColumn;
+                int hexColumn = firstHexColumn;
+                int charColumn = firstCharColumn;
 
                 for (int j = 0; j < bytesPerLine; j++)
                 {
@@ -343,18 +343,18 @@ namespace PcgTools.Model.Common
             // Recommendation: For the shortest possible string, 
             // within each Bank, the patchList needs to be ordered by Patch index.
 
-            var builder = new StringBuilder();
-            var listIndex = 0;
-            var listLength = patchList.Count;
-            var firstPrint = true;
-            var lastPrint = false;
-            var needToPrint = false;
-            var prevPatchIndex = -2;
+            StringBuilder builder = new StringBuilder();
+            int listIndex = 0;
+            int listLength = patchList.Count;
+            bool firstPrint = true;
+            bool lastPrint = false;
+            bool needToPrint = false;
+            int prevPatchIndex = -2;
             IBank prevPatchBank = null;
             IPatch rangePatchStart = null;
             IPatch rangePatchEnd = null;
 
-            foreach (var patch in patchList)
+            foreach (IPatch patch in patchList)
             {
                 if (listIndex == 0) // First patch? Initialize a range.
                 {

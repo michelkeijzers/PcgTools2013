@@ -83,10 +83,10 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         {
             get
             {
-                var param = GetParam(ParameterNames.ProgramParameterName.OscMode).Value;
+                dynamic param = GetParam(ParameterNames.ProgramParameterName.OscMode).Value;
 
                 // Only the first MS is used.
-                var usedDrumKits = new List<IDrumKit>();
+                List<IDrumKit> usedDrumKits = new List<IDrumKit>();
                 if ((param == "Drums") || (param == "Double Drums"))
                 {
                     usedDrumKits.Add(GetUsedDrumKit(0, 0));
@@ -110,7 +110,7 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <returns></returns>
         protected IDrumKit GetUsedDrumKit(int osc, int zone)
         {
-            var parameter = new IntParameter();
+            IntParameter parameter = new IntParameter();
             parameter.SetMultiBytes(Root, Root.Content, GetZoneMsByteOffset(osc, zone) + 2, 2, // + 2: Number (bank unused, always 0?)
                 false, false, null);
             int index = parameter.Value;
@@ -134,11 +134,11 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <returns></returns>
         private void SetUsedDrumKit(int osc, int zone, IDrumKit drumKit)
         {
-            var parameter = new IntParameter();
+            IntParameter parameter = new IntParameter();
             parameter.SetMultiBytes(Root, Root.Content, GetZoneMsByteOffset(osc, zone) + 2, 2, // + 2: Number (bank unused, alwyas 0?)
                 false, false, null);
 
-            var index = PcgRoot.DrumKitBanks.FindIndexOf(drumKit);
+            int index = PcgRoot.DrumKitBanks.FindIndexOf(drumKit);
             if (index >= 0)
             {
                 parameter.Value = index;
@@ -152,14 +152,14 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
         /// <param name="changes"></param>
         public override void ReplaceDrumKit(Dictionary<IDrumKit, IDrumKit> changes)
         {
-            var param = GetParam(ParameterNames.ProgramParameterName.OscMode).Value;
+            dynamic param = GetParam(ParameterNames.ProgramParameterName.OscMode).Value;
 
             // Only the first MS is used.
             if ((param == "Drums") || (param == "Double Drums"))
             {
-                var usedDrumKit = GetUsedDrumKit(0, 0);
+                IDrumKit usedDrumKit = GetUsedDrumKit(0, 0);
 
-                foreach (var drumKit in changes.Keys.Where(drumKit => drumKit.Id == usedDrumKit.Id))
+                foreach (IDrumKit drumKit in changes.Keys.Where(drumKit => drumKit.Id == usedDrumKit.Id))
                 {
                     SetUsedDrumKit(0, 0, changes[drumKit]);
                 }
@@ -167,8 +167,8 @@ namespace PcgTools.Model.KronosOasysSpecific.Synth
 
             if (param == "Double Drums")
             {
-                var usedDrumKit = GetUsedDrumKit(1, 0);
-                foreach (var drumKit in changes.Keys.Where(drumKit => drumKit.Id == usedDrumKit.Id))
+                IDrumKit usedDrumKit = GetUsedDrumKit(1, 0);
+                foreach (IDrumKit drumKit in changes.Keys.Where(drumKit => drumKit.Id == usedDrumKit.Id))
                 {
                     SetUsedDrumKit(1, 0, changes[drumKit]);
                 }

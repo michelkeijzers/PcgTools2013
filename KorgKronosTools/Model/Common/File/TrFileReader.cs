@@ -70,9 +70,9 @@ namespace PcgTools.Model.Common.File
                 (ContentType == PcgMemory.ContentType.AllCombis))
             {
                 // Read combi data.
-                var combiBank = (CombiBank) CurrentPcgMemory.CombiBanks[0];
+                CombiBank combiBank = (CombiBank) CurrentPcgMemory.CombiBanks[0];
 
-                for (var bankIndex = startCombiBank; bankIndex < CurrentPcgMemory.CombiBanks.BankCollection.Count; bankIndex++)
+                for (int bankIndex = startCombiBank; bankIndex < CurrentPcgMemory.CombiBanks.BankCollection.Count; bankIndex++)
                 {
                     ReadCombiBank(combiPatchSize, bankIndex, combiBank);
 
@@ -90,7 +90,7 @@ namespace PcgTools.Model.Common.File
         /// <param name="combiBank"></param>
         private void ReadCombiBank(int combiPatchSize, int bankIndex, CombiBank combiBank)
         {
-            var bank = (CombiBank) (CurrentPcgMemory.CombiBanks[bankIndex]);
+            CombiBank bank = (CombiBank) (CurrentPcgMemory.CombiBanks[bankIndex]);
             if (bank.Type != BankType.EType.Virtual)
             {
                 bank.ByteOffset = Index;
@@ -133,7 +133,7 @@ namespace PcgTools.Model.Common.File
                 (ContentType == PcgMemory.ContentType.AllPrograms))
             {
                 // Read program data.
-                for (var bankIndex = startProgramBank;
+                for (int bankIndex = startProgramBank;
                     bankIndex < CurrentPcgMemory.ProgramBanks.BankCollection.Count;
                     bankIndex++)
                 {
@@ -150,7 +150,7 @@ namespace PcgTools.Model.Common.File
         /// <param name="bankIndex"></param>
         private void ReadProgramBank(int programPatchSize, int bankIndex)
         {
-            var bank = (ProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
+            ProgramBank bank = (ProgramBank) (CurrentPcgMemory.ProgramBanks[bankIndex]);
             if ((bank.Type != BankType.EType.Virtual) && (bank.Type != BankType.EType.Gm))
             {
                 bank.ByteOffset = Index;
@@ -169,7 +169,7 @@ namespace PcgTools.Model.Common.File
         /// <param name="bank"></param>
         private void ReadProgram(IProgramBank bank)
         {
-            foreach (var program in bank.Patches)
+            foreach (IPatch program in bank.Patches)
             {
                 program.ByteOffset = Index;
                 program.ByteLength = bank.ByteLength;

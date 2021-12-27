@@ -58,7 +58,7 @@ namespace PcgTools.Model.TrinitySpecific.Synth
 
             if ((pcgId == 4) || (pcgId == 5))
             {
-                var programBank = BankCollection[4];
+                IBank programBank = BankCollection[4];
                 if (programBank.IsLoaded)
                 {
                     // S bank exists; return this bank;
@@ -75,7 +75,7 @@ namespace PcgTools.Model.TrinitySpecific.Synth
 
             if (bank == null)
             {
-                foreach (var currentBank in BankCollection.Where(bankLambda => bankLambda.PcgId == pcgId))
+                foreach (IBank currentBank in BankCollection.Where(bankLambda => bankLambda.PcgId == pcgId))
                 {
                     bank = currentBank;
                     break;

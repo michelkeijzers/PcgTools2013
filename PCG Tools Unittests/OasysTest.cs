@@ -37,7 +37,7 @@ namespace PCG_Tools_Unittests
             _generator.FilterSetListSlotDescription = true;
             _generator.SelectedProgramBanks = new ObservableBankCollection<IProgramBank>();
             
-            foreach (var item in _pcgMemory.ProgramBanks.BankCollection)
+            foreach (IBank item in _pcgMemory.ProgramBanks.BankCollection)
             {
                 _generator.SelectedProgramBanks.Add((IProgramBank) item);
             }
@@ -46,7 +46,7 @@ namespace PCG_Tools_Unittests
 
             _generator.SelectedCombiBanks = new ObservableBankCollection<ICombiBank>();
 
-            foreach (var item in _pcgMemory.CombiBanks.BankCollection)
+            foreach (IBank item in _pcgMemory.CombiBanks.BankCollection)
             {
                 _generator.SelectedCombiBanks.Add((ICombiBank) item);
             }
@@ -98,7 +98,7 @@ namespace PCG_Tools_Unittests
         public void TestDefaultPatchList()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory) korgFileReader.Read(PcgDirectory + @"\OasysPRELOAD.PCG");
             
             _generator = new ListGeneratorPatchList();
@@ -114,7 +114,7 @@ namespace PCG_Tools_Unittests
         public void TestDefaultProgramUsageList()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\OasysPRELOAD.PCG");
 
             _generator = new ListGeneratorProgramUsageList();
@@ -130,7 +130,7 @@ namespace PCG_Tools_Unittests
         public void Test01WPack()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\01WPACK.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -152,7 +152,7 @@ namespace PCG_Tools_Unittests
         public void TestKnCp80()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\..\Kronos\\KN_CP80.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -174,7 +174,7 @@ namespace PCG_Tools_Unittests
         public void TestKnal1_3()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory +  @"\..\Kronos\\KNAL1_3.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -196,7 +196,7 @@ namespace PCG_Tools_Unittests
         public void TestKNMod7()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\..\Kronos\\KNAL1_3.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -218,7 +218,7 @@ namespace PCG_Tools_Unittests
         public void TestUg0106_1()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\..\Kronos\\UG0106_1.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -240,7 +240,7 @@ namespace PCG_Tools_Unittests
         public void TestAkSons()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\AK_SONS.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -262,7 +262,7 @@ namespace PCG_Tools_Unittests
         public void TestAkSonsProgramUsageList()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\AK_SONS.PCG");
 
             _generator = new ListGeneratorProgramUsageList();
@@ -284,7 +284,7 @@ namespace PCG_Tools_Unittests
         public void TestEnigma()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\ENIGMA.PCG");
 
             _generator = new ListGeneratorPatchList();
@@ -306,7 +306,7 @@ namespace PCG_Tools_Unittests
         public void TestGroove01()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\GROOVE01.pcg");
 
             _generator = new ListGeneratorPatchList();
@@ -328,7 +328,7 @@ namespace PCG_Tools_Unittests
         public void TestGroove02()
         {
             // Run.
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory)korgFileReader.Read(PcgDirectory + @"\GROOVE02.pcg");
 
             _generator = new ListGeneratorPatchList();

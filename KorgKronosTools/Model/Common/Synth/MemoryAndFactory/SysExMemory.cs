@@ -71,7 +71,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             _convertedFrom7To8Bits = true;
 
-            var newContent = new LinkedList<byte>();
+            LinkedList<byte> newContent = new LinkedList<byte>();
 
             // Copy header as normal.
             int index;
@@ -102,7 +102,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <param name="newContent"></param>
         private void ConvertMain(LinkedList<byte> newContent)
         {
-            var convert = true;
+            bool convert = true;
             int index = SysExStartOffset + ModeChangesOffset;
             _targetConvertedBytes = 0;
 
@@ -122,7 +122,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <returns></returns>
         private int ConvertMainPart(LinkedList<byte> newContent, int index, ref bool convert)
         {
-            var models = new List<Models.EModelType>
+            List<Models.EModelType> models = new List<Models.EModelType>
             {
                 Models.EModelType.M1,
                 Models.EModelType.M3R,
@@ -157,7 +157,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
             int offset;
             for (offset = 1; offset < Math.Min(8, SysExEndOffset - index); offset++)
             {
-                var bit7Set = ((byte) (Content[index] & (0x01 << (offset - 1))) != 0);
+                bool bit7Set = ((byte) (Content[index] & (0x01 << (offset - 1))) != 0);
 
                 newContent.AddLast((byte) ((bit7Set ? 0x80 : 0) + Content[index + offset]));
                 _targetConvertedBytes++;
@@ -176,7 +176,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// </summary>
         void Convert8To7Bits()
         {
-            var newContent = new List<byte>();
+            List<byte> newContent = new List<byte>();
 
             // Copy header as normal.
             int index;
@@ -187,8 +187,8 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
 
             // Convert sysex data from 8 to 7 bits.
             index = SysExStartOffset;
-            var msbBitsIndex = 0;
-            var convertedBytes = 0;
+            int msbBitsIndex = 0;
+            int convertedBytes = 0;
 
             while (convertedBytes < _targetConvertedBytes)
             {
@@ -200,7 +200,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
                 }
 
                 // Convert byte.
-                var value = Content[index];
+                byte value = Content[index];
                 
                 newContent.Add((byte) (value & 0x7F));
                 
@@ -233,7 +233,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         {
             if (_convertedFrom7To8Bits)
             {
-                var originalContent = (byte[]) Content.Clone();
+                byte[] originalContent = (byte[]) Content.Clone();
                 Convert8To7Bits();
                 base.SaveFile(saveAs, saveToFile);
                 Content = originalContent;

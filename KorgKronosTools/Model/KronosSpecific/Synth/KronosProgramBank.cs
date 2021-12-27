@@ -69,7 +69,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             Debug.Assert((parameterIndex >= 0) && (parameterIndex < KronosProgramBanks.ParametersInPbk2Chunk));
             Debug.Assert((programIndex >= 0) && (programIndex <= CountPatches));
 
-            var offset = Pbk2PcgOffset;
+            int offset = Pbk2PcgOffset;
             if (parameterIndex < 32)
             {
                  offset += 32 * programIndex + parameterIndex;

@@ -124,7 +124,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
             return diffs;
         }
 
@@ -138,10 +138,10 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IClipBoardPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var otherProgram = otherPatch as ClipBoardProgram;
+            ClipBoardProgram otherProgram = otherPatch as ClipBoardProgram;
             Debug.Assert(otherProgram != null);
 
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
             return diffs;
         }
 
@@ -155,10 +155,10 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <returns></returns>
         private EMode GetZoneMsType(int osc, int zone)
         {
-            var offset = ByteOffset + 2774 + osc * (3240 - 2774) +
+            int offset = ByteOffset + 2774 + osc * (3240 - 2774) +
                          zone * (2796 - 2774);
 
-            var parameter = new IntParameter();
+            IntParameter parameter = new IntParameter();
             parameter.Set(Root, Root.Content, offset, 1, 0, false, null);
             int value = parameter.Value;
             EMode mode;
@@ -210,8 +210,8 @@ namespace PcgTools.Model.NautilusSpecific.Synth
             IWaveSequence waveSequence = null;
             if (GetZoneMsType(osc, zone) == EMode.WaveSequence)
             {
-                var parameter = new IntParameter();
-                var waveSequenceByteOffset = GetZoneMsByteOffset(osc, zone);
+                IntParameter parameter = new IntParameter();
+                int waveSequenceByteOffset = GetZoneMsByteOffset(osc, zone);
                 int bankIndex;
                 int patchIndex;
 
@@ -252,9 +252,9 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <returns></returns>
         int GetWaveSequenceIndex(IWaveSequence waveSequence)
         {
-            var bank = (IWaveSequenceBank)waveSequence.Parent;
+            IWaveSequenceBank bank = (IWaveSequenceBank)waveSequence.Parent;
 
-            var index = PcgRoot.WaveSequenceBanks.BankCollection.TakeWhile(
+            int index = PcgRoot.WaveSequenceBanks.BankCollection.TakeWhile(
                 bankIterator => bank != bankIterator).Sum(bankIterator => bankIterator.Patches.Count);
 
             index += waveSequence.Index;
@@ -287,7 +287,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         {
             get
             {
-                var param = "Drums";
+                string param = "Drums";
 
                 try
                 {
@@ -299,7 +299,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
                 }
 
                 // Only the first MS is used.
-                var usedDrumKits = new List<IDrumKit>();
+                List<IDrumKit> usedDrumKits = new List<IDrumKit>();
                 if ((param == "Drums") || (param == "Double Drums"))
                 {
                     usedDrumKits.Add(GetUsedDrumKit(0, 0));
@@ -342,15 +342,15 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         private void AddUsedDramTrackPattern(List<IDrumPattern> patterns, ParameterNames.ProgramParameterName bankName,
             ParameterNames.ProgramParameterName numberName)
         {
-            var paramBank = GetParam(bankName);
+            IParameter paramBank = GetParam(bankName);
             if (paramBank != null)
             {
-                var bank = (IDrumPatternBank)PcgRoot.DrumPatternBanks.GetBankWithPcgId((int)(paramBank.Value));
+                IDrumPatternBank bank = (IDrumPatternBank)PcgRoot.DrumPatternBanks.GetBankWithPcgId((int)(paramBank.Value));
 
-                var paramNumber = GetParam(numberName);
+                IParameter paramNumber = GetParam(numberName);
                 if (paramNumber != null)
                 {
-                    patterns.Add(bank.Patches[paramNumber.Value]);
+                    //MK patterns.Add(bank.Patches[paramNumber.Value]);
                 }
             }
         }

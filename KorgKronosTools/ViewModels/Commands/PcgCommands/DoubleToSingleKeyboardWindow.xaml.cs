@@ -47,13 +47,13 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         {
             if (_memory.SetLists != null)
             {
-                foreach (var setList in _memory.SetLists.BankCollection)
+                foreach (Model.Common.Synth.Meta.IBank setList in _memory.SetLists.BankCollection)
                 {
-                    var item = new ComboBoxItem();
+                    ComboBoxItem item = new ComboBoxItem();
                     item.Tag = setList;
                     item.Content = $"{setList.Id} {setList.Name}";
 
-                    var item2 = new ComboBoxItem();
+                    ComboBoxItem item2 = new ComboBoxItem();
                     item2.Tag = setList;
                     item2.Content = $"{setList.Id} {setList.Name}";
                 
@@ -68,9 +68,9 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         {
             if (_memory.CombiBanks != null)
             {
-                foreach (var bank in _memory.CombiBanks.BankCollection)
+                foreach (Model.Common.Synth.Meta.IBank bank in _memory.CombiBanks.BankCollection)
                 {
-                    var item = new ComboBoxItem
+                    ComboBoxItem item = new ComboBoxItem
                     {
                         Tag = bank,
                         Content = $"{bank.Id}"

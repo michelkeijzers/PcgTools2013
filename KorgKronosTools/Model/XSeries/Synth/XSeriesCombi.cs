@@ -37,11 +37,11 @@ namespace PcgTools.Model.XSeries.Synth
                     return string.Empty;
                 }
 
-                var name = new StringBuilder();
+                StringBuilder name = new StringBuilder();
 
-                for (var index = 0; index < MaxNameLength; index++)
+                for (int index = 0; index < MaxNameLength; index++)
                 {
-                    var character = PcgRoot.Content[ByteOffset + index];
+                    byte character = PcgRoot.Content[ByteOffset + index];
 
                     if (character == 0x00)
                     {
@@ -63,7 +63,7 @@ namespace PcgTools.Model.XSeries.Synth
                     SetChars(0, MaxNameLength, value);
 
                     // Add spaces.
-                    for (var index = value.Length; index < MaxNameLength; index++)
+                    for (int index = value.Length; index < MaxNameLength; index++)
                     {
                         PcgRoot.Content[ByteOffset + index] = (byte)' ';
                     }

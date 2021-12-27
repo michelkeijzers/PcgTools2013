@@ -33,7 +33,7 @@ namespace PcgTools.Model.TritonKarmaSpecific.Synth
             // Also have a look at PcgFileReader.DrumKitBankId2DrumKitIndex() if in the PCG the USER bank has id 0x20000.
             // Sorry but I could not do better than this at the moment, the Triton Drumkit banks are very differently organized...
 
-            foreach (var id in new[] { "A/B", "C", "D" })
+            foreach (string id in new[] { "A/B", "C", "D" })
             {
                 Add(new TritonKarmaDrumKitBank(this, BankType.EType.Int, id, -1));
             }

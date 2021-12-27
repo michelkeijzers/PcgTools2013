@@ -44,7 +44,7 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         {
             get
             {
-                var name = GetChars(0, MaxNameLength);
+                string name = GetChars(0, MaxNameLength);
                 return name;
             }
 
@@ -127,7 +127,7 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         /// <returns></returns>
         public override int GetFixedParameterValue(FixedParameter.EType type)
         {
-            var value = -1;
+            int value = -1;
 
             switch (type)
             {
@@ -155,8 +155,8 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         /// <returns></returns>
         private int GetFixedParameterModeValue(int value)
         {
-            var program = (IProgram) (GetParam(ParameterNames.ProgramParameterName.Mode).Patch);
-            var voiceMode = Util.GetBits(program.PcgRoot.Content, program.ByteOffset + 16, 5, 4);
+            IProgram program = (IProgram) (GetParam(ParameterNames.ProgramParameterName.Mode).Patch);
+            int voiceMode = Util.GetBits(program.PcgRoot.Content, program.ByteOffset + 16, 5, 4);
 
             // There is an error in the MS2000 Midi exclusive document, values of 1 and 2 are swapped
             switch (voiceMode)
@@ -188,8 +188,8 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         /// <returns></returns>
         private int GetFixedParameterCategoryValue(int value)
         {
-            var program = (IProgram) (GetParam(ParameterNames.ProgramParameterName.Category).Patch);
-            var category = Util.GetBits(program.PcgRoot.Content, program.ByteOffset + 16, 7, 6);
+            IProgram program = (IProgram) (GetParam(ParameterNames.ProgramParameterName.Category).Patch);
+            int category = Util.GetBits(program.PcgRoot.Content, program.ByteOffset + 16, 7, 6);
             switch (category)
             {
                 case 0:

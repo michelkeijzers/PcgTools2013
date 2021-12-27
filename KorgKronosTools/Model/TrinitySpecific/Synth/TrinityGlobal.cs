@@ -63,7 +63,7 @@ namespace PcgTools.Model.TrinitySpecific.Synth
         /// <returns></returns>
         protected override int CalcCategoryNameOffset(ECategoryType type, int index)
         {
-            var offset = ByteOffset + PcgOffsetCategories;
+            int offset = ByteOffset + PcgOffsetCategories;
             if (!Settings.Default.TrinityCategorySetA)
             {
                 offset += CategoryNameLength * NrOfCategories;

@@ -254,7 +254,7 @@ namespace PcgTools.ViewModels
                     _selectedBanksType = SelectedBanksType.ProgramBanks;
 
                     Banks.Clear(); // = new ObservableCollectionEx<IBank>();
-                    foreach (var bank in SelectedPcgMemory.ProgramBanks.BankCollection)
+                    foreach (IBank bank in SelectedPcgMemory.ProgramBanks.BankCollection)
                     {
                         Banks.Add(bank);
                     }
@@ -285,7 +285,7 @@ namespace PcgTools.ViewModels
                     _selectedBanksType = SelectedBanksType.CombiBanks;
 
                     Banks.Clear(); // new ObservableCollectionEx<IBank>();
-                    foreach (var bank in SelectedPcgMemory.CombiBanks.BankCollection)
+                    foreach (IBank bank in SelectedPcgMemory.CombiBanks.BankCollection)
                     {
                         Banks.Add(bank);
                     }
@@ -312,7 +312,7 @@ namespace PcgTools.ViewModels
                     _selectedBanksType = SelectedBanksType.SetLists;
 
                     Banks.Clear(); // // new ObservableCollectionEx<IBank>();
-                    foreach (var bank in SelectedPcgMemory.SetLists.BankCollection)
+                    foreach (IBank bank in SelectedPcgMemory.SetLists.BankCollection)
                     {
                         Banks.Add(bank);
                     }
@@ -340,7 +340,7 @@ namespace PcgTools.ViewModels
                     _selectedBanksType = SelectedBanksType.DrumKitBanks;
 
                     Banks.Clear(); // new ObservableCollectionEx<IBank>();
-                    foreach (var bank in SelectedPcgMemory.DrumKitBanks.BankCollection)
+                    foreach (IBank bank in SelectedPcgMemory.DrumKitBanks.BankCollection)
                     {
                         Banks.Add(bank);
                     }
@@ -368,7 +368,7 @@ namespace PcgTools.ViewModels
                     _selectedBanksType = SelectedBanksType.DrumPatternBanks;
 
                     Banks.Clear(); // new ObservableCollectionEx<IBank>();
-                    foreach (var bank in SelectedPcgMemory.DrumPatternBanks.BankCollection)
+                    foreach (IBank bank in SelectedPcgMemory.DrumPatternBanks.BankCollection)
                     {
                         Banks.Add(bank);
                     }
@@ -396,7 +396,7 @@ namespace PcgTools.ViewModels
                     _selectedBanksType = SelectedBanksType.WaveSequenceBanks;
 
                     Banks.Clear(); // new ObservableCollectionEx<IBank>();
-                    foreach (var bank in SelectedPcgMemory.WaveSequenceBanks.BankCollection)
+                    foreach (IBank bank in SelectedPcgMemory.WaveSequenceBanks.BankCollection)
                     {
                         Banks.Add(bank);
                     }
@@ -447,7 +447,7 @@ namespace PcgTools.ViewModels
         {
             if (banks != null)
             {
-                foreach (var bank in banks.BankCollection)
+                foreach (IBank bank in banks.BankCollection)
                 {
                     Banks.Add(bank);
                 }
@@ -1085,35 +1085,35 @@ namespace PcgTools.ViewModels
         {
             if (SelectedPcgMemory.CombiBanks != null)
             {
-                var key = patch as IProgram;
+                IProgram key = patch as IProgram;
                 if (key != null)
                 {
                     FixProgramReferences(key, otherPatch);
                 }
                 else
                 {
-                    var combi = patch as ICombi;
+                    ICombi combi = patch as ICombi;
                     if (combi != null)
                     {
                         FixCombiReferences(combi, otherPatch);
                     }
                     else
                     {
-                        var drumKit = patch as IDrumKit;
+                        IDrumKit drumKit = patch as IDrumKit;
                         if (drumKit != null)
                         {
                             FixDrumKitReferences(drumKit, otherPatch);
                         }
                         else
                         {
-                            var drumPattern = patch as IDrumPattern;
+                            IDrumPattern drumPattern = patch as IDrumPattern;
                             if (drumPattern != null)
                             {
                                 FixDrumPatternReferences(drumPattern, otherPatch);
                             }
                             else
                             {
-                                var waveSequence = patch as IWaveSequence;
+                                IWaveSequence waveSequence = patch as IWaveSequence;
                                 if (waveSequence != null)
                                 {
                                     FixWaveSequenceReferences(waveSequence, otherPatch);
@@ -1135,7 +1135,7 @@ namespace PcgTools.ViewModels
         /// <param name="otherPatch"></param>
         private void FixProgramReferences(IProgram key, INavigable otherPatch)
         {
-            var changes = new Dictionary<IProgram, IProgram>
+            Dictionary<IProgram, IProgram> changes = new Dictionary<IProgram, IProgram>
             {
                 {key, (IProgram) otherPatch},
                 {(IProgram) otherPatch, key}
@@ -1153,7 +1153,7 @@ namespace PcgTools.ViewModels
         /// <param name="combi"></param>
         private void FixCombiReferences(ICombi combi, INavigable otherPatch)
         {
-            var changes = new Dictionary<ICombi, ICombi>
+            Dictionary<ICombi, ICombi> changes = new Dictionary<ICombi, ICombi>
             {
                 {combi, (ICombi) otherPatch},
                 {(ICombi) otherPatch, combi}
@@ -1191,7 +1191,7 @@ namespace PcgTools.ViewModels
         /// <param name="otherPatch"></param>
         private void FixDrumKitReferences(IDrumKit drumKit, INavigable otherPatch)
         {
-            var changes = new Dictionary<IDrumKit, IDrumKit>
+            Dictionary<IDrumKit, IDrumKit> changes = new Dictionary<IDrumKit, IDrumKit>
             {
                 {drumKit, (IDrumKit) otherPatch},
                 {(IDrumKit) otherPatch, drumKit}
@@ -1207,7 +1207,7 @@ namespace PcgTools.ViewModels
         /// <param name="otherPatch"></param>
         private void FixWaveSequenceReferences(IWaveSequence waveSequence, INavigable otherPatch)
         {
-            var changes = new Dictionary<IWaveSequence, IWaveSequence>
+            Dictionary<IWaveSequence, IWaveSequence> changes = new Dictionary<IWaveSequence, IWaveSequence>
             {
                 {waveSequence, (IWaveSequence) otherPatch},
                 {(IWaveSequence) otherPatch, waveSequence}
@@ -1240,7 +1240,7 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                var errorText = string.Empty;
+                string errorText = string.Empty;
                 // If the PCG is of the same model.
                 if (!ModelCompatibility.AreModelsCompatible(SelectedPcgMemory.Model, PcgClipBoard.Model))
                 {
@@ -1263,7 +1263,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         void ExportToCubase()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
 
             builder.AppendLine("[cubase parse file]");
             builder.AppendLine("[parser version 0001]\n");
@@ -1275,28 +1275,28 @@ namespace PcgTools.ViewModels
             builder.AppendLine("[script version]version 1.00\n");
             builder.AppendLine("[define patchnames]\n");
             builder.AppendLine("[mode]" + SelectedPcgMemory.Model.ModelAsString);
-            var patches = (from bank in SelectedPcgMemory.ProgramBanks.BankCollection
+            List<IPatch> patches = (from bank in SelectedPcgMemory.ProgramBanks.BankCollection
                             from program in bank.Patches
                            where ((IBank)(program.Parent)).IsLoaded && !program.IsEmptyOrInit
                             select program).ToList();
 
             PatchSorter.SortBy(patches, PatchSorter.SortOrder.ESortOrderCategoryName);
 
-            var programs = patches.Select(patch => patch as Program).ToList();
+            List<Program> programs = patches.Select(patch => patch as Program).ToList();
 
-            var currentCategory = 0;
-            var currentSubCategory = 0;
+            int currentCategory = 0;
+            int currentSubCategory = 0;
             programs.Aggregate(false, (current, program) => ExportProgramToCubase(
                 program, current, builder, ref currentCategory, ref currentSubCategory));
 
             builder.AppendLine("[end]");
 
-            var folder = Settings.Default.Slg_DefaultOutputFolderForSequencerFiles;
+            string folder = Settings.Default.Slg_DefaultOutputFolderForSequencerFiles;
             if (folder == string.Empty)
             {
                 folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
-            var fileName = $@"{folder}\Cubase.txt";
+            string fileName = $@"{folder}\Cubase.txt";
 
             try
             {
@@ -1328,7 +1328,7 @@ namespace PcgTools.ViewModels
         private bool ExportProgramToCubase(IProgram program, bool gmReached, StringBuilder builder, ref int currentCategory,
             ref int currentSubCategory)
         {
-            var programIsGm = ((IProgramBank) program.Parent).Type == BankType.EType.Gm;
+            bool programIsGm = ((IProgramBank) program.Parent).Type == BankType.EType.Gm;
 
             gmReached = AddHeaderToCubase(program, gmReached, builder, 
                 ref currentCategory, ref currentSubCategory, programIsGm);
@@ -1346,7 +1346,7 @@ namespace PcgTools.ViewModels
         /// <param name="programIsGm"></param>
         private void AddProgramInfoToCubase(IProgram program, StringBuilder builder, bool programIsGm)
         {
-            var hasSubCategories = SelectedPcgMemory.HasSubCategories;
+            bool hasSubCategories = SelectedPcgMemory.HasSubCategories;
 
             string patchId;
             if (programIsGm)
@@ -1416,16 +1416,16 @@ namespace PcgTools.ViewModels
         private void AddNonGmProgramHeaderToCubase(IProgram program, StringBuilder builder, ref int currentCategory,
             ref int currentSubCategory)
         {
-            var hasSubCategories = SelectedPcgMemory.HasSubCategories;
-            var hasCategoryNames = (SelectedPcgMemory.Global != null);
+            bool hasSubCategories = SelectedPcgMemory.HasSubCategories;
+            bool hasCategoryNames = (SelectedPcgMemory.Global != null);
 
-            var category = program.GetParam(ParameterNames.ProgramParameterName.Category).Value;
-            var subCategory = hasSubCategories ? (int) (program.GetParam(ParameterNames.ProgramParameterName.SubCategory).Value) : -1;
+            dynamic category = program.GetParam(ParameterNames.ProgramParameterName.Category).Value;
+            int subCategory = hasSubCategories ? (int) (program.GetParam(ParameterNames.ProgramParameterName.SubCategory).Value) : -1;
 
             // Check if a new header should be produced.
             if (currentCategory != category)
             {
-                var categoryName = hasCategoryNames ? program.CategoryAsName : (string) ("Category" + category.ToString());
+                string categoryName = hasCategoryNames ? program.CategoryAsName : (string) ("Category" + category.ToString());
                 builder.AppendLine("[g1] " + categoryName);
                 currentCategory = category;
                 currentSubCategory = -1; // Make sure sub category is also added here after.
@@ -1434,7 +1434,7 @@ namespace PcgTools.ViewModels
             // Also add sub category when category changed (if supported).
             if (hasSubCategories && (currentSubCategory != subCategory))
             {
-                var subCategoryName = hasCategoryNames ? program.SubCategoryAsName : ("Sub Category" + subCategory);
+                string subCategoryName = hasCategoryNames ? program.SubCategoryAsName : ("Sub Category" + subCategory);
                 builder.AppendLine("[g2] " + subCategoryName);
                 currentSubCategory = subCategory;
             }
@@ -1458,8 +1458,8 @@ namespace PcgTools.ViewModels
         /// <returns></returns>
         public override bool Revert()
         {
-            var fileName = SelectedMemory.FileName;
-            var revert = true;
+            string fileName = SelectedMemory.FileName;
+            bool revert = true;
 
             if (!ExitCopyPasteMode())
             {
@@ -1493,8 +1493,8 @@ namespace PcgTools.ViewModels
         /// <returns>True if continue closing.</returns>
         public override bool Close(bool exitMode)
         {
-            var fileName = SelectedMemory.FileName;
-            var continueClosing = true;
+            string fileName = SelectedMemory.FileName;
+            bool continueClosing = true;
 
             if (!ExitCopyPasteMode())
             {
@@ -1503,7 +1503,7 @@ namespace PcgTools.ViewModels
             
             if (SelectedMemory.IsDirty)
             {
-                var result = ShowMessageBox(string.Format(Strings.SaveFile, fileName), Strings.PcgTools,
+                WindowUtils.EMessageBoxResult result = ShowMessageBox(string.Format(Strings.SaveFile, fileName), Strings.PcgTools,
                     exitMode ? WindowUtils.EMessageBoxButton.YesNoCancel : WindowUtils.EMessageBoxButton.YesNo, 
                     WindowUtils.EMessageBoxImage.Warning, WindowUtils.EMessageBoxResult.No);
                     
@@ -1690,7 +1690,7 @@ namespace PcgTools.ViewModels
 
             if (bank != null)
             {
-                foreach (var patch in bank.Patches)
+                foreach (IPatch patch in bank.Patches)
                 {
                     patch.IsSelected = true;
                 }
@@ -1727,7 +1727,7 @@ namespace PcgTools.ViewModels
         /// <param name="banks"></param>
         private void SelectBanks(IBanks banks)
         {
-            foreach (var bank in banks.BankCollection)
+            foreach (IBank bank in banks.BankCollection)
             {
                 bank.IsSelected = true;
             }
@@ -1787,7 +1787,7 @@ namespace PcgTools.ViewModels
         {
             DialogType dialogType;
             INavigable firstDialogItem = Banks.First();
-            var banksSelected = Banks.Count(bank => bank.IsSelected);
+            int banksSelected = Banks.Count(bank => bank.IsSelected);
 
             if (firstDialogItem is ProgramBank)
             {
@@ -1823,8 +1823,8 @@ namespace PcgTools.ViewModels
         {
             DialogType dialogType;
             INavigable firstDialogItem = Patches.First(patch => patch.IsSelected);
-            
-            var patchesSelected = Patches.Count(patch => patch.IsSelected);
+
+            int patchesSelected = Patches.Count(patch => patch.IsSelected);
 
             if (firstDialogItem is Program)
             {
@@ -2028,7 +2028,7 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                var canExecute = SelectedPcgMemory != null;
+                bool canExecute = SelectedPcgMemory != null;
                 
                 canExecute &= !PcgClipBoard.IsEmpty;
                 
@@ -2039,15 +2039,15 @@ namespace PcgTools.ViewModels
                     // Check if in the clipboard there is at least one program with the synthesis type of one of the 
                     // selected banks (no need to check for selected paches, because paste can paste to unselected
                     // patches too.
-                    var synthesisTypeIndices = new HashSet<int>();
-                    foreach (var bank in Banks.Where(bank => bank.IsSelected))
+                    HashSet<int> synthesisTypeIndices = new HashSet<int>();
+                    foreach (IBank bank in Banks.Where(bank => bank.IsSelected))
                     {
                         synthesisTypeIndices.Add((int) ((IProgramBank) bank).BankSynthesisType);
                     }
 
-                    var pastablePrograms = false;
+                    bool pastablePrograms = false;
 
-                    for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+                    for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
                     {
                         if (synthesisTypeIndices.Contains(index) && PcgClipBoard.Programs[index].CountUncopied > 0)
                         {
@@ -2107,7 +2107,7 @@ namespace PcgTools.ViewModels
                 }
 
                 PcgClipBoard.PastePcgMemory = SelectedPcgMemory;
-                var infoText = _copyPasteCommands.CopyPastePaste(PcgClipBoard, SelectedPcgMemory, SelectedScopeSet,
+                string infoText = _copyPasteCommands.CopyPastePaste(PcgClipBoard, SelectedPcgMemory, SelectedScopeSet,
                     ProgramBanksSelected, CombiBanksSelected, SetListsSelected, DrumKitBanksSelected,
                     DrumPatternBanksSelected, WaveSequenceBanksSelected,
                     AllPatchesSelected, Banks, Patches);
@@ -2171,7 +2171,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         private void Assign()
         {
-            var setListSlot = Patches.First(patch => patch.IsSelected) as ISetListSlot;
+            ISetListSlot setListSlot = Patches.First(patch => patch.IsSelected) as ISetListSlot;
             if (setListSlot != null)
             {
                 setListSlot.UsedPatch = LastSelectedProgramOrCombi;
@@ -2188,7 +2188,7 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                var text = string.Empty;
+                string text = string.Empty;
                 if (LastSelectedProgramOrCombi != null)
                 {
                     text =
@@ -2246,7 +2246,7 @@ namespace PcgTools.ViewModels
             if (SelectedScopeSet == ScopeSet.Banks)
             {
                 // Iterate through banks.
-                foreach (var patch in from bank in SelectedPcgMemory.ProgramBanks.BankCollection
+                foreach (ISetListSlot patch in from bank in SelectedPcgMemory.ProgramBanks.BankCollection
                     where bank.IsSelected
                     from ISetListSlot patch in bank.Patches
                     where patch.UsedPatch != null
@@ -2258,7 +2258,7 @@ namespace PcgTools.ViewModels
             else
             {
                 // Iterate through patches.
-                foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(
+                foreach (IPatch patch in Patches.Where(patch => patch.IsSelected).Where(
                     patch => ((ISetListSlot) patch).UsedPatch != null))
                 {
                     patch.Name = ((ISetListSlot) patch).UsedPatch.Name;
@@ -2273,7 +2273,7 @@ namespace PcgTools.ViewModels
         /// <returns></returns>
         bool CheckPastePreconditionsAndWarnings()
         {
-            var errorText = PastePreconditionsAndWarnings;
+            string errorText = PastePreconditionsAndWarnings;
             if (errorText != string.Empty)
             {
                 ShowMessageBox(errorText, Strings.PcgTools, WindowUtils.EMessageBoxButton.Ok, WindowUtils.EMessageBoxImage.Error, 
@@ -2322,7 +2322,7 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                var result = (PcgClipBoard.CutPasteSelected || PcgClipBoard.PasteDuplicatesExecuted) && !PcgClipBoard.IsEmpty;
+                bool result = (PcgClipBoard.CutPasteSelected || PcgClipBoard.PasteDuplicatesExecuted) && !PcgClipBoard.IsEmpty;
                 return result;
             }
         }
@@ -2438,16 +2438,16 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                for (var index = 0; index < Patches.Count; index++) // Note: first is not selected
+                for (int index = 0; index < Patches.Count; index++) // Note: first is not selected
                 {
-                    var patch = Patches[index];
+                    IPatch patch = Patches[index];
                     if (patch.IsSelected)
                     {
-                        var previousPatch = Patches[index - 1];
+                        IPatch previousPatch = Patches[index - 1];
                         if ((patch is IProgram) && (previousPatch is IProgram))
                         {
-                            var patchBank = (patch as IProgram).Parent as IProgramBank;
-                            var previousPatchBank = (previousPatch as IProgram).Parent as IProgramBank;
+                            IProgramBank patchBank = (patch as IProgram).Parent as IProgramBank;
+                            IProgramBank previousPatchBank = (previousPatch as IProgram).Parent as IProgramBank;
 
                             Debug.Assert(patchBank != null);
                             Debug.Assert(previousPatchBank != null);
@@ -2472,13 +2472,13 @@ namespace PcgTools.ViewModels
         {
             GetSelectedPatchListViewIndex(); //IMPR: Needed?
 
-            for (var index = 0; index < Patches.Count; index++)
+            for (int index = 0; index < Patches.Count; index++)
             {
-                var patch = Patches[index];
+                IPatch patch = Patches[index];
 
                 if (patch.IsSelected)
                 {
-                    var otherPatch = Patches[index - 1];
+                    IPatch otherPatch = Patches[index - 1];
                     patch.PcgRoot.SwapPatch(patch, otherPatch);
                     patch.IsSelected = false;
                     otherPatch.IsSelected = true;
@@ -2519,7 +2519,7 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                var listViewBanksActiveForCommands = (SelectedScopeSet == ScopeSet.Banks);
+                bool listViewBanksActiveForCommands = (SelectedScopeSet == ScopeSet.Banks);
                 return (SelectedPcgMemory != null) &&
                     (SelectedScopeSet == ScopeSet.Patches) &&
                     !listViewBanksActiveForCommands &&
@@ -2543,16 +2543,16 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                for (var index = 0; index < Patches.Count; index++)
+                for (int index = 0; index < Patches.Count; index++)
                 {
-                    var patch = Patches[index];
+                    IPatch patch = Patches[index];
                     if (patch.IsSelected)
                     {
-                        var nextPatch = Patches[index + 1];
+                        IPatch nextPatch = Patches[index + 1];
                         if ((patch is IProgram) && (nextPatch is IProgram))
                         {
-                            var patchBank = (patch as IProgram).Parent as IProgramBank;
-                            var nextPatchBank = (nextPatch as IProgram).Parent as IProgramBank;
+                            IProgramBank patchBank = (patch as IProgram).Parent as IProgramBank;
+                            IProgramBank nextPatchBank = (nextPatch as IProgram).Parent as IProgramBank;
 
                             Debug.Assert(patchBank != null);
                             Debug.Assert(nextPatchBank != null);
@@ -2577,13 +2577,13 @@ namespace PcgTools.ViewModels
         {
             GetSelectedPatchListViewIndex(); //IMPR: Needed?
 
-            for (var index = Patches.Count - 1; index >= 0; index--)
+            for (int index = Patches.Count - 1; index >= 0; index--)
             {
-                var patch = Patches[index];
+                IPatch patch = Patches[index];
 
                 if (patch.IsSelected)
                 {
-                    var otherPatch = Patches[index + 1];
+                    IPatch otherPatch = Patches[index + 1];
                     patch.PcgRoot.SwapPatch(patch, otherPatch);
                     otherPatch.IsSelected = true;
                     patch.IsSelected = false;
@@ -2653,8 +2653,8 @@ namespace PcgTools.ViewModels
         /// </summary>
         void ChangeVolume()
         {
-            var parameters = new ChangeVolumeParameters();
-            var window = new ChangeVolumeWindow(parameters);
+            ChangeVolumeParameters parameters = new ChangeVolumeParameters();
+            ChangeVolumeWindow window = new ChangeVolumeWindow(parameters);
             window.ShowDialog();
             if ((!window.DialogResult.HasValue) || !window.DialogResult.Value)
             {
@@ -2670,7 +2670,7 @@ namespace PcgTools.ViewModels
                 if (SelectedScopeSet == ScopeSet.Banks)
                 {
                     // Iterate through banks.
-                    foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(
+                    foreach (IPatch patch in Banks.Where(bank => bank.IsSelected).SelectMany(
                         bank => bank.Patches).Where(patch => !patch.IsEmptyOrInit))
                     {
                         if (patch is ICombi)
@@ -2688,7 +2688,7 @@ namespace PcgTools.ViewModels
                 else
                 {
                     // Iterate through patches.
-                    foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
+                    foreach (IPatch patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
                     {
                         if (patch is ICombi)
                         {
@@ -2708,7 +2708,7 @@ namespace PcgTools.ViewModels
             if (SelectedScopeSet == ScopeSet.Banks)
             {
                 // Iterate through banks.
-                foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(
+                foreach (IPatch patch in Banks.Where(bank => bank.IsSelected).SelectMany(
                     bank => bank.Patches).Where(patch => !patch.IsEmptyOrInit))
                 {
                     if (patch is ICombi)
@@ -2724,7 +2724,7 @@ namespace PcgTools.ViewModels
             else
             {
                 // Iterate through patches.
-                foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
+                foreach (IPatch patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
                 {
                     if (patch is ICombi)
                     {
@@ -2799,7 +2799,7 @@ namespace PcgTools.ViewModels
              if (SelectedScopeSet == ScopeSet.Banks)
             {
                 // Iterate through banks.
-                foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(
+                foreach (IPatch patch in Banks.Where(bank => bank.IsSelected).SelectMany(
                     bank => bank.Patches).Where(patch => !patch.IsEmptyOrInit))
                 {
                     ((ICombi) patch).InitAsMpe();
@@ -2808,7 +2808,7 @@ namespace PcgTools.ViewModels
             else
             {
                 // Iterate through patches.
-                foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
+                foreach (IPatch patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
                 {
                     ((ICombi) patch).InitAsMpe();
                 }
@@ -2864,7 +2864,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         private void Sort()
         {
-            var window = new SelectSortWindow(SelectedPcgMemory);
+            SelectSortWindow window = new SelectSortWindow(SelectedPcgMemory);
             window.ShowDialog();
             if ((!window.DialogResult.HasValue) || !window.DialogResult.Value)
             {
@@ -2875,12 +2875,12 @@ namespace PcgTools.ViewModels
             {
                 SetCursor(WindowUtils.ECursor.Wait);
 
-                var listsToSort = BuildProcessList();
+                IEnumerable<List<IPatch>> listsToSort = BuildProcessList();
 
                 // SortMethod each list.
-                foreach (var list in listsToSort)
+                foreach (List<IPatch> list in listsToSort)
                 {
-                    var destination = list.ToList();
+                    List<IPatch> destination = list.ToList();
 
                     PatchSorter.SortBy(destination, window.SortOrder);
                     
@@ -2905,18 +2905,18 @@ namespace PcgTools.ViewModels
         /// <param name="destination"></param>
         private void MovePatchesForSorting(List<IPatch> list, List<IPatch> destination)
         {
-            for (var index = 0; index < list.Count; index++)
+            for (int index = 0; index < list.Count; index++)
             {
-                var destinationIndex = list.FindIndex(0, patch => patch == destination[index]);
+                int destinationIndex = list.FindIndex(0, patch => patch == destination[index]);
 
-                var destination1Index = destination.FindIndex(0, patch => patch == list[index]);
-                var destination2Index = destination.FindIndex(0, patch => patch == list[destinationIndex]);
+                int destination1Index = destination.FindIndex(0, patch => patch == list[index]);
+                int destination2Index = destination.FindIndex(0, patch => patch == list[destinationIndex]);
 
                 if (destination1Index != destination2Index)
                 {
                     SelectedPcgMemory.SwapPatch(list[index], list[destinationIndex]);
 
-                    var temp = destination[destination1Index];
+                    IPatch temp = destination[destination1Index];
                     destination[destination1Index] = destination[destination2Index];
                     destination[destination2Index] = temp;
 
@@ -2936,7 +2936,7 @@ namespace PcgTools.ViewModels
         private IEnumerable<List<IPatch>> BuildProcessList()
         {
             // Create a list of list with patches, for programs: one per synthesis type, for combis/set list slot: only one.
-            var listToProcess = new List<List<IPatch>>();
+            List<List<IPatch>> listToProcess = new List<List<IPatch>>();
 
             if (ProgramBanksSelected)
             {
@@ -2951,7 +2951,7 @@ namespace PcgTools.ViewModels
                     // Iterate through banks.
                     if (CombiBanksSelected)
                     {
-                        foreach (var patch in from IBank bank in SelectedPcgMemory.CombiBanks.BankCollection
+                        foreach (IPatch patch in from IBank bank in SelectedPcgMemory.CombiBanks.BankCollection
                                               where Banks.Where(
                                                   elem => elem.IsSelected).Contains(bank)
                                               from patch in bank.Patches
@@ -2963,7 +2963,7 @@ namespace PcgTools.ViewModels
                     else
                     {
                         // Set lists selected.
-                        foreach (var patch in from IBank bank in SelectedPcgMemory.SetLists.BankCollection
+                        foreach (IPatch patch in from IBank bank in SelectedPcgMemory.SetLists.BankCollection
                                               where Banks.Where(
                                                   elem => elem.IsSelected).Contains(bank)
                                               from patch in bank.Patches
@@ -2978,7 +2978,7 @@ namespace PcgTools.ViewModels
                     // Iterate through patches.
                     if (Patches.Count > 0)
                     {
-                        var selectedPatches = Patches.Where(patch => patch.IsSelected);
+                        IEnumerable<IPatch> selectedPatches = Patches.Where(patch => patch.IsSelected);
                         listToProcess[0].AddRange(selectedPatches);
                     }
                 }
@@ -2994,7 +2994,7 @@ namespace PcgTools.ViewModels
         /// <param name="listToProcess"></param>
         private void BuildProgramBanksProcessList(IList<List<IPatch>> listToProcess)
         {
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
                 listToProcess.Add(new List<IPatch>());
             }
@@ -3002,11 +3002,11 @@ namespace PcgTools.ViewModels
             if (SelectedScopeSet == ScopeSet.Banks)
             {
                 // Iterate through banks.
-                foreach (var bank in SelectedPcgMemory.ProgramBanks.BankCollection)
+                foreach (IBank bank in SelectedPcgMemory.ProgramBanks.BankCollection)
                 {
                     if (Banks.Where(elem => elem.IsSelected).Contains(bank))
                     {
-                        var listToUse = listToProcess[(int) ((IProgramBank) bank).BankSynthesisType];
+                        List<IPatch> listToUse = listToProcess[(int) ((IProgramBank) bank).BankSynthesisType];
                         listToUse.AddRange(bank.Patches);
                     }
                 }
@@ -3014,9 +3014,9 @@ namespace PcgTools.ViewModels
             else
             {
                 // Iterate through patches.
-                foreach (var patch in Patches.Where(patch => patch.IsSelected))
+                foreach (IPatch patch in Patches.Where(patch => patch.IsSelected))
                 {
-                    var listToUse = listToProcess[(int)((IProgramBank)patch.Parent).BankSynthesisType];
+                    List<IPatch> listToUse = listToProcess[(int)((IProgramBank)patch.Parent).BankSynthesisType];
                     listToUse.Add(patch);
                 }
             }
@@ -3073,7 +3073,7 @@ namespace PcgTools.ViewModels
 
             if (SelectedScopeSet == ScopeSet.Banks)
             {
-                foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(bank => bank.Patches))
+                foreach (IPatch patch in Banks.Where(bank => bank.IsSelected).SelectMany(bank => bank.Patches))
                 {
                     if (patch is IProgram)
                     {
@@ -3089,7 +3089,7 @@ namespace PcgTools.ViewModels
             }
             else
             {
-                foreach (var patch in Patches.Where(patch => patch.IsSelected))
+                foreach (IPatch patch in Patches.Where(patch => patch.IsSelected))
                 {
                     if (patch is IProgram)
                     {
@@ -3189,7 +3189,7 @@ namespace PcgTools.ViewModels
 
         private void AssignClearProgram()
         {
-            var program = Patches.First(patch => patch.IsSelected) as IProgram;
+            IProgram program = Patches.First(patch => patch.IsSelected) as IProgram;
             ((IPcgMemory) SelectedMemory).AssignedClearProgram = program;
 
             if (program != null)
@@ -3248,7 +3248,7 @@ namespace PcgTools.ViewModels
         {
             SetCursor(WindowUtils.ECursor.Wait);
 
-            var selectedPatches = ((SelectedScopeSet == ScopeSet.Banks)
+            List<IPatch> selectedPatches = ((SelectedScopeSet == ScopeSet.Banks)
                 ? Banks.Where(bank => bank.IsSelected).SelectMany(bank => bank.Patches)
                 : Patches.Where(patch => patch.IsSelected)).ToList();
 
@@ -3259,7 +3259,7 @@ namespace PcgTools.ViewModels
 
             if (SelectedScopeSet == ScopeSet.Banks)
             {
-                foreach (var bank in Banks.Where(bank => bank.IsSelected))
+                foreach (IBank bank in Banks.Where(bank => bank.IsSelected))
                 {
                     bank.Clear();
                 }
@@ -3319,7 +3319,7 @@ namespace PcgTools.ViewModels
         {
             SetCursor(WindowUtils.ECursor.Wait);
 
-            var selectedPatches = ((SelectedScopeSet == ScopeSet.Banks)
+            List<IPatch> selectedPatches = ((SelectedScopeSet == ScopeSet.Banks)
                 ? Banks.Where(bank => bank.IsSelected).SelectMany(bank => bank.Patches)
                 : Patches.Where(patch => patch.IsSelected)).ToList();
 
@@ -3371,10 +3371,10 @@ namespace PcgTools.ViewModels
         {
             SetCursor(WindowUtils.ECursor.Wait);
 
-            var listsToCompact = BuildProcessList();
+            IEnumerable<List<IPatch>> listsToCompact = BuildProcessList();
             
             // Compact each list.
-            foreach (var list in listsToCompact)
+            foreach (List<IPatch> list in listsToCompact)
             {
                 CompactList(list);
             }
@@ -3391,13 +3391,13 @@ namespace PcgTools.ViewModels
         /// <param name="list"></param>
         private void CompactList(IList<IPatch> list)
         {
-            var destination = new List<IPatch>();
-            var emptyPatches = 0;
+            List<IPatch> destination = new List<IPatch>();
+            int emptyPatches = 0;
 
             // Put in destination all non empty patches, null for empty patches.
-            for (var index = 0; index < list.Count; index++)
+            for (int index = 0; index < list.Count; index++)
             {
-                var patch = list[index];
+                IPatch patch = list[index];
                 if (patch.IsEmptyOrInit)
                 {
                     emptyPatches++;
@@ -3410,7 +3410,7 @@ namespace PcgTools.ViewModels
             }
 
             // For every null patch, use last locations.
-            for (var index = 0; index < destination.Count; index++)
+            for (int index = 0; index < destination.Count; index++)
             {
                 if (destination[index] == null)
                 {
@@ -3423,11 +3423,11 @@ namespace PcgTools.ViewModels
             Debug.Assert(list.Count == destination.Count);
 
             // Move all patches.
-            for (var index = 0; index < list.Count; index++)
+            for (int index = 0; index < list.Count; index++)
             {
-                var listClosure = list;
-                var indexClosure = index;
-                var destinationIndex = destination.FindIndex(index, patch => patch == listClosure[indexClosure]);
+                IList<IPatch> listClosure = list;
+                int indexClosure = index;
+                int destinationIndex = destination.FindIndex(index, patch => patch == listClosure[indexClosure]);
                 SelectedPcgMemory.SwapPatch(list[index], list[destinationIndex]);
                 destination[destinationIndex] = destination[index];
 
@@ -3483,7 +3483,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         void ShowTimbres()
         {
-            foreach (var selectedCombi in Patches.Where(item => item.IsSelected).Cast<ICombi>())
+            foreach (ICombi selectedCombi in Patches.Where(item => item.IsSelected).Cast<ICombi>())
             {
                 ShowTimbresWindow(selectedCombi,
                     Settings.Default.UI_CombiWindowWidth == 0 ? 700 : Settings.Default.UI_CombiWindowWidth,
@@ -3567,7 +3567,7 @@ namespace PcgTools.ViewModels
             if (SelectedScopeSet == ScopeSet.Banks)
             {
                 // Iterate through banks.
-                foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(
+                foreach (IPatch patch in Banks.Where(bank => bank.IsSelected).SelectMany(
                     bank => bank.Patches).Where(patch => !patch.IsEmptyOrInit))
                 {
                     patch.Name = patch.Name.ToUpperInvariant();
@@ -3576,7 +3576,7 @@ namespace PcgTools.ViewModels
             else
             {
                 // Iterate through patches.
-                foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
+                foreach (IPatch patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
                 {
                     patch.Name = patch.Name.ToUpperInvariant();
                 }
@@ -3620,7 +3620,7 @@ namespace PcgTools.ViewModels
             if (SelectedScopeSet == ScopeSet.Banks)
             {
                 // Iterate through banks.
-                foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(
+                foreach (IPatch patch in Banks.Where(bank => bank.IsSelected).SelectMany(
                     bank => bank.Patches).Where(patch => !patch.IsEmptyOrInit))
                 {
                     patch.Name = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(patch.Name.ToLowerInvariant());
@@ -3629,7 +3629,7 @@ namespace PcgTools.ViewModels
             else
             {
                 // Iterate through paches.
-                foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
+                foreach (IPatch patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
                 {
                     patch.Name = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(patch.Name.ToLowerInvariant());
                 }
@@ -3693,7 +3693,7 @@ namespace PcgTools.ViewModels
             if (SelectedScopeSet == ScopeSet.Banks)
             {
                 // Iterate through banks.
-                foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(
+                foreach (IPatch patch in Banks.Where(bank => bank.IsSelected).SelectMany(
                     bank => bank.Patches).Where(patch => !patch.IsEmptyOrInit))
                 {
                     patch.Name = patch.Name.ToLowerInvariant();
@@ -3702,7 +3702,7 @@ namespace PcgTools.ViewModels
             else
             {
                 // Iterate through paches.
-                foreach (var patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
+                foreach (IPatch patch in Patches.Where(patch => patch.IsSelected).Where(patch => !patch.IsEmptyOrInit))
                 {
                     patch.Name = patch.Name.ToLowerInvariant();
                 }
@@ -3765,19 +3765,19 @@ namespace PcgTools.ViewModels
         private void ExportToHex()
         {
             const int columnsPerLine = 8;
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
 
-            foreach (var patch in Patches.Where(patch => patch.IsSelected))
+            foreach (IPatch patch in Patches.Where(patch => patch.IsSelected))
             {
                 builder.AppendLine($"{patch.Id}: {patch.Name}");
-                var index = 0;
+                int index = 0;
                 while (index < patch.ByteLength)
                 {
-                    var charsInLine = new char[columnsPerLine];
-                    var offset = patch.ByteOffset + index;
+                    char[] charsInLine = new char[columnsPerLine];
+                    int offset = patch.ByteOffset + index;
                     builder.Append($"{index:x8} ({index:d8}) {offset:x8}: ");
 
-                    for (var column = 0; column < columnsPerLine; column++)
+                    for (int column = 0; column < columnsPerLine; column++)
                     {
                         if ((column > 0) && (column % 4 == 0))
                         {
@@ -3787,12 +3787,12 @@ namespace PcgTools.ViewModels
                         if (index + column < patch.ByteLength)
                         {
                             builder.Append($" {patch.Root.Content[offset + column]:x2}");
-                            var charAtColumn = (char)patch.Root.Content[offset + column];
+                            char charAtColumn = (char)patch.Root.Content[offset + column];
                             charsInLine[column] = char.IsControl(charAtColumn) ? ' ' : charAtColumn;
                         }
                     }
                     builder.Append(": ");
-                    for (var column  = 0; column < columnsPerLine; column++)
+                    for (int column  = 0; column < columnsPerLine; column++)
                     {
                         if ((column > 0) && (column % 4 == 0))
                         {
@@ -3806,8 +3806,8 @@ namespace PcgTools.ViewModels
                 }
                 builder.AppendLine();
             }
-            
-            var dlg = new HexExportDlg(builder.ToString());
+
+            HexExportDlg dlg = new HexExportDlg(builder.ToString());
             dlg.ShowDialog();
         }
 
@@ -3920,7 +3920,7 @@ namespace PcgTools.ViewModels
                 if (_selectedBanksType == SelectedBanksType.AllPatches)
                 {
                     // Add all non empty patches.
-                    foreach (var patch in from bank in Banks from patch in bank.Patches
+                    foreach (IPatch patch in from bank in Banks from patch in bank.Patches
                                           where patch.IsLoaded && !patch.IsEmptyOrInit  // Virtual patches have noninit name
                                           select patch)
                     {
@@ -3937,7 +3937,7 @@ namespace PcgTools.ViewModels
                     }
                     */
                     // Add selected banks.
-                    foreach (var patch in Banks.Where(bank => bank.IsSelected).SelectMany(bank => bank.Patches))
+                    foreach (IPatch patch in Banks.Where(bank => bank.IsSelected).SelectMany(bank => bank.Patches))
                     {
                         Patches.Add(patch);
                     }
@@ -4018,12 +4018,12 @@ namespace PcgTools.ViewModels
         /// <returns></returns>
         private void EditParameter()
         {
-            var selectedPatches = ((SelectedScopeSet == ScopeSet.Banks)
+            List<IPatch> selectedPatches = ((SelectedScopeSet == ScopeSet.Banks)
                 ? Banks.Where(bank => bank.IsSelected).SelectMany(bank => bank.Patches)
                 : Patches.Where(patch => patch.IsSelected)).ToList();
 
-            var selectedPatchesToEdit = new ObservableCollectionEx<IPatch>();
-            foreach (var patch in selectedPatches)
+            ObservableCollectionEx<IPatch> selectedPatchesToEdit = new ObservableCollectionEx<IPatch>();
+            foreach (IPatch patch in selectedPatches)
             {
                 selectedPatchesToEdit.Add(patch);
             }
@@ -4039,14 +4039,14 @@ namespace PcgTools.ViewModels
         {
             get
             {
-                var selectedPatches = Patches.Where(item => item.IsSelected);
-                var enumerable = selectedPatches as IPatch[] ?? selectedPatches.ToArray();
-                var selectedPrograms = enumerable.Count(item => item is IProgram);
-                var selectedCombis = enumerable.Count(item => item is ICombi);
-                var selectedSetListSlots = enumerable.Count(item => item is ISetListSlot);
-                var selectedDrumKits = enumerable.Count(item => item is IDrumKit);
-                var selectedDrumPatterns = enumerable.Count(item => item is IDrumPattern);
-                var selectedWaveSequences = enumerable.Count(item => item is IWaveSequence);
+                IEnumerable<IPatch> selectedPatches = Patches.Where(item => item.IsSelected);
+                IPatch[] enumerable = selectedPatches as IPatch[] ?? selectedPatches.ToArray();
+                int selectedPrograms = enumerable.Count(item => item is IProgram);
+                int selectedCombis = enumerable.Count(item => item is ICombi);
+                int selectedSetListSlots = enumerable.Count(item => item is ISetListSlot);
+                int selectedDrumKits = enumerable.Count(item => item is IDrumKit);
+                int selectedDrumPatterns = enumerable.Count(item => item is IDrumPattern);
+                int selectedWaveSequences = enumerable.Count(item => item is IWaveSequence);
 
                 // Only if either programs, combis or set list slots are selected.
                 return (SelectedPcgMemory != null) &&

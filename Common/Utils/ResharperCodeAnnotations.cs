@@ -35,7 +35,7 @@ namespace Common.Utils
         /// </returns>
         public override bool Equals(object obj)
         {
-            var attribute = obj as LocalizationRequiredAttribute;
+            LocalizationRequiredAttribute attribute = obj as LocalizationRequiredAttribute;
             return attribute != null && attribute.Required == Required;
         }
 

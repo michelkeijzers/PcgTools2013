@@ -19,7 +19,7 @@ namespace PcgTools.Model.KromeExSpecific.Synth
             : base(drumKitBank, index)
         {
             // Override ID.
-            var indexInId = index;
+            int indexInId = index;
             if (drumKitBank.Type == Common.Synth.Meta.BankType.EType.User)
             {
                 indexInId += PcgRoot.DrumKitBanks.BankCollection[0].NrOfPatches;

@@ -29,7 +29,7 @@ namespace PcgTools.Model.OasysSpecific.Synth
         {
             Add(new OasysDrumKitBank(this,  BankType.EType.Int, "INT", -1));
 
-            foreach (var id in new[] { "U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G" })
+            foreach (string id in new[] { "U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G" })
             {
                 Add(new OasysDrumKitBank(this, BankType.EType.User, id, -1));
             }

@@ -28,7 +28,7 @@ namespace PcgTools.Model.Z1Specific.Synth
         protected override void CreateBanks()
         {
             //                          0    1 
-            foreach (var id in new[] { "A", "B" })
+            foreach (string id in new[] { "A", "B" })
             {
                 Add(new Z1CombiBank(this, BankType.EType.Int, id, -1));
             }

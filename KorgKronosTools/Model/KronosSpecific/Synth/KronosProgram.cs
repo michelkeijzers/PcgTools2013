@@ -58,9 +58,9 @@ namespace PcgTools.Model.KronosSpecific.Synth
         {
             get
             {
-                var param = GetParam(ParameterNames.ProgramParameterName.OscMode).Value;
+                dynamic param = GetParam(ParameterNames.ProgramParameterName.OscMode).Value;
 
-                var maxOsc = 0;
+                int maxOsc = 0;
                 switch ((string) param)
                 {
                     case "Single":
@@ -82,12 +82,12 @@ namespace PcgTools.Model.KronosSpecific.Synth
                         break;
                 }
 
-                var usedWaveSequences = new List<IWaveSequence>();
-                for (var osc = 0; osc < maxOsc; osc++)
+                List<IWaveSequence> usedWaveSequences = new List<IWaveSequence>();
+                for (int osc = 0; osc < maxOsc; osc++)
                 {
-                    for (var zone = 0; zone < 8; zone++)
+                    for (int zone = 0; zone < 8; zone++)
                     {
-                        var usedWaveSequence = GetUsedWaveSequence(osc, zone);
+                        IWaveSequence usedWaveSequence = GetUsedWaveSequence(osc, zone);
                         if (usedWaveSequence != null)
                         {
                             usedWaveSequences.Add(usedWaveSequence);
@@ -108,7 +108,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <returns></returns>
         private string GetMsType(int osc, int zone)
         {
-            var parameter = new EnumParameter();
+            EnumParameter parameter = new EnumParameter();
             parameter.Set(Root, Root.Content, ByteOffset + 2774 + osc*(3240 - 2774) + zone*(2796 - 2774), 1, 0,
                 new List<string> {"Off", "MS", "Wave Sequence"}, this);
             return parameter.Value;
@@ -190,17 +190,17 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
 
             // Take PBK2 differences into account.
             if (((KronosProgramBank) (Parent)).Pbk2PcgOffset != 0)
             {
-                for (var parameterIndex = 0;
+                for (int parameterIndex = 0;
                     parameterIndex < KronosProgramBanks.ParametersInPbk2Chunk;
                     parameterIndex++)
                 {
-                    var patchIndex = ((KronosProgramBank) Parent).GetParameterOffsetInPbk2(Index, parameterIndex);
-                    var otherPatchIndex = ((KronosProgramBank) otherPatch.Parent).GetParameterOffsetInPbk2(Index,
+                    int patchIndex = ((KronosProgramBank) Parent).GetParameterOffsetInPbk2(Index, parameterIndex);
+                    int otherPatchIndex = ((KronosProgramBank) otherPatch.Parent).GetParameterOffsetInPbk2(Index,
                         parameterIndex);
 
                     diffs += (Util.GetInt(PcgRoot.Content, patchIndex, 1) !=
@@ -223,19 +223,19 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IClipBoardPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var otherProgram = otherPatch as ClipBoardProgram;
+            ClipBoardProgram otherProgram = otherPatch as ClipBoardProgram;
             Debug.Assert(otherProgram != null);
 
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
 
             // Take PBK2 differences into account.
             if (((KronosProgramBank) (Parent)).Pbk2PcgOffset != 0)
             {
-                for (var parameterIndex = 0;
+                for (int parameterIndex = 0;
                     parameterIndex < KronosProgramBanks.ParametersInPbk2Chunk;
                     parameterIndex++)
                 {
-                    var patchIndex = ((KronosProgramBank) Parent).GetParameterOffsetInPbk2(Index, parameterIndex);
+                    int patchIndex = ((KronosProgramBank) Parent).GetParameterOffsetInPbk2(Index, parameterIndex);
                     diffs += (Util.GetInt(PcgRoot.Content, patchIndex, 1) !=
                               otherProgram.KronosOs1516Content[parameterIndex])
                         ? 1
@@ -264,8 +264,8 @@ namespace PcgTools.Model.KronosSpecific.Synth
             IWaveSequence waveSequence = null;
             if (GetZoneMsType(osc, zone) == EMode.WaveSequence)
             {
-                var parameter = new IntParameter();
-                var waveSequenceByteOffset = GetZoneMsByteOffset(osc, zone);
+                IntParameter parameter = new IntParameter();
+                int waveSequenceByteOffset = GetZoneMsByteOffset(osc, zone);
                 int bankIndex;
                 int patchIndex;
 
@@ -311,10 +311,10 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <returns></returns>
         private EMode GetZoneMsType(int osc, int zone)
         {
-            var offset = ByteOffset + 2774 + osc*(3240 - 2774) +
+            int offset = ByteOffset + 2774 + osc*(3240 - 2774) +
                          zone*(2796 - 2774);
 
-            var parameter = new IntParameter();
+            IntParameter parameter = new IntParameter();
             parameter.Set(Root, Root.Content, offset, 1, 0, false, null);
             int value = parameter.Value;
             EMode mode;
@@ -381,9 +381,9 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <returns></returns>
         int GetWaveSequenceIndex(IWaveSequence waveSequence)
         {
-            var bank = (IWaveSequenceBank) waveSequence.Parent;
+            IWaveSequenceBank bank = (IWaveSequenceBank) waveSequence.Parent;
 
-            var index = PcgRoot.WaveSequenceBanks.BankCollection.TakeWhile(
+            int index = PcgRoot.WaveSequenceBanks.BankCollection.TakeWhile(
                 bankIterator => bank != bankIterator).Sum(bankIterator => bankIterator.Patches.Count);
 
             index += waveSequence.Index;
@@ -407,7 +407,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
             {
                 case Models.EOsVersion.Kronos10_11: // FALL THROUGH
                 case Models.EOsVersion.Kronos15_16:
-                    var bankIndex = ((IBank) waveSequence.Parent).Index;
+                    int bankIndex = ((IBank) waveSequence.Parent).Index;
                     if (bankIndex >= 0x40)
                     {
                         bankIndex -= 0x40; // 40..46.. U-A..U-G

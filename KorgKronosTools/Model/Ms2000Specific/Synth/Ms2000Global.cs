@@ -59,7 +59,7 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         {
             string name;
 
-            var mode = (Ms2000Program.EMode) (((IProgram) patch).GetParam(ParameterNames.ProgramParameterName.Mode).Value);
+            Ms2000Program.EMode mode = (Ms2000Program.EMode) (((IProgram) patch).GetParam(ParameterNames.ProgramParameterName.Mode).Value);
 
             switch (mode)
             {

@@ -34,7 +34,7 @@ namespace PcgTools.ClipBoard
         {
             OriginalLocation = drumKit;
 
-            var memory = drumKit.Root as PcgMemory;
+            PcgMemory memory = drumKit.Root as PcgMemory;
             if ((memory != null) && (memory.PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16))
             {
                 KronosOs1516Bank = Util.GetInt(memory.Content, ((KronosDrumKit) drumKit).Drk2BankOffset, 1);

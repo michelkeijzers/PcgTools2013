@@ -14,8 +14,8 @@ namespace PCG_Tools_Unittests
 
         private static void Run(string fileName)
         {
-            var korgFileReader = new KorgFileReader();
-            var memory = korgFileReader.Read(PcgDirectory + fileName);
+            KorgFileReader korgFileReader = new KorgFileReader();
+            PcgTools.Model.Common.Synth.MemoryAndFactory.IMemory memory = korgFileReader.Read(PcgDirectory + fileName);
             Assert.IsNotNull(memory);
         }
 /*

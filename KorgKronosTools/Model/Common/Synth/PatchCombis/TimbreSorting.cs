@@ -41,9 +41,9 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <param name="sortKeys"></param>
         public static void SortBy(List<Timbre> timbres, IEnumerable<ESortKey> sortKeys)
         {
-            var comparers = new CompositeComparer<Timbre>();
+            CompositeComparer<Timbre> comparers = new CompositeComparer<Timbre>();
 
-            foreach (var key in sortKeys)
+            foreach (ESortKey key in sortKeys)
             {
                 comparers.Comparers.Add(new TimbreComparer(key));
             }

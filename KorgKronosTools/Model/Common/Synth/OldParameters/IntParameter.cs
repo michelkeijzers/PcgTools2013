@@ -171,8 +171,8 @@ namespace PcgTools.Model.Common.Synth.OldParameters
             Debug.Assert(_highBit == 7);
             Debug.Assert(_lowBit == 0);
 
-            var byte0 = PcgMemory.Content[PcgOffset];
-            var byte1 = PcgMemory.Content[PcgOffset + 1];
+            byte byte0 = PcgMemory.Content[PcgOffset];
+            byte byte1 = PcgMemory.Content[PcgOffset + 1];
 
             if (_msbToLsb)
             {
@@ -213,7 +213,7 @@ namespace PcgTools.Model.Common.Synth.OldParameters
             if ((_msbToLsb && BitConverter.IsLittleEndian) ||
                 (!_msbToLsb && !BitConverter.IsLittleEndian))
             {
-                var bytes = new List<byte>(byteArray);
+                List<byte> bytes = new List<byte>(byteArray);
                 bytes.Reverse();
             }
         }

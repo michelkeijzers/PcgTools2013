@@ -27,7 +27,7 @@ namespace PcgTools.Model.TrinitySpecific.Synth
         /// </summary>
         protected override void CreateBanks()
         {
-            foreach (var id in new[] { "A" })
+            foreach (string id in new[] { "A" })
             {
                 Add(new TrinityDrumKitBank(this, BankType.EType.Int, id, -1));
             }

@@ -67,12 +67,12 @@ namespace PcgTools.Tools
         /// <param name="changes"></param>
         void ChangeReferences(ICollection<KeyValuePair<IPatch, IPatch>> changes)
         {
-            var ruleNumber = 0;
-            var currentPercentage = 0;
-            foreach (var rule in changes)
+            int ruleNumber = 0;
+            int currentPercentage = 0;
+            foreach (KeyValuePair<IPatch, IPatch> rule in changes)
             {
                 ruleNumber++;
-                var newPercentage = (int) ((ruleNumber*100.0)/changes.Count);
+                int newPercentage = (int) ((ruleNumber*100.0)/changes.Count);
                 if (currentPercentage != newPercentage)
                 {
                     OnProgress(newPercentage);
@@ -92,11 +92,11 @@ namespace PcgTools.Tools
         /// <param name="rule"></param>
         private void ChangeReferencesInSetListSlots(KeyValuePair<IPatch, IPatch> rule)
         {
-            foreach (var setList in _memory.SetLists.BankCollection.Where(setList => setList.IsFilled))
+            foreach (IBank setList in _memory.SetLists.BankCollection.Where(setList => setList.IsFilled))
             {
-                for (var index = 0; index < setList.Patches.Count; index++)
+                for (int index = 0; index < setList.Patches.Count; index++)
                 {
-                    var setListSlot = (ISetListSlot) setList[index];
+                    ISetListSlot setListSlot = (ISetListSlot) setList[index];
                     if ((setListSlot.SelectedPatchType == SetListSlot.PatchType.Program) &&
                         (setListSlot.UsedPatch == rule.Key) &&
                         !_processedSetListSlots.Contains(setListSlot))
@@ -115,7 +115,7 @@ namespace PcgTools.Tools
         /// <param name="rule"></param>
         private void ChangeReferencesInCombis(KeyValuePair<IPatch, IPatch> rule)
         {
-            foreach (var combi in from combiBank in _memory.CombiBanks.BankCollection 
+            foreach (ICombi combi in from combiBank in _memory.CombiBanks.BankCollection 
                                   where combiBank.IsFilled from ICombi combi in combiBank.Patches select combi)
             {
                 ChangeReferencesInTimbres(rule, combi);
@@ -130,7 +130,7 @@ namespace PcgTools.Tools
         /// <param name="combi"></param>
         private void ChangeReferencesInTimbres(KeyValuePair<IPatch, IPatch> rule, ICombi combi)
         {
-            foreach (var timbre in combi.Timbres.TimbresCollection.Where(timbre => timbre.UsedProgram == rule.Key))
+            foreach (ITimbre timbre in combi.Timbres.TimbresCollection.Where(timbre => timbre.UsedProgram == rule.Key))
             {
                 if (((timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value == "Off") ||
                      (timbre.GetParam(ParameterNames.TimbreParameterName.Status).Value == "Int")) &&
@@ -164,7 +164,7 @@ namespace PcgTools.Tools
         {
             if (OnProgressHandler != null)
             {
-                var args = new ProgressChangedEventArgs(percentage, null);
+                ProgressChangedEventArgs args = new ProgressChangedEventArgs(percentage, null);
                 OnProgressHandler(args);
             }
         }

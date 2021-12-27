@@ -27,7 +27,7 @@ namespace PcgTools.Model.KromeExSpecific.Synth
         protected override void CreateBanks()
         {
             //                          0    1    2    3    4    5
-            foreach (var id in new[] { "A", "B", "C", "D", "E", "F" })
+            foreach (string id in new[] { "A", "B", "C", "D", "E", "F" })
             {
                 Add(new KromeExCombiBank(this, BankType.EType.Int, id, -1));
             }

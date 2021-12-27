@@ -24,7 +24,7 @@ namespace PcgTools.Model.Kross2Specific.Synth
         public Kross2Timbres(Combi combi)
             : base(combi, TimbresOffsetConstant)
         {
-            for (var n = 0; n < TimbresPerCombi; n++)
+            for (int n = 0; n < TimbresPerCombi; n++)
             {
                 TimbresCollection.Add(new Kross2Timbre(this, n));
             }

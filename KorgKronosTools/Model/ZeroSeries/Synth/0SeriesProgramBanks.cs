@@ -28,8 +28,8 @@ namespace PcgTools.Model.ZeroSeries.Synth
         protected override void CreateBanks()
         {
             // Add internal banks.
-            var pcgId = 0;
-            foreach (var id in new[] {"A", "B", "C", "D"})
+            int pcgId = 0;
+            foreach (string id in new[] {"A", "B", "C", "D"})
             {
                 Add(
                     new ZeroSeriesProgramBank(
@@ -38,7 +38,7 @@ namespace PcgTools.Model.ZeroSeries.Synth
             }
 
             // Add virtual banks for raw disk image file.
-            for (var id = 0; id <= 4; id++)
+            for (int id = 0; id <= 4; id++)
             {
                 Add(new ZeroSeriesProgramBank(
                         this, BankType.EType.Virtual, $"V{id + 1}", pcgId, 

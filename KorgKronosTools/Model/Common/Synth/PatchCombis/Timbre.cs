@@ -102,7 +102,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         public void SetNotifications()
         {
-            var masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(Root.Model);
+            MasterFiles.MasterFile masterFile = MasterFiles.MasterFiles.Instances.FindMasterFile(Root.Model);
             if ((masterFile != null) && !PcgRoot.FileName.IsEqualFileAs(masterFile.FileName))
             {
                 masterFile.PropertyChanged += OnMasterPcgFilePropertyChanged;
@@ -184,7 +184,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             get
             {
-                var param = GetParam(ParameterNames.TimbreParameterName.MidiChannel);
+                IParameter param = GetParam(ParameterNames.TimbreParameterName.MidiChannel);
                 return ((param != null) && (param.Value == ParameterValues.MidiChannelGch)); 
             }
         }
@@ -228,7 +228,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
             get
             {
                 // If Combi.Id seems to be null, check in the call stack if bank.IsWritable() should be added.
-                var pcgData = Combi.PcgRoot.Content;
+                byte[] pcgData = Combi.PcgRoot.Content;
                 return pcgData == null ? null : (IProgramBank) (PcgRoot.ProgramBanks.GetBankWithPcgId(UsedProgramBankId));
             }
             protected set
@@ -263,7 +263,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                     return null;
                 }
 
-                var programId = UsedProgramId;
+                int programId = UsedProgramId;
                 if (programId >= UsedProgramBank.Patches.Count)
                 {
                     // This can happen if a non complete bank is loaded and the remainder is removed
@@ -271,14 +271,14 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                     return null;
                 }
 
-                var program = (Program) UsedProgramBank[programId];
+                Program program = (Program) UsedProgramBank[programId];
                 if (!UsedProgramBank.IsWritable && ((ProgramBank) (program.Bank)).Type != BankType.EType.Gm)
                 {
                     // Try to find it in the master file.
-                    var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                    IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                     if ((masterPcgMemory != null) && (masterPcgMemory.FileName != Root.FileName))
                     {
-                        var programBank = masterPcgMemory.ProgramBanks.BankCollection.FirstOrDefault(
+                        IBank programBank = masterPcgMemory.ProgramBanks.BankCollection.FirstOrDefault(
                             item => (item.PcgId == UsedProgramBank.PcgId) && item.IsFilled);
                         return programBank == null ? null : programBank[programId] as Program;
                     }
@@ -302,7 +302,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             get
             {
-                var parent = Parent;
+                INavigable parent = Parent;
                 if (parent is SongTimbres)
                 {
                     return ByteOffset;
@@ -355,7 +355,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// </summary>
         public virtual void Clear()
         {
-            var memory = (PcgMemory) Root;
+            PcgMemory memory = (PcgMemory) Root;
             if (memory.AssignedClearProgram == null)
             {
                 UsedProgram = (Program) (((ProgramBank) (PcgRoot.ProgramBanks[0]))[0]);
@@ -377,7 +377,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
             GetParam(ParameterNames.TimbreParameterName.TopKey).Value = 0;
             GetParam(ParameterNames.TimbreParameterName.BottomVelocity).Value = 0;
             GetParam(ParameterNames.TimbreParameterName.TopVelocity).Value = 0;
-            var parameter = GetParam(ParameterNames.TimbreParameterName.OscMode);
+            IParameter parameter = GetParam(ParameterNames.TimbreParameterName.OscMode);
             if (parameter != null)
             {
                 parameter.Value = "Mono";
@@ -435,13 +435,13 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
             {
                 if (Parent is ISongTimbres) // 'this' is normal timbre
                 {
-                    var rawBankIndex = ProgramRawBankIndex;
-                    var rawProgramIndex = ProgramRawIndex;
+                    int rawBankIndex = ProgramRawBankIndex;
+                    int rawProgramIndex = ProgramRawIndex;
                     return Root.ProgramIdByIndex(rawBankIndex, rawProgramIndex);
                 }
                 else
                 {
-                    var usedProgram = UsedProgram;
+                    IProgram usedProgram = UsedProgram;
                     return usedProgram == null ? Strings.Unknown : usedProgram.Id;
                 }
             }
@@ -481,7 +481,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             get
             {
-                var usedProgram = UsedProgram;
+                IProgram usedProgram = UsedProgram;
                 return usedProgram == null ? Strings.Unknown : UsedProgram.Name;
             }
         }
@@ -496,7 +496,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             get
             {
-                var usedProgram = UsedProgram;
+                IProgram usedProgram = UsedProgram;
                 return usedProgram == null ? Strings.Unknown : UsedProgram.CategoryAsName;
             }
         }
@@ -511,7 +511,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             get
             {
-                var usedProgram = UsedProgram;
+                IProgram usedProgram = UsedProgram;
                 return usedProgram == null ? Strings.Unknown : UsedProgram.SubCategoryAsName;
             }
         }
@@ -628,7 +628,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             get
             {
-                var parameter = GetParam(ParameterNames.TimbreParameterName.Portamento);
+                IParameter parameter = GetParam(ParameterNames.TimbreParameterName.Portamento);
                 return parameter == null ? "-" :
                            (string) ParameterValues.GetStringValue(ParameterNames.TimbreParameterName.Portamento, parameter.Value);
             }
@@ -662,10 +662,10 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                 }
 
                 // Use the global setting, if not available, check the Master PCG file, else use just the number.
-                var global = FindGlobal();
+                IGlobal global = FindGlobal();
 
                 // Return either the value if no global/Master file pressent otherwise the name.
-                var category = (global == null)
+                dynamic category = (global == null)
                                    ? UsedProgram.GetParam(ParameterNames.ProgramParameterName.Category).Value.ToString()
                                    : global.GetCategoryName(UsedProgram);
 
@@ -696,7 +696,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                 }
 
                 // Use the global setting, if not available, check the Master PCG file, else use just the number.
-                var global = FindGlobal();
+                IGlobal global = FindGlobal();
 
                 // Return either the value if no global/Master file pressent otherwise the name.
                 return (global == null)
@@ -722,15 +722,15 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
                 if (UsedProgram.ByteOffset == 0)
                 {
                     // Find master PCG memory (except when file is master file itself).
-                    var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                    IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                     if ((masterPcgMemory != null) && (masterPcgMemory.FileName != Root.FileName))
                     {
                         // Iterate through bank IDs.
-                        var masterBank =
+                        IBank masterBank =
                             masterPcgMemory.ProgramBanks.BankCollection.FirstOrDefault(bank => bank.Id == UsedProgramBank.Id);
                         if (masterBank != null)
                         {
-                            var masterProgram = masterBank[UsedProgram.Index];
+                            IPatch masterProgram = masterBank[UsedProgram.Index];
                             return masterProgram.Name;
                         }
 
@@ -811,11 +811,11 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <returns></returns>
         private IGlobal FindGlobal()
         {
-            var global = PcgRoot.Global;
+            IGlobal global = PcgRoot.Global;
             if (global == null)
             {
                 // Find master PCG memory (except when file is master file itself).
-                var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                 if ((masterPcgMemory != null) && (masterPcgMemory.FileName != Root.FileName))
                 {
                     global = masterPcgMemory.Global;
@@ -870,10 +870,10 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             get
             {
-                var usedProgram = UsedProgram;
+                IProgram usedProgram = UsedProgram;
                 if (usedProgram != null)
                 {
-                    var category = usedProgram.GetParam(ParameterNames.ProgramParameterName.Category);
+                    IParameter category = usedProgram.GetParam(ParameterNames.ProgramParameterName.Category);
                     return ((category != null) && category.Value.ToString().ToUpper().Contains("DRUM"));
                 }
 

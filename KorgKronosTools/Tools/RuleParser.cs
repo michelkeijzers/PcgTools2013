@@ -57,9 +57,9 @@ namespace PcgTools.Tools
         /// </summary>
         public void Parse(string rules)
         {
-            var lines = rules.Split('\n');
-            var lineNumber = 0;
-            foreach (var trimmedLine2 in from line in lines select line.Trim() 
+            string[] lines = rules.Split('\n');
+            int lineNumber = 0;
+            foreach (string trimmedLine2 in from line in lines select line.Trim() 
                                              into trimmedLine select trimmedLine.Replace("->", ">") 
                                              into trimmedLine1 select trimmedLine1.Replace("=>", ">"))
             {
@@ -95,20 +95,20 @@ namespace PcgTools.Tools
                 return;
             }
 
-            var parts = trimmedLine.Split('>');
+            string[] parts = trimmedLine.Split('>');
             if ((parts.Count() != 2) || parts.Any(part => part.Length == 0))
             {
                 return;
             }
 
-            var parser = new ProgramPatchParser(_memory);
-            var fromPatches = parser.Parse(parts[0]);
+            ProgramPatchParser parser = new ProgramPatchParser(_memory);
+            List<IPatch> fromPatches = parser.Parse(parts[0]);
             if (fromPatches == null)
             {
                 return;
             }
 
-            var toPatches = parser.Parse(parts[1], fromPatches);
+            List<IPatch> toPatches = parser.Parse(parts[1], fromPatches);
             if (toPatches == null)
             {
                 return;
@@ -120,7 +120,7 @@ namespace PcgTools.Tools
                 return;
             }
             
-            for (var index = 0; index < fromPatches.Count; index++)
+            for (int index = 0; index < fromPatches.Count; index++)
             {
                 _parsedRules[fromPatches[index]] = toPatches[index];
             }

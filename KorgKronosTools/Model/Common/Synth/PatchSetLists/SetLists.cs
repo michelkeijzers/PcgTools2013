@@ -45,9 +45,9 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// </summary>
         void FillSetLists()
         {
-            foreach (var setList in BankCollection)
+            foreach (IBank setList in BankCollection)
             {
-                for (var index = 0; index < setList.NrOfPatches; index++)
+                for (int index = 0; index < setList.NrOfPatches; index++)
                 {
                     setList.CreatePatch(index);
                 }
@@ -61,7 +61,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// <param name="changes"></param>
         public void ChangeProgramReferences(Dictionary<IProgram, IProgram> changes)
         {
-            foreach (var setListSlot in BankCollection.Where(
+            foreach (IPatch setListSlot in BankCollection.Where(
                 bank => bank.IsFilled).SelectMany(bank => bank.Patches).Where(
                     setListSlot => (setListSlot.IsLoaded) &&
                                    (((ISetListSlot) setListSlot).SelectedPatchType == SetListSlot.PatchType.Program) &&
@@ -80,7 +80,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         public void ChangeCombiReferences(Dictionary<ICombi, ICombi> changes)
         {
             foreach (
-                var setListSlot in
+                IPatch setListSlot in
                     BankCollection.Where(bank => bank.IsFilled)
                         .SelectMany(bank => bank.Patches)
                         .Where(setListSlot => (setListSlot.IsLoaded) &&

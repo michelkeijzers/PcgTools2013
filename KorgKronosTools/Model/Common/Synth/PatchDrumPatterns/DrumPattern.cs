@@ -85,7 +85,7 @@ namespace PcgTools.Model.Common.Synth.PatchDrumPatterns
         {
             get
             {
-                var builder = new StringBuilder();
+                StringBuilder builder = new StringBuilder();
                 if (IsEmptyOrInit)
                 {
                     builder.Append(Strings.EmptyOrInitPatchName);

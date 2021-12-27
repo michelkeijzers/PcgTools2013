@@ -29,12 +29,12 @@ namespace PcgTools.Model.KronosSpecific.Synth
         {
             Add(new KronosDrumKitBank(this, BankType.EType.Int, "INT", -1));
 
-            foreach (var id in new[] { "U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G" })
+            foreach (string id in new[] { "U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G" })
             {
                 Add(new KronosDrumKitBank(this, BankType.EType.User, id, -1));
             }
 
-            foreach (var id in new[] { "U-AA", "U-BB", "U-CC", "U-DD", "U-EE", "U-FF", "U-GG" })
+            foreach (string id in new[] { "U-AA", "U-BB", "U-CC", "U-DD", "U-EE", "U-FF", "U-GG" })
             {
                 Add(new KronosDrumKitBank(this, BankType.EType.User, id, -1));
             }

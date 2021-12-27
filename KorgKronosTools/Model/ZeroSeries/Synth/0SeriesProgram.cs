@@ -48,11 +48,11 @@ namespace PcgTools.Model.ZeroSeries.Synth
                     return string.Empty;
                 }
 
-                var name = new StringBuilder();
+                StringBuilder name = new StringBuilder();
 
-                for (var index = 0; index < MaxNameLength; index++)
+                for (int index = 0; index < MaxNameLength; index++)
                 {
-                    var character = PcgRoot.Content[ByteOffset + index];
+                    byte character = PcgRoot.Content[ByteOffset + index];
                     // A 0 does not mean end of string.
                     name.Append((character == 0x00) ? ' ' : (char) character);
                 }
@@ -119,7 +119,7 @@ namespace PcgTools.Model.ZeroSeries.Synth
                     break;
 
                 case ParameterNames.ProgramParameterName.Category:
-                    var fixedParameter = new FixedParameter();
+                    FixedParameter fixedParameter = new FixedParameter();
                     fixedParameter.Set(PcgRoot, PcgRoot.Content, FixedParameter.EType.Category, this);
                     parameter = fixedParameter;
                     break;

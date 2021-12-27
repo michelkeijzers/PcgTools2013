@@ -19,9 +19,9 @@ namespace PcgTools.Model.MSpecific.Synth
         {
             // Override the Id set by the base class, since for M-models, the index-part of the Id seems to
             // continue into the next bank (it does not restart at 000 for the first DrumKit in the bank).
-            var drumKitBankIndex = PcgRoot.DrumKitBanks.BankCollection.IndexOf(drumKitBank);
+            int drumKitBankIndex = PcgRoot.DrumKitBanks.BankCollection.IndexOf(drumKitBank);
             Debug.Assert(drumKitBankIndex >= 0);
-            var indexInId = index;
+            int indexInId = index;
             if (drumKitBankIndex > 0) // M-synths have one INT drumkit bank
             {
                 //IMPR Check if difference is needed.

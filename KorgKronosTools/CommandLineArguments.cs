@@ -134,7 +134,7 @@ namespace PcgTools
         {
             _parameters = new List<string>();
             _options = new Dictionary<string, string>();
-            for (var i = 0; i < arguments.Count; i++)
+            for (int i = 0; i < arguments.Count; i++)
             {
                 if (arguments[i].StartsWith("-"))
                 {
@@ -227,7 +227,7 @@ namespace PcgTools
         /// </summary>
         void ParseOptions()
         {
-            foreach (var optionPair in _options)
+            foreach (KeyValuePair<string, string> optionPair in _options)
             {
                 ParseOption(optionPair);
 
@@ -406,7 +406,7 @@ namespace PcgTools
         private void ParseOptionDlmnod(KeyValuePair<string, string> optionPair)
         {
             {
-                var diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
+                ListGeneratorDifferencesList diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
                 if (diffListGenerator == null)
                 {
                     throw new CommandLineArgumentException(
@@ -425,7 +425,7 @@ namespace PcgTools
         private void ParseOptionDlipn(KeyValuePair<string, string> optionPair)
         {
             {
-                var diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
+                ListGeneratorDifferencesList diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
                 if (diffListGenerator == null)
                 {
                     throw new CommandLineArgumentException(
@@ -444,7 +444,7 @@ namespace PcgTools
         private void ParseOptionDlislsd(KeyValuePair<string, string> optionPair)
         {
             {
-                var diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
+                ListGeneratorDifferencesList diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
                 if (diffListGenerator == null)
                 {
                     throw new CommandLineArgumentException(
@@ -463,7 +463,7 @@ namespace PcgTools
         private void ParseOptionDlsbd(KeyValuePair<string, string> optionPair)
         {
             {
-                var diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
+                ListGeneratorDifferencesList diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
                 if (diffListGenerator == null)
                 {
                     throw new CommandLineArgumentException(
@@ -637,7 +637,7 @@ namespace PcgTools
         /// </summary>
         private void SetDefaultsListGeneratorDifferencesList()
         {
-            var diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
+            ListGeneratorDifferencesList diffListGenerator = ListGenerator as ListGeneratorDifferencesList;
             Debug.Assert(diffListGenerator != null);
 
             if (!_options.Keys.Contains("-dlmnod"))
@@ -808,7 +808,7 @@ namespace PcgTools
         /// <returns></returns>
         static bool GetBooleanOptionValue(KeyValuePair<string, string> optionPair)
         {
-            var matchedValue = GetMatch(new List<string> {"1", "ON", "TRUE", "0", "OFF", "FALSE"}, optionPair.Value);
+            string matchedValue = GetMatch(new List<string> {"1", "ON", "TRUE", "0", "OFF", "FALSE"}, optionPair.Value);
             return (new List<string> {"1", "ON", "TRUE"}).Contains(matchedValue);
         }
 
@@ -841,18 +841,18 @@ namespace PcgTools
         /// <returns></returns>
         static List<string> GetBankNamesOptionValue(KeyValuePair<string, string> optionPair)
         {
-            var bankNames = new string[0];
+            string[] bankNames = new string[0];
 
-            var banks = optionPair.Value.Trim().ToUpper();
+            string banks = optionPair.Value.Trim().ToUpper();
             if (banks != "NONE")
             {
                 bankNames = banks.Split(',');
             }
 
-            var adaptedBankNames = new List<string>();
-            foreach (var bank in bankNames)
+            List<string> adaptedBankNames = new List<string>();
+            foreach (string bank in bankNames)
             {
-                var adaptedBankName = bank.Trim().ToUpper();
+                string adaptedBankName = bank.Trim().ToUpper();
                 GetBankNameOptionValue(optionPair, adaptedBankName, bank);
 
                 adaptedBankNames.Add(adaptedBankName);
@@ -932,7 +932,7 @@ namespace PcgTools
         static string GetMatch(ICollection<string> values, string valueToFind)
         {
             Debug.Assert(values.Count > 0);
-            var upperValues = (from value in values select value.ToUpper()).ToList();
+            List<string> upperValues = (from value in values select value.ToUpper()).ToList();
             valueToFind = valueToFind.ToUpper();
             string matchedValue;
 
@@ -944,7 +944,7 @@ namespace PcgTools
             else
             {
                 // Remove all values not starting with the value to find.
-                var startingValues = (from value in upperValues where value.StartsWith(valueToFind) select value).ToList();
+                List<string> startingValues = (from value in upperValues where value.StartsWith(valueToFind) select value).ToList();
 
                 if (startingValues.Count == 0)
                 {
@@ -967,7 +967,7 @@ namespace PcgTools
         /// </summary>
         private void ShowHelp()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.AppendLine("pcgtools.exe [options] pcg_file_name list_type sub_list_type output_file_name\n");
             builder.AppendLine("where:");
             builder.AppendLine("  pcg_file_name          File name of the PCG file name [options].");

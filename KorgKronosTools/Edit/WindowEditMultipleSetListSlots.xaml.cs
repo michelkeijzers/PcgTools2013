@@ -78,7 +78,7 @@ namespace PcgTools.Edit
         /// </summary>
         private void Check()
         {
-            var usedSize = textBoxName.Text.Length;
+            int usedSize = textBoxName.Text.Length;
             labelNameLength.Content = string.Format(Strings.XOfYCharacters_editw, usedSize, _patch.MaxNameLength);
             labelError.Content = EditUtils.CheckText(textBoxName.Text, _patch.MaxNameLength, EditUtils.ECheckType.Name);
         
@@ -86,8 +86,8 @@ namespace PcgTools.Edit
             if (labelError.Content.Equals(string.Empty))
             {
                 // Set length.
-                var usedDescriptionSize = textBoxDescription.Text.Length;
-                var maxDescriptionLength = _patch.MaxDescriptionLength;
+                int usedDescriptionSize = textBoxDescription.Text.Length;
+                int maxDescriptionLength = _patch.MaxDescriptionLength;
                 labelDescriptionLength.Text =
                     $"{usedDescriptionSize} of {maxDescriptionLength} characters";
 

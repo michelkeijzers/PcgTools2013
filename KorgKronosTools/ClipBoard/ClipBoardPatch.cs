@@ -39,7 +39,7 @@ namespace PcgTools.ClipBoard
 
             Data = new byte[size];
 
-            for (var index = 0; index < size; index++)
+            for (int index = 0; index < size; index++)
             {
                 Data[index] = data[index + offset];
             }

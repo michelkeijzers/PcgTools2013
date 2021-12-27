@@ -148,7 +148,7 @@ namespace PcgTools.Model.Common.Synth.Meta
         /// </summary>
         public virtual int IndexOfBank(IBank bank)
         {
-            for (var index = 0; index < BankCollection.Count; index++)
+            for (int index = 0; index < BankCollection.Count; index++)
             {
                 if (BankCollection[index] == bank)
                 {

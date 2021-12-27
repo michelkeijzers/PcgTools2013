@@ -115,7 +115,7 @@ namespace PcgTools.Model.TrinitySpecific.Synth
         /// </summary>
         public override void Clear()
         {
-            var memory = (IPcgMemory)Root;
+            IPcgMemory memory = (IPcgMemory)Root;
             if (memory.AssignedClearProgram == null)
             {
                 UsedProgram = (IProgram)(PcgRoot.ProgramBanks[0][0]);

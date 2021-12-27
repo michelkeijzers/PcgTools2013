@@ -29,12 +29,12 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// </summary>
         protected override void CreateBanks()
         {
-            foreach (var id in new[] { "I-A", "I-B", "I-C", "I-D", "I-E", "I-F", "I-G" })
+            foreach (string id in new[] { "A", "B", "C", "D", "E", "F" })
             {
                 Add(new NautilusCombiBank(this, BankType.EType.Int, id, -1));
             }
 
-            foreach (var id in new[] { "U-A", "U-B", "U-C", "U-D", "U-E", "U-F", "U-G" })
+            foreach (string id in new[] { "G", "H", "I", "J", "K", "L", "M", "N" })
             {
                 Add(new NautilusCombiBank(this, BankType.EType.User, id, -1));
             }
@@ -63,11 +63,11 @@ namespace PcgTools.Model.NautilusSpecific.Synth
 #pragma warning restore 1570
         protected override void CreateVirtualBanks()
         {
-            var bankNames = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+            List<char> bankNames = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
 
-            for (var bankGroupIndex = 0; bankGroupIndex < 8; bankGroupIndex++)
+            for (int bankGroupIndex = 0; bankGroupIndex < 8; bankGroupIndex++)
             {
-                foreach (var bankName in bankNames)
+                foreach (char bankName in bankNames)
                 {
                     Add(
                         new NautilusCombiBank(

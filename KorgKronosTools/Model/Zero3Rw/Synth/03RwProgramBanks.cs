@@ -28,8 +28,8 @@ namespace PcgTools.Model.Zero3Rw.Synth
         protected override void CreateBanks()
         {
             // Add internal banks.
-            var pcgId = 0;
-            foreach (var id in new[] {"A"}) // Banks C and D not used in file, pretending everything is in A.
+            int pcgId = 0;
+            foreach (string id in new[] {"A"}) // Banks C and D not used in file, pretending everything is in A.
             {
                 Add(
                     new Zero3RwProgramBank(

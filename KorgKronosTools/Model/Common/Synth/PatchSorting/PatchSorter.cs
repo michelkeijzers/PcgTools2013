@@ -32,7 +32,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         {
             string title;
 
-            var splitIndex = SplitIndex(patch);
+            int splitIndex = SplitIndex(patch);
 
             if (splitIndex == -1)
             {
@@ -60,7 +60,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         {
             string artist;
 
-            var splitIndex = SplitIndex(patch);
+            int splitIndex = SplitIndex(patch);
 
             if (splitIndex == -1)
             {
@@ -100,7 +100,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         /// <param name="sortOrder"></param>
         public static void SortBy(List<IPatch> patches, SortOrder sortOrder)
         {
-            var comparers = new CompositeComparer<IPatch>();
+            CompositeComparer<IPatch> comparers = new CompositeComparer<IPatch>();
             comparers.Comparers.Add(EmptyOrInitComparer.Instance);
 
             switch (sortOrder)
@@ -161,21 +161,21 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         /// <returns></returns>
         private static int SplitIndex(IPatch patch)
         {
-            var splitIndex = -1;
+            int splitIndex = -1;
 
-            var defaultSplitCharacter = Settings.Default.Sort_SplitCharacter;
+            string defaultSplitCharacter = Settings.Default.Sort_SplitCharacter;
 
             Debug.Assert(!string.IsNullOrEmpty(defaultSplitCharacter));
             Debug.Assert(defaultSplitCharacter.Length == 1);
-            var splitCharacter = defaultSplitCharacter[0];
+            char splitCharacter = defaultSplitCharacter[0];
 
-            var maxSpacesAroundFoundSplitIndex = 0;
+            int maxSpacesAroundFoundSplitIndex = 0;
 
-            for (var index = 0; index < patch.Name.Length; index++)
+            for (int index = 0; index < patch.Name.Length; index++)
             {
                 if (patch.Name[index] == splitCharacter)
                 {
-                    var spacesAroundIndex = patch.Name.CountCharsAroundIndex(index, ' ');
+                    int spacesAroundIndex = patch.Name.CountCharsAroundIndex(index, ' ');
                     if (spacesAroundIndex >= maxSpacesAroundFoundSplitIndex)
                     {
                         // Select that index;

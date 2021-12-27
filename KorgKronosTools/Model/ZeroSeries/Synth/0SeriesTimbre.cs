@@ -58,7 +58,7 @@ namespace PcgTools.Model.ZeroSeries.Synth
             get
             {
                 // Programs can only be from bank C..D (combis C/D point to programs C/D only).
-                var value = Combi.PcgRoot.Content[TimbresOffset]; // Program No.
+                byte value = Combi.PcgRoot.Content[TimbresOffset]; // Program No.
                 return (value <= 100) ? 2 : 3; // 0-100: Bank C, 64..C7: Bank D
             }
         }

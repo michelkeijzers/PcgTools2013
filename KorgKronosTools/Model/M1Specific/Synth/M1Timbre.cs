@@ -59,7 +59,7 @@ namespace PcgTools.Model.M1Specific.Synth
             get
             {
                 // Get combi type: 0=Single, 1=Layer, 2=SPlit, 3=Vel-SW, 4=Multi.
-                var combiType = Combi.PcgRoot.Content[Combi.ByteOffset + 10];
+                byte combiType = Combi.PcgRoot.Content[Combi.ByteOffset + 10];
 
                 int bankId;
                 if (combiType == 4) // Multi

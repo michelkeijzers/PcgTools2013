@@ -40,8 +40,8 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         /// <returns></returns>
         public override int Compare(IPatch p1, IPatch p2)
         {
-            var patch1 = p1 as IArtistable;
-            var patch2 = p2 as IArtistable;
+            IArtistable patch1 = p1 as IArtistable;
+            IArtistable patch2 = p2 as IArtistable;
 
             if ((patch1 == null) || (patch2 == null))
             {

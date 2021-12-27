@@ -123,7 +123,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         {
             SetPatches(p1, p2);
 
-            var compare = HandlePatchesWithoutCategories();
+            int compare = HandlePatchesWithoutCategories();
 
             if (compare == 0)
             {
@@ -264,8 +264,8 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         private static int HandleOnlyOneHasCategory()        
         {
 
-            var p1HasCategory = PatchHasCategory(_p1);
-            var p2HasCategory = PatchHasCategory(_p2);
+            bool p1HasCategory = PatchHasCategory(_p1);
+            bool p2HasCategory = PatchHasCategory(_p2);
 
             if (p1HasCategory && !p2HasCategory)
             {
@@ -305,8 +305,8 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
         /// <returns></returns>
         private static int HandleGmPrograms()
         {
-            var p1IsGm = (_p1 is Program) && (((IBank) (_p1).Parent).Type == BankType.EType.Gm);
-            var p2IsGm = (_p2 is Program) && (((IBank) (_p2).Parent).Type == BankType.EType.Gm);
+            bool p1IsGm = (_p1 is Program) && (((IBank) (_p1).Parent).Type == BankType.EType.Gm);
+            bool p2IsGm = (_p2 is Program) && (((IBank) (_p2).Parent).Type == BankType.EType.Gm);
 
             if (p1IsGm)
             {
@@ -364,7 +364,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
             
             if (_hasCategoryNames)
             {
-                var program = p1 as Program;
+                Program program = p1 as Program;
                 _p1CategoryName = program != null ? program.CategoryAsName : ((Combi) p1).CategoryAsName;
             }
 
@@ -381,7 +381,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
 
                 if (_hasCategoryNames)
                 {
-                    var program = p1 as Program;
+                    Program program = p1 as Program;
                     _p1SubCategoryName = program != null ? program.SubCategoryAsName : ((Combi) p1).SubCategoryAsName;
                 }
             }
@@ -406,7 +406,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
 
             if (_hasCategoryNames)
             {
-                var program = p2 as Program;
+                Program program = p2 as Program;
                 _p2CategoryName = program != null ? program.CategoryAsName : ((Combi) p2).CategoryAsName;
             }
 
@@ -423,7 +423,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
 
                 if (_hasCategoryNames)
                 {
-                    var program = p2 as Program;
+                    Program program = p2 as Program;
                     _p2SubCategoryName = program != null ? program.SubCategoryAsName : ((Combi) p2).SubCategoryAsName;
                 }
             }

@@ -78,13 +78,13 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             int order;
             {
-                var values = new List<string> {"Int", "On", "Both", "Off", "Ext", "Ex2"};
+                List<string> values = new List<string> {"Int", "On", "Both", "Off", "Ext", "Ex2"};
 
-                var p1Status = p1.GetParam(ParameterNames.TimbreParameterName.Status).Value;
-                var p1Value = values.IndexOf(p1Status);
+                dynamic p1Status = p1.GetParam(ParameterNames.TimbreParameterName.Status).Value;
+                dynamic p1Value = values.IndexOf(p1Status);
 
-                var p2Status = p2.GetParam(ParameterNames.TimbreParameterName.Status).Value;
-                var p2Value = values.IndexOf(p2Status);
+                dynamic p2Status = p2.GetParam(ParameterNames.TimbreParameterName.Status).Value;
+                dynamic p2Value = values.IndexOf(p2Status);
 
                 order = (p1Value < p2Value) ? -1 : p1Value > p2Value ? 1 : 0;
             }
@@ -102,11 +102,11 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         {
             int order;
             {
-                var p1Mute = p1.GetParam(ParameterNames.TimbreParameterName.Mute);
-                var p1Value = (p1Mute == null) ? false : p1Mute.Value; // If not existing, it is not muted
+                IParameter p1Mute = p1.GetParam(ParameterNames.TimbreParameterName.Mute);
+                dynamic p1Value = (p1Mute == null) ? false : p1Mute.Value; // If not existing, it is not muted
 
-                var p2Mute = p2.GetParam(ParameterNames.TimbreParameterName.Mute);
-                var p2Value = (p2Mute == null) ? false : p2Mute.Value; // If not existing, it is not muted
+                IParameter p2Mute = p2.GetParam(ParameterNames.TimbreParameterName.Mute);
+                dynamic p2Value = (p2Mute == null) ? false : p2Mute.Value; // If not existing, it is not muted
 
                 order = p1Value ? (p2Value ? 0 : 1) : (p2Value ? -1 : 0); // Unmuted first
             }

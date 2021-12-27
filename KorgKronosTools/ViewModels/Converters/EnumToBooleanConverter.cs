@@ -21,7 +21,7 @@ namespace PcgTools.ViewModels.Converters
         {
             // You could also directly pass an enum value using {x:Static}, 
             // then there is no need to parse 
-            var parameterString = parameter as string;
+            string parameterString = parameter as string;
             if (parameterString == null)
                 return DependencyProperty.UnsetValue;
 
@@ -44,7 +44,7 @@ namespace PcgTools.ViewModels.Converters
         /// <returns></returns>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var parameterString = parameter as string;
+            string parameterString = parameter as string;
             if (parameterString == null)
                 return DependencyProperty.UnsetValue;
 

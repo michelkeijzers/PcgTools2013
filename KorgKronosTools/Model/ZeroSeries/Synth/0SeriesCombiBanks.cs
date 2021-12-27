@@ -28,14 +28,14 @@ namespace PcgTools.Model.ZeroSeries.Synth
         protected override void CreateBanks()
         {
             //                          0 
-            foreach (var id in new[] { "A", "B", "C", "D" })
+            foreach (string id in new[] { "A", "B", "C", "D" })
             {
                 Add(new ZeroSeriesCombiBank(this, BankType.EType.Int, id, -1));
             }
 
 
             // Add virtual banks for raw disk image file.
-            for (var id = 0; id <= 4; id++)
+            for (int id = 0; id <= 4; id++)
             {
                 Add(new ZeroSeriesCombiBank(this, BankType.EType.Virtual, $"V{id + 1}", -1));
             }

@@ -32,7 +32,7 @@ namespace PCG_Tools_Unittests
 
         protected void TestAll(string path)
         {
-            var korgFileReader = new KorgFileReader();
+            KorgFileReader korgFileReader = new KorgFileReader();
             _pcgMemory = (PcgMemory) korgFileReader.Read(DefaultDirectory + path);
 
             Debug.Assert(_pcgMemory != null);
@@ -44,10 +44,10 @@ namespace PCG_Tools_Unittests
             TestDefaultFileContentList();
 
             // Swap program (if there is more than one program).
-            var programBanks = _pcgMemory.ProgramBanks;
+            IProgramBanks programBanks = _pcgMemory.ProgramBanks;
             if (programBanks != null)
             {
-                var programBank = (ProgramBank) programBanks[0];
+                ProgramBank programBank = (ProgramBank) programBanks[0];
 
                 if (programBank.IsFilled && programBank.IsWritable && (programBank.CountPatches > 1))
                 {
@@ -56,10 +56,10 @@ namespace PCG_Tools_Unittests
             }
 
             // Swap combi (if there is more than one combi).
-            var combiBanks = _pcgMemory.CombiBanks;
+            ICombiBanks combiBanks = _pcgMemory.CombiBanks;
             if (combiBanks != null)
             {
-                var combiBank = (CombiBank) combiBanks[0];
+                CombiBank combiBank = (CombiBank) combiBanks[0];
                 if (combiBank.IsFilled && combiBank.IsWritable && (combiBank.CountPatches > 1))
                 {
                     _pcgMemory.SwapPatch(combiBank[0], combiBank[1]);
@@ -67,10 +67,10 @@ namespace PCG_Tools_Unittests
             }
 
             // Swap set list slot.
-            var setLists = _pcgMemory.SetLists;
+            ISetLists setLists = _pcgMemory.SetLists;
             if (setLists != null)
             {
-                var setList0 = (SetList) setLists[0];
+                SetList setList0 = (SetList) setLists[0];
                 if (setList0.IsFilled && setList0.IsWritable)
                 {
                     _pcgMemory.SwapPatch((SetListSlot) (setList0[0]), (SetListSlot) (setList0[1]));
@@ -134,7 +134,7 @@ namespace PCG_Tools_Unittests
 
             if (_pcgMemory.ProgramBanks != null)
             {
-                foreach (var item in _pcgMemory.ProgramBanks.BankCollection)
+                foreach (IBank item in _pcgMemory.ProgramBanks.BankCollection)
                 {
                     _generator.SelectedProgramBanks.Add((IProgramBank)item);
                 }
@@ -145,7 +145,7 @@ namespace PCG_Tools_Unittests
             _generator.SelectedCombiBanks = new ObservableBankCollection<ICombiBank>();
             if (_pcgMemory.CombiBanks != null)
             {
-                foreach (var item in _pcgMemory.CombiBanks.BankCollection)
+                foreach (IBank item in _pcgMemory.CombiBanks.BankCollection)
                 {
                     _generator.SelectedCombiBanks.Add((ICombiBank)item);
                 }

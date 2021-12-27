@@ -28,7 +28,7 @@ namespace PcgTools.Model.Zero3Rw.Synth
         protected override void CreateBanks()
         {
             //                          0 
-            foreach (var id in new[] { "A" }) // Pretending all is in A bank
+            foreach (string id in new[] { "A" }) // Pretending all is in A bank
             {
                 Add(new Zero3RwCombiBank(this, BankType.EType.Int, id, -1));
             }

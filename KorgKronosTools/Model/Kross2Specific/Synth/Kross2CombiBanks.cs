@@ -28,12 +28,12 @@ namespace PcgTools.Model.Kross2Specific.Synth
         protected override void CreateBanks()
         {
             // Do not remove UNUSED banks, otherwise the ID to bank mapping is incorrect.
-            foreach (var id in new[] {"A", "B", "C", "D", "UNUSED", "UNUSED", "UNUSED" })
+            foreach (string id in new[] {"A", "B", "C", "D", "UNUSED", "UNUSED", "UNUSED" })
             {
                 Add(new Kross2CombiBank(this, BankType.EType.Int, id, -1));
             }
 
-            foreach (var id in new[] {"UA", "UB", "UC", "UD"})
+            foreach (string id in new[] {"UA", "UB", "UC", "UD"})
             {
                 Add(new Kross2CombiBank(this, BankType.EType.User, id, -1));
             }

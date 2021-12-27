@@ -28,7 +28,7 @@ namespace PcgTools.Model.M3rSpecific.Synth
         protected override void CreateBanks()
         {
             //                          0 
-            foreach (var id in new[] { "I", "C" })
+            foreach (string id in new[] { "I", "C" })
             {
                 Add(new M3RCombiBank(this, BankType.EType.Int, id, -1));
             }

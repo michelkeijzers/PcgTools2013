@@ -28,7 +28,7 @@ namespace PcgTools.Model.TritonLeSpecific.Synth
         protected override void CreateBanks()
         {
             //                          0    1    2 
-            foreach (var id in new[] { "A", "B", "C" })
+            foreach (string id in new[] { "A", "B", "C" })
             {
                 Add(new TritonLeCombiBank(this, BankType.EType.Int, id, -1));
             }

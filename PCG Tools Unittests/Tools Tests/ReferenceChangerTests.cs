@@ -21,23 +21,23 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void ChangeCombi()
         {
-            var pcg = CreatePcg();
-            var programIa000 = (IProgram) pcg.ProgramBanks[0][0];
-            var combiIa000 = (ICombi) (pcg.CombiBanks[0])[0];
+            IPcgMemory pcg = CreatePcg();
+            IProgram programIa000 = (IProgram) pcg.ProgramBanks[0][0];
+            ICombi combiIa000 = (ICombi) (pcg.CombiBanks[0])[0];
             combiIa000.Name = "NonEmpty";
 
             combiIa000.Timbres.TimbresCollection[0].UsedProgram = programIa000;
             
             // Set most virtual banks loaded to save time.
-            foreach (var bank in pcg.CombiBanks.BankCollection.Where(
+            foreach (IBank bank in pcg.CombiBanks.BankCollection.Where(
                 bank => (bank.Type == BankType.EType.Virtual) && (bank.Id !="V-0A")))
             {
                 bank.IsLoaded = false;
             }
 
             // Run actual test.
-            var referenceChanger = new ReferenceChanger(pcg);
-            var ruleParser = new RuleParser(pcg);
+            ReferenceChanger referenceChanger = new ReferenceChanger(pcg);
+            RuleParser ruleParser = new RuleParser(pcg);
             referenceChanger.ParseRules(ruleParser, "I-A000->I-B000");
             referenceChanger.ChangeReferences();
 
@@ -51,14 +51,14 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void ChangeSetListSlot()
         {
-            var pcg = CreatePcg();
-            var programIa000 = (IProgram)pcg.ProgramBanks[0][0];
-            var setListSlot000000 = (ISetListSlot)(pcg.SetLists[0])[0];
+            IPcgMemory pcg = CreatePcg();
+            IProgram programIa000 = (IProgram)pcg.ProgramBanks[0][0];
+            ISetListSlot setListSlot000000 = (ISetListSlot)(pcg.SetLists[0])[0];
             setListSlot000000.SelectedPatchType = SetListSlot.PatchType.Program;
             setListSlot000000.UsedPatch = programIa000;
 
-            var referenceChanger = new ReferenceChanger(pcg);
-            var ruleParser = new RuleParser(pcg);
+            ReferenceChanger referenceChanger = new ReferenceChanger(pcg);
+            RuleParser ruleParser = new RuleParser(pcg);
             referenceChanger.ParseRules(ruleParser, "I-A000->I-B000");
             referenceChanger.ChangeReferences();
 
@@ -72,20 +72,20 @@ namespace PCG_Tools_Unittests
         [TestMethod]
         public void ChangeSetListSlotNotTooMany()
         {
-            var pcg = CreatePcg();
+            IPcgMemory pcg = CreatePcg();
 
-            var programIa000 = (IProgram)pcg.ProgramBanks[0][0];
-            var setListSlot000000 = (ISetListSlot)(pcg.SetLists[0])[0];
+            IProgram programIa000 = (IProgram)pcg.ProgramBanks[0][0];
+            ISetListSlot setListSlot000000 = (ISetListSlot)(pcg.SetLists[0])[0];
             setListSlot000000.SelectedPatchType = SetListSlot.PatchType.Program;
             setListSlot000000.UsedPatch = programIa000;
 
-            var programIa001 = (IProgram)pcg.ProgramBanks[0][1];
-            var setListSlot000001 = (ISetListSlot)(pcg.SetLists[0])[1];
+            IProgram programIa001 = (IProgram)pcg.ProgramBanks[0][1];
+            ISetListSlot setListSlot000001 = (ISetListSlot)(pcg.SetLists[0])[1];
             setListSlot000001.SelectedPatchType = SetListSlot.PatchType.Program;
             setListSlot000001.UsedPatch = programIa001;
 
-            var referenceChanger = new ReferenceChanger(pcg);
-            var ruleParser = new RuleParser(pcg);
+            ReferenceChanger referenceChanger = new ReferenceChanger(pcg);
+            RuleParser ruleParser = new RuleParser(pcg);
             referenceChanger.ParseRules(ruleParser, "I-A000->I-B000");
             referenceChanger.ChangeReferences();
 
@@ -105,16 +105,16 @@ namespace PCG_Tools_Unittests
             memory.Model = new Model(Models.EModelType.Kronos, Models.EOsVersion.Kronos3x, "3.0");
             memory.Content = new byte[10000000]; // Enough for timbre parameters
 
-            var byteOffset = 1000;
+            int byteOffset = 1000;
             
             memory.ProgramBanks = new KronosProgramBanks(memory);
             memory.ProgramBanks.Fill();
 
-            foreach (var bank in memory.ProgramBanks.BankCollection)
+            foreach (IBank bank in memory.ProgramBanks.BankCollection)
             {
                 bank.IsLoaded = true;
 
-                foreach (var patch in bank.Patches)
+                foreach (IPatch patch in bank.Patches)
                 {
                     patch.ByteOffset = byteOffset;
                     byteOffset += 100;
@@ -124,11 +124,11 @@ namespace PCG_Tools_Unittests
             memory.CombiBanks = new KronosCombiBanks(memory);
             memory.CombiBanks.Fill();
 
-            foreach (var bank in memory.CombiBanks.BankCollection)
+            foreach (IBank bank in memory.CombiBanks.BankCollection)
             {
                 bank.IsLoaded = true;
 
-                foreach (var patch in bank.Patches)
+                foreach (IPatch patch in bank.Patches)
                 {
                     patch.ByteOffset = byteOffset;
                     byteOffset += 100;
@@ -138,11 +138,11 @@ namespace PCG_Tools_Unittests
             memory.SetLists = new KronosSetLists(memory);
             memory.SetLists.Fill();
             
-            foreach (var bank in memory.SetLists.BankCollection)
+            foreach (IBank bank in memory.SetLists.BankCollection)
             {
                 bank.IsLoaded = true;
 
-                foreach (var patch in bank.Patches)
+                foreach (IPatch patch in bank.Patches)
                 {
                     patch.ByteOffset = byteOffset;
                     byteOffset += 100;

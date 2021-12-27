@@ -58,7 +58,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         public bool ClearPatches(IPcgViewModel pcgViewModel, List<IPatch> selectedPatches)
         {
             _pcgViewModel = pcgViewModel;
-            var atLeastOnePatchUsedAsReference =
+            bool atLeastOnePatchUsedAsReference =
                 selectedPatches.OfType<IReferencable>().Any(reference => reference.NumberOfReferences > 0);
 
             bool clearUnusedPatches;
@@ -70,9 +70,9 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 return false;
             }
 
-            var atLeastOnePatchCleared = false;
+            bool atLeastOnePatchCleared = false;
 
-            foreach (var patch in selectedPatches.Where(
+            foreach (IPatch patch in selectedPatches.Where(
                 patch => !(patch is IReferencable) || // Set list slots
                          ((((IReferencable) patch).NumberOfReferences > 0) && clearUsedPatches) || // Used patch
                          ((((IReferencable) patch).NumberOfReferences == 0) && clearUnusedPatches))) // Unused patch
@@ -155,7 +155,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
                 return false;
             }
 
-            var result = _pcgViewModel.ShowMessageBox(
+            WindowUtils.EMessageBoxResult result = _pcgViewModel.ShowMessageBox(
                 Strings.ClearWarning, Strings.PcgTools, WindowUtils.EMessageBoxButton.YesNoCancel,
                 WindowUtils.EMessageBoxImage.Warning, WindowUtils.EMessageBoxResult.Cancel);
 
@@ -188,13 +188,13 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// <returns>True if at least one patch cleared</returns>
         internal bool ClearDuplicatesPatches(PcgViewModel pcgViewModel, List<IPatch> selectedPatches)
         {
-            var atLeastOneCleared = false;
+            bool atLeastOneCleared = false;
 
-            var reversedSelectedPatches = selectedPatches;
+            List<IPatch> reversedSelectedPatches = selectedPatches;
             reversedSelectedPatches.Reverse();
-            foreach (var patch in reversedSelectedPatches)
+            foreach (IPatch patch in reversedSelectedPatches)
             {
-                var firstDuplicate = patch.FirstDuplicate;
+                IPatch firstDuplicate = patch.FirstDuplicate;
                 if (firstDuplicate != null)
                 {
                     ((IReferencable) (patch)).ChangeReferences(firstDuplicate);

@@ -85,7 +85,7 @@ namespace PcgTools.Model.Common.File
             IMemory memory = null;
             if (Content != null)
             {
-                var factory = Factory;
+                Factory factory = Factory;
 
                 memory = ReadContent(fileName, factory);
             }
@@ -220,7 +220,7 @@ namespace PcgTools.Model.Common.File
         /// <returns></returns>
         private IMemory ReadContent(string fileName, IFactory factory)
         {
-            var memory = ReadFileContent(fileName, factory);
+            IMemory memory = ReadFileContent(fileName, factory);
             RemoveExcessivePatches(memory);
             SetParameters(memory);
 
@@ -279,8 +279,8 @@ namespace PcgTools.Model.Common.File
         /// <returns></returns>
         private IMemory ReadSysexLikeContent(string fileName, IFactory factory)
         {
-            var client = new Client(factory, fileName);
-            var fileReader = factory.CreateFileReader(client.PcgMemory, Content);
+            Client client = new Client(factory, fileName);
+            IPatchesFileReader fileReader = factory.CreateFileReader(client.PcgMemory, Content);
             fileReader.ReadContent(FileType, ModelType);
 
             return client.PcgMemory;
@@ -296,8 +296,8 @@ namespace PcgTools.Model.Common.File
         private IMemory ReadSngContent(string fileName, IFactory factory)
         {
             IMemory memory = null;
-            var client = new Client(factory, fileName);
-            var sngFileReader = factory.CreateSongFileReader(client.SongMemory, Content);
+            Client client = new Client(factory, fileName);
+            ISongFileReader sngFileReader = factory.CreateSongFileReader(client.SongMemory, Content);
             if (sngFileReader != null)
             {
                 sngFileReader.ReadChunks();
@@ -315,8 +315,8 @@ namespace PcgTools.Model.Common.File
         /// <returns></returns>
         private IMemory ReadPcgContent(string fileName, IFactory factory)
         {
-            var client = new Client(factory, fileName);
-            var fileReader = factory.CreateFileReader(client.PcgMemory, Content);
+            Client client = new Client(factory, fileName);
+            IPatchesFileReader fileReader = factory.CreateFileReader(client.PcgMemory, Content);
             fileReader.ReadContent(FileType, ModelType);
 
             // If global is not read, set it to null.
@@ -339,7 +339,7 @@ namespace PcgTools.Model.Common.File
             {
                 memory.MemoryFileType = FileType;
 
-                var pcgMemory = memory as PcgMemory;
+                PcgMemory pcgMemory = memory as PcgMemory;
                 if (pcgMemory != null)
                 {
                     RemoveExcessivePatches(pcgMemory);
@@ -356,7 +356,7 @@ namespace PcgTools.Model.Common.File
         {
             if (memory != null)
             {
-                var pcgMemory = memory as PcgMemory;
+                PcgMemory pcgMemory = memory as PcgMemory;
                 if (pcgMemory != null)
                 {
                     pcgMemory.SetParameters();
@@ -384,13 +384,13 @@ namespace PcgTools.Model.Common.File
         {
             if (memory.ProgramBanks != null)
             {
-                foreach (var bank in memory.ProgramBanks.BankCollection.Where(
+                foreach (IBank bank in memory.ProgramBanks.BankCollection.Where(
                     bank =>
                         (bank.Type != BankType.EType.Gm) &&
                         (bank.Type != BankType.EType.Virtual) &&
                         (bank.CountWritablePatches > 0)))
                 {
-                    for (var patchIndex = bank.Patches.Count - 1; patchIndex >= 0; patchIndex--)
+                    for (int patchIndex = bank.Patches.Count - 1; patchIndex >= 0; patchIndex--)
                     {
                         if (!bank[patchIndex].IsLoaded)
                         {
@@ -410,11 +410,11 @@ namespace PcgTools.Model.Common.File
         {
             if (memory.CombiBanks != null)
             {
-                foreach (var bank in memory.CombiBanks.BankCollection.Where(bank => (
+                foreach (IBank bank in memory.CombiBanks.BankCollection.Where(bank => (
                     bank.Type != BankType.EType.Virtual &&
                     bank.CountWritablePatches > 0)))
                 {
-                    for (var patchIndex = bank.Patches.Count - 1; patchIndex >= 0; patchIndex--)
+                    for (int patchIndex = bank.Patches.Count - 1; patchIndex >= 0; patchIndex--)
                     {
                         if (!bank[patchIndex].IsLoaded)
                         {
@@ -614,7 +614,7 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         private void ReadBnkFile()
         {
-            var index = 0;
+            int index = 0;
             if (Util.GetChars(Content, index, 4) != "FORM")
             {
                 throw new NotSupportedException("Unsupported format");
@@ -624,7 +624,7 @@ namespace PcgTools.Model.Common.File
 
             while (true)
             {
-                var chunkName = Util.GetChars(Content, index, 4);
+                string chunkName = Util.GetChars(Content, index, 4);
                 if (chunkName == "BODY")
                 {
                     index += 8; // Skip BODY and chunk size
@@ -904,7 +904,7 @@ namespace PcgTools.Model.Common.File
                 throw new NotSupportedException("Unsupported MIDI format");
             }
 
-            var index = 14;
+            int index = 14;
             do
             {
                 index = ReadMidiFileContent(index);
@@ -933,10 +933,10 @@ namespace PcgTools.Model.Common.File
             // Data         : 00 00 01 30 00 F0    82 28 42      30           58     40 ...
             // Meaning      : <-Length--> ?? SysEx ?? ?? Korg ID MIDI Channel MS2000 CurrentProgram
 
-            var trackLength = Util.GetInt(Content, index, 4); // Track length, not used
+            int trackLength = Util.GetInt(Content, index, 4); // Track length, not used
             index += 4;
 
-            var length = 0;
+            int length = 0;
             if (trackLength < 0x100) // Just some random number lower than a patch size
             {
                 index += trackLength;
@@ -1220,17 +1220,17 @@ namespace PcgTools.Model.Common.File
         /// <param name="index"></param>
         private void SkipMetaMessages(ref int index)
         {
-            var continueParsing = true;
+            bool continueParsing = true;
 
             while (continueParsing)
             {
-                var savedOffset = index;
+                int savedOffset = index;
                 ReadVariableLengthQuality(ref index); // Ignore return variable: delta time
                 if (Content[index] == 0xFF)
                 {
                     // Meta event, containing: FF <type> <length> <bytes>
                     index += 2;  // Ignore type (2 bytes)
-                    var length = ReadVariableLengthQuality(ref index);
+                    int length = ReadVariableLengthQuality(ref index);
                     index += length;
                 }
                 else

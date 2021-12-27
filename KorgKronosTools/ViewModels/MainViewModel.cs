@@ -32,7 +32,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public const string Version = "3.2.0";
+        public const string Version = "3.2.1";
 
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace PcgTools.ViewModels
                 Strings.All);
 
             // Create folder for backup.
-            var dir = PcgToolsApplicationDataDir;
+            string dir = PcgToolsApplicationDataDir;
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
@@ -201,7 +201,7 @@ namespace PcgTools.ViewModels
         /// <returns></returns>
         public IPcgViewModel FindPcgViewModelWithName(string fileName)
         {
-            var childs = (from child in ChildWindows
+            IEnumerable<IPcgViewModel> childs = (from child in ChildWindows
                 where (child.ViewModel is IPcgViewModel) &&
                       (child.ViewModel.SelectedMemory != null) &&
                       (child.ViewModel.SelectedMemory.FileName.IsEqualFileAs(fileName.ToUpper()))
@@ -688,7 +688,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         void OpenFile()
         {
-            var result = OpenFileDialog(Strings.SelectFileToRead, _fileFormats, _lastUsedFilterType, true);
+            dynamic result = OpenFileDialog(Strings.SelectFileToRead, _fileFormats, _lastUsedFilterType, true);
 
             if (!result.Success)
             {
@@ -701,7 +701,7 @@ namespace PcgTools.ViewModels
             {
                 SetCursor(WindowUtils.ECursor.Wait);
 
-                foreach (var fileNameToOpen in result.Files)
+                foreach (dynamic fileNameToOpen in result.Files)
                 {
                     CheckAndOpenFile(fileNameToOpen);
                 }
@@ -797,12 +797,12 @@ namespace PcgTools.ViewModels
         /// </summary>
         private void SaveAsFile()
         {
-            var extension = Path.GetExtension(SelectedMemory.FileName);
+            string extension = Path.GetExtension(SelectedMemory.FileName);
             if (!string.IsNullOrEmpty(extension))
             {
                 extension = extension.Remove(0, 1); // Remove dot at first position
             }
-            var filter = (extension == string.Empty) ?
+            string filter = (extension == string.Empty) ?
                 $"No Extension {Strings.FileSaveDialogFile.ToLower()} (*)|*"
                 :
                              string.Format("{0} {1} (*.{0})|*.{0}", extension, Strings.FileSaveDialogFile.ToLower());
@@ -843,7 +843,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         void RevertToSavedFile()
         {
-            var fileName = CurrentChildViewModel.SelectedMemory.FileName;
+            string fileName = CurrentChildViewModel.SelectedMemory.FileName;
             if (CurrentChildViewModel.Revert())
             {
                 ReadAndShowFile(fileName, false);
@@ -952,7 +952,7 @@ namespace PcgTools.ViewModels
             StatusBarModel = SelectedMemory.Model.ModelAndVersionAsString;
             StatusBarFileType = Memory.FileTypeAsString(SelectedMemory.MemoryFileType);
 
-            var memory = SelectedMemory as IPcgMemory;
+            IPcgMemory memory = SelectedMemory as IPcgMemory;
             if (memory != null)
             {
                 UpdateStatusBarForPcg(memory);
@@ -972,7 +972,7 @@ namespace PcgTools.ViewModels
         {
             StatusBarSongs = string.Empty;
             StatusBarSamples = string.Empty;
-            var pcgMemory = memory;
+            IPcgMemory pcgMemory = memory;
 
             RecalculateStatusBarPrograms(pcgMemory);
 
@@ -987,21 +987,21 @@ namespace PcgTools.ViewModels
             RecalculateStatusBarWaveSequences(pcgMemory);
 
             // Build clipboard text.
-            var nrPrograms = 0;
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            int nrPrograms = 0;
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
                 nrPrograms += PcgClipBoard.Programs[index].CountUncopied;
             }
 
-            var nrCombis = PcgClipBoard.Combis.CountUncopied;
+            int nrCombis = PcgClipBoard.Combis.CountUncopied;
 
-            var nrSetListSlots = PcgClipBoard.SetListSlots.CountUncopied;
+            int nrSetListSlots = PcgClipBoard.SetListSlots.CountUncopied;
 
-            var nrDrumKits = PcgClipBoard.DrumKits.CountUncopied;
+            int nrDrumKits = PcgClipBoard.DrumKits.CountUncopied;
 
-            var nrDrumPatterns = PcgClipBoard.DrumPatterns.CountUncopied;
+            int nrDrumPatterns = PcgClipBoard.DrumPatterns.CountUncopied;
 
-            var nrWaveSequences = PcgClipBoard.WaveSequences.CountUncopied;
+            int nrWaveSequences = PcgClipBoard.WaveSequences.CountUncopied;
 
             // Perhaps only add to statusbar string counts are > 0 to prevent status bar string to become unnecessarily long.
             if ((PcgClipBoard.IsEmpty) ||
@@ -1011,7 +1011,7 @@ namespace PcgTools.ViewModels
             }
             else
             {
-                var builder = UpdateStatusBarForClipBoard(nrCombis, nrSetListSlots, nrDrumKits, nrDrumPatterns, nrWaveSequences);
+                StringBuilder builder = UpdateStatusBarForClipBoard(nrCombis, nrSetListSlots, nrDrumKits, nrDrumPatterns, nrWaveSequences);
 
                 StatusBarClipBoard = builder.ToString();
             }
@@ -1029,13 +1029,13 @@ namespace PcgTools.ViewModels
         /// <returns></returns>
         private StringBuilder UpdateStatusBarForClipBoard(int nrCombis, int nrSetListSlots, int nrDrumKits, int nrDrumPatterns, int nrWaveSequences)
         {
-            var builder = new StringBuilder($"{Strings.Clipboard}: {PcgClipBoard.Model.ModelAndVersionAsString}: ");
+            StringBuilder builder = new StringBuilder($"{Strings.Clipboard}: {PcgClipBoard.Model.ModelAndVersionAsString}: ");
 
             // Add programs.
-            for (var index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
+            for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
-                var uncopied = PcgClipBoard.Programs[index].CountUncopied;
-                var programsString = (uncopied == 1) ? Strings.Program : Strings.Programs;
+                int uncopied = PcgClipBoard.Programs[index].CountUncopied;
+                string programsString = (uncopied == 1) ? Strings.Program : Strings.Programs;
                 if (uncopied > 0)
                 {
                     builder.Append(
@@ -1077,7 +1077,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         private void UpdateStatusBarForSong()
         {
-            var selectedMemory = SelectedMemory as SongMemory;
+            SongMemory selectedMemory = SelectedMemory as SongMemory;
             if (selectedMemory != null)
             {
                 StatusBarPrograms = string.Empty;
@@ -1087,7 +1087,7 @@ namespace PcgTools.ViewModels
                 StatusBarDrumPatterns = string.Empty;
                 StatusBarWaveSequences = string.Empty;
 
-                var songMemory = selectedMemory;
+                SongMemory songMemory = selectedMemory;
                 StatusBarSongs =
                     $"{songMemory.Songs.SongCollection.Count} {(songMemory.Songs.SongCollection.Count == 1 ? Strings.Song : Strings.Songs)}";
                 StatusBarSamples =
@@ -1128,8 +1128,8 @@ namespace PcgTools.ViewModels
             StatusBarWaveSequences = string.Empty;
             if (pcgMemory.WaveSequenceBanks != null)
             {
-                var waveSequences = pcgMemory.WaveSequenceBanks.CountFilledPatches;
-                var waveSequenceBanks = pcgMemory.WaveSequenceBanks.CountFilledBanks;
+                int waveSequences = pcgMemory.WaveSequenceBanks.CountFilledPatches;
+                int waveSequenceBanks = pcgMemory.WaveSequenceBanks.CountFilledBanks;
 
                 switch (waveSequences)
                 {
@@ -1179,8 +1179,8 @@ namespace PcgTools.ViewModels
             StatusBarDrumKits = string.Empty;
             if (pcgMemory.DrumKitBanks != null)
             {
-                var drumKits = pcgMemory.DrumKitBanks.CountFilledPatches;
-                var drumKitBanks = pcgMemory.DrumKitBanks.CountFilledBanks;
+                int drumKits = pcgMemory.DrumKitBanks.CountFilledPatches;
+                int drumKitBanks = pcgMemory.DrumKitBanks.CountFilledBanks;
 
                 switch (drumKits)
                 {
@@ -1228,8 +1228,8 @@ namespace PcgTools.ViewModels
             StatusBarDrumPatterns = string.Empty;
             if (pcgMemory.DrumPatternBanks != null)
             {
-                var drumPatterns = pcgMemory.DrumPatternBanks.CountFilledPatches;
-                var drumPatternBanks = pcgMemory.DrumPatternBanks.CountFilledBanks;
+                int drumPatterns = pcgMemory.DrumPatternBanks.CountFilledPatches;
+                int drumPatternBanks = pcgMemory.DrumPatternBanks.CountFilledBanks;
 
                 switch (drumPatterns)
                 {
@@ -1274,8 +1274,8 @@ namespace PcgTools.ViewModels
 
             if (pcgMemory.SetLists != null)
             {
-                var setListSlots = pcgMemory.SetLists.CountFilledPatches;
-                var setLists = pcgMemory.SetLists.CountFilledBanks;
+                int setListSlots = pcgMemory.SetLists.CountFilledPatches;
+                int setLists = pcgMemory.SetLists.CountFilledBanks;
 
                 switch (setListSlots)
                 {
@@ -1324,8 +1324,8 @@ namespace PcgTools.ViewModels
             StatusBarCombis = string.Empty;
             if (pcgMemory.CombiBanks != null)
             {
-                var combis = pcgMemory.CombiBanks.CountFilledPatches;
-                var combiBanks = pcgMemory.CombiBanks.CountFilledBanks;
+                int combis = pcgMemory.CombiBanks.CountFilledPatches;
+                int combiBanks = pcgMemory.CombiBanks.CountFilledBanks;
 
                 switch (combis)
                 {
@@ -1373,8 +1373,8 @@ namespace PcgTools.ViewModels
             StatusBarPrograms = string.Empty;
             if (pcgMemory.ProgramBanks != null)
             {
-                var programs = pcgMemory.ProgramBanks.CountFilledAndNonEmptyPatches;
-                var programBanks = pcgMemory.ProgramBanks.CountFilledBanks;
+                int programs = pcgMemory.ProgramBanks.CountFilledAndNonEmptyPatches;
+                int programBanks = pcgMemory.ProgramBanks.CountFilledBanks;
 
                 switch (programs)
                 {
@@ -1457,9 +1457,9 @@ namespace PcgTools.ViewModels
 
             if (MasterFilesWindow == null)
             {
-                var width = Settings.Default.UI_MasterFilesWindowWidth == 0 ? 400 : Settings.Default.UI_MasterFilesWindowWidth;
-                var height = Settings.Default.UI_MasterFilesWindowHeight == 0 ? 300 : Settings.Default.UI_MasterFilesWindowHeight;
-                var mdiChild = CreateMdiChildWindow(
+                int width = Settings.Default.UI_MasterFilesWindowWidth == 0 ? 400 : Settings.Default.UI_MasterFilesWindowWidth;
+                int height = Settings.Default.UI_MasterFilesWindowHeight == 0 ? 300 : Settings.Default.UI_MasterFilesWindowHeight;
+                MdiChild mdiChild = CreateMdiChildWindow(
                     Strings.PcgMasterFile, ChildWindowType.MasterFiles, null, width, height); // No memory
                 SelectedMemory = null;
                 MasterFilesWindow = (MasterFilesWindow) (mdiChild.Content);
@@ -1565,7 +1565,7 @@ namespace PcgTools.ViewModels
         {
             ActOnSettingsChanged(""); // ShowSingleLinedSetListSlotDescriptions
 
-            foreach (var child in ChildWindows)
+            foreach (IChildWindow child in ChildWindows)
             {
                 child.ActOnSettingsChanged("");
                     // NumberOfReferences, ShowSingleLinedSetListSlotDescriptions but arguments are ignored
@@ -2079,7 +2079,7 @@ namespace PcgTools.ViewModels
 
             if (App.Arguments[0] == "debug")
             {
-                foreach (var file in App.Arguments.Skip(1)) // Skip 'Debug'
+                foreach (string file in App.Arguments.Skip(1)) // Skip 'Debug'
                 {
                     ReadAndShowFile(file, true);
                 }
@@ -2144,9 +2144,9 @@ namespace PcgTools.ViewModels
         {
             // ReSharper disable once ForCanBeConvertedToForeach
             // Cannot be changed to for loop because CloseView changes the collection.
-            for (var index = 0; index < ChildWindows.Count; index++)
+            for (int index = 0; index < ChildWindows.Count; index++)
             {
-                var childWindow = ChildWindows[index];
+                IChildWindow childWindow = ChildWindows[index];
                 if (childWindow.ViewModel.Close(true))
                 {
                     CloseView();
@@ -2169,9 +2169,9 @@ namespace PcgTools.ViewModels
             // Cannot be changed to for loop because CloseView changes the collection.
             // ReSharper disable once ForCanBeConvertedToForeach
             // ReSharper disable once LoopCanBeConvertedToQuery
-            for (var index = ChildWindows.Count - 1; index >= 0; index--)
+            for (int index = ChildWindows.Count - 1; index >= 0; index--)
             {
-                var childWindow = ChildWindows[index];
+                IChildWindow childWindow = ChildWindows[index];
                 if ((childWindow.ViewModel.SelectedMemory is IPcgMemory) &&
                     (string.Equals(childWindow.ViewModel.SelectedMemory.FileName, fileName, 
                     StringComparison.CurrentCultureIgnoreCase)))
@@ -2194,7 +2194,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         public void OnTimerTick()
         {
-            var backupsCreated = false;
+            bool backupsCreated = false;
 
             try
             {
@@ -2203,7 +2203,7 @@ namespace PcgTools.ViewModels
                 // Create new backups.
                 if (Settings.Default.Settings_AutoBackupFilesEnabled)
                 {
-                    foreach (var window in ChildWindows.Where(
+                    foreach (IChildWindow window in ChildWindows.Where(
                         window => (window is PcgWindow) &&
                                   window.Memory.IsBackupDirty &&
                                   (DateTime.Now - window.Memory.LastSaved >
@@ -2228,8 +2228,8 @@ namespace PcgTools.ViewModels
                 if (backupsCreated)
                 {
                     // Count disk space.
-                    var files = Directory.GetFiles(PcgToolsApplicationDataDir).ToList();
-                    var diskSpace = files.Sum(file => new FileInfo(file).Length);
+                    List<string> files = Directory.GetFiles(PcgToolsApplicationDataDir).ToList();
+                    long diskSpace = files.Sum(file => new FileInfo(file).Length);
 
                     // Sort files.
                     files.Sort(new FileUtils.FileAgeComparer());
@@ -2237,7 +2237,7 @@ namespace PcgTools.ViewModels
                     // Remove oldest file(s) until diskSpace is met.
                     while (diskSpace > Settings.Default.Settings_AutoBackupFilesMaxStorage*1024*1024) // Bytes->MB
                     {
-                        var oldestFile = files[0];
+                        string oldestFile = files[0];
                         diskSpace -= new FileInfo(oldestFile).Length;
                         File.Delete(oldestFile);
                         files.RemoveAt(0);
@@ -2265,23 +2265,23 @@ namespace PcgTools.ViewModels
         /// <returns></returns>
         public int GetFilterIndexOfFile(string extension, string filter)
         {
-            var model = SelectedMemory.Model.ModelAsString;
-            var filterParts = filter.Split('|');
-            var filters = new List<string>();
+            string model = SelectedMemory.Model.ModelAsString;
+            string[] filterParts = filter.Split('|');
+            List<string> filters = new List<string>();
 
-            for (var index = 0; index < filterParts.Length; index += 2)
+            for (int index = 0; index < filterParts.Length; index += 2)
             {
                 // Combine every two filter parts because a filter is made up by two |'s, e.g.: 
                 // "MicroKorg XL {0} (*.mkxl_all,*.syx)|*.mkxl_all;*.syx|" +
                 filters.Add(filterParts[index] + filterParts[index + 1]);
             }
 
-            var foundFilter = filters.FirstOrDefault(filterToCheck => filterToCheck.Contains(model + " ")) ??
+            string foundFilter = filters.FirstOrDefault(filterToCheck => filterToCheck.Contains(model + " ")) ??
                               filters.FirstOrDefault(
                                   filterToCheck => filterToCheck.ToUpper().Contains(extension.ToUpper() + ",") ||
                                                    filterToCheck.ToUpper().Contains(extension.ToUpper() + ")"));
 
-            for (var n = 0; n < filters.Count; n++)
+            for (int n = 0; n < filters.Count; n++)
             {
                 if (filters[n] == foundFilter)
                 {

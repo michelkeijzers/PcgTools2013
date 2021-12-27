@@ -30,7 +30,7 @@ namespace PcgTools.Model.Zero3Rw.Synth
         {
             get
             {
-                var value = Combi.PcgRoot.Content[TimbresOffset];
+                byte value = Combi.PcgRoot.Content[TimbresOffset];
                 return (value < 100) ? 0 : 3; // 2 = Bank A, 3 = GM Bank
             }
         }
@@ -45,7 +45,7 @@ namespace PcgTools.Model.Zero3Rw.Synth
         {
             get 
             {
-                var id = Combi.PcgRoot.Content[TimbresOffset];
+                byte id = Combi.PcgRoot.Content[TimbresOffset];
                 return (id < 100) ? id : id - 100; // -100 if GM
             }
         }

@@ -43,7 +43,7 @@ namespace PcgTools.Model.KrossSpecific.Synth
         /// <returns></returns>
         public override string GetCategoryName(IPatch patch)
         {
-            var category = -1;
+            int category = -1;
             if (patch is IProgram)
             {
                 category = ((IProgram) patch).GetParam(ParameterNames.ProgramParameterName.Category).Value;
@@ -52,7 +52,7 @@ namespace PcgTools.Model.KrossSpecific.Synth
                 category = ((ICombi) patch).GetParam(ParameterNames.CombiParameterName.Category).Value;
             }
 
-            var categories = GetCategoryNames(ECategoryType.Program); // Ignored
+            List<string> categories = GetCategoryNames(ECategoryType.Program); // Ignored
             return categories[category];
         }
 
@@ -64,7 +64,7 @@ namespace PcgTools.Model.KrossSpecific.Synth
         /// <returns></returns>
         public override List<string> GetCategoryNames(ECategoryType type)
         {
-            var categories = new List<string>
+            List<string> categories = new List<string>
             {
                 "PIANO",
                 "E.PIANO",
@@ -94,7 +94,7 @@ namespace PcgTools.Model.KrossSpecific.Synth
         /// <returns></returns>
         protected override int CalcSubCategoryNameOffset(ECategoryType type, int index, int subIndex)
         {
-            var offset = ByteOffset + PcgOffsetCategories;
+            int offset = ByteOffset + PcgOffsetCategories;
 
             // Skip categories; the Kross has no category names in its GLOBAL.
            

@@ -27,7 +27,7 @@ namespace PcgTools.Model.Ms2000Specific.Synth
         protected override void CreateBanks()
         {
             // Add internal banks.
-            foreach (var bankName in new List<string> {"A", "B", "C", "D", "E", "F", "G", "H"})
+            foreach (string bankName in new List<string> {"A", "B", "C", "D", "E", "F", "G", "H"})
             {
                 Add(
                     new Ms2000ProgramBank(
@@ -36,9 +36,9 @@ namespace PcgTools.Model.Ms2000Specific.Synth
             }
 
             // Add virtual banks.
-            for (var set = 0; set < 16; set++) // 15 virtual banks
+            for (int set = 0; set < 16; set++) // 15 virtual banks
             {
-                foreach (var bankName in new List<string> {"A", "B", "C", "D", "E", "F", "G", "H"})
+                foreach (string bankName in new List<string> {"A", "B", "C", "D", "E", "F", "G", "H"})
                 {
                     Add(
                         new Ms2000ProgramBank(

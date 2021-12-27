@@ -127,7 +127,7 @@ namespace PcgTools.Model.Common.Synth.SongsRelated
 
             Timbres = new SongTimbres(this);
 
-            for (var timbreIndex = 0; timbreIndex < reader.NumberOfSongTracks; timbreIndex++)
+            for (int timbreIndex = 0; timbreIndex < reader.NumberOfSongTracks; timbreIndex++)
             {
                 Timbres.TimbresCollection.Add(reader.CreateTimbre(Timbres, timbreIndex));
             }

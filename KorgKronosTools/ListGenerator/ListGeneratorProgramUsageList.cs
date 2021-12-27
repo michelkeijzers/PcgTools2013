@@ -33,7 +33,7 @@ namespace PcgTools.ListGenerator
         /// <returns></returns>
         protected override string RunAfterFilteringBanks(bool useFileWriter = true)
         {
-            using (var writer = File.CreateText(OutputFileName))
+            using (StreamWriter writer = File.CreateText(OutputFileName))
             {
                 //var programDict = new Dictionary<Program, List<Combi>> ();
                 _dict = new Dictionary<Tuple<IProgramBank, IProgram>, LinkedList<IPatch>>();
@@ -64,10 +64,10 @@ namespace PcgTools.ListGenerator
         void CreateDictionary()
         {
             if (_dict == null) throw new ArgumentNullException();
-            foreach (var programBank in SelectedProgramBanks)
+            foreach (IProgramBank programBank in SelectedProgramBanks)
             {
-                var bank = programBank;
-                foreach (var patch in (from program in programBank.Patches
+                IProgramBank bank = programBank;
+                foreach (IPatch patch in (from program in programBank.Patches
                                          where !((IBank) (program.Parent)).IsLoaded || 
                                          (((IBank) (program.Parent)).IsLoaded && (!IgnoreInitPrograms || !program.IsEmptyOrInit))
                     select program).Where(program => !IgnoreFirstProgram ||
@@ -83,7 +83,7 @@ namespace PcgTools.ListGenerator
                             ((ListFilterOnFavorites == FilterOnFavorites.Yes) && 
                             ((IProgram)program).GetParam(ParameterNames.ProgramParameterName.Favorite).Value))))
                 {
-                    var program = (IProgram) patch;
+                    IProgram program = (IProgram) patch;
                     _dict.Add(new Tuple<IProgramBank, IProgram>(programBank, program), new LinkedList<IPatch>());
                 }
             }
@@ -112,18 +112,18 @@ namespace PcgTools.ListGenerator
         /// </summary>
         private void FillDictionaryWithCombis()
         {
-            foreach (var combiBank in SelectedCombiBanks)
+            foreach (ICombiBank combiBank in SelectedCombiBanks)
             {
-                foreach (var combi in combiBank.Patches)
+                foreach (IPatch combi in combiBank.Patches)
                 {
                     if (!combiBank.IsLoaded || (IgnoreInitCombis && combi.IsEmptyOrInit))
                     {
                         continue;
                     }
 
-                    var combi1 = combi;
-                    var bank = combiBank;
-                    foreach (var key in from timbre in ((ICombi) combi).Timbres.TimbresCollection
+                    IPatch combi1 = combi;
+                    ICombiBank bank = combiBank;
+                    foreach (Tuple<IProgramBank, IProgram> key in from timbre in ((ICombi) combi).Timbres.TimbresCollection
                         where !bank.IsLoaded || (bank.IsLoaded && !IgnoreMutedOffTimbres ||
                                                       (((timbre.GetParam(ParameterNames.TimbreParameterName.Mute) == null) ||
                                                       !timbre.GetParam(ParameterNames.TimbreParameterName.Mute).Value) &&
@@ -142,7 +142,7 @@ namespace PcgTools.ListGenerator
 
         private void FillDictionaryWithSetListSlots()
         {
-            for (var setListIndex = 0; setListIndex < 128; setListIndex++)
+            for (int setListIndex = 0; setListIndex < 128; setListIndex++)
             {
                 if ((setListIndex < SetListsRangeFrom) ||
                     (setListIndex > SetListsRangeTo))
@@ -150,16 +150,16 @@ namespace PcgTools.ListGenerator
                     continue;
                 }
 
-                var setList = ((ISetList) PcgMemory.SetLists[setListIndex]);
-                foreach (var setListSlot in setList.Patches.Where(
+                ISetList setList = ((ISetList) PcgMemory.SetLists[setListIndex]);
+                foreach (IPatch setListSlot in setList.Patches.Where(
                     setListSlot => setList.IsLoaded && !setListSlot.IsEmptyOrInit))
                 {
                     switch (((ISetListSlot) setListSlot).SelectedPatchType)
                     {
                         case SetListSlot.PatchType.Program:
                         {
-                            var usedProgramBank = ((ISetListSlot) setListSlot).UsedPatch.Parent as IProgramBank;
-                            var key = new Tuple<IProgramBank, IProgram>(usedProgramBank,
+                                IProgramBank usedProgramBank = ((ISetListSlot) setListSlot).UsedPatch.Parent as IProgramBank;
+                                Tuple<IProgramBank, IProgram> key = new Tuple<IProgramBank, IProgram>(usedProgramBank,
                                 ((ISetListSlot) setListSlot).UsedPatch as IProgram);
 
                             if (_dict.ContainsKey(key) && !_dict[key].Contains(setListSlot))
@@ -181,7 +181,7 @@ namespace PcgTools.ListGenerator
         void WriteToFile(TextWriter writer)
         {
             string columnText;
-            var maxTimbresPerCombi = PrintHeader(writer, out columnText);
+            int maxTimbresPerCombi = PrintHeader(writer, out columnText);
 
             PrintLines(writer, maxTimbresPerCombi, columnText);
 
@@ -197,7 +197,7 @@ namespace PcgTools.ListGenerator
         /// <returns></returns>
         private int PrintHeader(TextWriter writer, out string columnText)
         {
-            var maxTimbresPerCombi = (from programBank in SelectedProgramBanks
+            int maxTimbresPerCombi = (from programBank in SelectedProgramBanks
                 from program in programBank.Patches
                 select
                     new Tuple<IProgramBank, IProgram>(programBank, (IProgram) program)
@@ -245,9 +245,9 @@ namespace PcgTools.ListGenerator
         /// <param name="columnText"></param>
         private void PrintLines(TextWriter writer, int maxTimbresPerCombi, string columnText)
         {
-            foreach (var programBank in SelectedProgramBanks)
+            foreach (IProgramBank programBank in SelectedProgramBanks)
             {
-                foreach (var program in programBank.Patches)
+                foreach (IPatch program in programBank.Patches)
                 {
                     PrintLine(writer, maxTimbresPerCombi, columnText, programBank, program);
                 }
@@ -266,7 +266,7 @@ namespace PcgTools.ListGenerator
         private void PrintLine(TextWriter writer, int maxTimbresPerCombi, string columnText, IProgramBank programBank,
             IPatch program)
         {
-            var key = new Tuple<IProgramBank, IProgram>(programBank, (Program) program);
+            Tuple<IProgramBank, IProgram> key = new Tuple<IProgramBank, IProgram>(programBank, (Program) program);
             if (!_dict.ContainsKey(key) || (_dict[key].Count <= 0))
             {
                 return;
@@ -308,7 +308,7 @@ namespace PcgTools.ListGenerator
             Tuple<IProgramBank, IProgram> key)
         {
             writer.Write("|{0,-8}|", program.Id);
-            foreach (var item in _dict[key])
+            foreach (IPatch item in _dict[key])
             {
                 writer.Write("{0,-8} ", item.Id);
             }
@@ -327,7 +327,7 @@ namespace PcgTools.ListGenerator
         private void PrintTextLine(TextWriter writer, IPatch program, Tuple<IProgramBank, IProgram> key)
         {
             writer.Write("{0,-8}: ", program.Id);
-            foreach (var item in _dict[key])
+            foreach (IPatch item in _dict[key])
             {
                 writer.Write("{0,-8} ", item.Id);
             }
@@ -344,7 +344,7 @@ namespace PcgTools.ListGenerator
         private void PrintCsvLine(TextWriter writer, IPatch program, Tuple<IProgramBank, IProgram> key)
         {
             writer.Write("{0},", program.Id);
-            foreach (var item in _dict[key])
+            foreach (IPatch item in _dict[key])
             {
                 writer.Write("{0},", item.Id);
             }
@@ -364,7 +364,7 @@ namespace PcgTools.ListGenerator
             writer.WriteLine("    <id>{0}</id>", program.Id);
             writer.WriteLine("    <patches>");
 
-            foreach (var item in _dict[key])
+            foreach (IPatch item in _dict[key])
             {
                 writer.WriteLine("      <patch>");
                 writer.WriteLine("        <type>{0}</type>", item is Combi ? "Combi" : "Set List Slot");
@@ -408,7 +408,7 @@ namespace PcgTools.ListGenerator
         /// </summary>
         void WriteXslFile()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.AppendLine("<?xml version=\"1.0\"?>");
             builder.AppendLine(" <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
             builder.AppendLine(string.Empty);

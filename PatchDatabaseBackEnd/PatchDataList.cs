@@ -25,9 +25,9 @@ namespace PatchDatabaseBackEnd
 
         public override string ToString()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
 
-            foreach (var patch in PatchList)
+            foreach (PatchData patch in PatchList)
             {
                 builder.AppendLine($"{patch.PatchName}: {patch.Author}, {patch.Description}");
             }

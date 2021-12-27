@@ -33,14 +33,14 @@ namespace PcgTools.Model.Zero3Rw.Pcg
         /// <param name="offset"></param>
         protected override void ReadSingleProgram(int offset)
         {
-            var bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
+            IProgramBank bank = (IProgramBank) (CurrentPcgMemory.ProgramBanks[0]);
             bank.ByteOffset = 0;
             bank.BankSynthesisType = ProgramBank.SynthesisType.Ai2;
             bank.ByteLength = 172; // 172 bytes despite of 164 according to manual
             bank.IsWritable = true;
             bank.IsLoaded = true;
 
-            var program = bank[0];
+            Common.Synth.Meta.IPatch program = bank[0];
             program.ByteOffset = offset;
             program.ByteLength = bank.ByteLength;
             program.IsLoaded = true;

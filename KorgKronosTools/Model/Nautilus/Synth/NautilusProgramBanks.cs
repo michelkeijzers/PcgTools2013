@@ -32,67 +32,64 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         {
             // Unknown synthesis type because it is dynamic.
             Add(new NautilusProgramBank(
-                this, BankType.EType.Int, "I-A", 0, ProgramBank.SynthesisType.Unknown, "SGX-1, EP-1 and best of all other EXi"));           //  0
+                this, BankType.EType.Int, "A", 0, ProgramBank.SynthesisType.Unknown, "EXi sounds"));    //  0
 
             Add(new NautilusProgramBank(
-                this, BankType.EType.Int, "I-B", 1, ProgramBank.SynthesisType.Unknown, "HD-1"));                                            //  1
+                this, BankType.EType.Int, "B", 1, ProgramBank.SynthesisType.Unknown, "EXi sounds"));    //  1
             
             Add(new NautilusProgramBank(
-                this, BankType.EType.Int, "I-C", 2, ProgramBank.SynthesisType.Unknown, "HD-1"));                                            //  2
+                this, BankType.EType.Int, "C", 2, ProgramBank.SynthesisType.Unknown, "EXi sounds"));    //  2
             
             Add(new NautilusProgramBank(
-                this, BankType.EType.Int, "I-D", 3, ProgramBank.SynthesisType.Unknown, "HD-1"));                                            //  3
+                this, BankType.EType.Int, "D", 3, ProgramBank.SynthesisType.Unknown, "EXi sounds"));    //  3
             
             Add(new NautilusProgramBank(
-                this, BankType.EType.Int, "I-E", 4, ProgramBank.SynthesisType.Unknown, "HD-1"));                                            //  4
+                this, BankType.EType.Int, "E", 4, ProgramBank.SynthesisType.Unknown, "EXi sounds"));    //  4
             
             Add(new NautilusProgramBank(
-                this, BankType.EType.Int, "I-F", 5, ProgramBank.SynthesisType.Unknown, "HD-1"));                                            //  5
-
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "U-A", 17, ProgramBank.SynthesisType.Unknown,
-                "HD1 including Ambient Drums and Sound Effects")); //  6
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "U-B", 18, ProgramBank.SynthesisType.Unknown, "AL-1"));                                          //  7
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "U-C", 19, ProgramBank.SynthesisType.Unknown, "AL-1 and CX-3"));                                 //  8
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "U-D", 20, ProgramBank.SynthesisType.Unknown, "STR-1"));                                         //  9
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "U-E", 21, ProgramBank.SynthesisType.Unknown, "MS-20EX & PolysixEX"));                           // 10
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "U-F", 22, ProgramBank.SynthesisType.Unknown, "MOD-7"));                                         // 11
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "U-G", 23, ProgramBank.SynthesisType.Unknown, "Initialized HD-1 Programs"));                     // 12 ; if changed -> change KronosTimbre
-
+                this, BankType.EType.Int, "F", 5, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));   //  5
 
             Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "U-AA", 24, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 13
+                this, BankType.EType.User, "G", 64, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 6
             
             Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "U-BB", 25, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 14
+                this, BankType.EType.User, "H", 65, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 7
+
+            Add(new NautilusProgramBank(
+                this, BankType.EType.User, "I", 66, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 8
+
+            Add(new NautilusProgramBank(
+                this, BankType.EType.User, "J", 67, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 9
+
+            Add(new NautilusProgramBank(
+                this, BankType.EType.User, "K", 68, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 10
+
+            Add(new NautilusProgramBank(
+                this, BankType.EType.User, "L", 69, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 11
+
+            Add(new NautilusProgramBank(
+                this, BankType.EType.User, "M", 70, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 12
+
+            Add(new NautilusProgramBank(
+                this, BankType.EType.User, "N", 71, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 13
+
+            Add(new NautilusProgramBank(
+                this, BankType.EType.UserExtended, "O", 72, ProgramBank.SynthesisType.Unknown, "Initialized EXi programs")); // 14
+
+            Add(new NautilusProgramBank(
+                this, BankType.EType.UserExtended, "P", 73, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs")); // 15
             
             Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "U-CC", 26, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 15
+                this, BankType.EType.UserExtended, "Q", 74, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs")); // 16
+
+            Add(new NautilusProgramBank(
+                this, BankType.EType.UserExtended, "R", 75, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs HD-1 Programs")); // 17
             
             Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "U-DD", 27, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 16
-            
+                this, BankType.EType.UserExtended, "S", 76, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs HD - 1 Programs")); // 18
+
             Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "U-EE", 28, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 17 
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "U-FF", 29, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 18
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "U-GG", 30, ProgramBank.SynthesisType.Unknown, string.Empty));                           // 19
+                this, BankType.EType.UserExtended, "T", 77, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs HD - 1 Programs")); // 18
 
             //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(1)", 7,  "GM2 Main programs"));             // [7]
             //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(2)", 8,  "GM2 Main programs"));             // [8]
@@ -130,11 +127,11 @@ namespace PcgTools.Model.NautilusSpecific.Synth
 #pragma warning restore 1570
         protected override void CreateVirtualBanks()
         {
-            var bankNames = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+            List<char> bankNames = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
 
-            for (var bankGroupIndex = 0; bankGroupIndex < 8; bankGroupIndex++)
+            for (int bankGroupIndex = 0; bankGroupIndex < 8; bankGroupIndex++)
             {
-                for (var bankIndex = 0; bankIndex < bankNames.Count; bankIndex++)
+                for (int bankIndex = 0; bankIndex < bankNames.Count; bankIndex++)
                 {
                     Add(
                         new NautilusProgramBank(
@@ -145,5 +142,25 @@ namespace PcgTools.Model.NautilusSpecific.Synth
                 }
             }
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pcgId"></param>
+        /// <returns></returns>
+        public override IBank GetBankWithPcgId(int pcgId)
+        {
+            if (pcgId <= 5)
+            {
+                return BankCollection[pcgId];
+            }
+            else if (pcgId <= 16)
+            {
+                return BankCollection[BankCollection.Count - 1]; // GM 
+            }
+            else return BankCollection[pcgId - 11];
+        }
+
     }
 }

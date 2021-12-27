@@ -99,11 +99,11 @@ namespace PcgTools.Model.Z1Specific.Synth
         /// <returns></returns>
         public override string GetCategoryName(IPatch patch)
         {
-            var categoryName = string.Empty;
+            string categoryName = string.Empty;
 
             if (patch is IProgram)
             {
-                var names = new[]
+                string[] names = new[]
                 {
                     "Synth-Hard", "Synth-Soft", "Synth-Lead", "Synth-Motion", "Synth-Bass", "E.Piano", "Organ",
                     "Keyboard",

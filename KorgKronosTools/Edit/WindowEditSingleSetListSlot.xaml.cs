@@ -89,7 +89,7 @@ namespace PcgTools.Edit
         /// </summary>
         private void WindowEditLoadedSetReferences()
         {
-            var usedPatch = _patch.UsedPatch;
+            Model.Common.Synth.Meta.IPatch usedPatch = _patch.UsedPatch;
             if (usedPatch == null)
             {
                 // If not filled in, it must be a song.
@@ -190,7 +190,7 @@ namespace PcgTools.Edit
         /// </summary>
         private void Check()
         {
-            var usedSize = textBoxName.Text.Length;
+            int usedSize = textBoxName.Text.Length;
             labelNameLength.Text = string.Format('(' + Strings.XOfYCharacters_editw + ')', usedSize,
                 _patch.MaxNameLength);
             labelErrorName.Content = EditUtils.CheckText(textBoxName.Text, _patch.MaxNameLength,
@@ -198,8 +198,8 @@ namespace PcgTools.Edit
 
             // Check set list slot description.
             // Set length.
-            var usedDescriptionSize = textBoxDescription.Text.Length;
-            var maxDescriptionLength = _patch.MaxDescriptionLength;
+            int usedDescriptionSize = textBoxDescription.Text.Length;
+            int maxDescriptionLength = _patch.MaxDescriptionLength;
             labelDescriptionLength.Text = string.Format('(' + Strings.XOfYCharacters_editw + ')',
                 usedDescriptionSize, maxDescriptionLength);
 
@@ -305,7 +305,7 @@ namespace PcgTools.Edit
         private void RadioButtonTextSize_Checked(object sender, RoutedEventArgs e)
         {
             //var fontFamily = "Arial";
-            var fontSize = -1;
+            int fontSize = -1;
             //var fontWeight = FontWeights.Normal;
 
             if (radioButtonTextSizeXl.IsReallyChecked())
@@ -363,7 +363,7 @@ namespace PcgTools.Edit
         {
             if ((comboBoxColor.SelectedIndex >= 0) && (comboBoxColor.SelectedIndex <= 15))
             {
-                var colors = new List<Color>
+                List<Color> colors = new List<Color>
                 {
                     new Color {A = 255, R = 77, G = 77, B = 77}, // Default
                     new Color {A = 255, R = 47, G = 47, B = 47}, // Charcoal

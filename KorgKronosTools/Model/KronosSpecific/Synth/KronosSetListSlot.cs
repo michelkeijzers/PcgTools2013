@@ -281,9 +281,9 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <param name="value"></param>
         private void SetUsedCombi(IPatch value)
         {
-            var combi = (KronosCombi) value;
-            var combiBank = (KronosCombiBank) (value.Parent);
-            var combiBanks = (KronosCombiBanks) combiBank.Parent;
+            KronosCombi combi = (KronosCombi) value;
+            KronosCombiBank combiBank = (KronosCombiBank) (value.Parent);
+            KronosCombiBanks combiBanks = (KronosCombiBanks) combiBank.Parent;
 
             // Set bank.
             Util.SetInt(PcgRoot, PcgRoot.Content, DefaultBankOffset, 1, combiBanks.BankCollection.IndexOf(combiBank));
@@ -310,8 +310,8 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <param name="value"></param>
         private void SetUsedProgram(IPatch value)
         {
-            var program = (KronosProgram) value;
-            var bank = (KronosProgramBank) (value.Parent);
+            KronosProgram program = (KronosProgram) value;
+            KronosProgramBank bank = (KronosProgramBank) (value.Parent);
 
             SetUsedProgramBank(bank);
             SetUsedProgram(bank, program);
@@ -413,19 +413,19 @@ namespace PcgTools.Model.KronosSpecific.Synth
         {
             get
             {
-                var combiId = Util.GetInt(PcgRoot.Content,
+                int combiId = Util.GetInt(PcgRoot.Content,
                     (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
                         ? Stl2PatchOffset
                         : DefaultPatchOffset, 1);
 
-                var combi = UsedCombiBank[combiId];
+                IPatch combi = UsedCombiBank[combiId];
                 if (!((IBank) (combi.Parent)).IsWritable)
                 {
                     // Try to find it in the master file.
-                    var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                    IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                     if ((masterPcgMemory != null) && (masterPcgMemory.FileName != Root.FileName))
                     {
-                        var combiBank = masterPcgMemory.CombiBanks.BankCollection.FirstOrDefault(
+                        IBank combiBank = masterPcgMemory.CombiBanks.BankCollection.FirstOrDefault(
                             item => (item.Id == UsedCombiBank.Id) && item.IsFilled);
                         return combiBank == null ? null : combiBank[combiId] as Combi;
                     }
@@ -443,19 +443,19 @@ namespace PcgTools.Model.KronosSpecific.Synth
         {
             get
             {
-                var programId = Util.GetInt(PcgRoot.Content,
+                int programId = Util.GetInt(PcgRoot.Content,
                     (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
                         ? Stl2PatchOffset
                         : DefaultPatchOffset, 1);
 
-                var program = UsedProgramBank[programId];
+                IPatch program = UsedProgramBank[programId];
                 if (!((IBank) (program.Parent)).IsWritable && ((ProgramBank) (program.Parent)).Type != BankType.EType.Gm)
                 {
                     // Try to find it in the master file.
-                    var masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
+                    IPcgMemory masterPcgMemory = MasterFiles.MasterFiles.Instances.FindMasterPcg(Root.Model);
                     if ((masterPcgMemory != null) && (masterPcgMemory.FileName != Root.FileName))
                     {
-                        var programBank = masterPcgMemory.ProgramBanks.BankCollection.FirstOrDefault(
+                        IBank programBank = masterPcgMemory.ProgramBanks.BankCollection.FirstOrDefault(
                             item => (item.PcgId == UsedProgramBank.PcgId) && item.IsFilled);
                         return programBank == null ? null : programBank[programId] as Program;
                     }
@@ -534,8 +534,8 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <param name="other"></param>
         public void SwapOs1516Data(KronosSetListSlot other)
         {
-            var os1516Bank = Util.GetInt(PcgRoot.Content, Stl2BankOffset, 1);
-            var os1516Patch = Util.GetInt(PcgRoot.Content, Stl2PatchOffset, 1);
+            int os1516Bank = Util.GetInt(PcgRoot.Content, Stl2BankOffset, 1);
+            int os1516Patch = Util.GetInt(PcgRoot.Content, Stl2PatchOffset, 1);
             Util.SetInt(PcgRoot, PcgRoot.Content, Stl2BankOffset, 1, 
                 Util.GetInt(PcgRoot.Content, other.Stl2BankOffset, 1));
             Util.SetInt(PcgRoot, PcgRoot.Content, Stl2PatchOffset, 1, 
@@ -554,12 +554,12 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
 
             // Take SLS2 differences into account.
             if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
             {
-                var otherSetListSlot = otherPatch as KronosSetListSlot;
+                KronosSetListSlot otherSetListSlot = otherPatch as KronosSetListSlot;
                 Debug.Assert(otherSetListSlot != null);
                 diffs += (Util.GetInt(PcgRoot.Content, Stl2BankOffset, 1) !=
                     Util.GetInt(otherSetListSlot.PcgRoot.Content, otherSetListSlot.Stl2BankOffset, 1)) ? 1 : 0;
@@ -580,10 +580,10 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <returns></returns>
         public override int CalcByteDifferences(IClipBoardPatch otherPatch, bool includingName, int maxDiffs)
         {
-            var otherSetListSlot = otherPatch as ClipBoardSetListSlot;
+            ClipBoardSetListSlot otherSetListSlot = otherPatch as ClipBoardSetListSlot;
             Debug.Assert(otherSetListSlot != null);
 
-            var diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
+            int diffs = base.CalcByteDifferences(otherPatch, includingName, maxDiffs);
 
             // Take SLS2 differences into account.
             if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)
