@@ -19,7 +19,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant => 2632;
+        private static int TimbresOffsetConstant => 2632;
 
 
         /// <summary>

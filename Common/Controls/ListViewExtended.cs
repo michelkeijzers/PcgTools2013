@@ -21,7 +21,7 @@ namespace Common.Controls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void ComboBoxExtended_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxExtended_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ScrollIntoView(SelectedItem);
         }

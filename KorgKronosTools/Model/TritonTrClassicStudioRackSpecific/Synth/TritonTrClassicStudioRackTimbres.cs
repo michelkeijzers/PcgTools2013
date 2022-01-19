@@ -14,7 +14,7 @@ namespace PcgTools.Model.TritonTrClassicStudioRackSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant => 224;
+        private static int TimbresOffsetConstant => 224;
 
 
         /// <summary>

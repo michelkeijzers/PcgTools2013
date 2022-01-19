@@ -21,7 +21,7 @@ namespace Common.Controls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void ListBoxExtended_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListBoxExtended_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ScrollIntoView(SelectedItem);
         }

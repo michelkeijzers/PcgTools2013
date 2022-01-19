@@ -361,7 +361,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <param name="waveSequenceIndex"></param>
         /// <param name="bankIndex"></param>
         /// <param name="patchIndex"></param>
-        void GetWaveSequenceIndices(int waveSequenceIndex, out int bankIndex, out int patchIndex)
+        private void GetWaveSequenceIndices(int waveSequenceIndex, out int bankIndex, out int patchIndex)
         {
             bankIndex = 0;
             patchIndex = waveSequenceIndex;
@@ -379,7 +379,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// </summary>
         /// <param name="waveSequence"></param>
         /// <returns></returns>
-        int GetWaveSequenceIndex(IWaveSequence waveSequence)
+        private int GetWaveSequenceIndex(IWaveSequence waveSequence)
         {
             IWaveSequenceBank bank = (IWaveSequenceBank) waveSequence.Parent;
 

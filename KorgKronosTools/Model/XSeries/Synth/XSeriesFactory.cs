@@ -19,7 +19,7 @@ namespace PcgTools.Model.XSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        readonly Memory.FileType _fileType ;
+        private readonly Memory.FileType _fileType ;
 
         
         /// <summary>

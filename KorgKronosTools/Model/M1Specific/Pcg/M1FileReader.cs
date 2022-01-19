@@ -112,7 +112,7 @@ namespace PcgTools.Model.M1Specific.Pcg
         /// Skip mode changes.
         /// Also adapts the contentType.
         /// </summary>
-        int SkipModeChanges()
+        private int SkipModeChanges()
         {
             int offset = 0;
             SysExMemory memory = (SysExMemory)CurrentPcgMemory;

@@ -11,8 +11,8 @@ namespace PcgTools
     public partial class App : Application
     {
         public static string[] Arguments { get; private set;  }
-        
-        void Application_Startup(object sender, StartupEventArgs e)
+
+        private void Application_Startup(object sender, StartupEventArgs e)
         {
             if (e.Args.Length > 0)
             {

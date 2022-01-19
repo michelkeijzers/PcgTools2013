@@ -24,8 +24,7 @@ namespace PcgTools.Model.Common.Synth.PatchDrumKits
             FillDrumKits();
         }
 
-        
-        void FillDrumKits()
+        private void FillDrumKits()
         {
             foreach (IBank bank in BankCollection)
             {

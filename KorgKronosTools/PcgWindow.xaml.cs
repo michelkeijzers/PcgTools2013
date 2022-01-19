@@ -34,18 +34,18 @@ namespace PcgTools
         /// 
         /// </summary>
         public IViewModel ViewModel { get; private set; }
-        
-
-        /// <summary>
-        /// 
-        /// </summary>
-        IPcgViewModel PcgViewModel => (IPcgViewModel) ViewModel;
 
 
         /// <summary>
         /// 
         /// </summary>
-        readonly IPcgMemory _pcgMemory; // Only for moving variable from PcgWindow constructor to Window_Loaded.
+        private IPcgViewModel PcgViewModel => (IPcgViewModel) ViewModel;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly IPcgMemory _pcgMemory; // Only for moving variable from PcgWindow constructor to Window_Loaded.
         
         
         /// <summary>
@@ -69,13 +69,13 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        readonly MainWindow _mainWindow;
+        private readonly MainWindow _mainWindow;
 
 
         /// <summary>
         /// 
         /// </summary>
-        ICollectionView _listViewBanksView;
+        private ICollectionView _listViewBanksView;
 
 
         /// <summary>
@@ -822,12 +822,12 @@ namespace PcgTools
         {
             PcgViewModel.SelectedScopeSet = ViewModels.PcgViewModel.ScopeSet.Patches;
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        void CloseWindow()
+        private void CloseWindow()
         {
             MdiChild.Close();
             foreach (MdiChild child in GetChilds())
@@ -845,7 +845,7 @@ namespace PcgTools
         /// 
         /// </summary>
         /// <returns></returns>
-        IEnumerable<MdiChild> GetChilds()
+        private IEnumerable<MdiChild> GetChilds()
         {
             return (from child in _mainWindow.Container.Children
                     let combiWindow = child.Content as CombiWindow
@@ -859,7 +859,7 @@ namespace PcgTools
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {

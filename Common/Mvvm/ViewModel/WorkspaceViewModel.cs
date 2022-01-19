@@ -12,7 +12,7 @@ namespace Common.Mvvm.ViewModel
     {
         #region Fields
 
-        RelayCommand _closeCommand;
+        private RelayCommand _closeCommand;
 
         #endregion // Fields
 
@@ -40,7 +40,7 @@ namespace Common.Mvvm.ViewModel
         /// </summary>
         public event EventHandler RequestClose;
 
-        void OnRequestClose()
+        private void OnRequestClose()
         {
             EventHandler handler = RequestClose;
             if (handler != null)

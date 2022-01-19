@@ -34,61 +34,61 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        List<CheckBox> _programBankButtons;
+        private List<CheckBox> _programBankButtons;
 
 
         /// <summary>
         /// 
         /// </summary>
-        List<CheckBox> _combiBankButtons;
+        private List<CheckBox> _combiBankButtons;
 
 
         /// <summary>
         /// 
         /// </summary>
-        readonly IPcgMemory _pcgMemory;
+        private readonly IPcgMemory _pcgMemory;
 
 
         /// <summary>
         /// 
         /// </summary>
-        int _setListRangeMin;
+        private int _setListRangeMin;
 
 
         /// <summary>
         /// 
         /// </summary>
-        int _setListRangeMax;
+        private int _setListRangeMax;
 
 
         /// <summary>
         /// 
         /// </summary>
-        const int InternalProgramBanksCheckBoxesAmount = 8;
+        private const int InternalProgramBanksCheckBoxesAmount = 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        const int UserProgramBanksCheckBoxesAmount = 8;
-
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        const int ExtendedUserProgramBanksCheckBoxesAmount = 8;
+        private const int UserProgramBanksCheckBoxesAmount = 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        const int InternalProgramBanksCheckBoxesStart = 0;
+        private const int ExtendedUserProgramBanksCheckBoxesAmount = 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        const int ProgramBankGmCheckBox = InternalProgramBanksCheckBoxesStart + InternalProgramBanksCheckBoxesAmount;
+        private const int InternalProgramBanksCheckBoxesStart = 0;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private const int ProgramBankGmCheckBox = InternalProgramBanksCheckBoxesStart + InternalProgramBanksCheckBoxesAmount;
 
 
         /// <summary>
@@ -107,31 +107,31 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        const int ProgramBanksVirtualCheckBox = ExtendedUserProgramBanksCheckBoxesStart + ExtendedUserProgramBanksCheckBoxesAmount;
+        private const int ProgramBanksVirtualCheckBox = ExtendedUserProgramBanksCheckBoxesStart + ExtendedUserProgramBanksCheckBoxesAmount;
 
 
         /// <summary>
         /// 
         /// </summary>
-        const int InternalCombiBanksCheckBoxesStart = 0;
+        private const int InternalCombiBanksCheckBoxesStart = 0;
 
 
         /// <summary>
         /// 
         /// </summary>
-        const int InternalCombiBanksCheckBoxesAmount = 8;
+        private const int InternalCombiBanksCheckBoxesAmount = 8;
 
 
         /// <summary>
         /// 
         /// </summary>
-        const int UserCombiBanksCheckBoxesStart = InternalCombiBanksCheckBoxesAmount;
+        private const int UserCombiBanksCheckBoxesStart = InternalCombiBanksCheckBoxesAmount;
 
 
         /// <summary>
         /// 
         /// </summary>
-        const int UserCombiBanksCheckBoxesAmount = 8;
+        private const int UserCombiBanksCheckBoxesAmount = 8;
 
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        readonly SaveFileDialog _saveDialog;
+        private readonly SaveFileDialog _saveDialog;
 
 
         /// <summary>
@@ -947,7 +947,7 @@ namespace PcgTools.ListGenerator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void CheckBoxFilterOnTextChecked(object sender, RoutedEventArgs e)
+        private void CheckBoxFilterOnTextChecked(object sender, RoutedEventArgs e)
         {
             bool filterEnabled = checkBoxFilterOnText.IsReallyChecked();
             textBoxTextToFilterOn.IsEnabled = filterEnabled;
@@ -1060,7 +1060,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        void SetProgramBankButtons()
+        private void SetProgramBankButtons()
         {
             bool show = !radioButtonFileContentList.IsReallyChecked();
             groupBoxFilterProgramBanks.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
@@ -1334,7 +1334,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        void SetCombiBankButtons()
+        private void SetCombiBankButtons()
         {
             bool show = !radioButtonFileContentList.IsReallyChecked();
             groupBoxFilterCombiBanks.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
@@ -1530,7 +1530,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// FUTURE: Enable for other list types.
         /// </summary>
-        void SetDrumKitBankButtons()
+        private void SetDrumKitBankButtons()
         {
             bool isSupported = radioButtonPatchList.IsReallyChecked() &&
                             (_pcgMemory.DrumKitBanks != null);
@@ -1566,7 +1566,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// FUTURE: Enable for other list types.
         /// </summary>
-        void SetDrumPatternBankButtons()
+        private void SetDrumPatternBankButtons()
         {
             bool isSupported = radioButtonPatchList.IsReallyChecked() &&
                             (_pcgMemory.DrumPatternBanks != null);
@@ -1602,7 +1602,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// FUTURE: Enable for other list types.
         /// </summary>
-        void SetWaveSequenceBankButtons()
+        private void SetWaveSequenceBankButtons()
         {
             bool isSupported = radioButtonPatchList.IsReallyChecked() &&
                               (_pcgMemory.WaveSequenceBanks != null);
@@ -2264,7 +2264,7 @@ namespace PcgTools.ListGenerator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void ComboBoxListSubTypeSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxListSubTypeSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             object selectedItem = comboBoxListSubType.SelectedItem;
             if (selectedItem != null)

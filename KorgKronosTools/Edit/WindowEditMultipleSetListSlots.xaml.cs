@@ -16,13 +16,13 @@ namespace PcgTools.Edit
         /// <summary>
         /// 
         /// </summary>
-        readonly ISetListSlot _patch;
+        private readonly ISetListSlot _patch;
 
 
         /// <summary>
         /// 
         /// </summary>
-        bool _ok = true;
+        private bool _ok = true;
 
 
         /// <summary>

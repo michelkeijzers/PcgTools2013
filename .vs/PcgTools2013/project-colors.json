@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "d18ed6c7-b8d0-4d9e-b498-744dc88a06aa": {
+      "ProjectGuid": "d18ed6c7-b8d0-4d9e-b498-744dc88a06aa",
+      "DisplayName": "PcgTools Application",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

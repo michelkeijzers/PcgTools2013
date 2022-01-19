@@ -14,7 +14,7 @@ namespace PcgTools.Model.TritonKarmaSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant => 772;
+        private static int TimbresOffsetConstant => 772;
 
 
         /// <summary>

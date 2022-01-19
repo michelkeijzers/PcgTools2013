@@ -15,7 +15,7 @@ namespace PcgTools.Model.TrinitySpecific.Synth
     /// </summary>
     public sealed class TrinityTimbre : Timbre
     {
-        static int TimbresSizeConstant => 19;
+        private static int TimbresSizeConstant => 19;
 
 
         /// <summary>

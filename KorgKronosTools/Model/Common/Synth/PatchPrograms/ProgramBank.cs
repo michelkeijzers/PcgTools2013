@@ -123,6 +123,7 @@ namespace PcgTools.Model.Common.Synth.PatchPrograms
         /// </summary>
         /// // ReSharper disable once UnusedMember.Global
         [UsedImplicitly]
+        private
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         string Description { [UsedImplicitly] get; set; }
         

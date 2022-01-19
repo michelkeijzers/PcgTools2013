@@ -32,7 +32,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public const string Version = "3.2.1";
+        public const string Version = "3.3.0";
 
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _appTitle;
+        private string _appTitle;
         // ReSharper disable once MemberCanBePrivate.Global
         [UsedImplicitly] public string AppTitle
         {
@@ -157,7 +157,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        IViewModel _currentChildViewModel;
+        private IViewModel _currentChildViewModel;
 
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbModel;
+        private string _statbModel;
 
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbFileType;
+        private string _statbFileType;
 
         /// <summary>
         /// 
@@ -266,7 +266,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbPrograms;
+        private string _statbPrograms;
 
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbCombis;
+        private string _statbCombis;
 
 
         /// <summary>
@@ -318,7 +318,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbDrumKits;
+        private string _statbDrumKits;
 
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbDrumPatterns;
+        private string _statbDrumPatterns;
 
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbWaveSequences;
+        private string _statbWaveSequences;
         
         
         /// <summary>
@@ -397,7 +397,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbSetLists;
+        private string _statbSetLists;
 
 
         /// <summary>
@@ -423,7 +423,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbClipBoard;
+        private string _statbClipBoard;
 
 
         /// <summary>
@@ -449,7 +449,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbSongs;
+        private string _statbSongs;
 
 
         /// <summary>
@@ -475,7 +475,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _statbSamples;
+        private string _statbSamples;
 
 
         /// <summary>
@@ -501,7 +501,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        PcgClipBoard _pcgClipBoard;
+        private PcgClipBoard _pcgClipBoard;
 
 
         /// <summary>
@@ -524,7 +524,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ObservableCollection<IChildWindow> _childWindows;
+        private ObservableCollection<IChildWindow> _childWindows;
 
 
         /// <summary>
@@ -547,7 +547,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _openFileCommand;
+        private ICommand _openFileCommand;
 
 
         /// <summary>
@@ -567,7 +567,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _saveFileCommand;
+        private ICommand _saveFileCommand;
 
 
         /// <summary>
@@ -585,7 +585,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _saveAsFileCommand;
+        private ICommand _saveAsFileCommand;
 
 
         /// <summary>
@@ -606,7 +606,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _revertToSavedFileCommand;
+        private ICommand _revertToSavedFileCommand;
 
 
         /// <summary>
@@ -628,7 +628,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _closeFileCommand;
+        private ICommand _closeFileCommand;
 
 
         /// <summary>
@@ -651,7 +651,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void CloseFile()
+        private void CloseFile()
         {
             CurrentChildViewModel.Close(false);
         }
@@ -660,7 +660,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _exitCommand;
+        private ICommand _exitCommand;
         
         
         /// <summary>
@@ -675,18 +675,18 @@ namespace PcgTools.ViewModels
                 return _exitCommand ?? (_exitCommand = new RelayCommand(param => Close(), param => true));
             }
         }
-        
+
 
         /// <summary>
         /// Default is 0: PCG.
         /// </summary>
-        int _lastUsedFilterType;
+        private int _lastUsedFilterType;
 
 
         /// <summary>
         /// 
         /// </summary>
-        void OpenFile()
+        private void OpenFile()
         {
             dynamic result = OpenFileDialog(Strings.SelectFileToRead, _fileFormats, _lastUsedFilterType, true);
 
@@ -758,7 +758,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="checkAutoLoadMasterFileSetting">True for checking settings for autoloading the master file</param>
-        void ReadAndShowFile(string fileName, bool checkAutoLoadMasterFileSetting)
+        private void ReadAndShowFile(string fileName, bool checkAutoLoadMasterFileSetting)
         {
 #if !DEBUG
             try
@@ -782,11 +782,11 @@ namespace PcgTools.ViewModels
 #endif
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        void SaveFile()
+        private void SaveFile()
         {
             SaveToFile(false);
         }
@@ -841,7 +841,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void RevertToSavedFile()
+        private void RevertToSavedFile()
         {
             string fileName = CurrentChildViewModel.SelectedMemory.FileName;
             if (CurrentChildViewModel.Revert())
@@ -940,7 +940,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void RecalculateStatusBar()
+        private void RecalculateStatusBar()
         {
             // Update status bar.
             if (SelectedMemory == null)
@@ -1412,11 +1412,11 @@ namespace PcgTools.ViewModels
             }
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showMasterFilesCommand;
+        private ICommand _showMasterFilesCommand;
 
 
 
@@ -1467,12 +1467,12 @@ namespace PcgTools.ViewModels
                 MasterFiles.MasterFiles.Instances.MasterFilesWindow = MasterFilesWindow;
             }
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showSingleLinedSetListSlotDescriptionsCommand;
+        private ICommand _showSingleLinedSetListSlotDescriptionsCommand;
 
 
         /// <summary>
@@ -1495,7 +1495,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowSingleLinedSetListSlotDescriptions()
+        private void ShowSingleLinedSetListSlotDescriptions()
         {
             // Settings changed already handled by IsShowSingleLinedSetListSlotDescriptions change.
         }
@@ -1530,7 +1530,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showSettingsCommand;
+        private ICommand _showSettingsCommand;
 
         /// <summary>
         /// 
@@ -1550,7 +1550,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowSettings()
+        private void ShowSettings()
         {
             ShowDialog(WindowType.Settings);
 
@@ -1586,7 +1586,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _gotoNextWindowCommand;
+        private ICommand _gotoNextWindowCommand;
 
 
         /// <summary>
@@ -1607,7 +1607,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _gotoPreviousWindowCommand;
+        private ICommand _gotoPreviousWindowCommand;
 
         
         /// <summary>
@@ -1623,12 +1623,12 @@ namespace PcgTools.ViewModels
                     (_gotoPreviousWindowCommand = new RelayCommand(param => GotoPreviousWindow(), param => true));
             }
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showManualCommand;
+        private ICommand _showManualCommand;
 
 
         /// <summary>
@@ -1650,7 +1650,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowManual()
+        private void ShowManual()
         {
             try
             {
@@ -1669,7 +1669,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showHomePageCommand;
+        private ICommand _showHomePageCommand;
 
 
         /// <summary>
@@ -1691,7 +1691,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowHomePage()
+        private void ShowHomePage()
         {
             try
             {
@@ -1710,7 +1710,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showAboutCommand;
+        private ICommand _showAboutCommand;
 
 
         /// <summary>
@@ -1727,7 +1727,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowAbout()
+        private void ShowAbout()
         {
             ShowDialog(WindowType.About);
         }
@@ -1736,7 +1736,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showExternalLinksOasysVoucherCodeSponsorsCommand;
+        private ICommand _showExternalLinksOasysVoucherCodeSponsorsCommand;
 
 
         /// <summary>
@@ -1769,7 +1769,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showExternalLinksContributorsCommand;
+        private ICommand _showExternalLinksContributorsCommand;
 
 
         /// <summary>
@@ -1791,7 +1791,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowExternalLinksContributors()
+        private void ShowExternalLinksContributors()
         {
             ShowDialog(WindowType.ExternalLinksContributors);
         }
@@ -1800,7 +1800,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showExternalLinksVideoCreatorsCommand;
+        private ICommand _showExternalLinksVideoCreatorsCommand;
 
 
         /// <summary>
@@ -1822,7 +1822,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowExternalLinksVideoCreators()
+        private void ShowExternalLinksVideoCreators()
         {
             ShowDialog(WindowType.ExternalLinksVideoCreators);
         }
@@ -1831,7 +1831,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showExternalLinksKorgRelatedCommand;
+        private ICommand _showExternalLinksKorgRelatedCommand;
 
 
         /// <summary>
@@ -1852,16 +1852,16 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowExternalLinksKorgRelated()
+        private void ShowExternalLinksKorgRelated()
         {
             ShowDialog(WindowType.ExternalLinksKorgRelated);
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showExternalLinksDonatorsCommand;
+        private ICommand _showExternalLinksDonatorsCommand;
 
 
         /// <summary>
@@ -1883,7 +1883,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowExternalLinksDonators()
+        private void ShowExternalLinksDonators()
         {
             ShowDialog(WindowType.ExternalLinksDonators);
         }
@@ -1892,7 +1892,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showExternalLinksTranslatorsCommand;
+        private ICommand _showExternalLinksTranslatorsCommand;
 
 
         /// <summary>
@@ -1914,7 +1914,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowExternalLinksTranslators()
+        private void ShowExternalLinksTranslators()
         {
             ShowDialog(WindowType.ExternalLinksTranslators);
         }
@@ -1923,7 +1923,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showExternalLinksThirdPartiesCommand;
+        private ICommand _showExternalLinksThirdPartiesCommand;
 
 
         /// <summary>
@@ -1945,7 +1945,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowExternalLinksThirdParties()
+        private void ShowExternalLinksThirdParties()
         {
             ShowDialog(WindowType.ExternalLinksThirdParties);
         }
@@ -1955,7 +1955,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showExternalLinksPersonalCommand;
+        private ICommand _showExternalLinksPersonalCommand;
 
 
         /// <summary>
@@ -1977,16 +1977,16 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowExternalLinksPersonal()
+        private void ShowExternalLinksPersonal()
         {
             ShowDialog(WindowType.ExternalLinksPersonal);
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showSpecialEventCommand;
+        private ICommand _showSpecialEventCommand;
 
 
         /// <summary>
@@ -2026,7 +2026,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        Theme _selectedTheme;
+        private Theme _selectedTheme;
 
 
         /// <summary>
@@ -2053,7 +2053,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void OnSelectedMemoryChanged(object sender, PropertyChangedEventArgs e)
+        private void OnSelectedMemoryChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -2096,7 +2096,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         /// <param name="o"></param>
         /// <param name="args"></param>
-        void OnChildViewModelChanged(object o, PropertyChangedEventArgs args)
+        private void OnChildViewModelChanged(object o, PropertyChangedEventArgs args)
         {
             switch (args.PropertyName)
             {
@@ -2140,7 +2140,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// Closes the view.
         /// </summary>
-        void Close()
+        private void Close()
         {
             // ReSharper disable once ForCanBeConvertedToForeach
             // Cannot be changed to for loop because CloseView changes the collection.

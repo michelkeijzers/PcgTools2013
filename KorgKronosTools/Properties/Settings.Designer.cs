@@ -1066,7 +1066,22 @@ namespace PcgTools.Properties {
                 this["MasterFile_Nautilus"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MasterFile_Nautilus12
+        {
+            get
+            {
+                return ((string)(this["MasterFile_Nautilus12"]));
+            }
+            set
+            {
+                this["MasterFile_Nautilus12"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]

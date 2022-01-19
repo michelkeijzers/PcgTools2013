@@ -94,7 +94,7 @@ namespace PcgTools.Help
         /// <summary>
         /// 
         /// </summary>
-        void ShowDonateButton()
+        private void ShowDonateButton()
         {
             try
             {

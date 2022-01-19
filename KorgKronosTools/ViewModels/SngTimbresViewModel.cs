@@ -69,7 +69,7 @@ namespace PcgTools.ViewModels
         /// <param name="sender"></param>
         /// <param name="e"></param>
         [UsedImplicitly]
-        void OnSongRootChanged(object sender, PropertyChangedEventArgs e)
+        private void OnSongRootChanged(object sender, PropertyChangedEventArgs e)
         {
             //switch (e.PropertyName)
             {

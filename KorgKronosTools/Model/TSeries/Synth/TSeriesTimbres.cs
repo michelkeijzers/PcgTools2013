@@ -15,7 +15,7 @@ namespace PcgTools.Model.TSeries.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant => 36;
+        private static int TimbresOffsetConstant => 36;
 
 
         /// <summary>

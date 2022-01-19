@@ -16,25 +16,25 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         /// <summary>
         /// 
         /// </summary>
-        int _highBit;
+        private int _highBit;
 
 
         /// <summary>
         /// 
         /// </summary>
-        int _lowBit;
+        private int _lowBit;
 
 
         /// <summary>
         /// 
         /// </summary>
-        List<string> _enumValues;
+        private List<string> _enumValues;
 
 
         /// <summary>
         /// 
         /// </summary>
-        static EnumParameter _instance;
+        private static EnumParameter _instance;
         
 
         /// <summary>

@@ -129,7 +129,7 @@ namespace PcgTools.Model.ZeroSeries.Pcg
         /// Skip mode changes.
         /// Also adapts the contentType.
         /// </summary>
-        int SkipModeChanges()
+        private int SkipModeChanges()
         {
             int offset = 0;
             ISysExMemory memory = (ISysExMemory)CurrentPcgMemory;

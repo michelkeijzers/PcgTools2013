@@ -153,7 +153,10 @@ namespace PcgTools.Model.NautilusSpecific.Synth
                             IBanks banks = (IBanks) bank.Parent;
                             int value = paramNumber.Value - bank.CountPatches;
                             bank = (IDrumPatternBank) banks[banks.IndexOfBank(bank) + 1];
-                            patterns.Add((IDrumPattern)bank.Patches[value]);
+                            if (value < bank.CountWritablePatches)
+                            {
+                                patterns.Add((IDrumPattern)bank.Patches[value]);
+                            }
                         }
                     }
                 }

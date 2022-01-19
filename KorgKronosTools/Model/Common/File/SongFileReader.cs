@@ -85,7 +85,7 @@ namespace PcgTools.Model.Common.File
         /// 
         /// </summary>
         /// <param name="sng1ChunkSize"></param>
-        void ReadSng1Chunk(int sng1ChunkSize)
+        private void ReadSng1Chunk(int sng1ChunkSize)
         {
             while (_index < SongMemory.Content.Length)
             {
@@ -133,12 +133,12 @@ namespace PcgTools.Model.Common.File
         /// <param name="index"></param>
         /// <returns></returns>
         public abstract ITimbre CreateTimbre(ITimbres timbres, int index);
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        void ReadSdk1Chunk()
+        private void ReadSdk1Chunk()
         {
             int amountOfSongs = Util.GetInt(SongMemory.Content, _index, 4);
             _index += 4;
@@ -163,7 +163,7 @@ namespace PcgTools.Model.Common.File
         /// 
         /// </summary>
         /// <param name="chunkSize"></param>
-        void ReadSdt1InSgs1Chunk(int chunkSize)
+        private void ReadSdt1InSgs1Chunk(int chunkSize)
         {
             _index += 12; // Skip header.
 
@@ -174,7 +174,7 @@ namespace PcgTools.Model.Common.File
         /// <summary>
         /// 
         /// </summary>
-        void ReadSpr1InSdt1Chunk()
+        private void ReadSpr1InSdt1Chunk()
         {
             
         }
@@ -183,16 +183,16 @@ namespace PcgTools.Model.Common.File
         /// <summary>
         /// Found on M50 preload SNG.
         /// </summary>
-        void ReadCue1Chunk(int chunkSize)
+        private void ReadCue1Chunk(int chunkSize)
         {
             _index += chunkSize;
-        }  
- 
+        }
+
 
         /// <summary>
         /// Found on M50 preload SNG.
         /// </summary>
-        void ReadPdx1Chunk(int chunkSize)
+        private void ReadPdx1Chunk(int chunkSize)
         {
             _index += chunkSize;
         }
@@ -201,7 +201,7 @@ namespace PcgTools.Model.Common.File
         /// <summary>
         /// Found on Kronos, contains audio tracks.
         /// </summary>
-        void ReadRgn1Chunk(int chunkSize)
+        private void ReadRgn1Chunk(int chunkSize)
         {
             int amount = Util.GetInt(SongMemory.Content, _index, 4);
             int startIndex = _index;
@@ -226,7 +226,7 @@ namespace PcgTools.Model.Common.File
         /// 
         /// </summary>
         /// <param name="chunkSize"></param>
-        void ReadSgs1Chunk(int chunkSize)
+        private void ReadSgs1Chunk(int chunkSize)
         {
             foreach (ISong song in SongMemory.Songs.SongCollection)
             {
@@ -242,7 +242,7 @@ namespace PcgTools.Model.Common.File
         /// 
         /// </summary>
         /// <param name="song"></param>
-        void ReadSdt1Chunk(ISong song)
+        private void ReadSdt1Chunk(ISong song)
         {
             // var sdt1ChunkName = Util.GetChars(SongMemory.Content, Index, 4);
             int sdt1ChunkSize = Util.GetInt(SongMemory.Content, _index + 4, 4);
@@ -304,7 +304,7 @@ namespace PcgTools.Model.Common.File
         /// 
         /// </summary>
         /// <param name="chunkSize"></param>
-        void ReadAdt1Chunk(int chunkSize)
+        private void ReadAdt1Chunk(int chunkSize)
         {
             _index += chunkSize; // Skip chunk
         }
@@ -314,7 +314,7 @@ namespace PcgTools.Model.Common.File
         /// 
         /// </summary>
         /// <param name="chunkSize"></param>
-        void ReadSpr1Chunk(int chunkSize)
+        private void ReadSpr1Chunk(int chunkSize)
         {
             _index += chunkSize; // Skip chunk
         }
@@ -325,7 +325,7 @@ namespace PcgTools.Model.Common.File
         /// </summary>
         /// <param name="song"></param>
         /// <param name="chunkSize"></param>
-        void ReadBmt1Chunk(ISong song, int chunkSize)
+        private void ReadBmt1Chunk(ISong song, int chunkSize)
         {
             song.ByteOffset = _index + 0x12C2 + 12;
 
@@ -342,7 +342,7 @@ namespace PcgTools.Model.Common.File
         /// <summary>
         /// Obsolete chunk for Kronos OS1.5/1.6.
         /// </summary>
-        void ReadBmt2Chunk()
+        private void ReadBmt2Chunk()
         {
             _index += 4; // 4 zero's padding.
 
@@ -353,7 +353,7 @@ namespace PcgTools.Model.Common.File
         /// <summary>
         ///
         /// </summary>
-        void ReadMdt1Chunk(int chunkSize)
+        private void ReadMdt1Chunk(int chunkSize)
         {
             _index += chunkSize; // Skip chunk
         }
@@ -363,7 +363,7 @@ namespace PcgTools.Model.Common.File
         /// 
         /// </summary>
         /// <param name="chunkSize"></param>
-        void ReadPtn1Chunk(int chunkSize)
+        private void ReadPtn1Chunk(int chunkSize)
         {
             _index += chunkSize; // Skip chunk
         }
@@ -373,7 +373,7 @@ namespace PcgTools.Model.Common.File
         /// 
         /// </summary>
         /// <param name="chunkSize"></param>
-        void ReadSdt1InSdt1Chunk(int chunkSize)
+        private void ReadSdt1InSdt1Chunk(int chunkSize)
         {
             _index += chunkSize; // Skip chunk
         }
@@ -383,7 +383,7 @@ namespace PcgTools.Model.Common.File
         /// 
         /// </summary>
         /// <param name="chunkSize"></param>
-        void ReadTrk1Chunk(int chunkSize)
+        private void ReadTrk1Chunk(int chunkSize)
         {
             _index += chunkSize; // Skip chunk
         }

@@ -29,12 +29,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         {
             Add(new NautilusWaveSequenceBank(this, BankType.EType.Int, "INT", -1));
 
-            foreach (string id in new[] { "USER-A", "USER-B", "USER-C", "USER-D", "USER-E", "USER-F", "USER-G" })
-            {
-                Add(new NautilusWaveSequenceBank(this, BankType.EType.User, id, -1));
-            }
-
-            foreach (string id in new[] { "USER-AA", "USER-BB", "USER-CC", "USER-DD", "USER-EE", "USER-FF", "USER-GG" })
+            foreach (string id in new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T" })
             {
                 Add(new NautilusWaveSequenceBank(this, BankType.EType.User, id, -1));
             }

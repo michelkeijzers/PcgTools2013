@@ -10,7 +10,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
     /// <summary>
     /// Class for comparing if a patch is empty/init (always put at end).
     /// </summary>
-    sealed class EmptyOrInitComparer : Comparer<IPatch>
+    internal sealed class EmptyOrInitComparer : Comparer<IPatch>
     {
         /// <summary>
         /// 

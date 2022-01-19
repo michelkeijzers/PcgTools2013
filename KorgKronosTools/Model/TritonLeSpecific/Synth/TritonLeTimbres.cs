@@ -14,7 +14,7 @@ namespace PcgTools.Model.TritonLeSpecific.Synth
         /// <summary>
         /// Triton non LE is 224, a Triton LE combi is 96 shorter than a Triton non LE combi.
         /// </summary>
-        static int TimbresOffsetConstant => 224 - 96;
+        private static int TimbresOffsetConstant => 224 - 96;
 
 
         /// <summary>

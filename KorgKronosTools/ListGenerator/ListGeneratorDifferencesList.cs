@@ -27,37 +27,37 @@ namespace PcgTools.ListGenerator
         /// Dictionary from each patch in each patch bank to a dictionary with #diffs as key and a list of programs 
         /// with that many diffs.
         /// </summary>
-        Dictionary<IProgram, Dictionary<int, LinkedList<IProgram>>> _diffPrograms;
+        private Dictionary<IProgram, Dictionary<int, LinkedList<IProgram>>> _diffPrograms;
 
 
         /// <summary>
         /// 
         /// </summary>
-        Dictionary<ICombi, Dictionary<int, LinkedList<ICombi>>> _diffCombis;
+        private Dictionary<ICombi, Dictionary<int, LinkedList<ICombi>>> _diffCombis;
 
 
         /// <summary>
         /// 
         /// </summary>
-        Dictionary<ISetListSlot, Dictionary<int, LinkedList<ISetListSlot>>> _diffSetListSlots;
+        private Dictionary<ISetListSlot, Dictionary<int, LinkedList<ISetListSlot>>> _diffSetListSlots;
 
 
         /// <summary>
         /// 
         /// </summary>
-        Dictionary<IDrumKit, Dictionary<int, LinkedList<IDrumKit>>> _diffDrumKits;
-
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        Dictionary<IDrumPattern, Dictionary<int, LinkedList<IDrumPattern>>> _diffDrumPatterns;
+        private Dictionary<IDrumKit, Dictionary<int, LinkedList<IDrumKit>>> _diffDrumKits;
 
 
         /// <summary>
         /// 
         /// </summary>
-        Dictionary<IWaveSequence, Dictionary<int, LinkedList<IWaveSequence>>> _diffWaveSequences; 
+        private Dictionary<IDrumPattern, Dictionary<int, LinkedList<IDrumPattern>>> _diffDrumPatterns;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private Dictionary<IWaveSequence, Dictionary<int, LinkedList<IWaveSequence>>> _diffWaveSequences; 
 
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// IMPR: Check if both directions should be supported (like combi).
         /// </summary>
-        void CreateProgramsList()
+        private void CreateProgramsList()
         {
             // Compare with all other selected programs.
             foreach (IProgramBank bank in SelectedProgramBanks.Where(bank => bank.Type != BankType.EType.Gm))
@@ -322,7 +322,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// IMPR: Check if both directions should be supported (like combi).
         /// </summary>
-        void CreateCombisList()
+        private void CreateCombisList()
         {
             // Compare with all other selected Combis.
             foreach (ICombiBank bank in SelectedCombiBanks.Where(bank => bank.Type != BankType.EType.Gm))
@@ -442,7 +442,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        void CreateSetListSlotsList()
+        private void CreateSetListSlotsList()
         {
             if (SetListsEnabled)
             {
@@ -572,7 +572,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// IMPR: Check if both directions should be supported (like combi).
         /// </summary>
-        void CreateDrumKitsList()
+        private void CreateDrumKitsList()
         {
             // Compare with all other selected DrumKits.
             foreach (IDrumKitBank bank in SelectedDrumKitBanks.Where(bank => bank.Type != BankType.EType.Gm))
@@ -692,7 +692,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// IMPR: Check if both directions should be supported (like combi).
         /// </summary>
-        void CreateDrumPatternsList()
+        private void CreateDrumPatternsList()
         {
             // Compare with all other selected DrumPatterns.
             foreach (IDrumPatternBank bank in SelectedDrumPatternBanks.Where(bank => bank.Type != BankType.EType.Gm))
@@ -812,7 +812,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// IMPR: Check if both directions should be supported (like combi).
         /// </summary>
-        void CreateWaveSequencesList()
+        private void CreateWaveSequencesList()
         {
             // Compare with all other selected WaveSequences.
             foreach (IWaveSequenceBank bank in SelectedWaveSequenceBanks.Where(bank => bank.Type != BankType.EType.Gm))
@@ -898,7 +898,7 @@ namespace PcgTools.ListGenerator
         /// <param name="patch1"></param>
         /// <param name="patch2"></param>
         /// <returns></returns>
-        int CalculateDiffs(IPatch patch1, IPatch patch2)
+        private int CalculateDiffs(IPatch patch1, IPatch patch2)
         {
             Debug.Assert(patch1.GetType() == patch2.GetType());
             Debug.Assert(patch1.ByteLength == patch2.ByteLength);
@@ -922,7 +922,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void WriteToFile(TextWriter writer)
+        private void WriteToFile(TextWriter writer)
         {
             switch (ListOutputFormat)
             {
@@ -952,7 +952,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void OutputToAsciiTable(TextWriter writer)
+        private void OutputToAsciiTable(TextWriter writer)
         {
             OutputProgramsToAsciiTable(writer);
 
@@ -1063,7 +1063,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void OutputCombisToAsciiTable(TextWriter writer)
+        private void OutputCombisToAsciiTable(TextWriter writer)
         {
             // ReSharper disable RedundantStringFormatCall
             int max = _diffCombis.Where(diffListPair => diffListPair.Value.Any(differencesPair =>
@@ -1123,7 +1123,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void OutputSetListSlotsToAsciiTable(TextWriter writer)
+        private void OutputSetListSlotsToAsciiTable(TextWriter writer)
         {
             // ReSharper disable RedundantStringFormatCall
 
@@ -1179,13 +1179,13 @@ namespace PcgTools.ListGenerator
             }
             writer.WriteLine(string.Empty);
         }
-     
+
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void OutputDrumKitsToAsciiTable(TextWriter writer)
+        private void OutputDrumKitsToAsciiTable(TextWriter writer)
         {
             // ReSharper disable RedundantStringFormatCall
 
@@ -1250,7 +1250,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void OutputDrumPatternsToAsciiTable(TextWriter writer)
+        private void OutputDrumPatternsToAsciiTable(TextWriter writer)
         {
             // ReSharper disable RedundantStringFormatCall
 
@@ -1315,7 +1315,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void OutputWaveSequencesToAsciiTable(TextWriter writer)
+        private void OutputWaveSequencesToAsciiTable(TextWriter writer)
         {
             // ReSharper disable RedundantStringFormatCall
 
@@ -2021,7 +2021,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        void WriteXslFile()
+        private void WriteXslFile()
         {
             StringBuilder builder = new StringBuilder();
             //IMPR; not a simple table

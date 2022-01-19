@@ -33,12 +33,12 @@ namespace PcgTools.Model.Common.Synth.PatchWaveSequences
             CreateBanks();
             FillWaveSequences();
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        void FillWaveSequences()
+        private void FillWaveSequences()
         {
             foreach (IBank bank in BankCollection)
             {

@@ -40,13 +40,13 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        List<string> _parameters;
+        private List<string> _parameters;
 
 
         /// <summary>
         /// 
         /// </summary>
-        Dictionary<string, string> _options;
+        private Dictionary<string, string> _options;
 
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace PcgTools
         /// 
         /// </summary>
         /// <param name="arguments"></param>
-        void ConvertArguments(IList<string> arguments)
+        private void ConvertArguments(IList<string> arguments)
         {
             _parameters = new List<string>();
             _options = new Dictionary<string, string>();
@@ -162,7 +162,7 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        void ParseParameters()
+        private void ParseParameters()
         {
             // Check there are exactly 4 parameters.
             if (_parameters.Count != 4)
@@ -225,7 +225,7 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        void ParseOptions()
+        private void ParseOptions()
         {
             foreach (KeyValuePair<string, string> optionPair in _options)
             {
@@ -541,7 +541,7 @@ namespace PcgTools
         /// <summary>
         /// Set defaults not set by options. Use the defaults from ShowHelp.
         /// </summary>
-        void SetDefaults()
+        private void SetDefaults()
         {
             if (_options.Keys.Contains("-h"))
             {
@@ -792,7 +792,7 @@ namespace PcgTools
         /// </summary>
         /// <param name="option"></param>
         /// <param name="requiredOption"></param>
-        void CheckOption(KeyValuePair<string, string> option, string requiredOption)
+        private void CheckOption(KeyValuePair<string, string> option, string requiredOption)
         {
             if (!_options.Keys.Contains(requiredOption))
             {
@@ -806,7 +806,7 @@ namespace PcgTools
         /// </summary>
         /// <param name="optionPair"></param>
         /// <returns></returns>
-        static bool GetBooleanOptionValue(KeyValuePair<string, string> optionPair)
+        private static bool GetBooleanOptionValue(KeyValuePair<string, string> optionPair)
         {
             string matchedValue = GetMatch(new List<string> {"1", "ON", "TRUE", "0", "OFF", "FALSE"}, optionPair.Value);
             return (new List<string> {"1", "ON", "TRUE"}).Contains(matchedValue);
@@ -820,7 +820,7 @@ namespace PcgTools
         /// <param name="minimumValue"></param>
         /// <param name="maximumValue"></param>
         /// <returns></returns>
-        static int GetIntOptionValue(KeyValuePair<string, string> optionPair, int minimumValue, int maximumValue)
+        private static int GetIntOptionValue(KeyValuePair<string, string> optionPair, int minimumValue, int maximumValue)
         {
             int value;
             Int32.TryParse(optionPair.Value, out value);
@@ -839,7 +839,7 @@ namespace PcgTools
         /// </summary>
         /// <param name="optionPair"></param>
         /// <returns></returns>
-        static List<string> GetBankNamesOptionValue(KeyValuePair<string, string> optionPair)
+        private static List<string> GetBankNamesOptionValue(KeyValuePair<string, string> optionPair)
         {
             string[] bankNames = new string[0];
 
@@ -929,7 +929,7 @@ namespace PcgTools
         /// <param name="values"></param>
         /// <param name="valueToFind"></param>
         /// <returns></returns>
-        static string GetMatch(ICollection<string> values, string valueToFind)
+        private static string GetMatch(ICollection<string> values, string valueToFind)
         {
             Debug.Assert(values.Count > 0);
             List<string> upperValues = (from value in values select value.ToUpper()).ToList();

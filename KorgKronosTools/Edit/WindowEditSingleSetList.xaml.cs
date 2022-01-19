@@ -18,7 +18,7 @@ namespace PcgTools.Edit
         /// <summary>
         /// 
         /// </summary>
-        readonly ISetList _setList;
+        private readonly ISetList _setList;
 
 
         /// <summary>

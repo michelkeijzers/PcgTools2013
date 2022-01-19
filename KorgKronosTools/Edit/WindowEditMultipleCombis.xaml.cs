@@ -19,13 +19,13 @@ namespace PcgTools.Edit
         /// <summary>
         /// 
         /// </summary>
-        readonly ICombi _patch;
+        private readonly ICombi _patch;
 
 
         /// <summary>
         /// 
         /// </summary>
-        bool _ok = true;
+        private bool _ok = true;
 
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace PcgTools.Edit
         /// 
         /// </summary>
         /// <param name="global"></param>
-        void FillCategoryComboboxes(IGlobal global)
+        private void FillCategoryComboboxes(IGlobal global)
         {
             Debug.Assert(global != null);
 
@@ -169,7 +169,7 @@ namespace PcgTools.Edit
         /// 
         /// </summary>
         /// <param name="global"></param>
-        void FillSubcategoryCombobox(IGlobal global)
+        private void FillSubcategoryCombobox(IGlobal global)
         {
             comboBoxSubCategory.Items.Clear();
             foreach (string subCategoryName in global.GetSubCategoryNames(

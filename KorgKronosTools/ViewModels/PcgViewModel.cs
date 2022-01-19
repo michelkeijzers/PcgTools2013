@@ -73,7 +73,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        enum SelectedBanksType
+        private enum SelectedBanksType
         {
             None, // Only allowed during init
             ProgramBanks,
@@ -207,7 +207,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _windowTitle;
+        private string _windowTitle;
 
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        SelectedBanksType _selectedBanksType = SelectedBanksType.None;
+        private SelectedBanksType _selectedBanksType = SelectedBanksType.None;
 
         
         /// <summary>
@@ -640,7 +640,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ScopeSet _selectedScopeSet;
+        private ScopeSet _selectedScopeSet;
 
 
         /// <summary>
@@ -661,7 +661,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ObservableCollectionEx<IBank> _banks;
+        private ObservableCollectionEx<IBank> _banks;
 
 
         /// <summary>
@@ -688,7 +688,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// All patches within the selected bank.
         /// </summary>
-        ObservableCollectionEx<IPatch> _patches;
+        private ObservableCollectionEx<IPatch> _patches;
 
 
         public ObservableCollectionEx<IPatch> Patches
@@ -713,7 +713,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _programsEnabled;
+        private bool _programsEnabled;
         // ReSharper disable once MemberCanBePrivate.Global
         [UsedImplicitly] public bool ProgramsEnabled
         {
@@ -736,7 +736,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _combisEnabled;
+        private bool _combisEnabled;
 
 
         /// <summary>
@@ -764,7 +764,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _setListSlotsEnabled;
+        private bool _setListSlotsEnabled;
 
 
         /// <summary>
@@ -792,7 +792,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _drumKitsEnabled;
+        private bool _drumKitsEnabled;
 
 
         /// <summary>
@@ -823,7 +823,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _drumPatternsEnabled;
+        private bool _drumPatternsEnabled;
 
 
         /// <summary>
@@ -853,7 +853,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _waveSequencesEnabled;
+        private bool _waveSequencesEnabled;
 
 
         /// <summary>
@@ -882,7 +882,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _allPatchesEnabled;
+        private bool _allPatchesEnabled;
 
 
         /// <summary>
@@ -918,7 +918,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _combiBanksSupported;
+        private bool _combiBanksSupported;
 
 
         /// <summary>
@@ -947,7 +947,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _setListSlotsSupported;
+        private bool _setListSlotsSupported;
 
         
         /// <summary>
@@ -975,7 +975,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _drumKitsSupported;
+        private bool _drumKitsSupported;
 
 
         /// <summary>
@@ -1005,7 +1005,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _drumPatternsSupported;
+        private bool _drumPatternsSupported;
 
 
         /// <summary>
@@ -1035,7 +1035,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool _waveSequencesSupported;
+        private bool _waveSequencesSupported;
 
 
         /// <summary>
@@ -1081,7 +1081,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         /// <param name="patch"></param>
         /// <param name="otherPatch"></param>
-        void FixReferences(IPatch patch, INavigable otherPatch)
+        private void FixReferences(IPatch patch, INavigable otherPatch)
         {
             if (SelectedPcgMemory.CombiBanks != null)
             {
@@ -1220,7 +1220,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void CopyPasteCut()
+        private void CopyPasteCut()
         {
             PcgClipBoard.CutPasteSelected = true;
             _copyPasteCommands.CopyPasteCopy(PcgClipBoard, SelectedPcgMemory, SelectedScopeSet, 
@@ -1232,11 +1232,11 @@ namespace PcgTools.ViewModels
             UpdateTimbresWindows();
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        string PastePreconditionsAndWarnings
+        private string PastePreconditionsAndWarnings
         {
             get
             {
@@ -1261,7 +1261,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ExportToCubase()
+        private void ExportToCubase()
         {
             StringBuilder builder = new StringBuilder();
 
@@ -1537,7 +1537,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _selectAllCommand;
+        private ICommand _selectAllCommand;
 
 
         /// <summary>
@@ -1558,7 +1558,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _editSelectedItemCommand;
+        private ICommand _editSelectedItemCommand;
 
 
         /// <summary>
@@ -1578,7 +1578,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _exportToCubaseCommand;
+        private ICommand _exportToCubaseCommand;
 
 
         /// <summary>
@@ -1599,7 +1599,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _runListGeneratorCommand;
+        private ICommand _runListGeneratorCommand;
 
 
         /// <summary>
@@ -1617,13 +1617,13 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _runProgramReferencesChangerCommand;
-        
+        private ICommand _runProgramReferencesChangerCommand;
+
 
         /// <summary>
         /// Executable when the file has either filled/nonempty combis or set list slots.
         /// </summary>
-        bool CanExecuteProgramReferenceChangerCommand => ((SelectedMemory is IPcgMemory) &&
+        private bool CanExecuteProgramReferenceChangerCommand => ((SelectedMemory is IPcgMemory) &&
                                                           (((SelectedPcgMemory.CombiBanks != null) && 
                                                             (SelectedPcgMemory.CombiBanks.CountFilledAndNonEmptyPatches > 0)) ||
                                                            (((SelectedPcgMemory.SetLists != null) && 
@@ -1649,13 +1649,13 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteSelectAllCommand => (SelectedMemory is IPcgMemory);
+        private bool CanExecuteSelectAllCommand => (SelectedMemory is IPcgMemory);
 
 
         /// <summary>
         /// 
         /// </summary>
-        void SelectAll()
+        private void SelectAll()
         {
             if ((SelectedScopeSet == ScopeSet.Banks))
             {
@@ -1739,7 +1739,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteEditSelectedItemCommand
+        private bool CanExecuteEditSelectedItemCommand
         {
             get
             {
@@ -1874,25 +1874,25 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void RunListGenerator()
+        private void RunListGenerator()
         {
             ShowListGenerator();
         }
 
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        void RunProgramReferencesChanger()
-        {
-            ShowProgramReferencesChanger();
-        }
-        
 
         /// <summary>
         /// 
         /// </summary>
-        ICommand _cutCommand;
+        private void RunProgramReferencesChanger()
+        {
+            ShowProgramReferencesChanger();
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private ICommand _cutCommand;
 
 
         /// <summary>
@@ -1913,7 +1913,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// Impr: Same as CanExecuteCopyCommand.
         /// </summary>
-        bool CanExecuteCutCommand => ((SelectedPcgMemory != null) &&
+        private bool CanExecuteCutCommand => ((SelectedPcgMemory != null) &&
                                       (PcgClipBoard.IsEmpty || !PcgClipBoard.CutPasteSelected) &&
                                       (PcgClipBoard.IsEmpty || !PcgClipBoard.PasteDuplicatesExecuted) &&
                                       AreItemsSelected);
@@ -1922,7 +1922,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void Cut()
+        private void Cut()
         {
             try
             {
@@ -1935,11 +1935,11 @@ namespace PcgTools.ViewModels
             }
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        ICommand _copyCommand;
+        private ICommand _copyCommand;
 
 
         /// <summary>
@@ -1960,7 +1960,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteCopyCommand => (SelectedPcgMemory != null) &&
+        private bool CanExecuteCopyCommand => (SelectedPcgMemory != null) &&
                                       (PcgClipBoard.IsEmpty || !PcgClipBoard.CutPasteSelected) &&
                                       (PcgClipBoard.IsEmpty || !PcgClipBoard.PasteDuplicatesExecuted) &&
                                       AreItemsSelected;
@@ -1982,7 +1982,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void Copy()
+        private void Copy()
         {
             try
             {
@@ -2003,7 +2003,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _pasteCommand;
+        private ICommand _pasteCommand;
 
 
         /// <summary>
@@ -2024,7 +2024,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecutePasteCommand
+        private bool CanExecutePasteCommand
         {
             get
             {
@@ -2094,7 +2094,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void Paste()
+        private void Paste()
         {
             try
             {
@@ -2131,7 +2131,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _assignCommand;
+        private ICommand _assignCommand;
 
 
         /// <summary>
@@ -2152,7 +2152,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteAssignCommand
+        private bool CanExecuteAssignCommand
         {
             get
             {
@@ -2202,7 +2202,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _autoFillInSetListSlotNamesCommand;
+        private ICommand _autoFillInSetListSlotNamesCommand;
 
 
         /// <summary>
@@ -2271,7 +2271,7 @@ namespace PcgTools.ViewModels
         /// 
         /// </summary>
         /// <returns></returns>
-        bool CheckPastePreconditionsAndWarnings()
+        private bool CheckPastePreconditionsAndWarnings()
         {
             string errorText = PastePreconditionsAndWarnings;
             if (errorText != string.Empty)
@@ -2297,7 +2297,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _exitCopyPasteModeCommand;
+        private ICommand _exitCopyPasteModeCommand;
 
 
         /// <summary>
@@ -2314,11 +2314,11 @@ namespace PcgTools.ViewModels
             }
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteExitCopyPasteModeCommand
+        private bool CanExecuteExitCopyPasteModeCommand
         {
             get
             {
@@ -2332,7 +2332,7 @@ namespace PcgTools.ViewModels
         /// 
         /// </summary>
         /// <returns></returns>
-        bool ExitCopyPasteMode()
+        private bool ExitCopyPasteMode()
         {
             if (!PcgClipBoard.IsPastingFinished)
             {
@@ -2355,7 +2355,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _recallCommand;
+        private ICommand _recallCommand;
 
 
         /// <summary>
@@ -2376,14 +2376,14 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteRecallCommand => (SelectedPcgMemory != null) &&
+        private bool CanExecuteRecallCommand => (SelectedPcgMemory != null) &&
                                         PcgClipBoard.IsEmpty && !PcgClipBoard.IsMemoryEmpty;
 
 
         /// <summary>
         /// 
         /// </summary>
-        void Recall()
+        private void Recall()
         {
             PcgClipBoard.Recall();
             OnPropertyChanged("PcgClipBoard");
@@ -2393,7 +2393,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _moveUpCommand;
+        private ICommand _moveUpCommand;
 
 
         /// <summary>
@@ -2414,7 +2414,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteMoveUpCommand
+        private bool CanExecuteMoveUpCommand
         {
             get
             {
@@ -2434,7 +2434,7 @@ namespace PcgTools.ViewModels
         /// It can be assumed the last patch has not been selected.
         /// </summary>
         /// <returns></returns>
-        bool ArePatchesAfterEngineChangeSelected
+        private bool ArePatchesAfterEngineChangeSelected
         {
             get
             {
@@ -2464,11 +2464,11 @@ namespace PcgTools.ViewModels
             }
         }
 
-    
+
         /// <summary>
         /// 
         /// </summary>
-        void MoveUp()
+        private void MoveUp()
         {
             GetSelectedPatchListViewIndex(); //IMPR: Needed?
 
@@ -2494,7 +2494,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _moveDownCommand;
+        private ICommand _moveDownCommand;
 
 
         /// <summary>
@@ -2515,7 +2515,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteMoveDownCommand
+        private bool CanExecuteMoveDownCommand
         {
             get
             {
@@ -2532,14 +2532,14 @@ namespace PcgTools.ViewModels
             }
         }
 
-        
+
         /// <summary>
         /// Returns true if there are no programs selected at the end of a bank where the next bank has a different 
         /// synthesis engine type. For other types always return true.
         /// It can be assumed the last patch has not been selected.
         /// </summary>
         /// <returns></returns>
-        bool ArePatchesBeforeEngineChangeSelected
+        private bool ArePatchesBeforeEngineChangeSelected
         {
             get
             {
@@ -2573,7 +2573,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void MoveDown()
+        private void MoveDown()
         {
             GetSelectedPatchListViewIndex(); //IMPR: Needed?
 
@@ -2600,7 +2600,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _changeVolumeCommand;
+        private ICommand _changeVolumeCommand;
 
 
         /// <summary>
@@ -2622,7 +2622,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteChangeVolumeCommand
+        private bool CanExecuteChangeVolumeCommand
         {
             get
             {
@@ -2651,7 +2651,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ChangeVolume()
+        private void ChangeVolume()
         {
             ChangeVolumeParameters parameters = new ChangeVolumeParameters();
             ChangeVolumeWindow window = new ChangeVolumeWindow(parameters);
@@ -2740,11 +2740,11 @@ namespace PcgTools.ViewModels
             UpdateTimbresWindows();
         }
 
-               
+
         /// <summary>
         /// 
         /// </summary>
-        ICommand _initAsMpeCombiCommand;
+        private ICommand _initAsMpeCombiCommand;
 
 
         /// <summary>
@@ -2760,12 +2760,12 @@ namespace PcgTools.ViewModels
                     param => CanExecuteInitAsMpeCombiCommand));
             }
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteInitAsMpeCombiCommand
+        private bool CanExecuteInitAsMpeCombiCommand
         {
             get
             {
@@ -2794,7 +2794,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void InitAsMpeCombi()
+        private void InitAsMpeCombi()
         {
              if (SelectedScopeSet == ScopeSet.Banks)
             {
@@ -2815,11 +2815,11 @@ namespace PcgTools.ViewModels
             }
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        ICommand _sortCommand;
+        private ICommand _sortCommand;
 
 
         /// <summary>
@@ -2840,7 +2840,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteSortCommand => (SelectedPcgMemory != null) &&
+        private bool CanExecuteSortCommand => (SelectedPcgMemory != null) &&
                                       (AreMultipleItemsSelected &&
                                        (!PcgClipBoard.PasteDuplicatesExecuted || PcgClipBoard.IsEmpty));
 
@@ -3026,7 +3026,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _setFavoriteCommand;
+        private ICommand _setFavoriteCommand;
 
 
         /// <summary>
@@ -3047,7 +3047,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteSetFavoriteCommand
+        private bool CanExecuteSetFavoriteCommand
         {
             get
             {
@@ -3061,13 +3061,13 @@ namespace PcgTools.ViewModels
                        (Patches.All(item => !item.IsSelected || (item is IProgram) || (item is ICombi)));
             }
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="favorite"></param>
-        void SetFavorite(bool favorite)
+        private void SetFavorite(bool favorite)
         {
             Debug.Assert(SelectedPcgMemory.AreFavoritesSupported);
 
@@ -3109,7 +3109,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _unsetFavoriteCommand;
+        private ICommand _unsetFavoriteCommand;
 
 
         /// <summary>
@@ -3130,7 +3130,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteUnsetFavoriteCommand
+        private bool CanExecuteUnsetFavoriteCommand
         {
             get
             {
@@ -3144,8 +3144,7 @@ namespace PcgTools.ViewModels
             }
         }
 
-        
-        ICommand _assignClearProgramCommand;
+        private ICommand _assignClearProgramCommand;
 
 
         /// <summary>
@@ -3168,7 +3167,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteAssignClearProgram
+        private bool CanExecuteAssignClearProgram
         {
             get
             {
@@ -3205,7 +3204,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _clearCommand;
+        private ICommand _clearCommand;
 
 
         /// <summary>
@@ -3227,7 +3226,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteClearCommand
+        private bool CanExecuteClearCommand
         {
             get
             {
@@ -3271,7 +3270,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _clearDuplicatesCommand;
+        private ICommand _clearDuplicatesCommand;
 
 
         /// <summary>
@@ -3293,7 +3292,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteClearDuplicatesCommand
+        private bool CanExecuteClearDuplicatesCommand
         {
             get
             {
@@ -3330,12 +3329,12 @@ namespace PcgTools.ViewModels
             
             SetCursor(WindowUtils.ECursor.Arrow);
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        ICommand _compactCommand;
+        private ICommand _compactCommand;
 
 
         /// <summary>
@@ -3442,7 +3441,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _showTimbresCommand;
+        private ICommand _showTimbresCommand;
 
 
         /// <summary>
@@ -3464,7 +3463,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteShowTimbresCommand
+        private bool CanExecuteShowTimbresCommand
         {
             get
             {
@@ -3481,7 +3480,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void ShowTimbres()
+        private void ShowTimbres()
         {
             foreach (ICombi selectedCombi in Patches.Where(item => item.IsSelected).Cast<ICombi>())
             {
@@ -3495,7 +3494,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _exportToHexCommand;
+        private ICommand _exportToHexCommand;
 
 
         /// <summary>
@@ -3517,7 +3516,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteExportToHexCommand
+        private bool CanExecuteExportToHexCommand
         {
             get
             {
@@ -3533,7 +3532,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _capitalizeNameCommand;
+        private ICommand _capitalizeNameCommand;
 
 
 
@@ -3556,13 +3555,13 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteCapitalizeNameCommand => CanExecuteCaseCommand;
+        private bool CanExecuteCapitalizeNameCommand => CanExecuteCaseCommand;
 
 
         /// <summary>
         /// 
         /// </summary>
-        void CapitalizeName()
+        private void CapitalizeName()
         {
             if (SelectedScopeSet == ScopeSet.Banks)
             {
@@ -3587,7 +3586,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _titleCaseNameCommand;
+        private ICommand _titleCaseNameCommand;
 
 
         /// <summary>
@@ -3609,13 +3608,13 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteTitleCaseNameCommand => CanExecuteCaseCommand;
+        private bool CanExecuteTitleCaseNameCommand => CanExecuteCaseCommand;
 
 
         /// <summary>
         /// Keep first character capitalized, rest title cased.
         /// </summary>
-        void TitleCaseName()
+        private void TitleCaseName()
         {
             if (SelectedScopeSet == ScopeSet.Banks)
             {
@@ -3635,12 +3634,12 @@ namespace PcgTools.ViewModels
                 }
             }
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        ICommand _decapitalizeNameCommand;
+        private ICommand _decapitalizeNameCommand;
 
         
         /// <summary>
@@ -3662,7 +3661,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteDecapitalizeNameCommand => CanExecuteCaseCommand;
+        private bool CanExecuteDecapitalizeNameCommand => CanExecuteCaseCommand;
 
 
         /// <summary>
@@ -3688,7 +3687,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// Keep first character capitalized, rest decapitalized.
         /// </summary>
-        void DecapitalizeName()
+        private void DecapitalizeName()
         {
             if (SelectedScopeSet == ScopeSet.Banks)
             {
@@ -3713,7 +3712,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _setPcgFileAsMasterFileCommand;
+        private ICommand _setPcgFileAsMasterFileCommand;
 
 
         /// <summary>
@@ -3736,7 +3735,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteSetPcgFileAsMasterFileCommand => (SelectedPcgMemory != null) && 
+        private bool CanExecuteSetPcgFileAsMasterFileCommand => (SelectedPcgMemory != null) && 
                                                         SelectedPcgMemory.AreCategoriesEditable && 
                                                         SelectedPcgMemory.AreAllNeededProgramsCombisAndGlobalPresent;
 
@@ -3744,7 +3743,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void SetFileAsMasterFile()
+        private void SetFileAsMasterFile()
         {
             SetPcgFileAsMasterFile(SelectedPcgMemory.Model, SelectedPcgMemory.FileName);
 
@@ -3841,7 +3840,7 @@ namespace PcgTools.ViewModels
         /// </summary>
         /// <param name="o"></param>
         /// <param name="args"></param>
-        void OnMemoryPropertyChanged(object o, PropertyChangedEventArgs args)
+        private void OnMemoryPropertyChanged(object o, PropertyChangedEventArgs args)
         {
             switch (args.PropertyName)
             {
@@ -3952,7 +3951,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _doubleToSingleKeyboardCommand;
+        private ICommand _doubleToSingleKeyboardCommand;
 
 
         /// <summary>
@@ -3988,12 +3987,12 @@ namespace PcgTools.ViewModels
         {
             _doubleToSingleKeyboardCommands.Execute(this);
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        ICommand _editParameterCommand;
+        private ICommand _editParameterCommand;
 
 
         /// <summary>
@@ -4035,7 +4034,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteEditParameterCommand
+        private bool CanExecuteEditParameterCommand
         {
             get
             {

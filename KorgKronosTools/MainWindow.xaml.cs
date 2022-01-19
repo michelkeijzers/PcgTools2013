@@ -387,7 +387,7 @@ namespace PcgTools
         /// </summary>
         /// <param name="o"></param>
         /// <param name="args"></param>
-        void OnMdiContainerChanged(object o, NotifyCollectionChangedEventArgs args)
+        private void OnMdiContainerChanged(object o, NotifyCollectionChangedEventArgs args)
         {
             ViewModel.ChildWindows.Clear();
             foreach (MdiChild child in Container.Children)
@@ -661,7 +661,7 @@ namespace PcgTools
         /// </summary>
         /// <param name="o"></param>
         /// <param name="args"></param>
-        void OnViewModelChanged(object o, PropertyChangedEventArgs args)
+        private void OnViewModelChanged(object o, PropertyChangedEventArgs args)
         {
             switch (args.PropertyName)
             {

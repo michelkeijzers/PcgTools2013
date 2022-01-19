@@ -12,7 +12,7 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        readonly string _diagnosticsText;
+        private readonly string _diagnosticsText;
 
 
         /// <summary>

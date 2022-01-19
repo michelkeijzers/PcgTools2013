@@ -20,7 +20,7 @@ namespace PcgTools.Model.M1Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        readonly Memory.FileType _fileType ;
+        private readonly Memory.FileType _fileType ;
 
         
         /// <summary>

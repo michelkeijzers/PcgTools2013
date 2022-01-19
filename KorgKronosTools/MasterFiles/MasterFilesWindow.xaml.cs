@@ -27,7 +27,7 @@ namespace PcgTools.MasterFiles
         /// <summary>
         /// 
         /// </summary>
-        readonly MainWindow _mainWindow;
+        private readonly MainWindow _mainWindow;
 
 
         /// <summary>

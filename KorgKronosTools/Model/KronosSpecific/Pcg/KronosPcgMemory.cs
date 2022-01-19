@@ -142,8 +142,7 @@ namespace PcgTools.Model.KronosSpecific.Pcg
             return false;
         }
 
-
-        int FindIni2Or3Offset(string chunkNameInIni2, int index)
+        private int FindIni2Or3Offset(string chunkNameInIni2, int index)
         {
             Debug.Assert(Chunks.Collection[1].Name == "INI2");
             int ini2Start = Chunks.Collection[1].Offset; // Index 1 = INI2

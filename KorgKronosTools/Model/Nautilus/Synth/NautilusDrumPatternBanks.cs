@@ -27,9 +27,14 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// </summary>
         protected override void CreateBanks()
         {
+
             Add(new NautilusDrumPatternBank(this, BankType.EType.Int, "P", 0)); // Preset
 
-            Add(new NautilusDrumPatternBank(this, BankType.EType.User, "U", 1));
+           
+            for (int bank = 0; bank < 15; bank++)
+            {
+                Add(new NautilusDrumPatternBank(this, BankType.EType.Int, ((char) ('A' + bank)).ToString(), 1));
+            }
         }
     }
 }

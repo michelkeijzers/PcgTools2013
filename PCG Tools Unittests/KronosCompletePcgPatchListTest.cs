@@ -17,13 +17,10 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class KronosCompletePcgPatchListTest
     {
-        const string PcgFileName = @"E:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
-
-        PcgMemory _pcgMemory;
-
-        ListGeneratorPatchList _generator;
-
-        string[] _lines;
+        private const string PcgFileName = @"E:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        private PcgMemory _pcgMemory;
+        private ListGeneratorPatchList _generator;
+        private string[] _lines;
 
         [TestInitialize]
         public void SetDefaults()

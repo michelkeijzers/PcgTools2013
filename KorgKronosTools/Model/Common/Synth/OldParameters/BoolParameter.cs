@@ -15,13 +15,13 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         /// <summary>
         /// 
         /// </summary>
-        int _bit;
+        private int _bit;
 
 
         /// <summary>
         /// 
         /// </summary>
-        static BoolParameter _instance;
+        private static BoolParameter _instance;
 
 
         /// <summary>

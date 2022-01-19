@@ -159,7 +159,7 @@ namespace PcgTools.Tools
         /// <summary>
         /// 
         /// </summary>
-        void OnProgress(ProgressChangedEventArgs args)
+        private void OnProgress(ProgressChangedEventArgs args)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {

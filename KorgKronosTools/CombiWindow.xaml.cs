@@ -105,7 +105,7 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        void CloseWindow()
+        private void CloseWindow()
         {
             MdiChild.Close();
             

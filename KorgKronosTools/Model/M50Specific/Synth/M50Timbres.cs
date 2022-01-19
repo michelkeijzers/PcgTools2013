@@ -14,7 +14,7 @@ namespace PcgTools.Model.M50Specific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant => 836;
+        private static int TimbresOffsetConstant => 836;
 
 
         /// <summary>

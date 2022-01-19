@@ -37,13 +37,13 @@ namespace PcgTools.Model.Common.Synth.SongsRelated
         /// <summary>
         /// 
         /// </summary>
-        string _name;
+        private string _name;
 
 
         /// <summary>
         /// Used for UI control binding for selections.
         /// </summary>
-        bool _isSelected;
+        private bool _isSelected;
 
 
         /// <summary>

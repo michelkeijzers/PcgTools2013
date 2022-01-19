@@ -28,13 +28,13 @@ namespace PcgTools.MasterFiles
         /// <summary>
         /// 
         /// </summary>
-        string _fileName;
+        private string _fileName;
 
 
         /// <summary>
         /// Used for UI control binding for selections.
         /// </summary>
-        bool _isSelected;
+        private bool _isSelected;
 
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace PcgTools.MasterFiles
         /// <summary>
         /// 
         /// </summary>
-        EFileState _fileState;
+        private EFileState _fileState;
         [UsedImplicitly]
         public EFileState FileState
         {
@@ -241,7 +241,7 @@ namespace PcgTools.MasterFiles
         /// 
         /// </summary>
         /// <returns></returns>
-        string FileState2String()
+        private string FileState2String()
         {
             string str;
             switch (FileState)
@@ -268,11 +268,11 @@ namespace PcgTools.MasterFiles
             return str;
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        string _fileStateAsString;
+        private string _fileStateAsString;
 
 
         /// <summary>

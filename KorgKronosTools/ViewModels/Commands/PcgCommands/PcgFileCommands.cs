@@ -72,7 +72,7 @@ namespace PcgTools.ViewModels.Commands
         /// </summary>
         /// <param name="checkAutoLoadMasterFileSetting"></param>
         /// <param name="loadedPcgFileName"></param>
-        static void LoadMasterFileIfRequested(bool checkAutoLoadMasterFileSetting, string loadedPcgFileName)
+        private static void LoadMasterFileIfRequested(bool checkAutoLoadMasterFileSetting, string loadedPcgFileName)
         {
             if (checkAutoLoadMasterFileSetting)
             {

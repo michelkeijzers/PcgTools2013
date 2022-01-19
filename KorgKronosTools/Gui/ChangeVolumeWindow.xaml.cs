@@ -17,7 +17,7 @@ namespace PcgTools.Gui
         /// <summary>
         /// 
         /// </summary>
-        ChangeVolumeParameters _parameters;
+        private ChangeVolumeParameters _parameters;
 
 
         /// <summary>

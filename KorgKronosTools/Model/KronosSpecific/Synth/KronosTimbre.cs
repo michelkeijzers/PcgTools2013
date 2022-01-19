@@ -19,7 +19,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresSizeConstant => 188;
+        private static int TimbresSizeConstant => 188;
 
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// 
         /// </summary>
         /// <returns></returns>
-        int GetProgramOffset()
+        private int GetProgramOffset()
         {
             int programOffset;
             if (PcgRoot.Model.OsVersion == Models.EOsVersion.Kronos15_16)

@@ -13,13 +13,13 @@ namespace PcgTools.Model.TrinitySpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant => 236;
+        private static int TimbresOffsetConstant => 236;
 
 
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresPerCombiConstant => 8;
+        private static int TimbresPerCombiConstant => 8;
 
 
         /// <summary>

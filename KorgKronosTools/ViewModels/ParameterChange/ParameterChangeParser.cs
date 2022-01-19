@@ -1,6 +1,6 @@
 ﻿namespace PcgTools.ViewModels.ParameterChange
 {
-    class ParameterChangeParser
+    internal class ParameterChangeParser
     {
     }
 }

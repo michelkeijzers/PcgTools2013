@@ -62,7 +62,7 @@ namespace Common.Mvvm
         /// </summary>
         [Conditional("DEBUG")]
         [DebuggerStepThrough]
-        void VerifyPropertyName(string propertyName)
+        private void VerifyPropertyName(string propertyName)
         {
             // Verify that the property name matches a real,
             // public, instance property on this object.
@@ -85,7 +85,7 @@ namespace Common.Mvvm
         /// override this property's getter to return true.
         /// </summary>
         [UsedImplicitly]
-        bool ThrowOnInvalidPropertyName { get; set; }
+        private bool ThrowOnInvalidPropertyName { get; set; }
     
 
         #endregion // Debugging Aides

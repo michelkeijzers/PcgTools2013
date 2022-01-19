@@ -15,7 +15,7 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        const int ImagePixelArea = 10000;
+        private const int ImagePixelArea = 10000;
 
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace PcgTools
         /// <summary>
         /// 
         /// </summary>
-        void DrawLogoAndName()
+        private void DrawLogoAndName()
         {
             Logo logo = new Logos().GetRandomLogo();
             if (logo.ImageName != string.Empty)

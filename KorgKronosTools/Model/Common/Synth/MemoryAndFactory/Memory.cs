@@ -109,7 +109,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        bool _dirty;
+        private bool _dirty;
 
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        string _fileName;
+        private string _fileName;
         public string FileName
         {
             get { return _fileName; }
@@ -164,7 +164,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// True if the complete file has been read (and chunks handled).
         /// </summary>
         [UsedImplicitly]
-        bool _readingFinished;
+        private bool _readingFinished;
         public bool ReadingFinished
         {
 // ReSharper disable UnusedMember.Global

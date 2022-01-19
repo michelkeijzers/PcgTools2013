@@ -19,7 +19,7 @@ namespace PcgTools.Model.KronosSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant => 4802;
+        private static int TimbresOffsetConstant => 4802;
 
 
         /// <summary>

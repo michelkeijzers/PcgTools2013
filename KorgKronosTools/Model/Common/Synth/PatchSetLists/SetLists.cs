@@ -43,7 +43,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// <summary>
         /// 
         /// </summary>
-        void FillSetLists()
+        private void FillSetLists()
         {
             foreach (IBank setList in BankCollection)
             {

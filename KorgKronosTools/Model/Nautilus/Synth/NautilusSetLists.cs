@@ -14,7 +14,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int NrOfSetLists => 128;
+        private static int NrOfSetLists => 128;
 
 
         /// <summary>

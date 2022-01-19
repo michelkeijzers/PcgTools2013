@@ -65,7 +65,7 @@ namespace PcgTools.Tools
         /// 
         /// </summary>
         /// <param name="changes"></param>
-        void ChangeReferences(ICollection<KeyValuePair<IPatch, IPatch>> changes)
+        private void ChangeReferences(ICollection<KeyValuePair<IPatch, IPatch>> changes)
         {
             int ruleNumber = 0;
             int currentPercentage = 0;

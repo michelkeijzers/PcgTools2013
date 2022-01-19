@@ -16,7 +16,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresSizeConstant => 188;
+        private static int TimbresSizeConstant => 188;
 
 
         /// <summary>

@@ -442,7 +442,6 @@ namespace PcgTools.Model.Common.File
         ///                            63                                       Triton LE
         ///                            68                                       Kronos
         ///                            70                                       Oasys
-        ///                            99 TODO                                  Nautilus
         ///                            75       0x00     0x02 0x00              M3 pcm_version checksum_flag, see x4100pcg.txt
         ///                            7A                                       X50/microX
         ///                            85                                       M50
@@ -451,6 +450,7 @@ namespace PcgTools.Model.Common.File
         ///                            96                                       Kross
         ///                            C9                                       Kross2
         ///                            D2                                       Krome Ex                            
+        ///                            DD                     03/04             Nautilus (03:v1.0/v1.1, 04: v1.2)
         /// 
         /// MemoryFileType: 00 = PCG 01=SNG 02=EXL
         /// </summary>
@@ -1575,7 +1575,7 @@ namespace PcgTools.Model.Common.File
         /// 614    1        CmbD?   | MicroKorg XL Plus mkxlp_combi No
         /// 614    1        GlbD?   | MicroKorg XL Plus mkxlp_glob  No
         ///  </summary>
-        void ReadMkxlFile()
+        private void ReadMkxlFile()
         {
             if (Util.GetChars(Content, 1, 2) != "14")
             {

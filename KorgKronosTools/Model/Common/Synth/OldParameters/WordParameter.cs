@@ -14,13 +14,13 @@ namespace PcgTools.Model.Common.Synth.OldParameters
         /// <summary>
         /// 
         /// </summary>
-        static WordParameter _instance;
+        private static WordParameter _instance;
 
 
         /// <summary>
         /// True if Little endian, false if Big endian.
         /// </summary>
-        bool _reverseOrder;
+        private bool _reverseOrder;
 
 
         /// <summary>

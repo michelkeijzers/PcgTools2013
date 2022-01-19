@@ -14,9 +14,9 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class CommandLineArgumentTest
     {
-        const string PcgFileName = @"E:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
+        private const string PcgFileName = @"E:\PCG Tools Test Files\TestFiles\Workstations\Kronos\DEFAULT.pcg";
 
-        static void Run(CommandLineArguments args)
+        private static void Run(CommandLineArguments args)
         {
             KorgFileReader korgFileReader = new KorgFileReader();
             IMemory memory = korgFileReader.Read(args.PcgFileName);

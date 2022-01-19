@@ -43,7 +43,7 @@ namespace PcgTools.Model.Common.Synth
         /// <summary>
         /// 
         /// </summary>
-        void FillPrograms()
+        private void FillPrograms()
         {
             foreach (IBank bank in BankCollection)
             {

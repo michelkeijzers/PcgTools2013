@@ -18,7 +18,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        readonly ICombi _combi;
+        private readonly ICombi _combi;
 
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        void Fill()
+        private void Fill()
         {
             FillTimbres();
         }
@@ -74,7 +74,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// 
         /// </summary>
-        void FillTimbres()
+        private void FillTimbres()
         {
             for (int i = 0; i < TimbresCollection.Count; i++)
             {

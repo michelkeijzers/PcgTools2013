@@ -122,7 +122,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// <summary>
         /// 
         /// </summary>
-        string FullPatchId
+        private string FullPatchId
         {
             get
             {
@@ -339,7 +339,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void OnMasterPcgFilePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnMasterPcgFilePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -362,7 +362,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void OnPatchPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPatchPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -403,7 +403,7 @@ namespace PcgTools.Model.Common.Synth.PatchSetLists
         /// <summary>
         /// 
         /// </summary>
-        void UpdateUsedPatch()
+        private void UpdateUsedPatch()
         {
             RaisePropertyChanged("UsedPatch");
             RaisePropertyChanged("Reference");

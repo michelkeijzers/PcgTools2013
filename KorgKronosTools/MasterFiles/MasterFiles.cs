@@ -18,7 +18,7 @@ namespace PcgTools.MasterFiles
         /// <summary>
         /// 
         /// </summary>
-        [NotNull] static readonly MasterFiles AllInstances = new MasterFiles();
+        [NotNull] private static readonly MasterFiles AllInstances = new MasterFiles();
 
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace PcgTools.MasterFiles
         /// <summary>
         /// 
         /// </summary>
-        MasterFiles()
+        private MasterFiles()
         {
         }
 
@@ -97,7 +97,7 @@ namespace PcgTools.MasterFiles
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void OnMainViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnMainViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if ((e.PropertyName == "ChildWindows") || (e.PropertyName == "CurrentChildViewModel"))
             {
@@ -119,7 +119,7 @@ namespace PcgTools.MasterFiles
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        static void OnPcgViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private static void OnPcgViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedMemory")
             {
@@ -139,7 +139,7 @@ namespace PcgTools.MasterFiles
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        static void OnSelectedPcgMemoryPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private static void OnSelectedPcgMemoryPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "FileName")
             {

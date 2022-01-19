@@ -303,7 +303,7 @@ namespace PcgTools.ClipBoard
         /// </summary>
         /// <param name="programToFind"></param>
         /// <returns></returns>
-        IClipBoardPatch FindProgram(IPatch programToFind)
+        private IClipBoardPatch FindProgram(IPatch programToFind)
         {
             for (int index = 0; index < (int) ProgramBank.SynthesisType.Last; index++)
             {
@@ -324,7 +324,7 @@ namespace PcgTools.ClipBoard
         /// <param name="programs"></param>
         /// <param name="programToFind"></param>
         /// <returns></returns>
-        static IClipBoardPatch FindProgram(IEnumerable<IClipBoardPatch> programs, IPatch programToFind)
+        private static IClipBoardPatch FindProgram(IEnumerable<IClipBoardPatch> programs, IPatch programToFind)
         {
             IClipBoardPatch patch = null;
             foreach (IClipBoardPatch program in programs)
@@ -347,7 +347,7 @@ namespace PcgTools.ClipBoard
         /// </summary>
         /// <param name="drumKitToFind"></param>
         /// <returns></returns>
-        IClipBoardDrumKit FindDrumKit(IPatch drumKitToFind)
+        private IClipBoardDrumKit FindDrumKit(IPatch drumKitToFind)
         {
             return FindDrumKit(DrumKits.CopiedPatches, drumKitToFind);
         }
@@ -359,7 +359,7 @@ namespace PcgTools.ClipBoard
         /// <param name="drumKits"></param>
         /// <param name="drumKitToFind"></param>
         /// <returns></returns>
-        static IClipBoardDrumKit FindDrumKit(IEnumerable<IClipBoardPatch> drumKits, IPatch drumKitToFind)
+        private static IClipBoardDrumKit FindDrumKit(IEnumerable<IClipBoardPatch> drumKits, IPatch drumKitToFind)
         {
             IClipBoardPatch patch = null;
             foreach (IClipBoardPatch drumKit in drumKits)
@@ -382,7 +382,7 @@ namespace PcgTools.ClipBoard
         /// </summary>
         /// <param name="drumPatternToFind"></param>
         /// <returns></returns>
-        IClipBoardDrumPattern FindDrumPattern(IPatch drumPatternToFind)
+        private IClipBoardDrumPattern FindDrumPattern(IPatch drumPatternToFind)
         {
             return FindDrumPattern(DrumPatterns.CopiedPatches, drumPatternToFind);
         }
@@ -394,7 +394,7 @@ namespace PcgTools.ClipBoard
         /// <param name="drumPatterns"></param>
         /// <param name="drumPatternToFind"></param>
         /// <returns></returns>
-        static IClipBoardDrumPattern FindDrumPattern(IEnumerable<IClipBoardPatch> drumPatterns, 
+        private static IClipBoardDrumPattern FindDrumPattern(IEnumerable<IClipBoardPatch> drumPatterns, 
             IPatch drumPatternToFind)
         {
             IClipBoardPatch patch = null;
@@ -754,7 +754,7 @@ namespace PcgTools.ClipBoard
         /// </summary>
         /// <param name="patch"></param>
         /// <param name="program"></param>
-        static void FixReferencesToProgram(IClipBoardPatch patch, IProgram program)
+        private static void FixReferencesToProgram(IClipBoardPatch patch, IProgram program)
         {
             IPcgMemory memory = patch.OriginalLocation.Root as IPcgMemory;
             Debug.Assert(memory != null);
@@ -819,7 +819,7 @@ namespace PcgTools.ClipBoard
         /// </summary>
         /// <param name="patch"></param>
         /// <param name="combi"></param>
-        static void FixReferencesToCombi(IClipBoardPatch patch, ICombi combi)
+        private static void FixReferencesToCombi(IClipBoardPatch patch, ICombi combi)
         {
             IPcgMemory memory = patch.OriginalLocation.Root as IPcgMemory;
             Debug.Assert(memory != null);
@@ -1122,7 +1122,7 @@ namespace PcgTools.ClipBoard
         /// <summary>
         /// 
         /// </summary>
-        void FixPastePatchInSetListSlotsReferences()
+        private void FixPastePatchInSetListSlotsReferences()
         {
             foreach (IClipBoardPatch clipBoardPatch in SetListSlots.CopiedPatches)
             {

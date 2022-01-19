@@ -14,7 +14,7 @@ namespace PcgTools.Model.MicroStationSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant => 664;
+        private static int TimbresOffsetConstant => 664;
 
 
         /// <summary>

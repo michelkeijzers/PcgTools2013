@@ -29,13 +29,13 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        List<IPatch> _list;
+        private List<IPatch> _list;
 
 
         /// <summary>
         /// 
         /// </summary>
-        bool _areFavoritesSupported;
+        private bool _areFavoritesSupported;
 
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void WriteToFile(TextWriter writer)
+        private void WriteToFile(TextWriter writer)
         {
             // Print header.
             bool setListSlotInList = _list.OfType<SetListSlot>().Any();
@@ -1140,7 +1140,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        void WriteXslFile()
+        private void WriteXslFile()
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<?xml version=\"1.0\"?>");

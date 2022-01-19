@@ -12,13 +12,13 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        readonly IPcgMemory _pcgMemory;
+        private readonly IPcgMemory _pcgMemory;
 
 
         /// <summary>
         /// 
         /// </summary>
-        readonly ISongMemory _songMemory;
+        private readonly ISongMemory _songMemory;
 
 
         /// <summary>

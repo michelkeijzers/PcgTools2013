@@ -109,7 +109,7 @@ namespace PcgTools.Model.KromeExSpecific.Pcg
         /// <param name="chunkNameInIni2"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        int FindIni2Offset(string chunkNameInIni2, int index)
+        private int FindIni2Offset(string chunkNameInIni2, int index)
         {
             Debug.Assert(Chunks.Collection[1].Name == "INI2");
             int ini2Start = Chunks.Collection[1].Offset; // Index 1 = INI2

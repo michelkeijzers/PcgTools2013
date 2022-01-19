@@ -14,7 +14,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        IMemory _selectedMemory;
+        private IMemory _selectedMemory;
 
 
         /// <summary>

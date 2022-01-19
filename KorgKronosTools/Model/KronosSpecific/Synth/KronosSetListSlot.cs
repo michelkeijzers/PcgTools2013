@@ -596,8 +596,5 @@ namespace PcgTools.Model.KronosSpecific.Synth
 
             return diffs;
         }
-
-
-
     }
 }

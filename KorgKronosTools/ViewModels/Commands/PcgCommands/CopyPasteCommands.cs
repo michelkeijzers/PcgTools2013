@@ -26,70 +26,70 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// <summary>
         /// 
         /// </summary>
-        IPcgClipBoard PcgClipBoard { get; set; }
+        private IPcgClipBoard PcgClipBoard { get; set; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        IPcgMemory SelectedPcgMemory { get; set; }
+        private IPcgMemory SelectedPcgMemory { get; set; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        bool ProgramBanksSelected { get; set; }
+        private bool ProgramBanksSelected { get; set; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        bool CombiBanksSelected { get; set; }
+        private bool CombiBanksSelected { get; set; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        bool SetListsSelected { get; set; }
-        
-
-        /// <summary>
-        /// 
-        /// </summary>
-        bool DrumKitBanksSelected { get; set; }
+        private bool SetListsSelected { get; set; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        bool DrumPatternBanksSelected { get; set; }
-        
+        private bool DrumKitBanksSelected { get; set; }
+
 
         /// <summary>
         /// 
         /// </summary>
-        bool WaveSequenceBanksSelected { get; set; }
+        private bool DrumPatternBanksSelected { get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool WaveSequenceBanksSelected { get; set; }
 
 
         /// <summary>
         /// All patches.
         /// </summary>
-        bool AllPatchesSelected { get; set; }
+        private bool AllPatchesSelected { get; set; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        PcgViewModel.ScopeSet SelectedScopeSet { get; set; }
+        private PcgViewModel.ScopeSet SelectedScopeSet { get; set; }
 
 
         /// <summary>
         /// 
         /// </summary>
-        static ObservableCollectionEx<IBank> Banks { get; set; }
+        private static ObservableCollectionEx<IBank> Banks { get; set; }
 
 
-        static ObservableCollectionEx<IPatch> Patches { get; set; }
+        private static ObservableCollectionEx<IPatch> Patches { get; set; }
 
         
         /// <summary>
@@ -485,7 +485,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// If copied to the same PCG, do not paste the type which is copied (e.g. when combis are copied, do not paste them, 
         /// independent of the settings).
         /// </summary>
-        void PasteDuplicatePatches()
+        private void PasteDuplicatePatches()
         {
             FindDuplicatePrograms();
             FindDuplicateCombis();
@@ -613,7 +613,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// </summary>
         /// <param name="clipBoardPatches"></param>
         /// <param name="banks"></param>
-        void FindDuplicatesOfType(ObservableCollection<IClipBoardPatch> clipBoardPatches, IBanks banks)
+        private void FindDuplicatesOfType(ObservableCollection<IClipBoardPatch> clipBoardPatches, IBanks banks)
         {
             foreach (IClipBoardPatch clipBoardPatch in clipBoardPatches)
             {
@@ -826,7 +826,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         ///  (or is first paste).
         /// Returns error text if applicable.
         /// </summary>
-        string PastePatches()
+        private string PastePatches()
         {
             bool[] atLeastOnePatchIsPasted = {false};
 
@@ -938,7 +938,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// <param name="patch"></param>
         /// <param name="atLeastOnePatchIsPasted">Or-s the value with True if the patch is pasted</param>
         /// <returns></returns>
-        bool PasteToSelectedPatch(IPatch patch, ref bool atLeastOnePatchIsPasted)
+        private bool PasteToSelectedPatch(IPatch patch, ref bool atLeastOnePatchIsPasted)
         {
             if ((patch.IsEmptyOrInit || (PcgClipBoard.PastePcgMemory == SelectedPcgMemory)) &&
                 !PcgClipBoard.ProtectedPatches.Contains(patch))
@@ -1141,7 +1141,7 @@ namespace PcgTools.ViewModels.Commands.PcgCommands
         /// 
         /// </summary>
         /// <returns></returns>
-        static bool CheckSelectedBanksForPasting()
+        private static bool CheckSelectedBanksForPasting()
         {
             return (Banks.Count(bank => bank.IsSelected) > 0);
         }

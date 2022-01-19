@@ -48,7 +48,7 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
         /// <summary>
         /// Used for UI control binding for selections.
         /// </summary>
-        bool _isSelected;
+        private bool _isSelected;
 
 
         /// <summary>

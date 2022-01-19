@@ -10,7 +10,7 @@ namespace PcgTools.Model.Common.Synth.PatchSorting
     /// <summary>
     /// Class for comparing names in an ordinal manner.
     /// </summary>
-    sealed class NameComparer : Comparer<IPatch>
+    internal sealed class NameComparer : Comparer<IPatch>
     {
         /// <summary>
         /// 

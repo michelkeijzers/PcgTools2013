@@ -15,8 +15,8 @@ namespace Common.Mvvm
     {
         #region Fields
 
-        readonly Action<object> _execute;
-        readonly Predicate<object> _canExecute;        
+        private readonly Action<object> _execute;
+        private readonly Predicate<object> _canExecute;        
 
         #endregion // Fields
 

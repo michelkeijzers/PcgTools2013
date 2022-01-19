@@ -59,7 +59,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _moveUpCommand;
+        private ICommand _moveUpCommand;
 
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteMoveUpCommand
+        private bool CanExecuteMoveUpCommand
         {
             get
             {
@@ -86,12 +86,12 @@ namespace PcgTools.ViewModels
                     !Combi.Timbres.TimbresCollection[0].IsSelected);
             }
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        void MoveUp()
+        private void MoveUp()
         {
             foreach (ITimbre timbre in Combi.Timbres.TimbresCollection.Where(item => item.IsSelected))
             {
@@ -108,7 +108,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _moveDownCommand;
+        private ICommand _moveDownCommand;
 
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteMoveDownCommand
+        private bool CanExecuteMoveDownCommand
         {
             get
             {
@@ -142,7 +142,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void MoveDown()
+        private void MoveDown()
         {
             for (int timbreIndex = Combi.Timbres.TimbresCollection.Count - 1; timbreIndex >= 0; timbreIndex--)
             {
@@ -163,7 +163,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        ICommand _clearCommand;
+        private ICommand _clearCommand;
 
         
         /// <summary>
@@ -182,7 +182,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteClearCommand
+        private bool CanExecuteClearCommand
         {
             get
             {
@@ -194,7 +194,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void Clear()
+        private void Clear()
         {
             foreach (ITimbre timbre in Combi.Timbres.TimbresCollection.Where(item => item.IsSelected))
             {
@@ -207,7 +207,7 @@ namespace PcgTools.ViewModels
 
         public Func<bool> ShowEditDialog { private get; set; }
 
-        ICommand _editCombiCommand;
+        private ICommand _editCombiCommand;
         // ReSharper disable once UnusedMember.Global
         [UsedImplicitly] public ICommand EditCombiCommand
         {
@@ -222,7 +222,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        bool CanExecuteEditCombiCommand
+        private bool CanExecuteEditCombiCommand
         {
             get
             {
@@ -234,7 +234,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        void EditCombi()
+        private void EditCombi()
         {
             ShowEditDialog();
         }
@@ -265,7 +265,7 @@ namespace PcgTools.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        string _assignedClearProgram;
+        private string _assignedClearProgram;
         [UsedImplicitly]
     // ReSharper disable once MemberCanBePrivate.Global
         public string AssignedClearProgram
@@ -281,12 +281,12 @@ namespace PcgTools.ViewModels
                 }
             }
         }
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        void ReassignClearProgram()
+        private void ReassignClearProgram()
         {
             Model.Common.Synth.MemoryAndFactory.IPcgMemory root = Combi.PcgRoot;
             Model.Common.Synth.Meta.IPatch assignedClearProgram = root.AssignedClearProgram ?? root.ProgramBanks[0][0];
@@ -295,7 +295,7 @@ namespace PcgTools.ViewModels
 
 
         [UsedImplicitly]
-        void OnPcgRootChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPcgRootChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {

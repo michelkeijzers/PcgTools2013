@@ -13,13 +13,13 @@ namespace PcgTools.Model.OasysSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresPerCombiConstant => 16;
+        private static int TimbresPerCombiConstant => 16;
 
 
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresOffsetConstant => 4790;
+        private static int TimbresOffsetConstant => 4790;
 
 
         /// <summary>

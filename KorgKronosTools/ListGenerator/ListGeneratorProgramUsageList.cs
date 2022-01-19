@@ -23,7 +23,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        Dictionary<Tuple<IProgramBank, IProgram>, LinkedList<IPatch>> _dict;
+        private Dictionary<Tuple<IProgramBank, IProgram>, LinkedList<IPatch>> _dict;
 
 
         /// <summary>
@@ -57,11 +57,11 @@ namespace PcgTools.ListGenerator
             return OutputFileName;
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        void CreateDictionary()
+        private void CreateDictionary()
         {
             if (_dict == null) throw new ArgumentNullException();
             foreach (IProgramBank programBank in SelectedProgramBanks)
@@ -93,7 +93,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// Fills combis. Ignore favorites for combis.
         /// </summary>
-        void FillDictionary()
+        private void FillDictionary()
         {
             if (_dict == null) throw new ArgumentNullException();
             FillDictionaryWithCombis();
@@ -178,7 +178,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void WriteToFile(TextWriter writer)
+        private void WriteToFile(TextWriter writer)
         {
             string columnText;
             int maxTimbresPerCombi = PrintHeader(writer, out columnText);
@@ -406,7 +406,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        void WriteXslFile()
+        private void WriteXslFile()
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<?xml version=\"1.0\"?>");

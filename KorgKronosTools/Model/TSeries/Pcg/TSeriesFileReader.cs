@@ -115,7 +115,7 @@ namespace PcgTools.Model.TSeries.Pcg
         /// Skip mode changes.
         /// Also adapts the SysExFunction.
         /// </summary>
-        int SkipModeChanges()
+        private int SkipModeChanges()
         {
             int offset = 0;
             SysExMemory memory = (SysExMemory)CurrentPcgMemory;

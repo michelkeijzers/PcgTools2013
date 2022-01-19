@@ -16,16 +16,10 @@ namespace PCG_Tools_Unittests
     [TestClass]
     public class OasysTest
     {
-        const string PcgDirectory = @"E:\PCG Tools Test Files\TestFiles\Workstations\Oasys";
-
-        
-        PcgMemory _pcgMemory;
-
-        
-        ListGenerator _generator;
-
-
-        string[] _lines;
+        private const string PcgDirectory = @"E:\PCG Tools Test Files\TestFiles\Workstations\Oasys";
+        private PcgMemory _pcgMemory;
+        private ListGenerator _generator;
+        private string[] _lines;
 
         
         private void SetDefaults()

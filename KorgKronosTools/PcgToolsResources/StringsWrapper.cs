@@ -1,6 +1,6 @@
 ﻿namespace PcgTools.PcgToolsResources
 {
-    class StringsWrapper : Strings
+    internal class StringsWrapper : Strings
     {
         public StringsWrapper() { }
     }

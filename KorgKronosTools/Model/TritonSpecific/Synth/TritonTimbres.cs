@@ -13,7 +13,7 @@ namespace PcgTools.Model.TritonSpecific.Synth
         /// <summary>
         /// 
         /// </summary>
-        static int TimbresPerCombiConstant => 8;
+        private static int TimbresPerCombiConstant => 8;
 
 
         /// <summary>

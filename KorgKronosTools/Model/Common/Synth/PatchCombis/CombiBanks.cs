@@ -37,11 +37,11 @@ namespace PcgTools.Model.Common.Synth.PatchCombis
             FillCombis();
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
-        void FillCombis()
+        private void FillCombis()
         {
             foreach (IBank bank in BankCollection)
             {

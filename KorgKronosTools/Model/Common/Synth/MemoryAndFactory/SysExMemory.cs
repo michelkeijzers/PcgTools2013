@@ -20,25 +20,25 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// <summary>
         /// 
         /// </summary>
-        int SysExEndOffset { get; set; }
+        private int SysExEndOffset { get; set; }
 
 
         /// <summary>
         /// Number of bytes after converting the 7 to 8 bits conversion.
         /// </summary>
-        int _targetConvertedBytes;
+        private int _targetConvertedBytes;
 
 
         /// <summary>
         /// True if converted from 7 to 8 bits.
         /// </summary>
-        bool _convertedFrom7To8Bits;
+        private bool _convertedFrom7To8Bits;
 
-        
+
         /// <summary>
         /// True if patch names should duplicated in the beginning of the file before saving.
         /// </summary>
-        readonly bool _patchNamesCopyNeeded;
+        private readonly bool _patchNamesCopyNeeded;
 
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace PcgTools.Model.Common.Synth.MemoryAndFactory
         /// first out of eight target bytes contains the MS bits of the seven source bytes.
         /// This method is for WRITING a sysex file.
         /// </summary>
-        void Convert8To7Bits()
+        private void Convert8To7Bits()
         {
             List<byte> newContent = new List<byte>();
 

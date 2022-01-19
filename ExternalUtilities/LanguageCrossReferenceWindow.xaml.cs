@@ -131,8 +131,7 @@ namespace ExternalUtilities
             }
         }
 
-
-        void CreateReferenceLanguageList()
+        private void CreateReferenceLanguageList()
         {
             const string fileName = ResourcePath + "Strings.resx";
             List<XElement> elements = XDocument.Load(fileName).Root.Elements("data").ToList();
@@ -154,7 +153,7 @@ namespace ExternalUtilities
             }
         }
 
-        void CheckOtherLanguages()
+        private void CheckOtherLanguages()
         {
 
             string[] cultures = new[] {"cs", "de", "el", "es", "fr", "nl", "pl", "pt-BR", "pt-BR", "ru", "sr-Latn-RS", "tr"};

@@ -30,6 +30,7 @@ namespace PcgTools.Model.NautilusSpecific.Synth
         /// </summary>
         protected override void CreateBanks()
         {
+            /*
             // Unknown synthesis type because it is dynamic.
             Add(new NautilusProgramBank(
                 this, BankType.EType.Int, "A", 0, ProgramBank.SynthesisType.Unknown, "EXi sounds"));    //  0
@@ -48,60 +49,22 @@ namespace PcgTools.Model.NautilusSpecific.Synth
             
             Add(new NautilusProgramBank(
                 this, BankType.EType.Int, "F", 5, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));   //  5
+            */
+    
+            // Remaining banks (total: A..T, a..t, 2* 20 - 7(A..F)
+            for (int bank = 0; bank < 40; bank++)
+            {
+                char bankName = bank < 20 ? (char)('A' + bank) : (char)('a' + (bank - 20));
+                Add(new NautilusProgramBank(
+                  this, BankType.EType.Int, bankName.ToString() + "(" + bank.ToString() + ")", bank, 
+                  ProgramBank.SynthesisType.Unknown, "HD-1/EXI sounds"));
+                //Add(new NautilusProgramBank(
+                //  this, BankType.EType.Int, ((char)('a' + bank)).ToString(), 64 + bank * 2 + 1,
+                //  ProgramBank.SynthesisType.Unknown, "HD-1/EXI sounds")); 
+            }
 
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "G", 64, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 6
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "H", 65, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 7
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "I", 66, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 8
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "J", 67, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 9
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "K", 68, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 10
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "L", 69, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 11
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "M", 70, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 12
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.User, "N", 71, ProgramBank.SynthesisType.Unknown, "HD-1 sounds"));  // 13
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "O", 72, ProgramBank.SynthesisType.Unknown, "Initialized EXi programs")); // 14
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "P", 73, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs")); // 15
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "Q", 74, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs")); // 16
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "R", 75, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs HD-1 Programs")); // 17
-            
-            Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "S", 76, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs HD - 1 Programs")); // 18
-
-            Add(new NautilusProgramBank(
-                this, BankType.EType.UserExtended, "T", 77, ProgramBank.SynthesisType.Unknown, "Initialized EXi Programs HD - 1 Programs")); // 18
-
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(1)", 7,  "GM2 Main programs"));             // [7]
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(2)", 8,  "GM2 Main programs"));             // [8]
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(3)", 9,  "GM2 Main programs"));             // [9]
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(4)", 10, "GM2 Main programs"));            // [10]
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(5)", 11, "GM2 Main programs"));            // [11]
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(6)", 12, "GM2 Main programs"));            // [12]
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(7)", 13, "GM2 Main programs"));            // [13]
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(8)", 14, "GM2 Main programs"));            // [14]
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(9)", 15, "GM2 Main programs"));            // [15]
-            //Add(new NautilusGmProgramBank(this, ProgramBank.ListSubType.Gm, "g(d)", 16, "GM2 Main programs"));            // [16]
-
+            // a: 76
+            // c: 65
             CreateVirtualBanks();
 
             // Add GM bank.

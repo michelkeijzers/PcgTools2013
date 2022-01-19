@@ -2,14 +2,14 @@
 
 using System;
 using PcgTools.Model.Common.Synth.MemoryAndFactory;
-using PcgTools.Model.KronosSpecific.Pcg;
+using PcgTools.Model.KronosOasysSpecific.Pcg;
 
 namespace PcgTools.Model.NautilusSpecific.Pcg
 {
     /// <summary>
     /// 
     /// </summary>
-    public class NautilusPcgFileReader : KronosPcgFileReader
+    public class NautilusPcgFileReader : KronosOasysPcgFileReader
     {
         /// <summary>
         /// 

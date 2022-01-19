@@ -58,7 +58,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void WriteToFile(TextWriter writer)
+        private void WriteToFile(TextWriter writer)
         {
             // Print header, assuming a 16 timbres per combi.
             // Do not print directly in foreach loop below, but store, calc max, then loop again and print
@@ -78,7 +78,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void WriteOtherTypeOfListToFile(TextWriter writer)
+        private void WriteOtherTypeOfListToFile(TextWriter writer)
         {
             const int maxTimbresPerCombi = 16; // Impr: Calculate real max timbres per line.
 
@@ -244,7 +244,7 @@ namespace PcgTools.ListGenerator
         /// </summary>
         /// <param name="timbre"></param>
         /// <returns></returns>
-        bool ShowTimbre(ITimbre timbre)
+        private bool ShowTimbre(ITimbre timbre)
         {
             return (!IgnoreMutedOffTimbres ||
                 ((timbre.GetParam(ParameterNames.TimbreParameterName.Mute) == null) || 
@@ -264,7 +264,7 @@ namespace PcgTools.ListGenerator
         /// <param name="combi"></param>
         /// <param name="programIds"></param>
         /// <param name="maxTimbresPerCombi"></param>
-        void WriteLineToFile(TextWriter writer, IPatch combi, IEnumerable<string> programIds, 
+        private void WriteLineToFile(TextWriter writer, IPatch combi, IEnumerable<string> programIds, 
             int maxTimbresPerCombi) // IEnumerable<Program> programs)
         {
             switch (ListOutputFormat)
@@ -375,7 +375,7 @@ namespace PcgTools.ListGenerator
         /// <summary>
         /// 
         /// </summary>
-        void WriteXslFile()
+        private void WriteXslFile()
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<?xml version=\"1.0\"?>");
@@ -414,7 +414,7 @@ namespace PcgTools.ListGenerator
         /// 
         /// </summary>
         /// <param name="writer"></param>
-        void WriteLongListToFile(TextWriter writer)
+        private void WriteLongListToFile(TextWriter writer)
         {
             foreach (IPatch patch in from combiBank in SelectedCombiBanks
               from combi in combiBank.Patches
